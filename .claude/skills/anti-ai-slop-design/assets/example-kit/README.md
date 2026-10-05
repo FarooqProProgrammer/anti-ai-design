@@ -11,6 +11,7 @@ this folder is what you ship.
 | `components.css` | Buttons, fields, card, band, table, badges, icon & logo sizing - built on the tokens. |
 | `tailwind.theme.css` | **Tailwind CSS v4** (current) `@theme` - `bg-accent`, `font-display`, `text-h1`, `rounded-md`, `shadow-raised`... |
 | `tailwind.preset.js` | Legacy: Tailwind v3 preset, only for projects still on v3. |
+| `shadcn-theme.css` | **React/Vue projects (shadcn/ui, shadcn-vue):** the brand as shadcn CSS variables (OKLCH, light + derived dark, fonts, status colors). Paste into the project's `tailwindCssFile`, replacing shadcn's `:root`/`.dark`. |
 | `fonts.html` | `<link>` tags for the brand fonts. |
 | `logo/*.svg` | `mark.svg`, `wordmark.svg` use `currentColor` (inline them and set `color`). `*-ink`, `*-reversed`, `*-accent` have colors baked in (for `<img>`, email, docs). |
 | `favicon.svg` | Mark on an accent tile. Link with `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`. PNG sizes not generated (install `cairosvg`, or export favicon.svg at 32/180/512px). |
@@ -36,7 +37,15 @@ this folder is what you ship.
 <button class="btn btn-primary">Primary action</button>
 ```
 
-## React / Next.js
+## React / Vue with shadcn (default for React and Vue projects)
+1. Set up shadcn per its docs (`npx shadcn@latest init`, or `npx shadcn-vue@latest init` for Vue/Nuxt).
+   For React, install the official agent skills: `npx skills add shadcn/ui`.
+2. Open the project's global CSS (`tailwindCssFile` from `npx shadcn@latest info`), replace shadcn's
+   `:root` and `.dark` blocks with those in `shadcn-theme.css`, and paste its `@theme inline` block after shadcn's.
+3. Add components only with the CLI (`npx shadcn@latest add button card ...`); use `font-heading` on headings.
+4. Logo, favicon and icons: as below (match `iconLibrary` in components.json to the brand's icon set).
+
+## React / Next.js without shadcn (plain CSS)
 ```jsx
 // app/layout.jsx (or main.jsx): import once
 import "@/brand/tokens.css";

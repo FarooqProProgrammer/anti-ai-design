@@ -61,6 +61,7 @@ Schema (all sections optional except name + colors):
 """
 import colorsys
 import html
+import math
 import json
 import re
 import sys
@@ -137,6 +138,23 @@ def hsl(h):
     r, g, b = (v / 255 for v in rgb(h))
     hh, l, s = colorsys.rgb_to_hls(r, g, b)
     return f"{round(hh * 360)}° {round(s * 100)}% {round(l * 100)}%"
+
+
+def oklch(h):
+    """Hex -> CSS oklch() string (the color space shadcn's themes use)."""
+    def lin(c):
+        c /= 255
+        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    r, g, b = (lin(v) for v in rgb(h))
+    l_ = (0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b) ** (1 / 3)
+    m_ = (0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b) ** (1 / 3)
+    s_ = (0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b) ** (1 / 3)
+    L = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+    A = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_
+    B = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_
+    C = (A * A + B * B) ** 0.5
+    H = (math.degrees(math.atan2(B, A)) + 360) % 360 if C > 1e-4 else 0
+    return f"oklch({L:.3f} {C:.3f} {H:.1f})"
 
 
 def tints(h):
@@ -680,6 +698,7 @@ this folder is what you ship.
 | `components.css` | Buttons, fields, card, band, table, badges, icon & logo sizing - built on the tokens. |
 | `tailwind.theme.css` | **Tailwind CSS v4** (current) `@theme` - `bg-accent`, `font-display`, `text-h1`, `rounded-md`, `shadow-raised`... |
 | `tailwind.preset.js` | Legacy: Tailwind v3 preset, only for projects still on v3. |
+| `shadcn-theme.css` | **React/Vue projects (shadcn/ui, shadcn-vue):** the brand as shadcn CSS variables (OKLCH, light + derived dark, fonts, status colors). Paste into the project's `tailwindCssFile`, replacing shadcn's `:root`/`.dark`. |
 | `fonts.html` | `<link>` tags for the brand fonts. |
 | `logo/*.svg` | `mark.svg`, `wordmark.svg` use `currentColor` (inline them and set `color`). `*-ink`, `*-reversed`, `*-accent` have colors baked in (for `<img>`, email, docs). |
 | `favicon.svg` | Mark on an accent tile. Link with `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`. {png_note} |
@@ -703,7 +722,15 @@ this folder is what you ship.
 <button class="btn btn-primary">Primary action</button>
 ```
 
-## React / Next.js
+## React / Vue with shadcn (default for React and Vue projects)
+1. Set up shadcn per its docs (`npx shadcn@latest init`, or `npx shadcn-vue@latest init` for Vue/Nuxt).
+   For React, install the official agent skills: `npx skills add shadcn/ui`.
+2. Open the project's global CSS (`tailwindCssFile` from `npx shadcn@latest info`), replace shadcn's
+   `:root` and `.dark` blocks with those in `shadcn-theme.css`, and paste its `@theme inline` block after shadcn's.
+3. Add components only with the CLI (`npx shadcn@latest add button card ...`); use `font-heading` on headings.
+4. Logo, favicon and icons: as below (match `iconLibrary` in components.json to the brand's icon set).
+
+## React / Next.js without shadcn (plain CSS)
 ```jsx
 // app/layout.jsx (or main.jsx): import once
 import "@/brand/tokens.css";
@@ -797,6 +824,77 @@ def kit(spec, out, offline=False):
     th += [f"  --shadow-{slug(e['name'])}: {e['css']};" for e in c["elevation"]]
     th.append("}")
     w("tailwind.theme.css", "\n".join(th) + "\n"); made.append("tailwind.theme.css")
+
+    # shadcn/ui + shadcn-vue theme: brand -> shadcn CSS variables (OKLCH), to paste into the
+    # project's tailwindCssFile (replace shadcn's :root/.dark blocks). Map meaning, not names:
+    # shadcn --primary = brand accent; shadcn --accent = subtle hover surface.
+    def danger_hex():
+        for x in c["colors"]:
+            if re.search(r"danger|error|destructive", str(x.get("role", "")), re.I):
+                return x["hex"]
+        return "#b42318"
+    ink, paper, acc, onacc = c["ink"], c["bg"], c["accent"], c["on_accent"]
+    surf, bord, mut = c["surface"], c["border"], c["muted"]
+    others = [x["hex"] for x in c["colors"] if x["hex"] not in (ink, paper, surf, bord, mut, acc)]
+    charts = ([acc] + others + [mix(acc, paper, .45), mix(acc, ink, .4), mix(ink, paper, .5)])[:5]
+    light = {
+        "background": paper, "foreground": ink, "card": paper, "card-foreground": ink,
+        "popover": paper, "popover-foreground": ink, "primary": acc, "primary-foreground": onacc,
+        "secondary": surf, "secondary-foreground": ink, "muted": surf, "muted-foreground": mut,
+        "accent": mix(surf, ink, .04), "accent-foreground": ink, "destructive": danger_hex(),
+        "border": bord, "input": bord, "ring": acc,
+        **{f"chart-{i + 1}": h for i, h in enumerate(charts)},
+        "sidebar": surf, "sidebar-foreground": ink, "sidebar-primary": acc,
+        "sidebar-primary-foreground": onacc, "sidebar-accent": mix(surf, ink, .07),
+        "sidebar-accent-foreground": ink, "sidebar-border": bord, "sidebar-ring": acc,
+    }
+    # Derived dark mode: brand ink becomes the canvas; accent lightened until it reads on it.
+    d_bg = mix(ink, "#000000", .15)
+    d_card = mix(d_bg, paper, .06)
+    d_acc = acc
+    for t in (.15, .3, .45, .6):
+        if contrast(d_acc, d_bg) >= 4.5:
+            break
+        d_acc = mix(acc, "#ffffff", t)
+    d_onacc = d_bg if contrast(d_bg, d_acc) >= contrast(paper, d_acc) else paper
+    dark = {
+        "background": d_bg, "foreground": paper, "card": d_card, "card-foreground": paper,
+        "popover": d_card, "popover-foreground": paper, "primary": d_acc, "primary-foreground": d_onacc,
+        "secondary": mix(d_bg, paper, .12), "secondary-foreground": paper,
+        "muted": mix(d_bg, paper, .12), "muted-foreground": mix(paper, d_bg, .35),
+        "accent": mix(d_bg, paper, .14), "accent-foreground": paper,
+        "destructive": mix(danger_hex(), "#ffffff", .25),
+        "border": mix(d_bg, paper, .16), "input": mix(d_bg, paper, .2), "ring": d_acc,
+        **{f"chart-{i + 1}": mix(h, "#ffffff", .2) for i, h in enumerate(charts)},
+        "sidebar": d_card, "sidebar-foreground": paper, "sidebar-primary": d_acc,
+        "sidebar-primary-foreground": d_onacc, "sidebar-accent": mix(d_bg, paper, .14),
+        "sidebar-accent-foreground": paper, "sidebar-border": mix(d_bg, paper, .16), "sidebar-ring": d_acc,
+    }
+    status_tok = {}
+    for x in c["colors"]:
+        m = re.search(r"success|warning|info", str(x.get("role", "")), re.I)
+        if m:
+            status_tok[m.group(0).lower()] = x["hex"]
+    rad_px = c["radius"].get("lg", c["radius"].get("md", 6))
+    sh = ["/* shadcn theme for this brand - generated by brand_book.py kit.",
+          "   Paste into the project's tailwindCssFile (see `npx shadcn@latest info`):",
+          "   replace shadcn's :root and .dark blocks with these, and add the @theme inline block below",
+          "   after shadcn's own. Keep shadcn's imports, @custom-variant dark and its @theme inline mapping.",
+          "   .dark is DERIVED from the light palette - review it. */", "", ":root {",
+          f"  --radius: {rad_px / 16:g}rem;"]
+    sh += [f"  --{k}: {oklch(v)};" for k, v in light.items()]
+    sh += [f"  --{k}: {oklch(v)};\n  --{k}-foreground: {oklch(ink if contrast(ink, v) >= contrast(paper, v) else paper)};"
+           for k, v in status_tok.items()]
+    sh += ["}", "", ".dark {"]
+    sh += [f"  --{k}: {oklch(v)};" for k, v in dark.items()]
+    sh += [f"  --{k}: {oklch(mix(v, '#ffffff', .25))};\n  --{k}-foreground: {oklch(d_bg)};" for k, v in status_tok.items()]
+    sh += ["}", "", "@theme inline {",
+           f"  --font-sans: {fam_line('body', 'system-ui, sans-serif')};",
+           f"  --font-heading: {fam_line('display', 'Georgia, serif')};",
+           f"  --font-mono: {fam_line('mono', 'ui-monospace, monospace')};"]
+    sh += [f"  --color-{k}: var(--{k});\n  --color-{k}-foreground: var(--{k}-foreground);" for k in status_tok]
+    sh += ["}", ""]
+    w("shadcn-theme.css", "\n".join(sh)); made.append("shadcn-theme.css")
 
     # Tailwind v3 preset (legacy projects only; points at CSS vars so tokens.css stays the single source)
     col = {slug(x["name"]): f"var(--color-{slug(x['name'])})" for x in c["colors"]}
