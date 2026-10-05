@@ -72,7 +72,7 @@ RULES = [
      re.compile(r"(?<![\w-])h-screen\b|(?:min-)?height:\s*100vh", re.I),
      "100vh / h-screen - jumps with mobile browser bars; use 100svh/100dvh or min-height"),
     ("fixed-width", "responsive", 2,
-     re.compile(r"(?<![-\w])(?:width|min-width):\s*(?:[5-9]\d{2}|[1-9]\d{3,})px|\bw-\[(?:[5-9]\d{2}|[1-9]\d{3,})px\]", re.I),
+     re.compile(r"(?<![-\w(])width:\s*(?:[5-9]\d{2}|[1-9]\d{3,})px|\bw-\[(?:[5-9]\d{2}|[1-9]\d{3,})px\]", re.I),
      "Fixed pixel width >= 500px - breaks on phones; use max-width / min() / fluid units"),
     ("zoom-disabled", "responsive", 2,
      re.compile(r"user-scalable\s*=\s*(?:no|0)|maximum-scale\s*=\s*1(?:\.0)?\b", re.I),
