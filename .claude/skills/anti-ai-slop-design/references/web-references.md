@@ -27,7 +27,7 @@ Pull this from the user's input before searching. Ask only for what's missing *a
 
 ```
 Subject:        what it is (e.g. tax consultancy for freelancers in Lahore)
-Audience:       who, in what situation, on what device
+Audience:       who, in what situation, on what device (default: phone first)
 Traits (3):     e.g. trustworthy, precise, local
 Content shape:  long reading / dense data / short marketing / app UI
 Must-haves:     e.g. pricing table, WhatsApp CTA, Urdu labels, dark mode
@@ -105,7 +105,7 @@ If a reference doesn't show a module (for example, no pricing on the homepage), 
 Useful things to note per dimension:
 - **Typography:** classification, contrast, scale drama, figures, script support.
 - **Color:** proportions, e.g. "90% bone, 8% ink, 2% vermilion".
-- **Layout:** grid, density, rhythm.
+- **Layout:** grid, density, rhythm, and **how it adapts on a phone**. Look at the mobile version too: a browser screenshot at 390px, Mobbin `platform: "ios"` for app patterns, or the site's mobile layout. A reference that only works on desktop scores lower on Feasibility for a mobile-first brief.
 - **Imagery:** photo, illustration, product UI or none.
 
 ## 6. Score and rank
