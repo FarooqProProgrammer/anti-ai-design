@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "index.html exists",
+      "passed": true,
+      "evidence": "iteration-1\\eval-1-build-tax-landing\\without_skill\\run-1\\outputs\\index.html"
+    },
+    {
+      "text": "Scanner finds <=3 distinct slop tells",
+      "passed": true,
+      "evidence": "2 distinct tells: ['generic-heading', 'placeholder']"
+    },
+    {
+      "text": "No indigo/violet/purple gradient",
+      "passed": true,
+      "evidence": "none"
+    },
+    {
+      "text": "No emoji in page",
+      "passed": true,
+      "evidence": "none"
+    },
+    {
+      "text": "No hype copy words",
+      "passed": true,
+      "evidence": "none"
+    },
+    {
+      "text": "Copy uses >=3 concrete domain terms",
+      "passed": true,
+      "evidence": "FBR, NTN, Payoneer, Wise, Upwork, Fiverr, PKR, IRIS, PSEB, return"
+    },
+    {
+      "text": "Uses CSS custom properties (tokens)",
+      "passed": true,
+      "evidence": "85 var() uses"
+    },
+    {
+      "text": "Loads a display font other than Inter",
+      "passed": true,
+      "evidence": "Fraunces, IBM+Plex+Sans, IBM+Plex+Mono"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  }
+}

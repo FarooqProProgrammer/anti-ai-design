@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ward 7B · ShiftBoard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /*
+      Point of view: a ward whiteboard made precise.
+      Read in ten seconds at the nurses' station: where are the gaps, who is on.
+      Warm board-white paper, ink text, and one marker red that only ever means "short-staffed".
+    */
+    :root {
+      /* neutrals: whiteboard paper and ink, never pure #fff / #000 */
+      --paper: #f6f4ef;
+      --paper-sunk: #ece9e1;
+      --surface: #fcfbf8;
+      --ink: #1d2126;
+      --ink-2: #4a4f57;
+      --ink-3: #6f747b;
+      --rule: #d9d5cb;
+      --rule-strong: #1d2126;
+
+      /* one accent with one job: a gap in cover */
+      --gap: #c4281c;
+      --gap-wash: #f8e3df;
+      /* status only, used sparingly */
+      --tight: #8a5a00;
+      --tight-wash: #f6ead0;
+      --ok: #2f6b4f;
+
+      --f-display: 'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif;
+      --f-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+      --f-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+
+      --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 40px; --s-7: 64px;
+      --radius: 2px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--f-body);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    a { color: inherit; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    :focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+    /* ---------- top bar ---------- */
+    .bar {
+      display: flex; align-items: baseline; gap: var(--s-5); flex-wrap: wrap;
+      padding: var(--s-3) var(--s-5);
+      background: var(--ink); color: var(--paper);
+    }
+    .wordmark { font-family: var(--f-display); font-weight: 700; font-size: 18px; letter-spacing: 0.01em; }
+    .wordmark span { font-weight: 500; opacity: 0.6; }
+    .bar nav { display: flex; gap: var(--s-1); flex-wrap: wrap; }
+    .bar nav a {
+      text-decoration: none; padding: var(--s-1) var(--s-3); font-size: 14px;
+      color: #c9ccd1; border-bottom: 2px solid transparent;
+      transition: color 150ms, border-color 150ms;
+    }
+    .bar nav a:hover { color: var(--paper); border-color: #6f747b; }
+    .bar nav a[aria-current="page"] { color: var(--paper); border-color: var(--paper); }
+    .bar .who { margin-left: auto; font-size: 13px; color: #c9ccd1; }
+
+    main { max-width: 1240px; margin: 0 auto; padding: var(--s-5) var(--s-5) var(--s-7); }
+
+    /* ---------- ward + clock line ---------- */
+    .context {
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-5);
+      padding-bottom: var(--s-3); border-bottom: 2px solid var(--rule-strong);
+    }
+    .context h1 { font-family: var(--f-display); font-size: 22px; font-weight: 700; }
+    .context .meta { color: var(--ink-2); font-size: 14px; }
+    .context .clock { margin-left: auto; font-family: var(--f-mono); font-size: 14px; color: var(--ink-2); }
+    .context .clock strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- the headline gap ---------- */
+    .alert {
+      display: grid; grid-template-columns: auto 1fr auto; gap: var(--s-2) var(--s-6); align-items: end;
+      padding: var(--s-6) 0 var(--s-5);
+    }
+    .alert .big {
+      font-family: var(--f-display); font-weight: 700;
+      font-size: clamp(72px, 11vw, 128px); line-height: 0.85; letter-spacing: -0.03em;
+      color: var(--gap);
+    }
+    .alert h2 {
+      font-family: var(--f-display); font-weight: 600;
+      font-size: clamp(26px, 3.2vw, 38px); line-height: 1.05; letter-spacing: -0.01em;
+      max-width: 22ch;
+    }
+    .alert p { color: var(--ink-2); margin-top: var(--s-2); max-width: 62ch; }
+    .action {
+      display: inline-block; text-decoration: none; white-space: nowrap;
+      font-weight: 600; font-size: 15px;
+      padding: var(--s-3) var(--s-4);
+      background: var(--ink); color: var(--paper); border-radius: var(--radius);
+      transition: background-color 150ms;
+    }
+    .action:hover { background: #000; }
+    .alert .secondary { display: block; margin-top: var(--s-2); font-size: 14px; color: var(--ink-2); }
+
+    /* ---------- strip of figures (not cards) ---------- */
+    .figures {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+      margin-bottom: var(--s-6);
+    }
+    .figures div { padding: var(--s-3) var(--s-4); border-left: 1px solid var(--rule); }
+    .figures div:first-child { border-left: 0; padding-left: 0; }
+    .figures dt { font-size: 13px; color: var(--ink-2); }
+    .figures dd { font-family: var(--f-mono); font-size: 22px; font-weight: 500; }
+    .figures dd small { font-family: var(--f-body); font-size: 13px; color: var(--ink-3); font-weight: 400; margin-left: var(--s-1); }
+    .figures .is-gap dd { color: var(--gap); }
+
+    /* ---------- section headers ---------- */
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-4); margin-bottom: var(--s-3); flex-wrap: wrap; }
+    .section-head h2 { font-family: var(--f-display); font-size: 20px; font-weight: 700; }
+    .section-head a { font-size: 14px; color: var(--ink-2); }
+    .legend { display: flex; gap: var(--s-4); font-size: 13px; color: var(--ink-2); flex-wrap: wrap; }
+    .legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px; border-radius: 1px; }
+
+    /* ---------- the week board ---------- */
+    .board-wrap { overflow-x: auto; margin-bottom: var(--s-7); border: 1px solid var(--rule); background: var(--surface); }
+    table.board { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+    .board th, .board td { border: 1px solid var(--rule); text-align: left; vertical-align: top; }
+    .board thead th {
+      font-weight: 600; font-size: 13px; padding: var(--s-2) var(--s-3);
+      background: var(--paper-sunk); border-top: 0;
+    }
+    .board thead th:first-child, .board tbody th { border-left: 0; }
+    .board thead th:last-child, .board td:last-child { border-right: 0; }
+    .board tbody tr:last-child > * { border-bottom: 0; }
+    .board thead th .date { display: block; font-weight: 400; color: var(--ink-3); font-family: var(--f-mono); font-size: 12px; }
+    .board thead th.today { background: var(--ink); color: var(--paper); }
+    .board thead th.today .date { color: #c9ccd1; }
+    .board tbody th { width: 128px; padding: var(--s-3); font-weight: 600; background: var(--paper-sunk); }
+    .board tbody th .hrs { display: block; font-family: var(--f-mono); font-weight: 400; font-size: 12px; color: var(--ink-3); }
+    .board td { padding: var(--s-2) var(--s-3); }
+    .cell-n { font-family: var(--f-mono); font-size: 18px; font-weight: 500; }
+    .cell-n .of { color: var(--ink-3); font-size: 13px; }
+    .cell-d { font-size: 12px; color: var(--ink-3); line-height: 1.35; }
+    td.short { background: var(--gap-wash); box-shadow: inset 4px 0 0 var(--gap); }
+    td.short .cell-n { color: var(--gap); font-weight: 600; }
+    td.short .cell-d { color: #7d1a12; }
+    td.tight { background: var(--tight-wash); }
+    td.tight .cell-d { color: var(--tight); }
+    td.past { color: var(--ink-3); }
+    td.past .cell-n { color: var(--ink-3); }
+    td.now { box-shadow: inset 0 0 0 2px var(--ink); }
+
+    /* ---------- lower split: on shift / changes ---------- */
+    .lower { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--s-6); align-items: start; }
+
+    table.roster { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .roster caption { text-align: left; font-weight: 600; font-size: 13px; color: var(--ink-2); padding: 0 0 var(--s-1); }
+    .roster th { text-align: left; font-weight: 500; font-size: 12px; color: var(--ink-3); padding: var(--s-1) var(--s-2) var(--s-1) 0; border-bottom: 1px solid var(--rule-strong); }
+    .roster td { padding: 7px var(--s-2) 7px 0; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+    .roster td.name { font-weight: 500; }
+    .roster .mono { font-family: var(--f-mono); font-size: 13px; }
+    .tag { font-size: 12px; font-weight: 600; padding: 1px 6px; border: 1px solid var(--ink); border-radius: var(--radius); margin-left: var(--s-1); white-space: nowrap; }
+    .tag.bank { border-color: var(--ink-3); color: var(--ink-2); font-weight: 500; }
+    .next { font-size: 14px; color: var(--ink-2); margin-top: var(--s-4); }
+    .next strong { color: var(--ink); font-weight: 600; }
+
+    ol.log { list-style: none; border-top: 1px solid var(--rule-strong); }
+    .log li { display: grid; grid-template-columns: 52px 1fr; gap: var(--s-3); padding: var(--s-3) 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+    .log time { font-family: var(--f-mono); font-size: 13px; color: var(--ink-3); padding-top: 1px; }
+    .log .what { color: var(--ink); }
+    .log .so { display: block; color: var(--ink-2); font-size: 13px; margin-top: 2px; }
+    .log li.opens .so { color: var(--gap); font-weight: 500; }
+    .log-more { display: inline-block; margin-top: var(--s-3); font-size: 14px; color: var(--ink-2); }
+
+    @media (max-width: 900px) {
+      .alert { grid-template-columns: auto 1fr; }
+      .alert > :last-child { grid-column: 1 / -1; }
+      .lower { grid-template-columns: 1fr; gap: var(--s-6); }
+      .figures { grid-template-columns: repeat(2, 1fr); }
+      .figures div:nth-child(3) { border-left: 0; padding-left: 0; }
+      .figures div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+    }
+    @media (max-width: 560px) {
+      .bar, main { padding-left: var(--s-4); padding-right: var(--s-4); }
+      .bar .who { margin-left: 0; width: 100%; }
+      .context .clock { margin-left: 0; }
+      .alert { grid-template-columns: 1fr; padding-top: var(--s-5); }
+      .roster .hide-sm { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <div class="wordmark">ShiftBoard <span>/ Ward 7B</span></div>
+    <nav aria-label="Main">
+      <a href="#" aria-current="page">Today</a>
+      <a href="#">Rota</a>
+      <a href="#">Staff</a>
+      <a href="#">Reports</a>
+      <a href="#">Settings</a>
+    </nav>
+    <div class="who">Signed in as Ruth Okafor, Ward Manager</div>
+  </header>
+
+  <main>
+    <div class="context">
+      <h1>Ward 7B · Acute Medicine</h1>
+      <span class="meta">28 beds · 26 occupied · 3 side rooms on isolation</span>
+      <span class="clock">Mon 5 Oct · <strong>07:18</strong> · Early shift, 8 h 12 m left</span>
+    </div>
+
+    <section class="alert" aria-labelledby="gap-title">
+      <div class="big" aria-hidden="true">−2</div>
+      <div>
+        <h2 id="gap-title">Tonight's night shift is two registered nurses short.</h2>
+        <p>3 of 5 RNs rostered for 21:00–07:45. Mariam Haddad called in sick at 06:40 and the second Band 5 line was never filled. Bank requests go out to 14 nurses with recent 7B shifts.</p>
+      </div>
+      <div>
+        <a class="action" href="#">Request 2 bank RNs for tonight</a>
+        <a class="secondary" href="#">or move someone from a later shift</a>
+      </div>
+    </section>
+
+    <dl class="figures">
+      <div class="is-gap"><dt>Unfilled shifts, next 7 days</dt><dd>5<small>3 RN · 2 HCA</small></dd></div>
+      <div><dt>On the ward now</dt><dd>9<small>of 9 needed</small></dd></div>
+      <div><dt>Off sick today</dt><dd>1<small>M. Haddad</small></dd></div>
+      <div><dt>Bank &amp; agency hours this week</dt><dd>67.5<small>budget 90</small></dd></div>
+    </dl>
+
+    <section aria-labelledby="week-title">
+      <div class="section-head">
+        <h2 id="week-title">Cover this week</h2>
+        <div class="legend" aria-hidden="true">
+          <span><i style="background:var(--gap)"></i>Short</span>
+          <span><i style="background:#e2c27c"></i>Covered with bank / no spare</span>
+          <span><i style="background:var(--surface);border:1px solid var(--rule)"></i>Covered</span>
+        </div>
+      </div>
+      <div class="board-wrap" tabindex="0" role="region" aria-label="Cover by shift for the week, rostered out of required">
+        <table class="board">
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr">Shift</span></th>
+              <th scope="col" class="today">Mon <span class="date">5 Oct · today</span></th>
+              <th scope="col">Tue <span class="date">6 Oct</span></th>
+              <th scope="col">Wed <span class="date">7 Oct</span></th>
+              <th scope="col">Thu <span class="date">8 Oct</span></th>
+              <th scope="col">Fri <span class="date">9 Oct</span></th>
+              <th scope="col">Sat <span class="date">10 Oct</span></th>
+              <th scope="col">Sun <span class="date">11 Oct</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Early <span class="hrs">07:30–15:30</span></th>
+              <td class="now"><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">On now</div></td>
+              <td><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">6 RN · 3 HCA</div></td>
+              <td class="tight"><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">2 bank RN</div></td>
+              <td><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">6 RN · 3 HCA</div></td>
+              <td class="short"><div class="cell-n">8<span class="of">/9</span></div><div class="cell-d">1 HCA short</div></td>
+              <td><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">6 RN · 3 HCA</div></td>
+              <td><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">6 RN · 3 HCA</div></td>
+            </tr>
+            <tr>
+              <th scope="row">Late <span class="hrs">13:30–21:30</span></th>
+              <td class="tight"><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">Bank: S. Reyes for M. Haddad</div></td>
+              <td><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">6 RN · 3 HCA</div></td>
+              <td><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">6 RN · 3 HCA</div></td>
+              <td class="short"><div class="cell-n">8<span class="of">/9</span></div><div class="cell-d">1 RN short · no NIC</div></td>
+              <td><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">6 RN · 3 HCA</div></td>
+              <td class="tight"><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">1 agency HCA</div></td>
+              <td><div class="cell-n">9<span class="of">/9</span></div><div class="cell-d">6 RN · 3 HCA</div></td>
+            </tr>
+            <tr>
+              <th scope="row">Night <span class="hrs">21:00–07:45</span></th>
+              <td class="short"><div class="cell-n">5<span class="of">/7</span></div><div class="cell-d">2 RN short</div></td>
+              <td><div class="cell-n">7<span class="of">/7</span></div><div class="cell-d">5 RN · 2 HCA</div></td>
+              <td><div class="cell-n">7<span class="of">/7</span></div><div class="cell-d">5 RN · 2 HCA</div></td>
+              <td><div class="cell-n">7<span class="of">/7</span></div><div class="cell-d">5 RN · 2 HCA</div></td>
+              <td class="tight"><div class="cell-n">7<span class="of">/7</span></div><div class="cell-d">2 bank RN</div></td>
+              <td class="short"><div class="cell-n">6<span class="of">/7</span></div><div class="cell-d">1 HCA short</div></td>
+              <td><div class="cell-n">7<span class="of">/7</span></div><div class="cell-d">5 RN · 2 HCA</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="lower">
+      <section aria-labelledby="on-title">
+        <div class="section-head">
+          <h2 id="on-title">Who's on</h2>
+          <a href="#">Print handover sheet</a>
+        </div>
+        <table class="roster">
+          <caption>Early · 07:30–15:30 · nurse in charge Grace Adeyemi</caption>
+          <thead>
+            <tr><th scope="col">Name</th><th scope="col">Band</th><th scope="col">Bays</th><th scope="col" class="hide-sm">Break</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="name">Grace Adeyemi <span class="tag">NIC</span></td><td class="mono">6</td><td>Floating</td><td class="mono hide-sm">12:00</td></tr>
+            <tr><td class="name">Tomasz Nowak</td><td class="mono">6</td><td>Bay 1 · SR 1–3</td><td class="mono hide-sm">12:30</td></tr>
+            <tr><td class="name">Priya Raman</td><td class="mono">5</td><td>Bay 2</td><td class="mono hide-sm">11:30</td></tr>
+            <tr><td class="name">Liam O'Connell</td><td class="mono">5</td><td>Bay 3</td><td class="mono hide-sm">12:00</td></tr>
+            <tr><td class="name">Joy Mensah</td><td class="mono">5</td><td>Bay 4</td><td class="mono hide-sm">13:00</td></tr>
+            <tr><td class="name">Daniel Burke <span class="tag bank">Bank</span></td><td class="mono">5</td><td>Bay 5</td><td class="mono hide-sm">12:30</td></tr>
+            <tr><td class="name">Shauna Kelly</td><td class="mono">HCA</td><td>Bays 1–2</td><td class="mono hide-sm">11:00</td></tr>
+            <tr><td class="name">Ben Ashworth</td><td class="mono">HCA</td><td>Bays 3–4</td><td class="mono hide-sm">11:30</td></tr>
+            <tr><td class="name">Aiko Tanaka</td><td class="mono">HCA</td><td>Bay 5 · SRs</td><td class="mono hide-sm">13:00</td></tr>
+          </tbody>
+        </table>
+        <p class="next"><strong>Coming on at 13:30 (Late):</strong> Hannah Price (NIC), Kwame Osei, Sofia Reyes <span class="tag bank">Bank</span>, Ellie Ward, Rohan Mehta, Chloe Dunn · HCAs Marta Silva, Josh Hale, Fatima Noor</p>
+      </section>
+
+      <section aria-labelledby="changes-title">
+        <div class="section-head">
+          <h2 id="changes-title">Since last handover</h2>
+        </div>
+        <ol class="log">
+          <li class="opens"><time>06:40</time><div><span class="what">Mariam Haddad called in sick (3 days)</span><span class="so">Opens: Late today, Night tonight, Early Wed</span></div></li>
+          <li><time>06:52</time><div><span class="what">Sofia Reyes accepted bank Late today</span><span class="so">Covers Mariam's Late</span></div></li>
+          <li><time>Sun 22:10</time><div><span class="what">Kwame Osei moved from Thu Late to Fri Early</span><span class="so">Thu Late now 1 RN short, no Band 6 to take charge</span></div></li>
+          <li><time>Sun 16:05</time><div><span class="what">Joy Mensah requested annual leave 19–23 Oct</span><span class="so">Awaiting your approval</span></div></li>
+          <li><time>Sun 09:30</time><div><span class="what">Rota for 12–25 Oct published by Ruth Okafor</span></div></li>
+        </ol>
+        <a class="log-more" href="#">Full change log →</a>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

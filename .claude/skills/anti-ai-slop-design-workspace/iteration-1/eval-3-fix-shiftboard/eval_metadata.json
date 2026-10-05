@@ -1,0 +1,6 @@
+{
+  "eval_id": 3,
+  "eval_name": "fix-shiftboard",
+  "prompt": "This is the dashboard for our hospital nurse rota app (ShiftBoard). Ward managers glance at it at the start of every shift to see gaps and who's on. It looks like every other AI app. Redesign it, keep it one HTML file.",
+  "assertions": []
+}

@@ -1,0 +1,54 @@
+{
+  "brief": {
+    "subject": "tax consultancy for freelancers, Lahore",
+    "audience": "freelancers paid from abroad, mostly on phones",
+    "traits": ["trustworthy", "precise", "local"],
+    "content_shape": "short marketing + fee table",
+    "must_haves": ["fixed-fee pricing", "WhatsApp CTA", "Urdu labels"]
+  },
+  "modules": [
+    {"key": "hero", "label": "Hero", "need": "Say what the firm does for freelancers in one glance; one clear action"},
+    {"key": "typography", "label": "Typography", "need": "Trustworthy + precise; readable figures; Urdu support"},
+    {"key": "color", "label": "Color", "need": "Calm and credible, one accent, not 'tech'"},
+    {"key": "pricing", "label": "Pricing / fees", "need": "Fixed fees in PKR, easy to compare on a phone"},
+    {"key": "proof", "label": "Trust & proof", "need": "Credibility for a new firm without fake testimonials"}
+  ],
+  "refs": [
+    {
+      "id": 1, "title": "Stripe", "url": "https://stripe.com", "source": "direct",
+      "image": "example-images/stripe-com.jpg", "direction": "polished fintech",
+      "scores": {"fit": 3, "traits": 4, "content": 3, "distinct": 3, "feasible": 2, "constraints": 4},
+      "signature": "animated gradient mesh", "borrow": "crisp numerals",
+      "watch_out": "gradient is their brand, too heavy for a small firm",
+      "modules": {
+        "hero": {"score": 3, "note": "Big claim + gradient mesh; strong but needs a large brand budget"},
+        "typography": {"score": 4, "note": "Tight grotesk headlines, excellent tabular figures"},
+        "color": {"score": 2, "note": "Signature gradient — instantly reads as Stripe, avoid"},
+        "pricing": {"score": 4, "note": "Clear per-transaction pricing, plain table, fine print visible"}
+      }
+    },
+    {
+      "id": 2, "title": "Linear", "url": "https://linear.app", "source": "direct",
+      "image": "example-images/linear-app.png", "direction": "dark product-led",
+      "scores": {"fit": 2, "traits": 3, "content": 2, "distinct": 4, "feasible": 3, "constraints": 3},
+      "signature": "product UI as hero", "borrow": "tight type scale",
+      "watch_out": "dark tech look, wrong audience",
+      "modules": {
+        "hero": {"score": 3, "note": "Shows the real product instead of illustration — the principle transfers"},
+        "typography": {"score": 3, "note": "Precise and tight, but cold for a local service"},
+        "color": {"score": 1, "note": "Near-black tech palette; wrong mood for tax clients"}
+      }
+    },
+    {
+      "id": 3, "title": "Financial Times", "url": "https://ft.com", "source": "direct", "seen": false,
+      "direction": "editorial salmon paper",
+      "scores": {"fit": 4, "traits": 5, "content": 3, "distinct": 5, "feasible": 4, "constraints": 4},
+      "signature": "tinted paper + serif", "borrow": "warm paper tone, serif headlines",
+      "modules": {
+        "typography": {"score": 5, "note": "Serif display + sober sans reads 'established and careful'"},
+        "color": {"score": 5, "note": "Tinted paper + ink + one accent — calm and recognisable"},
+        "proof": {"score": 4, "note": "Authority from bylines, dates and specifics rather than testimonials"}
+      }
+    }
+  ]
+}
