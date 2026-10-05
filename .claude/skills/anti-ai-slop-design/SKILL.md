@@ -19,6 +19,16 @@ Before picking a mode, look for design sources the user gave you and check which
 
 State what you found in one line ("Figma connected — reading your file first"), then continue.
 
+## Always use the latest stable versions
+
+Everything this skill produces must use the **latest stable** release of every library, framework, CDN package and tool it touches (Tailwind, React, Next.js, Vue, Svelte, Astro, shadcn/ui, icon sets, animation libraries, the Google Fonts API, Figma/Mobbin tool APIs) — and that release's **current syntax**. Versions and APIs change faster than memory, so:
+
+- **Verify, don't recall.** Before writing code against a library, check its current version and API: Context7 MCP first (`resolve-library-id` → `query-docs`), otherwise `npm view <pkg> version` and the official docs. Load deferred Context7 tools with one ToolSearch call.
+- **Existing project → its installed versions win.** Read `package.json` / the lockfile and write code for *those* versions. If they're behind latest, say so and offer the upgrade — don't upgrade silently; that's the user's call.
+- **New project or standalone HTML → latest stable** (never beta / rc / canary): `npm i <pkg>@latest`, and **pin the exact current version in CDN URLs** (`https://unpkg.com/lucide-static@1.52.0/...`, looked up at build time) so a future major release can't break the page. The bundled scripts already do this for icon packages.
+- **Current syntax**, e.g. Tailwind v4 is CSS-first (`@import "tailwindcss"; @theme { … }`) — no `tailwind.config.js` unless the project is still on v3. Modern CSS that's baseline in current browsers is the default: container queries, `svh`/`dvh`, `clamp()`, `color-mix()`, `:has()`, `text-wrap: balance`, logical properties.
+- **Report versions** in the handover ("Built with Tailwind 4.x, lucide-static 1.x") so the user knows what they're running.
+
 ## Modes
 
 This skill has five modes. Pick based on the request:
@@ -62,7 +72,7 @@ python .claude/skills/anti-ai-slop-design/scripts/brand_book.py build brand/bran
 
 The script computes tints, RGB/HSL, a WCAG contrast matrix (and prints failing intended pairings — fix them), logo clear-space/size ladder/misuse examples, inlined icons, live components and downloadable tokens. See `assets/example-book.html`. Open and check it before handing over.
 
-Then export the **kit** — everything the book shows as files the app actually uses (tokens.css/json, components.css, Tailwind preset, logo SVGs + color variants, favicon, icon SVGs + sprite, demo page, README with HTML/React/Tailwind snippets):
+Then export the **kit** — everything the book shows as files the app actually uses (tokens.css/json, components.css, Tailwind v4 `@theme` file (+ legacy v3 preset), logo SVGs + color variants, favicon, icon SVGs + sprite, demo page, README with HTML/React/Tailwind snippets):
 
 ```bash
 python .claude/skills/anti-ai-slop-design/scripts/brand_book.py kit brand/brand.json brand/kit

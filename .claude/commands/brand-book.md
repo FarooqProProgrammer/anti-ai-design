@@ -1,7 +1,7 @@
 ---
-description: Create a brand guidelines book (book.html) plus a ready-to-use brand kit — logo SVGs, favicon, icons + sprite, color/typography tokens, components CSS, Tailwind preset.
+description: Create a brand guidelines book (book.html) plus a ready-to-use brand kit — logo SVGs, favicon, icons + sprite, color/typography tokens, components CSS, Tailwind v4 theme. Uses the latest stable versions.
 argument-hint: <brand name + what it is — or leave empty to use the current reference picks>
-allowed-tools: Read, Write, Bash, WebFetch, AskUserQuestion, ToolSearch, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_variable_defs, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Figma__download_assets
+allowed-tools: Read, Write, Bash, WebFetch, AskUserQuestion, ToolSearch, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_variable_defs, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Figma__download_assets, mcp__claude_ai_Context7__resolve-library-id, mcp__claude_ai_Context7__query-docs
 ---
 
 Create a brand book with the `anti-ai-slop-design` skill for:

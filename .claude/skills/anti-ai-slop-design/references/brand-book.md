@@ -41,7 +41,8 @@ Skip it for a single component or a quick fix, or when the user already has a br
    |---|---|
    | `tokens.css`, `tokens.json` | Colors, fonts, spacing, radius, shadows, type sizes |
    | `components.css` | `.btn-primary/secondary/link`, `.field`, `.card`, `.band`, `.table`, `.badge-*`, `.icon`, `.logo` |
-   | `tailwind.preset.js` | Maps the tokens to Tailwind (`bg-accent`, `font-display`…) |
+   | `tailwind.theme.css` | Tailwind v4 (current) `@theme`: `bg-accent`, `font-display`, `text-h1`… |
+   | `tailwind.preset.js` | Legacy Tailwind v3 preset, only for projects still on v3 |
    | `fonts.html` | Font `<link>` tags |
    | `logo/` | `mark.svg` and `wordmark.svg` (currentColor) plus baked `-ink`, `-reversed` and `-accent` variants |
    | `favicon.svg` | The favicon, plus PNGs if `cairosvg` is installed |
@@ -57,7 +58,7 @@ Skip it for a single component or a quick fix, or when the user already has a br
 
 When building pages after a brand book exists, **use the kit; don't re-invent the design**:
 
-- **Styles:** import `tokens.css` + `components.css` once (or the Tailwind preset). Use the token variables and component classes, and never hard-code a hex value or font that's already a token.
+- **Styles:** import `tokens.css` + `components.css` once. On Tailwind, check the project's installed version first: for v4 (current) add `@import "./brand/tailwind.theme.css"` after `@import "tailwindcss"`, and use the v3 preset only if the project is still on v3. Use the token variables and component classes, and never hard-code a hex value or font that's already a token.
 - **Logo:** inline `logo/wordmark.svg` in the header (it follows `color`), and use `logo/mark.svg` where space is tight. Link `favicon.svg`.
 - **Icons:** only from `icons/`, via the sprite (`<use href="…/sprite.svg#i-name">`) or the individual SVGs, always beside a label. Need an icon that isn't in the set? Add it to `brand.json` and re-export, so the set stays consistent.
 - **Copy:** follow the book's voice section ("we say / we don't say").

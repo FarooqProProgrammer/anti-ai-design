@@ -1,4 +1,5 @@
-/** Brand preset - requires tokens.css to be loaded. */
+/** LEGACY - Tailwind CSS v3 projects only. On v4 (current) use tailwind.theme.css instead.
+ *  Requires tokens.css to be loaded. */
 module.exports = {
   "theme": {
     "extend": {

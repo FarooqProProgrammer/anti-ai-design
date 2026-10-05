@@ -9,7 +9,8 @@ this folder is what you ship.
 | `tokens.css` | CSS custom properties: colors, fonts, spacing, radius, shadows, type sizes. Load first. |
 | `tokens.json` | Same tokens as data (for JS, Figma Tokens, native apps). |
 | `components.css` | Buttons, fields, card, band, table, badges, icon & logo sizing - built on the tokens. |
-| `tailwind.preset.js` | Tailwind preset mapping the tokens (`bg-accent`, `font-display`, `rounded-md`...). |
+| `tailwind.theme.css` | **Tailwind CSS v4** (current) `@theme` - `bg-accent`, `font-display`, `text-h1`, `rounded-md`, `shadow-raised`... |
+| `tailwind.preset.js` | Legacy: Tailwind v3 preset, only for projects still on v3. |
 | `fonts.html` | `<link>` tags for the brand fonts. |
 | `logo/*.svg` | `mark.svg`, `wordmark.svg` use `currentColor` (inline them and set `color`). `*-ink`, `*-reversed`, `*-accent` have colors baked in (for `<img>`, email, docs). |
 | `favicon.svg` | Mark on an accent tile. Link with `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`. PNG sizes not generated (install `cairosvg`, or export favicon.svg at 32/180/512px). |
@@ -49,13 +50,22 @@ export const Icon = ({ name, ...p }) => (
 // (`import Logo from "@/brand/logo/wordmark.svg"`) or paste it into a component - keep fill="currentColor".
 ```
 
-## Tailwind
-```js
-// tailwind.config.js
-module.exports = { presets: [require("./brand/tailwind.preset.js")], content: ["./src/**/*.{js,jsx,ts,tsx,html}"] };
-// still import tokens.css once - the preset points at its CSS variables.
+## Tailwind CSS v4 (current)
+```css
+/* app.css - CSS-first config, no tailwind.config.js needed */
+@import "tailwindcss";
+@import "./brand/tailwind.theme.css";
+@import "./brand/tokens.css";      /* spacing tokens + vars used by components.css */
+@import "./brand/components.css";  /* optional */
 ```
-Then: `bg-bg text-text`, `bg-accent text-on-accent`, `border-border`, `font-display`, `rounded-md`, `shadow-raised`.
+Then: `bg-bg text-text`, `bg-accent text-on-accent`, `border-border`, `font-display`, `text-h1`, `rounded-md`, `shadow-raised`.
+
+Legacy Tailwind v3 only: `module.exports = { presets: [require("./brand/tailwind.preset.js")] }` + import `tokens.css`.
+
+## Versions
+Built against the latest stable releases at export time: `lucide-static@1.52.0`. Check for newer versions
+before starting a new project (`npm view <package> version`); in an existing project, keep the
+versions it already uses unless you decide to upgrade.
 
 ## Rules that the files can't enforce
 See `book.html`: one accent, tabular figures for money, icons always beside labels, no emoji,

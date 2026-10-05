@@ -1,7 +1,7 @@
 ---
 description: Search the web for design references, analyze and rank them module-by-module against your brief, build a visual board, and let you pick the best reference per module.
 argument-hint: <what you're designing, for whom — e.g. "landing page for a Lahore tax firm for freelancers">
-allowed-tools: Read, Write, Bash, WebSearch, WebFetch, AskUserQuestion, ToolSearch, mcp__claude_ai_Mobbin__search_screens, mcp__claude_ai_Mobbin__search_sections, mcp__claude_ai_Mobbin__search_flows, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_variable_defs, mcp__claude_ai_Figma__get_design_context
+allowed-tools: Read, Write, Bash, WebSearch, WebFetch, AskUserQuestion, ToolSearch, mcp__claude_ai_Mobbin__search_screens, mcp__claude_ai_Mobbin__search_sections, mcp__claude_ai_Mobbin__search_flows, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_variable_defs, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Context7__resolve-library-id, mcp__claude_ai_Context7__query-docs
 ---
 
 Run the **Reference hunt** from the `anti-ai-slop-design` skill for this brief:

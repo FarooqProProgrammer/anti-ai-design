@@ -5,7 +5,8 @@ Usage:
     python brand_book.py build <brand.json> <book.html> [--offline]
     python brand_book.py kit   <brand.json> <outdir>    [--offline]
         Exports everything in the book as files the app can use: tokens.css/json,
-        components.css, tailwind.preset.js, fonts.html, logo SVGs (currentColor + baked
+        components.css, tailwind.theme.css (Tailwind v4 @theme) + legacy tailwind.preset.js (v3),
+        fonts.html, logo SVGs (currentColor + baked
         ink/reversed/accent), favicon.svg (+ PNGs if cairosvg is installed), icon SVGs +
         sprite.svg, demo.html and a README with HTML / React / Tailwind snippets.
 
@@ -66,11 +67,39 @@ import sys
 import urllib.parse
 import urllib.request
 
-ICON_LIBS = {
-    "lucide": "https://unpkg.com/lucide-static/icons/{n}.svg",
-    "tabler": "https://unpkg.com/@tabler/icons/icons/outline/{n}.svg",
-    "phosphor": "https://unpkg.com/@phosphor-icons/core/assets/regular/{n}.svg",
+# Icon packages: (npm package, path inside the package). URLs are pinned to the package's
+# *latest* published version, looked up on the npm registry at build time (see latest_version).
+ICON_PKGS = {
+    "lucide": ("lucide-static", "icons/{n}.svg"),
+    "tabler": ("@tabler/icons", "icons/outline/{n}.svg"),
+    "phosphor": ("@phosphor-icons/core", "assets/regular/{n}.svg"),
 }
+_LATEST = {}
+VERSIONS_USED = {}
+
+
+def latest_version(pkg):
+    """Latest stable version of an npm package (registry 'latest' dist-tag), cached; None if offline."""
+    if pkg not in _LATEST:
+        try:
+            req = urllib.request.Request(f"https://registry.npmjs.org/{pkg.replace('/', '%2F')}/latest",
+                                         headers={"User-Agent": "brand-book/1.0", "Accept": "application/json"})
+            with urllib.request.urlopen(req, timeout=15) as r:
+                _LATEST[pkg] = json.loads(r.read().decode("utf-8")).get("version")
+        except Exception:
+            _LATEST[pkg] = None
+    return _LATEST[pkg]
+
+
+def icon_url(lib, name):
+    pkg, path = ICON_PKGS[lib]
+    ver = latest_version(pkg)
+    if ver:
+        VERSIONS_USED[pkg] = ver
+    return f"https://unpkg.com/{pkg}{'@' + ver if ver else ''}/{path.format(n=urllib.parse.quote(name))}"
+
+
+ICON_LIBS = ICON_PKGS  # membership checks
 E = lambda x: html.escape(str(x if x is not None else ""))
 
 
@@ -128,7 +157,7 @@ def slug(s):
 
 # ---------- icons ----------
 def fetch_icon(lib, name, stroke):
-    url = ICON_LIBS[lib].format(n=urllib.parse.quote(name))
+    url = icon_url(lib, name)
     req = urllib.request.Request(url, headers={"User-Agent": "brand-book/1.0"})
     with urllib.request.urlopen(req, timeout=15) as r:
         svg = r.read().decode("utf-8")
@@ -378,7 +407,7 @@ def build(spec, offline=False, ctx_only=False):
             if svg:
                 glyph = f'<span class="ic" style="width:{size}px;height:{size}px">{svg}</span>'
             elif lib in ICON_LIBS:
-                u = ICON_LIBS[lib].format(n=urllib.parse.quote(it["name"]))
+                u = icon_url(lib, it["name"])
                 glyph = f'<span class="ic mask" style="width:{size}px;height:{size}px;-webkit-mask-image:url({u});mask-image:url({u})"></span>'
             else:
                 glyph = '<span class="ic missing">?</span>'
@@ -386,7 +415,7 @@ def build(spec, offline=False, ctx_only=False):
         first = cells[0].split("<figcaption>")[0].replace('<figure class="icell">', "") if cells else ""
         sizes = "".join(f'<div class="isz"><div style="transform:scale({s / size});transform-origin:center">{first}</div><span>{s}px</span></div>' for s in (16, 20, 24, 32)) if first else ""
         body = f"""
-<p class="meta">Library: <b>{E(lib)}</b> · grid {size}px{f' · stroke {stroke}px' if stroke else ''}. {E(ic.get('style', ''))}</p>
+<p class="meta">Library: <b>{E(lib)}</b>{f' ({E(ICON_PKGS[lib][0])}@{E(VERSIONS_USED[ICON_PKGS[lib][0]])}, latest at build)' if lib in ICON_PKGS and ICON_PKGS[lib][0] in VERSIONS_USED else ''} · grid {size}px{f' · stroke {stroke}px' if stroke else ''}. {E(ic.get('style', ''))}</p>
 <div class="icons">{''.join(cells)}</div>
 <div class="cols2"><div><h3>Sizes</h3><div class="isizes">{sizes}</div></div>
 <div><h3>Color</h3><div class="icolors">
@@ -649,7 +678,8 @@ this folder is what you ship.
 | `tokens.css` | CSS custom properties: colors, fonts, spacing, radius, shadows, type sizes. Load first. |
 | `tokens.json` | Same tokens as data (for JS, Figma Tokens, native apps). |
 | `components.css` | Buttons, fields, card, band, table, badges, icon & logo sizing - built on the tokens. |
-| `tailwind.preset.js` | Tailwind preset mapping the tokens (`bg-accent`, `font-display`, `rounded-md`...). |
+| `tailwind.theme.css` | **Tailwind CSS v4** (current) `@theme` - `bg-accent`, `font-display`, `text-h1`, `rounded-md`, `shadow-raised`... |
+| `tailwind.preset.js` | Legacy: Tailwind v3 preset, only for projects still on v3. |
 | `fonts.html` | `<link>` tags for the brand fonts. |
 | `logo/*.svg` | `mark.svg`, `wordmark.svg` use `currentColor` (inline them and set `color`). `*-ink`, `*-reversed`, `*-accent` have colors baked in (for `<img>`, email, docs). |
 | `favicon.svg` | Mark on an accent tile. Link with `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`. {png_note} |
@@ -687,13 +717,22 @@ export const Icon = ({{ name, ...p }}) => (
 // (`import Logo from "@/brand/logo/wordmark.svg"`) or paste it into a component - keep fill="currentColor".
 ```
 
-## Tailwind
-```js
-// tailwind.config.js
-module.exports = {{ presets: [require("./brand/tailwind.preset.js")], content: ["./src/**/*.{{js,jsx,ts,tsx,html}}"] }};
-// still import tokens.css once - the preset points at its CSS variables.
+## Tailwind CSS v4 (current)
+```css
+/* app.css - CSS-first config, no tailwind.config.js needed */
+@import "tailwindcss";
+@import "./brand/tailwind.theme.css";
+@import "./brand/tokens.css";      /* spacing tokens + vars used by components.css */
+@import "./brand/components.css";  /* optional */
 ```
-Then: `bg-bg text-text`, `bg-accent text-on-accent`, `border-border`, `font-display`, `rounded-md`, `shadow-raised`.
+Then: `bg-bg text-text`, `bg-accent text-on-accent`, `border-border`, `font-display`, `text-h1`, `rounded-md`, `shadow-raised`.
+
+Legacy Tailwind v3 only: `module.exports = {{ presets: [require("./brand/tailwind.preset.js")] }}` + import `tokens.css`.
+
+## Versions
+Built against the latest stable releases at export time: {versions}. Check for newer versions
+before starting a new project (`npm view <package> version`); in an existing project, keep the
+versions it already uses unless you decide to upgrade.
 
 ## Rules that the files can't enforce
 See `book.html`: one accent, tabular figures for money, icons always beside labels, no emoji,
@@ -738,7 +777,28 @@ def kit(spec, out, offline=False):
                  f'<link rel="stylesheet" href="{c["fonts_href"]}">') if c["fonts_href"] else "<!-- no web fonts -->"
     w("fonts.html", fonts_tag + "\n"); made.append("fonts.html")
 
-    # tailwind preset (points at CSS vars so tokens.css stays the single source)
+    # Tailwind v4 (current): CSS-first @theme with real values, so it works on its own.
+    named = {slug(x["name"]): x["hex"] for x in c["colors"]}
+    named.update({"bg": c["bg"], "text": c["ink"], "accent": c["accent"], "on-accent": c["on_accent"],
+                  "surface": c["surface"], "border": c["border"], "muted": c["muted"]})
+    fb = c["fam_by_role"]
+    fam_line = lambda role, fallback: (f'"{fb[role]["name"]}", {fb[role].get("fallback", fallback)}' if role in fb else fallback)
+    th = ["/* Tailwind CSS v4 theme for this brand.", "   Usage (main CSS):  @import \"tailwindcss\";  @import \"./brand/tailwind.theme.css\";",
+          "   Generates bg-accent, text-on-accent, border-border, font-display, text-h1, rounded-md, shadow-raised ... */", "@theme {"]
+    th += [f"  --color-{k}: {v};" for k, v in named.items()]
+    th += [f"  --font-display: {fam_line('display', 'Georgia, serif')};",
+           f"  --font-body: {fam_line('body', 'system-ui, sans-serif')};",
+           f"  --font-mono: {fam_line('mono', 'ui-monospace, monospace')};"]
+    for s in c["typo"].get("scale", []):
+        th.append(f"  --text-{slug(s['token'])}: {s['size'] / 16:g}rem;")
+        if s.get("line"):
+            th.append(f"  --text-{slug(s['token'])}--line-height: {s['line']};")
+    th += [f"  --radius-{k}: {v}px;" for k, v in c["radius"].items()]
+    th += [f"  --shadow-{slug(e['name'])}: {e['css']};" for e in c["elevation"]]
+    th.append("}")
+    w("tailwind.theme.css", "\n".join(th) + "\n"); made.append("tailwind.theme.css")
+
+    # Tailwind v3 preset (legacy projects only; points at CSS vars so tokens.css stays the single source)
     col = {slug(x["name"]): f"var(--color-{slug(x['name'])})" for x in c["colors"]}
     col.update({k: f"var(--color-{k})" for k in ("bg", "text", "accent", "on-accent", "surface", "border", "muted")})
     preset = {"theme": {"extend": {
@@ -748,7 +808,8 @@ def kit(spec, out, offline=False):
         "boxShadow": {slug(e["name"]): f"var(--shadow-{slug(e['name'])})" for e in c["elevation"]},
         "fontSize": {slug(s["token"]): f"var(--text-{slug(s['token'])})" for s in c["typo"].get("scale", [])},
     }}}
-    w("tailwind.preset.js", "/** Brand preset - requires tokens.css to be loaded. */\nmodule.exports = " + json.dumps(preset, indent=2) + ";\n")
+    w("tailwind.preset.js", "/** LEGACY - Tailwind CSS v3 projects only. On v4 (current) use tailwind.theme.css instead.\n"
+                            " *  Requires tokens.css to be loaded. */\nmodule.exports = " + json.dumps(preset, indent=2) + ";\n")
     made.append("tailwind.preset.js")
 
     # logos
@@ -830,7 +891,8 @@ ul.icons{{list-style:none;padding:0;display:grid;grid-template-columns:repeat(au
     w("demo.html", demo); made.append("demo.html")
 
     w("README.md", README.format(name=c["name"], fonts_tag=fonts_tag, first_icon=first or "name",
-                                 icon_lib=lib, png_note=png_note))
+                                 icon_lib=lib, png_note=png_note,
+                                 versions=", ".join(f"`{p}@{v}`" for p, v in VERSIONS_USED.items()) or "n/a (offline)"))
     made.append("README.md")
     return made
 
