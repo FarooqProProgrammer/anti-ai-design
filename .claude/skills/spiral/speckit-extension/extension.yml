@@ -1,0 +1,55 @@
+schema_version: "1.0"
+
+extension:
+  id: spiral
+  name: "Spiral Gates"
+  version: "1.0.0"
+  description: "Ship Spec Kit tasks through Spiral checkpoints: tests-first behaviour gate, UI review, two adversarial reviewers, engineer approval, and project memory"
+  author: the-developer
+  license: MIT
+
+requires:
+  speckit_version: ">=1.0.0"
+  tools:
+    - name: git
+      required: true
+    - name: node
+      required: true
+
+provides:
+  commands:
+    - name: speckit.spiral.checkpoints
+      file: commands/speckit.spiral.checkpoints.md
+      description: "Spec gate (analyze) + turn tasks.md into an ordered Spiral checkpoint plan for engineer approval"
+    - name: speckit.spiral.run
+      file: commands/speckit.spiral.run.md
+      description: "Implement the feature's checkpoints through the four Spiral gates instead of free-form implementation"
+    - name: speckit.spiral.house
+      file: commands/speckit.spiral.house.md
+      description: "Offer the company house rules as candidate constitution principles"
+
+hooks:
+  before_constitution:
+    command: speckit.spiral.house
+    optional: true
+    prompt: "Seed the constitution with the company's Spiral house rules?"
+    description: "Offer house rules as candidate principles"
+  after_tasks:
+    command: speckit.spiral.checkpoints
+    optional: false
+    description: "Run the spec gate and slice tasks.md into Spiral checkpoints"
+  after_converge:
+    command: speckit.spiral.checkpoints
+    optional: true
+    prompt: "Turn the tasks converge added into new Spiral checkpoints?"
+    description: "Plan checkpoints for newly added tasks"
+  before_implement:
+    command: speckit.spiral.run
+    optional: false
+    description: "Implementation goes through Spiral gates"
+
+tags:
+  - "quality"
+  - "review"
+  - "testing"
+  - "workflow"

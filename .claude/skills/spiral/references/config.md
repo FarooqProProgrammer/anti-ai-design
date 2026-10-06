@@ -16,6 +16,7 @@ relies on what remains, and `/spiral-init` warns about it.
     "install":   "pnpm install",
     "typecheck": "pnpm tsc --noEmit",
     "lint":      "pnpm eslint . --max-warnings=0",
+    "lintFile":  "pnpm eslint --max-warnings=0 {file}", // run by the quick-check hook after every edit; keep it fast (<10s)
     "test":      "pnpm vitest run",             // whole suite
     "testFile":  "pnpm vitest run {file}",      // single file; {file} is substituted
     "build":     "pnpm build",                  // optional, run at the end of a target
@@ -43,9 +44,30 @@ relies on what remains, and `/spiral-init` warns about it.
     "maxAttempts": 5,
     "reviewers": ["architecture", "correctness"],
     "uiBlockingSeverities": ["blocker", "major"]
+  },
+
+  "houseRules": null,                // path to the company house-rules.md; null = house/house-rules.md in the spiral skill dir
+
+  "guard": {
+    "protected": ["src/generated/**"],   // extra globs the implementer may not edit during a run (added to the built-in list)
+    "lintExtensions": null               // file extensions quick-check lints; null = common source extensions
   }
 }
 ```
+
+The file Spiral writes must be **plain JSON** (the comments above are documentation only; the hooks tolerate them, but other
+tools may not).
+
+## Installing the hooks
+
+Spiral's guardrails are hooks (`.claude/hooks/spiral/*.mjs`, Node 18+, no dependencies). Install one of two ways:
+
+- **Per project:** copy the toolkit's `.claude/hooks/spiral/` into the project and merge the toolkit's `.claude/settings.json`
+  `hooks` block into the project's `.claude/settings.json` (commands use `$CLAUDE_PROJECT_DIR/.claude/hooks/spiral/…`).
+- **User-wide:** copy `hooks/spiral/` to `~/.claude/hooks/spiral/` and add the same `hooks` block to `~/.claude/settings.json`
+  with commands pointing at `$HOME/.claude/hooks/spiral/…`. The hooks still only act in projects that have `spiral.config.json`.
+
+Add `.spiral/state.json` to the project's `.gitignore`. It's per-machine run state.
 
 ## Stack presets (what `/spiral-init` fills in)
 

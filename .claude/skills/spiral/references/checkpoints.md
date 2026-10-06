@@ -10,7 +10,7 @@ Goal: an ordered list the engineer can sanity-check in about a minute. Each chec
 
 Use 3–10 checkpoints. More than 10 means the target is too big: split it into several targets.
 
-## plan.md format
+## checkpoints.md format
 
 ```markdown
 # <Target name>
@@ -46,7 +46,7 @@ Record any legacy behaviour you deliberately won't port under *Out of scope*, so
 
 ### feature (SOW / ticket + design is the spec)
 Turn each acceptance criterion into at least one checkpoint "done" line. If a criterion is ambiguous, list it
-under **Questions** at the top of plan.md. Don't guess: the engineer answers at plan approval.
+under **Questions** at the top of checkpoints.md. Don't guess: the engineer answers at plan approval.
 Order: data model/API contract → skeleton UI → happy path → validation/errors → secondary flows → polish.
 
 ### fix (bug or refactor)
