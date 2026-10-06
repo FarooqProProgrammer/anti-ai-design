@@ -6,6 +6,9 @@ argument-hint: <target — e.g. "migrate OrdersScreen from legacy/ to app/", "SO
 Load the `spiral` skill and read `references/checkpoints.md`. Target: $ARGUMENTS
 
 1. If `spiral.config.json` is missing, stop and tell the engineer to run `/spiral-init` first.
+   If the target is a Spec Kit feature (`specs/NNN-name/` or its name) with a `tasks.md`, use `spec` mode: follow
+   `references/speckit.md` (spec gate, then tasks → checkpoints) and skip to step 5. If Spec Kit is installed and the target
+   is a substantial new feature with no spec yet, recommend starting with `/speckit-specify` instead of `feature` mode.
 2. **Classify the mode** (`migration` | `feature` | `fix`) and **locate the reference**: the legacy files, the ticket/SOW text and
    Figma nodes, or the bug report. If the reference is missing or ambiguous, ask. The reference is the spec, so don't plan
    without one.

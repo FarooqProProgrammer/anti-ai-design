@@ -1,6 +1,6 @@
 ---
 name: spiral
-description: Checkpoint-and-gate delivery workflow for the software house, inspired by the Shopify engineering Helix case study (shopify.engineering/helix). Use when building a client feature, migrating/rewriting an app or screen, or doing a refactor/bug fix with AI agents and you want reliable convergence instead of one big unreviewable diff. Splits a target into small ordered checkpoints; each must pass four gates (behavior tests, UI review, two adversarial code reviews, engineer approval) before it is committed; engineer feedback becomes project memory. Triggered by /spiral-init, /spiral-plan, /spiral-run, /spiral-status, or requests like "build this screen spiral-style", "migrate X with checkpoints", "run the gates".
+description: Checkpoint-and-gate delivery workflow for the software house, inspired by the Shopify engineering Helix case study (shopify.engineering/helix). Use when building a client feature, migrating/rewriting an app or screen, or doing a refactor/bug fix with AI agents and you want reliable convergence instead of one big unreviewable diff. Splits a target into small ordered checkpoints; each must pass four gates (behavior tests, UI review, two adversarial code reviews, engineer approval) before it is committed; engineer feedback becomes project memory. Integrates GitHub Spec Kit as an extension (spec → plan → tasks feed checkpoints; /speckit-implement runs through the gates). Triggered by /spiral-init, /spiral-plan, /spiral-run, /spiral-status, /spiral-promote, /speckit-spiral-*, or requests like "build this screen spiral-style", "migrate X with checkpoints", "run the gates".
 ---
 
 # Spiral — checkpoints, gates, memory
@@ -25,26 +25,31 @@ loop until every gate is green, then a human signs off and the feedback is remem
 3. **Memory.** Approved patterns and every piece of engineer feedback accumulate in `.spiral/memory.md` and are
    read at the start of every checkpoint, so later checkpoints need less supervision.
 
-## Reference-as-spec (one workflow, three modes)
+## Reference-as-spec (one workflow, four modes)
 
-Spiral does not write giant specs. It points the agents at a **reference** and keeps context small.
+Spiral points the agents at a **reference** and keeps context small. For quick work the reference is whatever already exists.
+For new client features worth specifying properly, the reference is a Spec Kit spec (`spec` mode, `references/speckit.md`).
 
 | Mode | Reference (the spec) | Tests come from | UI gate compares against |
 |------|----------------------|-----------------|--------------------------|
 | `migration` | the legacy code/screen being replaced | observed behaviour of the old code | screenshots of the old app |
 | `feature` | SOW / ticket acceptance criteria + Figma frames or design PNGs | the acceptance criteria | Figma/design images |
 | `fix` (refactor or bug) | the bug report / current behaviour | a failing repro test (bug) or characterization tests (refactor) | before-screenshots (regression only), or skipped |
+| `spec` (Spec Kit feature) | `specs/NNN-name/`: spec.md, plan.md, contracts/, data-model.md, tasks.md | acceptance scenarios + contracts + the feature's test tasks | Figma/images linked from the spec |
+
+**Which mode for which job:** a substantial new client feature uses `spec` (the spec doubles as the client-facing requirement
+record). A small feature from a clear ticket uses `feature`. Ports use `migration`. Bugs and refactors use `fix`.
 
 ## Files in the target project
 
 ```
-spiral.config.json            # commands, screenshot method, gate settings  → references/config.md
+spiral.config.json           # commands, screenshot method, gate settings  → references/config.md
 .spiral/
   architecture.md            # the rules reviewers enforce (from templates/architecture.md)
   memory.md                  # distilled engineer feedback, newest last (from templates/memory.md)
   state.json                 # current phase + locked-test hashes; local only (gitignored), written by spiral.mjs
-  runs/<target-slug>/
-    checkpoints.md                  # target, mode, reference, ordered checkpoints + status
+  runs/<target-slug>/        # spec mode: slug = the Spec Kit feature dir name, e.g. 003-user-auth
+    checkpoints.md           # target, mode, reference, ordered checkpoints (+ task IDs in spec mode) + status
     cp-01/                   # one folder per checkpoint
       tests.md               # what the test writer added and why
       gate-1.md … gate-4.md  # each gate attempt's report (append, never overwrite)
@@ -52,11 +57,13 @@ spiral.config.json            # commands, screenshot method, gate settings  → 
       shots/                 # reference-*.png, candidate-*.png
 ```
 
-## Three layers of rules
+## Layers of rules
 
-Every checkpoint, and every test-writer and reviewer launch, reads all three. When they conflict, the more specific one wins:
+Every checkpoint, and every test-writer and reviewer launch, reads all of them. When they conflict, the higher one wins:
 
-1. `.spiral/memory.md`: this project's lessons from engineer feedback (most specific, wins).
+0. `.specify/memory/constitution.md` (only if Spec Kit is installed): non-negotiable principles. Feedback that contradicts
+   it is flagged for a `/speckit-constitution` amendment, never silently stored in memory.
+1. `.spiral/memory.md`: this project's lessons from engineer feedback.
 2. `.spiral/architecture.md`: this project's conventions.
 3. **House rules**: company-wide taste and lessons shared by every client project. They live in `house/house-rules.md` in this
    skill's directory (override the path with `spiral.config.json → houseRules`). They grow through `/spiral-promote`, which
@@ -106,7 +113,7 @@ the client repo must stay clean (`spiral.config.json → commitRunLogs`).
 - **Loop budget.** `gates.maxAttempts` (default 5) per gate per checkpoint. On exhaustion, stop and escalate to the
   engineer with the reports. Never lower the bar to get green.
 - **Scope.** One checkpoint = one concern. Don't pull work forward from later checkpoints; note it in `checkpoints.md`.
-- **Commits.** Work on branch `spiral/<target-slug>`. Commit once per checkpoint, only after gate 4 (or after gate 3 in
+- **Commits.** Work on branch `spiral/<target-slug>` (in `spec` mode, the Spec Kit feature branch if one exists). Commit once per checkpoint, only after gate 4 (or after gate 3 in
   `batch` autonomy — see below). Never push, merge, or open a PR unless the engineer asks.
 
 ## Autonomy
@@ -125,5 +132,9 @@ the client repo must stay clean (`spiral.config.json → commitRunLogs`).
 4. `/spiral-status [target]`: progress, gate pass rates, escalations, autonomy suggestion.
 5. `/spiral-promote [other projects…]`: lift repeated project lessons into the house rules (lead approves).
 
+With Spec Kit, steps 2–3 become the Spec Kit flow: `/speckit-specify` → `/speckit-clarify` → `/speckit-plan` → `/speckit-tasks`
+(its hook plans the checkpoints) → `/speckit-implement` (its hook runs the gates) → `/speckit-converge`.
+
 References: `references/checkpoints.md` (how to slice per mode), `references/gates.md` (exact gate procedure),
-`references/config.md` (config schema + stack presets).
+`references/config.md` (config schema + stack presets + hook install), `references/speckit.md` (Spec Kit integration,
+spec mode, tasks → checkpoints). The Spec Kit extension itself lives in `speckit-extension/`.

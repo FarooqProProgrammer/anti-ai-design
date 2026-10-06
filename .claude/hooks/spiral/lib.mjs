@@ -117,6 +117,10 @@ export const DEFAULT_PROTECTED = [
   'phpstan.neon*', 'phpunit.xml*', 'pint.json',
   '.swiftlint.yml', 'detekt.yml', '.editorconfig', 'analysis_options.yaml', '.golangci.*',
   '.github/workflows/**', '.gitlab-ci.yml', '.husky/**',
+  // Spec Kit: the spec is the reference; the implementer may not edit it to match the code (tasks.md stays writable).
+  '.specify/**',
+  'specs/*/spec.md', 'specs/*/plan.md', 'specs/*/research.md', 'specs/*/data-model.md', 'specs/*/quickstart.md',
+  'specs/*/contracts/**', 'specs/*/checklists/**',
 ];
 
 export function protectedMatchers(config) {

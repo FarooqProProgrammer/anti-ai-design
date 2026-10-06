@@ -24,7 +24,13 @@ Load the `spiral` skill, then set Spiral up in the current project. Notes from t
    Install the chosen one (copy the scripts, merge the `hooks` block without dropping existing hooks). Then smoke-test:
    `node <hooks>/spiral.mjs status` must print state.
 6. **Show** the config and architecture draft, then ask with AskUserQuestion: the UI reference source (Figma / design images /
-   legacy app / none), the UI reviewer (Claude vision or Gemini CLI), and the starting autonomy (recommend `checkpoint`).
-   Apply the answers.
-7. Don't commit. Tell the engineer to review `.spiral/architecture.md` (it's the rulebook the reviewers will enforce), commit
+   legacy app / none), the UI reviewer (Claude vision or Gemini CLI), the starting autonomy (recommend `checkpoint`), and
+   **Spec Kit** (recommend yes for projects with substantial new features; see `references/speckit.md`). Apply the answers.
+7. **Spec Kit (if chosen).** Follow `references/speckit.md → Installing`: upgrade `specify-cli` to the latest release with `uv`,
+   then `specify init --here --force --non-interactive --integration claude --script <ps on Windows | sh> --extension git` (skip init
+   if `.specify/` already exists), then `specify extension add --dev <spiral skill dir>/speckit-extension`. Verify the
+   `speckit-spiral-*` skills exist under `.claude/skills/` and that `.specify/extensions.yml` has the Spiral hooks. Then run
+   `/speckit-constitution`. Its before-hook offers house-rule principles. Keep the constitution to principles and leave the
+   concrete conventions in `.spiral/architecture.md`.
+8. Don't commit. Tell the engineer to review `.spiral/architecture.md` (it's the rulebook the reviewers will enforce), commit
    it themselves, and then run `/spiral-plan <target>`.

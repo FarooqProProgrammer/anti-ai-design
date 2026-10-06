@@ -5,8 +5,9 @@ to subagents, so no agent grades its own work. Paths below are relative to the t
 `$CP` = `.spiral/runs/<slug>/cp-NN`. `$SPIRAL` = the run-state CLI (see SKILL.md → Guardrails); every phase change
 below goes through it so the hooks know what is allowed.
 
-"The rules" means all three layers: `.spiral/memory.md` > `.spiral/architecture.md` > house rules. Pass all three to
-every subagent.
+"The rules" means all layers: constitution (if Spec Kit) > `.spiral/memory.md` > `.spiral/architecture.md` > house rules.
+Pass all of them to every subagent. In `spec` mode, also apply the differences in `references/speckit.md → Gate differences`
+(test sources, extra reviewer inputs, ticking `tasks.md` at approval, `/speckit-converge` at the end).
 
 ## 0. Prepare
 
