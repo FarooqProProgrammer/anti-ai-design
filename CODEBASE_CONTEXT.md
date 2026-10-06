@@ -1,7 +1,7 @@
 # Codebase context — the-developer
 
 > Compiled for AI assistants. The curated section is written by Claude; the auto section is regenerated
-> by compile-context v1.1.0 whenever files change. Last compiled: 2026-10-06 18:31 UTC.
+> by compile-context v1.1.0 whenever files change. Last compiled: 2026-10-06 18:41 UTC.
 
 <!-- CONTEXT:CURATED:START -->
 ## Architecture & conventions
@@ -15,19 +15,35 @@ flow, coding conventions, and gotchas. This block is preserved across automatic 
 
 ## Stack
 - **Languages:** n/a
-- **Files tracked:** 0 (source files: 0, scanned: 0)
+- **Files tracked:** 14 (source files: 0, scanned: 0)
 
 ## Directory structure
 ```
 the-developer/
-
+.claude/  (14)
+  agents/  (4)
+    helix-reviewer-architecture.md
+    helix-reviewer-correctness.md
+    helix-test-writer.md
+    helix-ui-reviewer.md
+  commands/  (4)
+    helix-init.md
+    helix-plan.md
+    helix-run.md
+    helix-status.md
+  skills/  (6)
+    helix/  (6)
+      references/  (3)
+      templates/  (2)
+      SKILL.md
 ```
 
 ## Git
 - **Branch:** `main`
-- **Most-changed files (last 200 commits):** `.claude/skills/anti-ai-slop-design/SKILL.md` (4), `.claude/skills/anti-ai-slop-design/scripts/slop_scan.py` (3), `.claude/skills/anti-ai-slop-design/assets/example-kit/README.md` (3), `.claude/skills/anti-ai-slop-design/references/brand-book.md` (3), `.claude/skills/anti-ai-slop-design/scripts/brand_book.py` (3), `.claude/commands/brand-book.md` (2), `.claude/commands/ref-board.md` (2), `.claude/skills/anti-ai-slop-design/assets/example-book.html` (2), `.claude/skills/anti-ai-slop-design/assets/example-kit/tailwind.preset.js` (2), `.claude/skills/anti-ai-slop-design/references/web-references.md` (2), `.gitignore` (1), `.claude/commands/find-frontend-skills.md` (1)
+- **Most-changed files (last 200 commits):** `.claude/skills/anti-ai-slop-design/SKILL.md` (5), `.claude/skills/anti-ai-slop-design/assets/example-kit/README.md` (4), `.claude/skills/anti-ai-slop-design/references/brand-book.md` (4), `.claude/skills/anti-ai-slop-design/scripts/brand_book.py` (4), `.claude/skills/anti-ai-slop-design/scripts/slop_scan.py` (4), `.claude/commands/brand-book.md` (3), `.claude/commands/ref-board.md` (3), `.claude/skills/anti-ai-slop-design/assets/example-book.html` (3), `.claude/skills/anti-ai-slop-design/assets/example-kit/tailwind.preset.js` (3), `.claude/skills/anti-ai-slop-design/references/web-references.md` (3), `.claude/commands/find-frontend-skills.md` (2), `.claude/skills/anti-ai-slop-design-workspace/fixtures/dashboard.html` (2)
 - **Recent commits:**
 ```
+9211329 2026-10-06 Refactor: Remove outdated rules and guidelines for Shadcn components
 2b62c7a 2026-10-05 Fix regex for width rule in slop scanner and add .gitignore for care-platform
 d779ac2 2026-10-05 Add find-frontend-skills command to vet and install agent skills for frontend stack
 4fc73f5 2026-10-05 Add comprehensive rules and guidelines for component usage in Shadcn
