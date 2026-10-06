@@ -1,6 +1,0 @@
-{
-  "eval_id": 2,
-  "eval_name": "audit-plantly",
-  "prompt": "can you review landing.html and tell me why it looks so AI-generated? be honest, and tell me what to change first",
-  "assertions": []
-}

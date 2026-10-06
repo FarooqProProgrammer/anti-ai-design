@@ -1,8 +1,0 @@
-{
-  "skill_name": "anti-ai-slop-design",
-  "evals": [
-    {"id": 1, "prompt": "I'm launching a small tax consultancy in Lahore for freelancers and remote workers who get paid from abroad (Upwork, Fiverr, Payoneer, Wise). Build me a landing page as a single index.html (HTML + CSS, no build step, CDN fonts ok).", "expected_output": "A distinctive, subject-grounded landing page that avoids the default AI palette, emoji icons, hype copy and centered 3-card template.", "files": []},
-    {"id": 2, "prompt": "can you review landing.html and tell me why it looks so AI-generated? be honest, and tell me what to change first", "expected_output": "A prioritized audit naming specific tells with locations and concrete fixes, plus a direction grounded in plant care.", "files": ["fixtures/landing.html"]},
-    {"id": 3, "prompt": "This is the dashboard for our hospital nurse rota app (ShiftBoard). Ward managers glance at it at the start of every shift to see gaps and who's on. It looks like every other AI app. Redesign it, keep it one HTML file.", "expected_output": "A redesigned dashboard oriented to ward managers' real task (coverage gaps, who's on), no glass/glow/emoji/purple, plus a short change summary.", "files": ["fixtures/dashboard.html"]}
-  ]
-}

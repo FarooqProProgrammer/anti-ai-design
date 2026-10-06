@@ -1,6 +1,0 @@
-{
-  "eval_id": 1,
-  "eval_name": "build-tax-landing",
-  "prompt": "I'm launching a small tax consultancy in Lahore for freelancers and remote workers who get paid from abroad (Upwork, Fiverr, Payoneer, Wise). Build me a landing page as a single index.html (HTML + CSS, no build step, CDN fonts ok).",
-  "assertions": []
-}
