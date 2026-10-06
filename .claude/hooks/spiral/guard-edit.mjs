@@ -32,7 +32,9 @@ if (state.phase !== 'tests') {
   }
 }
 
-if (protectedMatchers(config).some((re) => re.test(r))) {
+// In "plan" the Spec Kit skills legitimately write .specify/** and specs/**; the guard only protects them once building starts.
+const specArtifact = r.startsWith('.specify/') || r.startsWith('specs/');
+if (!(state.phase === 'plan' && specArtifact) && protectedMatchers(config).some((re) => re.test(r))) {
   deny(`${r} is protected tooling/config during a Spiral run. Loosening lint, type, test or CI config is not a fix. ` +
     'Escalate to the engineer if it truly needs to change.');
 }

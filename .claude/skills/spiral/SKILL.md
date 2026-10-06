@@ -132,8 +132,10 @@ the client repo must stay clean (`spiral.config.json → commitRunLogs`).
 4. `/spiral-status [target]`: progress, gate pass rates, escalations, autonomy suggestion.
 5. `/spiral-promote [other projects…]`: lift repeated project lessons into the house rules (lead approves).
 
-With Spec Kit, steps 2–3 become the Spec Kit flow: `/speckit-specify` → `/speckit-clarify` → `/speckit-plan` → `/speckit-tasks`
-(its hook plans the checkpoints) → `/speckit-implement` (its hook runs the gates) → `/speckit-converge`.
+6. **`/spiral-ship <target>`: the one-command path.** It readies the project, routes the target, **drives Spec Kit itself**
+   (constitution → specify → clarify → plan → checklist → tasks → spec gate), plans checkpoints, runs the gates, and loops
+   `speckit-converge` until nothing is left. It stops only at the decision points in `spiral.config.json → spec`.
+   Spiral never asks the engineer to run a `/speckit-*` command; it invokes those skills itself.
 
 References: `references/checkpoints.md` (how to slice per mode), `references/gates.md` (exact gate procedure),
 `references/config.md` (config schema + stack presets + hook install), `references/speckit.md` (Spec Kit integration,

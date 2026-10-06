@@ -5,7 +5,28 @@ plan → tasks → analyze. Spiral decides **how it ships**: every task is built
 gates. Spiral is installed into Spec Kit as an **extension** (`speckit-extension/` in this skill), so the two connect
 through Spec Kit's own hooks. Nothing is forked, and `specify` upgrades keep working.
 
-## Flow
+## Driven flow (default)
+
+**Spiral drives Spec Kit itself. The engineer never has to type a `/speckit-*` command.** `/spiral-ship <target>` (and
+`/spiral-plan` for a new feature) invokes the Spec Kit skills with the Skill tool in order: constitution (if still a template) →
+specify → clarify → plan → checklist → tasks (the after-hook plans checkpoints) → Spiral gates → converge → loop. The engineer is
+interrupted only at the decision points in `spiral.config.json → spec`:
+
+| Stop | When | Can be turned off |
+|------|------|-------------------|
+| Clarifications | only questions no source (SOW, ticket, Figma, code, constitution, rules) answers | `clarify: "auto"` is already minimal |
+| Spec approval | once, as a 10-line summary | `approveSpec: false` |
+| Checkpoint approval | once per plan (and per converge round) | `approveCheckpoints: false` |
+| Gate 4 | per checkpoint, or once per target in `batch` autonomy | `autonomy: "batch"` |
+| Escalations | loop budget exhausted, product decision needed | no |
+
+Every stop is a single batched AskUserQuestion, and `/spiral-ship <slug>` resumes from the first missing artifact. While the spec
+artifacts are being written, the phase is `plan`: git stays guarded, and `.specify/**` and `specs/**` are writable. From
+`implement` onward they are locked.
+
+Running the `/speckit-*` commands manually still works: the extension hooks below keep it on the gated path.
+
+## Hook wiring (also used when someone runs Spec Kit by hand)
 
 ```
 /speckit-constitution      ← before hook (optional): house rules offered as candidate principles

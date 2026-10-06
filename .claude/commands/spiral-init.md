@@ -29,8 +29,8 @@ Load the `spiral` skill, then set Spiral up in the current project. Notes from t
 7. **Spec Kit (if chosen).** Follow `references/speckit.md → Installing`: upgrade `specify-cli` to the latest release with `uv`,
    then `specify init --here --force --non-interactive --integration claude --script <ps on Windows | sh> --extension git` (skip init
    if `.specify/` already exists), then `specify extension add --dev <spiral skill dir>/speckit-extension`. Verify the
-   `speckit-spiral-*` skills exist under `.claude/skills/` and that `.specify/extensions.yml` has the Spiral hooks. Then run
-   `/speckit-constitution`. Its before-hook offers house-rule principles. Keep the constitution to principles and leave the
+   `speckit-spiral-*` skills exist under `.claude/skills/` and that `.specify/extensions.yml` has the Spiral hooks. Then invoke the
+   `speckit-constitution` skill yourself (its before-hook offers house-rule principles), drafting from the architecture draft. Keep the constitution to principles and leave the
    concrete conventions in `.spiral/architecture.md`.
 8. Don't commit. Tell the engineer to review `.spiral/architecture.md` (it's the rulebook the reviewers will enforce), commit
    it themselves, and then run `/spiral-plan <target>`.

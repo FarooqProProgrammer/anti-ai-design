@@ -46,6 +46,15 @@ relies on what remains, and `/spiral-init` warns about it.
     "uiBlockingSeverities": ["blocker", "major"]
   },
 
+  "spec": {                          // Spec Kit pipeline, driven by Spiral itself (/spiral-ship)
+    "useSpecKit": true,              // false = never route through Spec Kit
+    "clarify": "auto",               // "auto": Spiral answers from sources, asks only what none answer | "ask": engineer answers all
+    "approveSpec": true,             // engineer approves the spec summary before planning
+    "approveCheckpoints": true,      // engineer approves the checkpoint table before building
+    "checklist": ["ux", "security"], // speckit-checklist domains to run after plan; [] = skip
+    "maxConvergeRounds": 3           // converge → new checkpoints → build loops before escalating
+  },
+
   "houseRules": null,                // path to the company house-rules.md; null = house/house-rules.md in the spiral skill dir
 
   "guard": {

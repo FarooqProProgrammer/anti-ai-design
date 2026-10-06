@@ -1,7 +1,7 @@
 # Codebase context — the-developer
 
 > Compiled for AI assistants. The curated section is written by Claude; the auto section is regenerated
-> by compile-context v1.1.0 whenever files change. Last compiled: 2026-10-06 19:16 UTC.
+> by compile-context v1.1.0 whenever files change. Last compiled: 2026-10-06 19:21 UTC.
 
 <!-- CONTEXT:CURATED:START -->
 ## Architecture & conventions
@@ -15,22 +15,23 @@ flow, coding conventions, and gotchas. This block is preserved across automatic 
 
 ## Stack
 - **Languages:** JavaScript (5)
-- **Files tracked:** 27 (source files: 5, scanned: 5)
+- **Files tracked:** 28 (source files: 5, scanned: 5)
 
 ## Directory structure
 ```
 the-developer/
-.claude/  (27)
+.claude/  (28)
   agents/  (4)
     spiral-reviewer-architecture.md
     spiral-reviewer-correctness.md
     spiral-test-writer.md
     spiral-ui-reviewer.md
-  commands/  (5)
+  commands/  (6)
     spiral-init.md
     spiral-plan.md
     spiral-promote.md
     spiral-run.md
+    spiral-ship.md
     spiral-status.md
   hooks/  (5)
     spiral/  (5)
@@ -70,9 +71,10 @@ _Top-level exports / declarations per file; ←N = imported by N files._
 
 ## Git
 - **Branch:** `main`
-- **Most-changed files (last 200 commits):** `.claude/skills/anti-ai-slop-design/SKILL.md` (5), `.claude/skills/anti-ai-slop-design/assets/example-kit/README.md` (4), `.claude/skills/anti-ai-slop-design/references/brand-book.md` (4), `.claude/skills/anti-ai-slop-design/scripts/brand_book.py` (4), `.claude/skills/anti-ai-slop-design/scripts/slop_scan.py` (4), `.claude/commands/brand-book.md` (3), `.claude/commands/ref-board.md` (3), `.claude/skills/anti-ai-slop-design/assets/example-book.html` (3), `.claude/skills/anti-ai-slop-design/assets/example-kit/tailwind.preset.js` (3), `.claude/skills/anti-ai-slop-design/references/web-references.md` (3), `.claude/agents/spiral-reviewer-architecture.md` (2), `.claude/agents/spiral-test-writer.md` (2)
+- **Most-changed files (last 200 commits):** `.claude/skills/anti-ai-slop-design/SKILL.md` (5), `.claude/skills/anti-ai-slop-design/assets/example-kit/README.md` (4), `.claude/skills/anti-ai-slop-design/references/brand-book.md` (4), `.claude/skills/anti-ai-slop-design/scripts/brand_book.py` (4), `.claude/skills/anti-ai-slop-design/scripts/slop_scan.py` (4), `.claude/agents/spiral-reviewer-architecture.md` (3), `.claude/agents/spiral-test-writer.md` (3), `.claude/commands/spiral-init.md` (3), `.claude/commands/spiral-plan.md` (3), `.claude/skills/spiral/SKILL.md` (3), `.claude/skills/spiral/references/gates.md` (3), `.claude/commands/brand-book.md` (3)
 - **Recent commits:**
 ```
+f4e98eb 2026-10-07 feat: Integrate Spec Kit support into Spiral workflow and enhance documentation
 4e6586f 2026-10-07 Enhance Spiral workflow with new house rules and checkpoint management
 6eb1c54 2026-10-07 feat: Add Spiral hooks for command validation and linting during active runs
 4e90ec4 2026-10-06 feat: Implement Spiral checkpoint-and-gate workflow with detailed agent instructions and configurations

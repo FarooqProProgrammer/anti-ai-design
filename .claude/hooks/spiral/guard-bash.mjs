@@ -44,7 +44,8 @@ if (!usesCli && WRITES.test(cleaned)) {
     if (!p || p.startsWith('-')) continue;
     const r = rel(root, p);
     if (locked.includes(r)) deny(`shell command modifies locked Spiral test ${r}. Tests are owned by spiral-test-writer.`);
-    if (prot.some((re) => re.test(r))) deny(`shell command modifies protected config ${r} during a Spiral run.`);
+    const specArtifact = r.startsWith('.specify/') || r.startsWith('specs/');
+    if (!(state.phase === 'plan' && specArtifact) && prot.some((re) => re.test(r))) deny(`shell command modifies protected config ${r} during a Spiral run.`);
   }
 }
 process.exit(0);
