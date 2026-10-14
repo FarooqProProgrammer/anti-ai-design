@@ -2,62 +2,73 @@
 
 This repository adheres to a strict 6-Phase AI Engineering Workflow governed by a mandatory **Request Firewall** ([FIREWALL.md](FIREWALL.md)).
 
-> 🛡️ **REQUEST FIREWALL PROTOCOL:**
-> Every request MUST proceed through the sequential process:
-> `Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
-> - Never skip Phase 2 planning to write code immediately.
-> - Never write code without explicit plan approval.
-> - Never suppress or hide errors in Phase 4.
-> - When asked to review in Phase 5, you are in READ-ONLY mode.
+Modular rules:
+- [.claude/rules/firewall.md](.claude/rules/firewall.md) — Firewall admission control & blocking gates
+- [.claude/rules/wiki.md](.claude/rules/wiki.md) — Karpathy LLM Wiki Grounding Invariant & procedures
+- [.claude/rules/workflow.md](.claude/rules/workflow.md) — Universal 6-phase lifecycle protocol
+- [.claude/rules/engineering.md](.claude/rules/engineering.md) — Engineering standards, humanized content & diagram rules
 
-## Universal Execution Across All 6 Phases
-You can execute **any or all** of the 6 phases of the workflow:
+---
 
-### 1. Phase 1: Understand (Code Exploration, Brainstorming & Grill-Me)
-- **Mandatory Skills**: Always use **`brainstorming`** (`.claude/skills/brainstorming/`) and **`grill-me`** (`.claude/skills/grill-me/`).
-- **Brainstorming**: Uncover goals, non-goals, and anti-goals. Propose 2–3 architectural approaches with trade-offs.
-- **Grill-Me**: Socratic questioning down the decision tree; surface unstated assumptions and edge cases.
-- **Codebase Recon**: Explore codebase, trace call stacks, search symbols, and consult `wiki/index.md`.
-- **STRICT RULE**: READ-ONLY. Do NOT edit or write code during this phase.
+## 🛡️ Non-Bypassable Request Firewall Protocol
+Every request MUST proceed sequentially through the 6 gates:
+`Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
 
-### 2. Phase 2: Plan (Architect & Strategist)
-- **Investigation**: Deeply analyze complex requirements, dependencies, and potential regressions.
-- **Risk Assessment**: Identify failure modes, concurrency issues, edge cases, and backward compatibility.
-- **Acceptance Criteria**: Formulate explicit, testable criteria (Given-When-Then format).
-- **Execution Blueprint**: Break work into phased, atomic milestones.
-- **Gate**: Await user confirmation before beginning Phase 3 (Implement).
+- **Gate 1: Understand (Read-Only Reconnaissance)**
+  - Mandatory Skills: `brainstorming` (`.claude/skills/brainstorming/`) and `grill-me` (`.claude/skills/grill-me/`).
+  - Uncover goals, non-goals, and anti-goals. Propose 2–3 architectural approaches with trade-offs.
+  - Socratic questioning down the decision tree; challenge edge cases and surface unstated assumptions.
+  - Explore codebase, trace call stacks, and consult `wiki/index.md`.
+  - **STRICT RULE:** READ-ONLY. Do NOT edit or write code during this phase.
 
-### 2. Phase 3: Implement (Primary Driver)
-- When assigned as the Primary Driver, you hold sole end-to-end accountability for the core implementation.
-- Follow the approved plan sequentially.
-- Write unit and integration tests alongside implementation.
-- Do NOT introduce unrequested refactorings or speculative features.
-- Collaborate with Cursor by leaving visual/interactive styling refinements to Cursor while maintaining domain logic integrity.
+- **Gate 2: Plan (Architect & Strategist)**
+  - Deeply analyze complex requirements, dependencies, and potential regressions.
+  - Formulate testable Acceptance Criteria (Given-When-Then format) and risk matrix.
+  - Ingest external references into `raw/` and compile in `wiki/`.
+  - **Gate:** Await user confirmation before beginning Phase 3 (Implement).
 
-### 3. Phase 4: Verify (Zero-Tolerance Validation)
-- Run the project's verification suite: type checks, linters, unit tests, integration tests, and build.
-- Test actual runtime behavior against the acceptance criteria.
-- **NEVER hide or suppress failures**:
-  - Log complete error messages and stack traces.
-  - Fix root causes in the implementation code.
-  - Do not disable tests, relax types, or add suppressions.
+- **Gate 3: Implement (Single Driver)**
+  - When assigned as the Primary Driver, hold sole accountability for core logic and architecture.
+  - Follow the approved plan sequentially.
+  - Write unit and integration tests alongside implementation.
+  - Do NOT introduce unrequested refactorings or speculative features.
+  - If collaborating with Cursor, handle core architecture while allowing Cursor to perform interactive/visual refinements.
 
-### 4. Phase 5: Independent Review (When designated as Reviewer)
-- When given a `git diff` for independent review:
-  - **READ-ONLY MANDATE**: Review without editing or modifying files.
-  - Audit for correctness, security vulnerabilities, edge cases, performance bottlenecks, and adherence to acceptance criteria.
-  - Report findings categorized by severity (High/Blocker, Medium, Low/Nit).
+- **Gate 4: Verify (Zero Concealment)**
+  - Run project test runner, type checkers, and linters.
+  - Test actual runtime behavior against acceptance criteria.
+  - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
+  - **Zero Concealment:** Never hide or suppress failures (`@ts-ignore`, commented tests). Fix root causes.
 
-### 5. Phase 6: Ship Safely
-- Review final git diff and status for lingering debug statements or extraneous files.
-- Commit atomically using Conventional Commits on dedicated feature/fix branches.
-- Follow the repository's established CI/CD pipeline and deployment protocols.
-- If architectural or domain concepts are introduced, compile/update them in `wiki/` and record in `wiki/log.md`.
+- **Gate 5: Review Independently (Read-Only Auditor)**
+  - When given a `git diff` for independent review:
+    - **READ-ONLY MANDATE:** Review without editing or modifying files.
+    - Audit for correctness, security, performance, and acceptance criteria.
+    - Report findings categorized by severity (High/Blocker, Medium, Low/Nit).
+
+- **Gate 6: Ship Safely (Branch Hygiene & CI/CD)**
+  - Review final git diff and status for lingering debug statements or extraneous files.
+  - Commit atomically using Conventional Commits on dedicated feature/fix branches.
+  - Follow established CI/CD pipeline and release protocols.
+  - Compound newly introduced architectural patterns into `wiki/` and record in `wiki/log.md`.
+
+---
+
+## ✍️ Humanized Content Standard
+All generated content—including comments, PR summaries, commit messages, and documentation—must read naturally like practical human engineering prose:
+- Never use robotic AI buzzwords (*"delve into"*, *"tapestry"*, *"testament to"*, *"harnessing"*, *"streamlining"*, *"game-changer"*).
+- Write in active voice with clear, direct explanations.
+- Never write redundant comments that merely echo code syntax.
+
+---
 
 ## Karpathy LLM Wiki Skill Integration
 You have access to the `karpathy-llm-wiki` skill located at `.claude/skills/karpathy-llm-wiki/` and `skills/karpathy-llm-wiki/`.
-- **Ingest**: When given a new source, fetch into `raw/<topic>/YYYY-MM-DD-slug.md` and compile into `wiki/<topic>/concept.md`. Adhere to the Grounding Invariant (locate every quote/literal in raw before writing).
-- **Query**: Search `wiki/` and provide grounded answers with citations.
-- **Lint**: Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py` during verification to guarantee evidence consistency.
+- **Ingest:** When given a new source, fetch into `raw/<topic>/YYYY-MM-DD-slug.md` and compile into `wiki/<topic>/concept.md`. Adhere to the Grounding Invariant (locate every quote/literal in raw before writing).
+- **Query:** Search `wiki/` and provide grounded answers with citations.
+- **Lint:** Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .` during verification to guarantee evidence consistency.
 
+---
 
+## Diagram Artifact Standard (.exceldraw)
+Every workflow phase must maintain an ExcelDraw diagram (`.exceldraw`, `.excalidraw`, `.svg`) with a clear description under `diagrams/` or repository root.

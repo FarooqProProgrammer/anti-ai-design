@@ -1,25 +1,58 @@
-# Cursor AI Engineering Rules
+# Universal AI Engineering Rules for Cursor
 
-You operate as part of the 6-Phase AI Engineering Workflow. Your specific responsibilities are defined below:
+You are equipped to execute **all 6 phases** of the AI Engineering Workflow as defined in [AI_WORKFLOW.md](AI_WORKFLOW.md) and governed by the Request Firewall in [FIREWALL.md](FIREWALL.md).
 
-## 1. Phase 1: Understand (Code Exploration & Pattern Identification)
-- When tasked with exploring a feature or bug, your job is reconnaissance only.
-- Check `wiki/index.md` and relevant `wiki/` topic articles for established domain concepts, ADRs, and decisions.
-- Map impacted files, symbols, types, and dependencies.
-- Identify existing codebase conventions (error handling, data fetching, naming, architectural patterns).
-- **CRITICAL**: Do NOT modify or edit code during the Understand phase. Present your findings, context map, and constraints to the user.
+For modular rule definitions, consult:
+- [.cursor/rules/workflow.mdc](.cursor/rules/workflow.mdc) — Full 6-phase lifecycle protocol.
+- [.cursor/rules/firewall-rules.mdc](.cursor/rules/firewall-rules.mdc) — Mandatory admission controller and blocking gates.
+- [.cursor/rules/wiki-rules.mdc](.cursor/rules/wiki-rules.mdc) — Karpathy LLM Wiki Grounding Invariant and evidence standards.
+- [.cursor/rules/engineering-standards.mdc](.cursor/rules/engineering-standards.mdc) — Single Driver principle, zero concealment, Humanized Content Rule, Vercel design standards, and ExcelDraw diagram requirements.
 
-## 2. Phase 3: Implement (Interactive Edits & Frontend Refinement)
-- When participating in implementation, your designated focus is:
-  - Frontend visual refinement (UI components, layouts, CSS/Tailwind styling).
-  - Fast interactive tweaks and developer-driven inline adjustments.
-- **Single Driver Respect**:
-  - The Primary Driver (Claude Code or Codex) owns core business logic, domain models, and architectural backbone.
-  - Do NOT rewrite or restructure core domain logic, database operations, or API contracts.
-  - Keep edits surgical, minimal, and aligned with the approved plan.
+---
 
-## 3. General Behavioral Guidelines
-- Always preserve existing comments and documentation.
-- When suggesting code, match the established style and formatting of the project.
-- Never suppress type errors, linter rules, or test assertions.
+## Non-Bypassable Firewall Protocol
+Every request proceeds sequentially:
+`Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
 
+1. **Phase 1: Understand (Read-Only Reconnaissance)**
+   - Always invoke `brainstorming` (goals/anti-goals, trade-offs) and `grill-me` (Socratic decision-tree questioning).
+   - Consult `wiki/index.md` for existing architectural patterns and ADRs.
+   - **CRITICAL:** Do NOT modify, write, or delete code during Phase 1.
+
+2. **Phase 2: Plan (Architectural Blueprint)**
+   - Formulate risk matrix, edge cases, and testable acceptance criteria (Given-When-Then).
+   - External RFCs/docs must be fetched into `raw/` and compiled in `wiki/`.
+   - Wait for user/lead approval before writing code.
+
+3. **Phase 3: Implement (Single Driver)**
+   - You can act as the Primary Driver for the entire change, or collaborate by handling interactive/frontend refinements.
+   - Maintain single agent ownership of the core logic. Do not bounce core logic between competing agents.
+   - Strictly follow the approved plan; avoid speculative scope.
+
+4. **Phase 4: Verify (Zero Concealment)**
+   - Run typecheckers, linters, and full automated test suites.
+   - Verify wiki consistency via `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
+   - Never suppress or bypass errors (`@ts-ignore`, commented-out tests). Fix root causes.
+
+5. **Phase 5: Review Independently (Read-Only Auditor)**
+   - Audit the final `git diff` for correctness, security, performance, and acceptance criteria.
+   - **MANDATE:** Review without editing. Never modify files during review mode.
+
+6. **Phase 6: Ship Safely (Branch Hygiene & CI/CD)**
+   - Inspect diff hygiene (no lingering `console.log` or debug code).
+   - Commit atomically using Conventional Commits on feature branches.
+   - Compound new patterns and models into `wiki/` and record in `wiki/log.md`.
+
+---
+
+## ✍️ Humanized Content Rule
+All generated code comments, commit messages, PR descriptions, and markdown documentation must read like human software engineering prose:
+- Zero AI buzzwords (*"delve into"*, *"tapestry"*, *"in conclusion"*, *"testament to"*, *"harnessing"*).
+- Active voice, direct descriptions, and pragmatic explanations of *why* non-obvious choices were made.
+- Never write redundant comments echoing syntax.
+
+---
+
+## Diagrams & Documentation
+- Every phase must produce or reference an ExcelDraw diagram (`.exceldraw`, `.excalidraw`, `.svg`) with a clear description.
+- Preserve existing comments and docstrings.

@@ -1,0 +1,66 @@
+---
+description: Karpathy LLM Wiki knowledge base rules, Grounding Invariant, and evidence verification standards
+globs: *
+alwaysApply: true
+---
+
+# Karpathy LLM Wiki Rules
+
+This repository maintains a persistent, compounding knowledge base powered by the Karpathy LLM Wiki methodology (`skills/karpathy-llm-wiki/`).
+
+## 1. Directory Structure & Authority Boundaries
+- **`raw/` (Immutable Source Material):**
+  - Read-only layer for agents. NEVER edit existing files in `raw/`.
+  - Store primary sources, external RFCs, documentation, meeting transcripts, and articles under `raw/<topic>/YYYY-MM-DD-slug.md`.
+- **`wiki/` (Compiled Knowledge Base):**
+  - Full LLM ownership. One level of topic nesting: `wiki/<topic>/<article>.md`.
+  - `wiki/index.md`: Global table of contents. Every article must have an entry with `Article | Summary | Updated`.
+  - `wiki/log.md`: Append-only audit log tracking every Ingest, Query archive, and Lint run.
+
+---
+
+## 2. The Grounding Invariant (Non-Negotiable)
+> **Every load-bearing fact in `wiki/`—numbers, dates, and direct quotes—must exist verbatim in the `raw/` files linked by that article's `Raw` field.**
+
+- Locate before you write: Grep or locate the exact string in `raw/` before writing it to `wiki/`.
+- If the source states `42K`, write `42K`, not `42,000`.
+- Derived values (e.g. sums, deltas) must show constituent components findable in `raw/`.
+- Never hallucinate, extrapolate, or embellish numbers or dates.
+
+---
+
+## 3. Operational Lifecycles
+
+### A. Ingest (Source Acquisition & Compilation)
+1. **Fetch:** Save source text into `raw/<topic>/YYYY-MM-DD-slug.md` with metadata header (`Source`, `Collected`, `Published`).
+2. **Triage:** Search `wiki/` and state disposition: `New`, `Update`, `Disputed`, or `No material`.
+3. **Compile:** Write or update article in `wiki/<topic>/<concept>.md` with header:
+   ```markdown
+   # Title
+   > Sources: {Author/Spec, YYYY-MM-DD}
+   > Raw: [{source}](../../raw/{topic}/{file}.md)
+   > Updated: YYYY-MM-DD
+   ```
+4. **Cascade Updates:** Check full wiki for ripple effects on related claims. Mark superseded claims with `> **Status: Outdated** (YYYY-MM-DD)` or `> **Status: Disputed**`.
+5. **Post-Ingest:**
+   - Update `wiki/index.md` row.
+   - Append entry to `wiki/log.md`:
+     ```markdown
+     ## [YYYY-MM-DD] ingest | <primary article title>
+     - Disposition: <New; Update; Disputed>
+     - Raw: <project-root-relative raw path>
+     ```
+
+### B. Query (Knowledge Retrieval)
+1. Read `wiki/index.md` and full-text search `wiki/` using key concepts and synonyms.
+2. Synthesize answers prioritizing wiki content over training data. Cite articles using relative markdown links.
+3. Ordinary queries do NOT modify files. If user explicitly requests archiving, save to `wiki/<topic>/<title>.md` (without `Raw` field), prefix summary in `wiki/index.md` with `[Archived]`, and log in `wiki/log.md`.
+
+### C. Lint & Evidence Verification
+- Run the evidence verification script:
+  ```bash
+  python skills/karpathy-llm-wiki/scripts/check_evidence.py .
+  ```
+- **Fidelity suspects:** Candidates reported by the script must be judged against raw context; never auto-fix facts.
+- **Evidence errors:** Broken raw links or missing Raw fields must be fixed immediately.
+- **Log:** Append `## [YYYY-MM-DD] lint | <N> issues found, <M> auto-fixed` to `wiki/log.md`.

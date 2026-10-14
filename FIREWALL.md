@@ -1,10 +1,10 @@
-# AI Request Firewall Specification
+# AI Request Firewall
 
-The **Request Firewall** is the mandatory admission controller and governance gatekeeper for all tasks entering the development lifecycle. No code can be edited, no test can be bypassed, and no feature can be shipped without sequentially clearing the Firewall gates.
+The Request Firewall stops shortcuts before they touch the codebase. When an AI agent gets a request, it cannot jump straight into hacking files, disable failing tests, or self-approve a pull request. Every change must clear six practical gates in order.
 
 ---
 
-## Firewall Principle & Non-Bypassable Rule
+## How the Firewall Works
 
 ```
 [ INCOMING REQUEST ]
@@ -12,107 +12,105 @@ The **Request Firewall** is the mandatory admission controller and governance ga
         ▼
 ╔════════════════════════════════════════════════════════════════════╗
 ║                      AI REQUEST FIREWALL                           ║
-║   Every request must pass sequentially through all 6 gates.        ║
-║   Any agent (Cursor / Claude / Codex) can execute all steps.       ║
-║   Shortcuts, skipped phases, and unauthorized edits are BLOCKED.   ║
+║   Every change clears all six gates sequentially.                  ║
+║   Any agent (Cursor, Claude Code, Codex, Antigravity) can drive.   ║
+║   Shortcuts, blind edits, and skipped tests are BLOCKED.           ║
 ╚════════════════════════════════════════════════════════════════════╝
         │
-   [GATE 1] ──► 1. UNDERSTAND            (Any Agent: Read-Only Reconnaissance)
+   [GATE 1] ──► 1. UNDERSTAND            (Explore, Brainstorm, Grill-Me, Read-Only)
         │
-   [GATE 2] ──► 2. PLAN                  (Any Agent: Risks & Acceptance Criteria)
+   [GATE 2] ──► 2. PLAN                  (Define Risks & Acceptance Criteria)
         │
-   [GATE 3] ──► 3. IMPLEMENT             (Primary Driver: Core Logic & Refinement)
+   [GATE 3] ──► 3. IMPLEMENT             (Single Driver owns the core change)
         │
-   [GATE 4] ──► 4. VERIFY                (Checks, Runtime Behavior, Zero Concealment)
+   [GATE 4] ──► 4. VERIFY                (Run tests, check runtime, zero concealment)
         │
-   [GATE 5] ──► 5. REVIEW INDEPENDENTLY  (Auditor: Diff Audit Without Editing)
+   [GATE 5] ──► 5. REVIEW INDEPENDENTLY  (Fresh eyes: audit the diff without editing)
         │
-   [GATE 6] ──► 6. SHIP SAFELY           (Branch Hygiene, Conventional Commit, CI/CD)
+   [GATE 6] ──► 6. SHIP SAFELY           (Clean diff, conventional commits, CI/CD)
 ```
 
 > [!NOTE]
-> **UNIVERSAL AGENT EXECUTION POLICY:**
-> This workflow does not lock tasks to a single tool. **Cursor can execute all 6 steps.** **Claude Code can execute all 6 steps.** **Codex can execute all 6 steps.** Or they can collaborate seamlessly.
-> The Firewall governs the **process discipline and quality gates**, ensuring that whichever agent is active never takes shortcuts.
+> **Universal Agent Execution:**
+> This setup isn't tied to a single tool. **Cursor**, **Claude Code**, **Codex**, or **Antigravity** can handle every single step. Or they can team up. The firewall enforces the engineering discipline so no tool cuts corners.
 
 > [!CAUTION]
-> **FIREWALL INTERCEPT RULE:**
-> If a user prompts: *"Just quickly fix this file"*, *"Generate the code for X"*, or *"Skip tests and merge"*, the Firewall **intercepts and enforces the process**:
-> 1. Understand the problem and codebase patterns.
-> 2. Formulate a plan and acceptance criteria.
-> 3. Implement with a single driver.
-> 4. Verify completely.
-> 5. Review independently without editing.
-> 6. Ship safely.
+> **Shortcut Interception:**
+> When someone prompts: *"Just quickly patch this file"*, *"Generate the code for X"*, or *"Skip tests and push"*, the firewall steps in and runs the full process:
+> 1. Understand what's actually happening in the code first.
+> 2. Write a clear plan with testable criteria.
+> 3. Let one agent drive the implementation.
+> 4. Verify that tests pass and the runtime actually works.
+> 5. Review the diff with fresh context without editing.
+> 6. Ship safely on a clean branch.
 
 ---
 
-## The 6 Firewall Enforcement Gates
+## The Six Quality Gates
 
 ### Gate 1: Understand
-- **Applicable Agents**: Cursor, Claude Code, Codex, Antigravity.
-- **Mandatory Skills**: `skills/brainstorming/` and `skills/grill-me/`.
-- **Admission Check**: Does the agent understand the affected files, call stack, existing patterns, and has it interviewed the user/spec to clarify all edge cases?
-- **Firewall Blocking Conditions**:
-  - 🛑 **BLOCKED**: Any attempt to write, edit, or delete source code during Phase 1.
-  - 🛑 **BLOCKED**: Proceeding without applying **Brainstorming** (goals/anti-goals, trade-offs) and **Grill-Me** (Socratic decision-tree questioning).
-  - 🛑 **BLOCKED**: Proceeding without consulting `wiki/index.md` or existing design patterns.
-- **Exit Condition**: Documented context snapshot (clarified edge cases, resolved trade-offs, files impacted, patterns detected, technical constraints).
+- **Agents:** Cursor, Claude Code, Codex, Antigravity.
+- **Skills Required:** `skills/brainstorming/` and `skills/grill-me/`.
+- **The Check:** Did the agent trace the affected files, check caller/callee paths, uncover existing patterns, and ask the hard questions about edge cases?
+- **What Gets Blocked:**
+  - 🛑 **BLOCKED**: Editing, creating, or deleting source code during this phase.
+  - 🛑 **BLOCKED**: Skipping **Brainstorming** (goals, non-goals, trade-offs) or **Grill-Me** (Socratic decision tree questioning).
+  - 🛑 **BLOCKED**: Skipping `wiki/index.md` or existing design patterns.
+- **Exit Criteria:** A clear context snapshot with trade-offs weighed, edge cases resolved, and impacted files mapped out.
 
 ### Gate 2: Plan
-- **Applicable Agents**: Cursor, Claude Code, Codex, Antigravity.
-- **Admission Check**: Are the requirements investigated, edge cases forecasted, and acceptance criteria testable?
-- **Firewall Blocking Conditions**:
-  - 🛑 **BLOCKED**: Starting implementation without an explicit, approved plan.
-  - 🛑 **BLOCKED**: Plans lacking concrete Acceptance Criteria (Given-When-Then) or Risk Analysis.
-  - 🛑 **BLOCKED**: Unresolved external RFCs/specs (must be ingested into `raw/` and compiled in `wiki/`).
-- **Exit Condition**: Explicit human or lead engineer sign-off on the implementation plan.
+- **Agents:** Cursor, Claude Code, Codex, Antigravity.
+- **The Check:** Did the agent pin down tricky requirements, call out risks, and write concrete acceptance criteria (Given-When-Then)?
+- **What Gets Blocked:**
+  - 🛑 **BLOCKED**: Touching code before getting human sign-off on the plan.
+  - 🛑 **BLOCKED**: Vague plans missing testable acceptance criteria or failure modes.
+  - 🛑 **BLOCKED**: Unresolved external specs (must be fetched into `raw/` and compiled in `wiki/`).
+- **Exit Criteria:** Explicit approval on the plan from you or the lead engineer.
 
 ### Gate 3: Implement (Single Driver)
-- **Applicable Agents**: Cursor, Claude Code, Codex, Antigravity.
-- **Admission Check**: Is implementation owned by a single primary driver (either Cursor alone, or Claude/Codex with Cursor frontend tuning)?
-- **Firewall Blocking Conditions**:
-  - 🛑 **BLOCKED**: Multi-driver chaos (switching core business logic ownership back and forth between competing agents during a run).
-  - 🛑 **BLOCKED**: Scope creep (modifying files or abstractions outside the approved Phase 2 plan).
-- **Exit Condition**: Complete implementation satisfying the Phase 2 plan and initial unit tests.
+- **Agents:** Cursor, Claude Code, Codex, Antigravity.
+- **The Check:** Does one primary driver own the implementation from start to finish?
+- **What Gets Blocked:**
+  - 🛑 **BLOCKED**: Bouncing core logic back and forth between different agents mid-task.
+  - 🛑 **BLOCKED**: Sneaking in unrelated refactors or out-of-scope edits.
+- **Exit Criteria:** Code that fulfills the approved plan and passes initial tests.
 
-### Gate 4: Verify (Zero-Concealment)
-- **Applicable Agents**: Any Agent + Test Runner / Environment.
-- **Admission Check**: Do all automated checks pass, and has actual runtime behavior been tested?
-- **Firewall Blocking Conditions**:
-  - 🛑 **BLOCKED**: Concealed failures (commented-out tests, disabled assertions, `@ts-ignore`, `eslint-disable`).
-  - 🛑 **BLOCKED**: Failing test suites, type errors, or lint warnings.
-  - 🛑 **BLOCKED**: Inconsistent wiki evidence (`python skills/karpathy-llm-wiki/scripts/check_evidence.py` reports errors).
-- **Exit Condition**: 100% green checks with failure logs transparently resolved at the root cause.
+### Gate 4: Verify (Zero Concealment)
+- **Agents:** Any agent with the project test runner.
+- **The Check:** Do all automated checks pass, and did you test the actual behavior?
+- **What Gets Blocked:**
+  - 🛑 **BLOCKED**: Concealed failures (commented-out tests, softened assertions, `@ts-ignore`, `eslint-disable`).
+  - 🛑 **BLOCKED**: Type errors, linter warnings, or failing tests.
+  - 🛑 **BLOCKED**: Inconsistent wiki evidence (`python skills/karpathy-llm-wiki/scripts/check_evidence.py .` reports errors).
+- **Exit Criteria:** 100% clean test runs, with root causes fixed instead of hidden.
 
 ### Gate 5: Review Independently (Read-Only Auditor)
-- **Applicable Agents**: Any Agent in a fresh/clean context (or a separate model/agent instance).
-- **Admission Check**: Has the complete `git diff` been audited without editing permissions?
-- **Firewall Blocking Conditions**:
-  - 🛑 **BLOCKED**: The reviewer agent modifying, editing, or writing code.
-  - 🛑 **BLOCKED**: Skipping independent review or self-approving without fresh-context diff inspection.
-  - 🛑 **BLOCKED**: Unresolved High/Blocker severity findings.
-- **Exit Condition**: Review report generated; all confirmed issues resolved by Primary Driver and re-verified.
+- **Agents:** An agent running in a fresh, clean context or a separate model.
+- **The Check:** Did fresh eyes review the entire `git diff` without editing privileges?
+- **What Gets Blocked:**
+  - 🛑 **BLOCKED**: The reviewer making edits or rewriting code during the review.
+  - 🛑 **BLOCKED**: Self-approving or skipping independent review.
+  - 🛑 **BLOCKED**: Leaving high-severity issues or security bugs unaddressed.
+- **Exit Criteria:** A clear review report, with all valid findings fixed by the primary driver and re-verified.
 
 ### Gate 6: Ship Safely (Branch Hygiene & CI/CD)
-- **Applicable Agents**: Any Agent + Lead Engineer.
-- **Admission Check**: Is the git diff clean, committed on the proper branch, and verified by CI/CD?
-- **Firewall Blocking Conditions**:
-  - 🛑 **BLOCKED**: Committing directly to protected branches (`main`, `master`).
-  - 🛑 **BLOCKED**: Lingering temporary debug code (`console.log`, `debugger`, `print()`) or un-tracked temp files.
-  - 🛑 **BLOCKED**: Failing remote CI/CD status checks.
-- **Exit Condition**: PR merged with conventional commits; new architecture models compounded into `wiki/`.
+- **Agents:** The driver agent and the engineer.
+- **The Check:** Is the working tree clean, on a feature branch, and passing CI?
+- **What Gets Blocked:**
+  - 🛑 **BLOCKED**: Committing straight to protected branches (`main`, `master`).
+  - 🛑 **BLOCKED**: Leaving behind debug statements (`console.log`, `print()`, `debugger`) or temporary files.
+  - 🛑 **BLOCKED**: Merging with failing remote CI checks.
+- **Exit Criteria:** A clean PR merged with conventional commits, with new system patterns logged in `wiki/`.
 
 ---
 
-## Firewall Quick Reference Card
+## Gate Summary Card
 
-| Gate | Stage | Who Operates | What the Firewall Blocks |
+| Gate | Name | Who Runs It | What Gets Blocked |
 |---|---|---|---|
-| **Gate 1** | **Understand** | Any Agent + Brainstorming & Grill-Me | Writing/editing code; skipping brainstorming/interview |
-| **Gate 2** | **Plan** | Any Agent (Cursor / Claude / Codex) | Coding without an approved plan & acceptance criteria |
-| **Gate 3** | **Implement** | Primary Driver (Cursor / Claude / Codex) | Scope creep, competing simultaneous drivers |
-| **Gate 4** | **Verify** | Any Agent + Runner | Hidden failures, suppressed errors, broken tests |
-| **Gate 5** | **Review Independently** | Independent Auditor (Clean Context) | Reviewer editing code, unaddressed review blockers |
-| **Gate 6** | **Ship Safely** | Driver Agent & Engineer | Committing to main, dirty diffs, failing CI pipelines |
-
+| **Gate 1** | **Understand** | Any agent + Brainstorming & Grill-Me | Writing code, skipping the technical interview |
+| **Gate 2** | **Plan** | Any agent (Cursor / Claude / Codex) | Coding without an approved plan and acceptance criteria |
+| **Gate 3** | **Implement** | Primary Driver | Multi-driver churn, scope creep |
+| **Gate 4** | **Verify** | Any agent + test runner | Hidden failures, suppressed errors, broken tests |
+| **Gate 5** | **Review Independently** | Auditor (clean context) | Reviewer editing code, unaddressed review blockers |
+| **Gate 6** | **Ship Safely** | Driver & engineer | Committing to main, messy diffs, broken CI |

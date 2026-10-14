@@ -1,206 +1,197 @@
-# AI Engineering Workflow Specification
+# AI Engineering Workflow
 
-An end-to-end, multi-agent development lifecycle designed to maximize code quality, eliminate AI hallucinations, and prevent architectural regressions by enforcing role segregation and verification gates.
+A pragmatic, disciplined workflow for building software with AI coding agents (Cursor, Claude Code, Codex, and Antigravity). It keeps AI models from making wild assumptions, hacking code in a rush, hiding failing tests, or breaking existing architecture.
 
 ---
 
 ## The AI Request Firewall
 
 > [!IMPORTANT]
-> **EVERY INCOMING REQUEST MUST PASS THROUGH THE FIREWALL.**
-> No agent may write or modify code directly. All user prompts, feature requests, and bug reports must be intercepted by the Request Firewall and routed sequentially through all 6 phases:
+> **Every request stops at the firewall first.**
+> No agent jumps straight to writing or editing code. When you give a prompt, request a feature, or report a bug, the firewall intercepts it and walks it through six practical phases:
 > `Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
-> Any attempt to jump directly to coding, bypass tests, self-approve, or push unverified diffs is **BLOCKED** by the Firewall. See detailed rules in **[`FIREWALL.md`](file:///d:/ai%20agent/the-developer/FIREWALL.md)**.
+>
+> Skipping planning, disabling tests, self-approving, or pushing unreviewed diffs is **BLOCKED**. Details live in **[`FIREWALL.md`](file:///d:/ai%20agent/the-developer/FIREWALL.md)**.
 
 ---
 
-## The Universal 6-Phase Lifecycle Matrix
+## The 6-Phase Lifecycle Matrix
 
 > [!NOTE]
-> **AGENT-UNIVERSAL EXECUTION:**
-> This workflow is **not rigidly split** between agents. **Any agent**—whether **Cursor**, **Claude Code**, **Codex**, or **Antigravity**—can execute all 6 phases end-to-end, or collaborate flexibly.
-> The discipline lies in the **Firewall Gates & Sequential Process**, regardless of which AI tool is driving.
+> **Any agent can drive any phase:**
+> This workflow isn't split into rigid agent silos. **Cursor**, **Claude Code**, **Codex**, or **Antigravity** can run all six phases end-to-end, or collaborate as a team. What matters is following the gates and not cutting corners.
 
-| Phase | Executing Agent | Role & Activity | Quality Gate / Exit Criteria |
+| Phase | Agent Role | Core Focus | Exit Criteria |
 |---|---|---|---|
-| **1. Understand** | **Any Agent** (Cursor / Claude / Codex) + **Brainstorming & Grill-Me Skills** | Explore code, trace dependencies, apply **Brainstorming** (goals/anti-goals, trade-offs) and **Grill-Me** (Socratic interrogation, edge cases), consult `wiki/` | Context notes, resolved decision tree, pattern map; **zero code modifications** |
-| **2. Plan** | **Any Agent** (Cursor / Claude / Codex) | Investigate complex requirements, analyze risks, generate testable acceptance criteria | Approved implementation plan with acceptance criteria & risk matrix |
-| **3. Implement** | **Primary Driver** (Cursor, Claude, or Codex) | Execute core change per plan; interactive edits & frontend refinement | Plan items completed; **single agent ownership** for core logic |
-| **4. Verify** | **Any Agent** + Test Runner | Run tests, linters, type checks, runtime behavior, and wiki evidence checker | 100% checks passing; all failures captured and resolved |
-| **5. Review Independently** | **Auditor** (Clean Context / Second Agent) | Audit final `git diff` with strict instructions: **review without editing** | All confirmed findings remediated and re-verified |
-| **6. Ship Safely** | **Any Agent** + Engineer | Final diff review, atomic commit on feature branch, CI/CD, and wiki compounding | Clean diff, passed CI/CD checks, deployment readiness verified |
+| **1. Understand** | Any Agent + **Brainstorming & Grill-Me** | Trace code, explore patterns, run Socratic interview, check `wiki/` | Context snapshot with trade-offs; **zero code edits** |
+| **2. Plan** | Any Agent | Investigate requirements, weigh risks, write Given-When-Then tests | Approved plan with acceptance criteria & risk matrix |
+| **3. Implement** | **Primary Driver** (Cursor, Claude, or Codex) | Write core logic, build tests, polish UI | Completed plan; **one agent owns the core logic** |
+| **4. Verify** | Any Agent + Test Runner | Run tests, linters, types, runtime check, and wiki evidence audit | All checks green; zero suppressed errors |
+| **5. Review Independently** | Auditor (Clean Context / Second Agent) | Audit final git diff with one mandate: **review without editing** | All confirmed review findings addressed & verified |
+| **6. Ship Safely** | Any Agent + Engineer | Final diff check, atomic commit, CI/CD run, compound knowledge | Clean diff, passed CI/CD, documented in `wiki/` |
 
 ---
 
-> **Visual Diagram:** View and edit the lifecycle architecture diagram in **[`workflow.exceldraw`](file:///d:/ai%20agent/the-developer/workflow.exceldraw)** (or **[`workflow.excalidraw`](file:///d:/ai%20agent/the-developer/workflow.excalidraw)** / **[`workflow.svg`](file:///d:/ai%20agent/the-developer/workflow.svg)**).
+> **Lifecycle Diagram:** View and edit the workflow diagram in **[`workflow.exceldraw`](file:///d:/ai%20agent/the-developer/workflow.exceldraw)** (or **[`workflow.excalidraw`](file:///d:/ai%20agent/the-developer/workflow.excalidraw)** / **[`workflow.svg`](file:///d:/ai%20agent/the-developer/workflow.svg)**).
 
 ---
 
-## Detailed Phase Specifications
+## Phase Breakdown
 
 ### Phase 1: Understand
-**Applicable Tools:** Cursor, Claude Code, Codex, or Antigravity  
-**Mandatory Skills:** **`brainstorming`** (`skills/brainstorming/`) & **`grill-me`** (`skills/grill-me/`)  
-**Goal:** Build complete architectural awareness, interrogate requirements, and map dependencies before proposing any modifications.
+**Tools:** Cursor, Claude Code, Codex, or Antigravity  
+**Skills:** **`brainstorming`** (`skills/brainstorming/`) & **`grill-me`** (`skills/grill-me/`)  
+**Objective:** Figure out how the code actually works today and pin down the true requirements before touching a single line.
 
-#### Protocols & Actions:
-1. **Always Use Brainstorming (`skills/brainstorming/SKILL.md`)**:
-   - Clarify the underlying "Why": Goals, Non-Goals, and Anti-Goals.
-   - Propose 2–3 architectural approaches with clear trade-offs (minimal vs. extensible vs. high-performance).
-   - Ask clarifying open questions to uncover true intent before settling on an approach.
-2. **Always Use Grill-Me (`skills/grill-me/SKILL.md`)**:
-   - Conduct a relentless Socratic technical interview.
-   - Walk down the **decision tree** branch-by-branch, resolving prerequisites.
-   - Interrogate failure modes, edge cases, scaling limits, and breaking changes.
-   - Do NOT passively nod along; aggressively surface unstated assumptions.
-3. **Codebase Exploration & Pattern Reconnaissance**:
-   - Use codebase indexing (`@Codebase`, semantic search, file/symbol lookup) to locate relevant files, types, and schemas.
-   - Consult `wiki/index.md` and relevant `wiki/` topic articles for prior architectural decisions and ADRs.
-   - Trace callers and callees of affected components.
-   - Note error-handling strategies, state management patterns, naming conventions, and layer boundaries.
-4. **Strict Constraints**:
-   - **Do NOT edit code** during this phase.
-   - Summarize findings into a structured context snapshot (interview answers, trade-off decision, files impacted, patterns identified, constraints).
+#### What to Do:
+1. **Brainstorming (`skills/brainstorming/SKILL.md`)**:
+   - Call out Goals, Non-Goals, and Anti-Goals.
+   - Lay out 2–3 architectural approaches with real trade-offs (e.g. minimal vs. extensible vs. high performance).
+   - Ask clarifying questions before settling on a design.
+2. **Grill-Me (`skills/grill-me/SKILL.md`)**:
+   - Run a Socratic technical interview.
+   - Walk down the decision tree branch by branch.
+   - Pressure-test edge cases, network failures, empty states, and breaking changes.
+   - Don't just nod along; bring hidden assumptions out into the open.
+3. **Explore the Codebase**:
+   - Trace caller and callee chains across affected files.
+   - Check `wiki/index.md` for earlier architecture decisions and ADRs.
+   - Note down existing conventions for error handling, state, and naming.
+4. **Hard Rule**:
+   - **Do not write or edit code.** Gather context only.
+5. **Diagram**:
+   - Maintain and describe `diagrams/01-understand.exceldraw`.
 
 ---
 
 ### Phase 2: Plan
-**Applicable Tools:** Cursor, Claude Code, Codex, or Antigravity  
-**Goal:** Deeply analyze complex requirements, forecast edge cases, assess risks, and formulate an actionable implementation plan.
+**Tools:** Cursor, Claude Code, Codex, or Antigravity  
+**Objective:** Map out what to build, how to test it, and what could go wrong.
 
-#### Protocols & Actions:
-1. **Requirements & Scope Investigation**:
-   - Ingest requirements, existing codebase context from Phase 1, and technical constraints.
-   - Ingest external RFCs, specifications, or library documentation into `raw/` and compile into `wiki/` using the `karpathy-llm-wiki` skill.
-   - Identify implicit requirements, breaking change potentials, and backward compatibility concerns.
+#### What to Do:
+1. **Requirements & Scope**:
+   - Pull in context from Phase 1.
+   - Ingest any external RFCs or documentation into `raw/` and compile them into `wiki/` via `karpathy-llm-wiki`.
+   - Call out potential breaking changes or migration headaches early.
 2. **Risk & Mitigation Matrix**:
-   - Identify performance bottlenecks, race conditions, security vulnerabilities, and API limits.
-   - Propose explicit mitigations for each identified risk.
+   - Identify concurrency issues, performance bottlenecks, and security gaps.
+   - Write down how you will handle each one.
 3. **Acceptance Criteria**:
-   - Define concrete, testable criteria (Given-When-Then / Gherkin or bulleted test conditions).
-4. **Phased Implementation Roadmap**:
-   - Divide implementation into sequential, atomic milestones.
-   - Define checkpoint criteria for each milestone.
-5. **Gate Approval**:
-   - The user or lead engineer reviews and approves the plan before execution begins.
+   - Write clear, testable criteria using Given-When-Then format.
+4. **Milestones**:
+   - Break the task into sequential, bite-sized checkpoints.
+5. **Human Sign-Off**:
+   - Get explicit approval from the engineer before starting implementation.
+6. **Diagram**:
+   - Generate `diagrams/02-plan.exceldraw`.
 
 ---
 
 ### Phase 3: Implement
-**Applicable Tools:** Cursor, Claude Code, Codex, or Antigravity (Any agent as Primary Driver)  
-**Goal:** Execute the planned changes with discipline and architectural fidelity.
+**Tools:** Cursor, Claude Code, Codex, or Antigravity  
+**Objective:** Build the change cleanly, sticking strictly to the approved plan.
 
 #### The Single Driver Principle:
 > [!IMPORTANT]
-> **Keep one agent responsible for the main implementation.**
-> Whether you use **Cursor**, **Claude Code**, or **Codex** as the driver, that agent owns the core logic and architecture for the task.
-> - **If using Cursor alone:** Cursor performs the main implementation, unit testing, and interactive/frontend refinement.
-> - **If collaborating across agents (e.g., Claude/Codex + Cursor):** Claude Code or Codex drives the core business logic, while Cursor handles interactive edits and frontend visual tuning.
-> - **Golden Rule:** Do not bounce core logic between competing agents simultaneously to avoid context fragmentation.
+> **One agent drives the main implementation.**
+> Whether that driver is Cursor, Claude Code, or Codex, keep ownership of the core logic with that agent.
+> - **Using Cursor alone:** Cursor writes the core logic, adds tests, and polishes the UI.
+> - **Collaborating (e.g., Claude Code + Cursor):** Claude Code drives the backend and core business logic, while Cursor handles interactive UI styling and visual tweaks.
+> - **Avoid chaos:** Never bounce core logic between competing agents on the fly.
 
-#### Protocols & Actions:
-1. **Main Change Execution**:
-   - Follow the approved plan sequentially.
-   - Build unit/integration tests alongside or prior to business logic (TDD preferred).
-   - Maintain consistency with patterns identified in Phase 1.
-2. **Interactive & Frontend Refinement**:
-   - Live UI iteration, styling tweaks (CSS/Tailwind), visual adjustments, and small interactive fixes.
-3. **Implementation Hygiene**:
-   - Do not touch unrelated files or refactor code outside the planned scope.
-   - Keep diffs minimal, focused, and clean.
+#### What to Do:
+1. **Follow the Plan**:
+   - Implement step-by-step; write unit and integration tests alongside your code.
+   - Keep to the patterns discovered in Phase 1.
+2. **Clean Scope**:
+   - Don't rewrite unrelated code or introduce unrequested refactorings.
+   - Keep the diff small, focused, and reviewable.
+3. **Diagram**:
+   - Generate `diagrams/03-implement.exceldraw`.
 
 ---
 
 ### Phase 4: Verify
-**Applicable Tools:** Any Agent + Test Runner / Environment  
-**Goal:** Validate functional behavior, ensure zero regressions, and transparently log all diagnostic outputs.
+**Tools:** Any Agent + Test Runner / Environment  
+**Objective:** Prove the code actually works and catch regressions.
 
-#### Protocols & Actions:
-1. **Automated Checks**:
-   - **Type Checking**: Run compiler/typechecker (e.g., `tsc --noEmit`, `mypy`, `cargo check`).
-   - **Linting & Formatting**: Run project linters (e.g., `eslint`, `flake8`, `ruff`, `prettier`).
-   - **Automated Tests**: Execute unit, integration, and end-to-end test suites.
-   - **Wiki Grounding Check**: If wiki or documentation was updated, run `python skills/karpathy-llm-wiki/scripts/check_evidence.py`.
-2. **Behavioral Runtime Verification**:
-   - Test the actual behavior against the acceptance criteria defined in Phase 2.
-   - Trigger edge cases, error conditions, and empty states.
-3. **Failure Transparency Protocol**:
+#### What to Do:
+1. **Run the Checks**:
+   - Types: Run your compiler/typechecker (`tsc --noEmit`, `mypy`).
+   - Linters: Run code formatters and linters (`eslint`, `ruff`, `prettier`).
+   - Test suites: Execute unit, integration, and end-to-end tests.
+   - Wiki check: Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
+2. **Test Runtime Behavior**:
+   - Test the real behavior against the Phase 2 acceptance criteria.
+   - Hit error paths, empty states, and weird inputs.
+3. **Zero Concealment**:
    > [!CAUTION]
-   > **Never hide, bypass, suppress, or skip failing tests or type errors.**
-   > - Capture the full stack trace and error message.
-   > - Root-cause every failure.
-   > - Fix the underlying defect; do not modify test assertions to make failing code appear green unless the requirement itself changed.
+   > **Never hide, skip, or suppress failing tests.**
+   > - Don't comment out assertions, add `@ts-ignore`, or slap on `eslint-disable`.
+   > - Capture the actual error message and stack trace.
+   > - Fix the root cause in the implementation code.
+4. **Diagram**:
+   - Generate `diagrams/04-verify.exceldraw`.
 
 ---
 
 ### Phase 5: Review Independently
-**Applicable Tools:** Codex, Claude Code, Cursor (Fresh Context), or Antigravity  
-**Goal:** Fresh-context, objective code review of the final Git diff without editing permissions.
+**Tools:** Codex, Claude Code, Cursor (Fresh Context), or Antigravity  
+**Objective:** Fresh-context audit of the final diff without editing privileges.
 
-#### Protocols & Actions:
-1. **Reviewer Independence**:
-   - The review must be performed with a clean context (or a separate model/agent instance) from the implementation driver.
-2. **Strict Read-Only Instruction**:
-   - Prompt instructions: *"You are an independent code auditor. Review this git diff for correctness, performance, edge cases, and security vulnerabilities. DO NOT edit or modify files."*
-3. **Review Evaluation Criteria**:
-   - **Correctness & Logic**: Any off-by-one errors, null/undefined hazards, unhandled promise rejections?
-   - **Security**: Any injection vectors, unauthorized access, secrets leaked, unsafe deserialization?
-   - **Performance**: Any unnecessary allocations, N+1 queries, memory leaks, unoptimized re-renders?
-   - **Acceptance Criteria Check**: Does the diff satisfy all criteria defined in Phase 2?
-4. **Remediation Loop**:
-   - Triage feedback: classify into blocker, fix, or false-positive.
-   - Primary driver implements confirmed fixes.
-   - Re-run Phase 4 (Verify) on the updated diff.
+#### What to Do:
+1. **Fresh Context**:
+   - Run the review from a clean conversation or separate model instance so you aren't biased by the coding session.
+2. **Review Without Editing**:
+   - Prompt: *"You are an independent auditor. Review this git diff for correctness, security, performance, and acceptance criteria. DO NOT edit or modify files."*
+3. **Checklist**:
+   - Logic: Off-by-one errors, null pointer traps, unhandled promises?
+   - Security: Injection risks, leaked credentials, unsanitized input?
+   - Performance: N+1 queries, memory leaks, needless re-renders?
+   - Criteria: Did we actually deliver what was promised in Phase 2?
+4. **Fix & Re-verify**:
+   - Primary driver fixes confirmed bugs.
+   - Run Phase 4 checks again on the updated diff.
+5. **Diagram**:
+   - Generate `diagrams/05-review.exceldraw`.
 
 ---
 
 ### Phase 6: Ship Safely
 **Owner:** Driver Agent & Engineer  
-**Goal:** Package, commit, and deploy changes adhering to repository hygiene and CI/CD protocols.
+**Objective:** Package, commit, and ship without surprises.
 
-#### Protocols & Actions:
-1. **Final Diff Inspection**:
-   - Run `git diff` and `git status` to ensure no temporary files, debug statements (`console.log`, `print`, `debugger`), or unintended changes are staged.
-2. **Branch Management**:
-   - Ensure commits are made on the designated feature or hotfix branch (`feature/...`, `fix/...`), never directly to protected branches (`main`, `master`).
-3. **Atomic Conventional Commits**:
-   - Use standard conventional commit format:
-     `feat(scope): concise description of feature`
-     `fix(scope): concise description of bugfix`
-4. **CI/CD & Deployment**:
-   - Push to remote and open a Pull Request with the implementation plan and verification proof.
-   - Monitor CI pipeline until all status checks pass.
-   - Adhere to the project's staging and production release gates.
-5. **Knowledge Compounding**:
-   - If the shipped change introduces new architectural patterns, external APIs, or domain concepts, record or update the corresponding article in `wiki/`.
-   - Log the change in `wiki/log.md`.
+#### What to Do:
+1. **Diff Hygiene**:
+   - Check `git diff` and `git status` to ensure no stray `console.log`, `print()`, or temporary files made it in.
+2. **Branch Discipline**:
+   - Commit on a feature or bugfix branch (`feature/...`, `fix/...`), never straight to `main` or `master`.
+3. **Conventional Commits**:
+   - Write clear, concise commits: `feat(scope): concise description` or `fix(scope): concise description`.
+4. **CI/CD**:
+   - Push, open a PR with the plan and verification proof, and make sure remote CI builds pass.
+5. **Compound What You Learned**:
+   - If you built a new pattern or added domain rules, write or update an article in `wiki/` and log it in `wiki/log.md`.
+6. **Diagram**:
+   - Generate `diagrams/06-ship.exceldraw`.
 
 ---
 
-## Compounding Knowledge: Karpathy LLM Wiki Subsystem
+## Humanized Content Standard
 
-This workflow integrates the **Karpathy LLM Wiki** (`skills/karpathy-llm-wiki/`) to prevent amnesia and eliminate repeated exploratory research.
+All content produced in this workspace—including code comments, docstrings, commit messages, PR descriptions, and markdown documentation—must sound like it was written by a thoughtful human software engineer:
+- **No AI Clichés:** Ban empty buzzwords like "delve into", "tapestry", "in conclusion", "it's important to remember", "testament to", "harnessing", "streamlining", or "game-changer".
+- **Clear Active Voice:** Write directly: "we recommend", "this function throws when...", "here's how to configure".
+- **Pragmatic Comments:** Explain *why* something unusual was done, not what the syntax already shows.
+- **Natural Rhythm:** Keep sentences direct, punchy, and grounded in real software engineering trade-offs.
 
-### Core Architecture
-- **`raw/` (Immutable Source Material)**: Primary sources, RFCs, API references, meeting notes, articles, and incident logs. Agents read but never modify.
-- **`wiki/` (Compiled Knowledge)**: Synthesized markdown articles maintained by LLM agents.
-  - `wiki/index.md`: Global table of contents linking all concepts.
-  - `wiki/log.md`: Append-only operation log.
-- **`skills/karpathy-llm-wiki/`**: The schema and verification scripts (`check_evidence.py`).
+---
 
-### Workflow Operations Across the 6 Phases
-1. **Querying (Phase 1: Understand)**:
-   - Before exploring raw code, check `wiki/index.md` or search `wiki/<topic>/` for existing domain models, business rules, and technical decisions.
-2. **Ingestion & Compilation (Phase 2: Plan)**:
-   - When researching external dependencies, algorithms, or complex requirements, fetch the source into `raw/` and compile a clean article in `wiki/`.
-   - Maintain the **Grounding Invariant**: every specific number, date, and quote in `wiki/` must exist verbatim in `raw/`.
-3. **Verification & Evidence Linting (Phase 4: Verify)**:
-   - Run the evidence checker:
-     ```bash
-     python skills/karpathy-llm-wiki/scripts/check_evidence.py
-     ```
-   - Verifies that all citations and literal claims in `wiki/` map cleanly to immutable sources in `raw/`.
-4. **Knowledge Compounding (Phase 6: Ship Safely)**:
-   - Record newly established architecture decisions (ADRs) or system behavioral contracts directly into `wiki/` upon release.
+## Compounding Knowledge: Karpathy LLM Wiki
 
+To prevent knowledge amnesia and stop re-learning the same things repeatedly, the project uses the Karpathy LLM Wiki (`skills/karpathy-llm-wiki/`).
 
+- **`raw/` (Immutable Sources)**: RFCs, upstream docs, articles, and meeting notes. Agents read these but never modify existing files.
+- **`wiki/` (Compiled Articles)**: Clean markdown articles maintained by LLMs, backed by `wiki/index.md` and `wiki/log.md`.
+- **The Grounding Invariant**: Every number, date, and quote in `wiki/` must exist verbatim in `raw/`.
+- **Verification**: Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .` to ensure zero broken citations or fabricated facts.

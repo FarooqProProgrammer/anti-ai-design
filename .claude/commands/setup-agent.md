@@ -32,3 +32,4 @@ cmd.exe /c "npx skills add vercel-labs/agent-skills -y --copy"
    - `karpathy-llm-wiki` (`Astro-Han/karpathy-llm-wiki`): Persistent compounding knowledge base.
 4. **Synchronizes Across Directories**: Copies installed skills to `.agents/skills/`, `skills/`, and `.claude/skills/` so **every agent** has immediate access.
 5. **Verifies Evidence & Integrity**: Validates installed skill schemas and runs regression tests.
+

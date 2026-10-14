@@ -1,0 +1,64 @@
+---
+description: AI Request Firewall admission controller rules governing all requests, edits, and agent actions
+globs: *
+alwaysApply: true
+---
+
+# AI Request Firewall Rules
+
+The Request Firewall is the non-bypassable admission controller and governance gatekeeper for this repository. Every user prompt, bugfix, or feature request must pass through the Firewall before code can be written, tested, or merged.
+
+## 1. Non-Bypassable Intercept Rule
+If the user requests shortcuts such as:
+- *"Just quickly fix this file"*
+- *"Write the code for feature X"*
+- *"Skip tests and push/merge"*
+
+You must **intercept and enforce** the sequential 6-phase lifecycle:
+`Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
+
+Any agent (Cursor, Claude Code, Codex, Antigravity) is empowered to execute all 6 phases. The Firewall ensures no agent skips quality gates.
+
+---
+
+## 2. Gate-by-Gate Enforcement & Blocking Conditions
+
+### Gate 1: Understand (Read-Only Reconnaissance)
+- **Mandatory Skills:** You MUST invoke and apply:
+  1. `brainstorming` (`skills/brainstorming/`): Identify goals, non-goals, anti-goals; explore 2–3 architectural approaches with trade-offs.
+  2. `grill-me` (`skills/grill-me/`): Socratic interrogation down the decision tree; challenge edge cases, failure modes, and unstated assumptions.
+- **Knowledge Base Consultation:** Always check `wiki/index.md` and relevant `wiki/` topic articles before inspecting source files.
+- **🛑 HARD BLOCK:** Never edit, create, or delete source code during Phase 1.
+- **Exit Condition:** Structured context snapshot produced (edge cases clarified, trade-offs resolved, impacted files mapped).
+
+### Gate 2: Plan (Architectural Blueprints)
+- **Requirements Investigation:** Detail risks, failure modes, concurrency, and security.
+- **Acceptance Criteria:** Write explicit, testable criteria (Given-When-Then format).
+- **External Specs:** Ingest new external specs/RFCs into `raw/` and compile them into `wiki/` using `karpathy-llm-wiki`.
+- **🛑 HARD BLOCK:** Starting implementation without explicit plan approval from the user or lead engineer.
+- **Exit Condition:** Approved implementation plan and risk matrix.
+
+### Gate 3: Implement (Single Driver)
+- **Primary Driver:** Maintain single agent ownership for core logic and architecture during an implementation task.
+- **Implementation Scope:** Strictly adhere to the approved Phase 2 plan.
+- **🛑 HARD BLOCK:** Multi-driver chaos (competing agents editing core logic simultaneously) or unapproved scope creep.
+- **Exit Condition:** Complete code implementation satisfying all Phase 2 acceptance criteria.
+
+### Gate 4: Verify (Zero Concealment)
+- **Verification Suite:** Run typecheck (`tsc`, `mypy`), linters, and full automated test suites.
+- **Wiki Verification:** Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .` to ensure zero evidence errors or fidelity suspects.
+- **Behavioral Testing:** Validate runtime behavior against Phase 2 acceptance criteria.
+- **🛑 HARD BLOCK:** Concealing failures (commenting out tests, disabling assertions, `@ts-ignore`, `eslint-disable`).
+- **Exit Condition:** 100% passing tests with all diagnostic failures resolved at root cause.
+
+### Gate 5: Review Independently (Read-Only Auditor)
+- **Auditor Role:** Conduct review of the final `git diff` from a clean, objective perspective.
+- **Evaluation Criteria:** Logic bugs, security vulnerabilities, edge cases, performance bottlenecks.
+- **🛑 HARD BLOCK:** Modifying, editing, or writing code while in review mode.
+- **Exit Condition:** Comprehensive audit report produced; all confirmed findings resolved by Primary Driver and re-verified.
+
+### Gate 6: Ship Safely (Branch Hygiene & CI/CD)
+- **Diff Hygiene:** Check `git diff` and `git status` for temporary logs or artifacts.
+- **Branch Strategy:** Never commit directly to `main` or `master`. Use atomic Conventional Commits (`feat(...)`, `fix(...)`).
+- **Knowledge Compounding:** Compound newly introduced architecture patterns, models, or ADRs into `wiki/` and record in `wiki/log.md`.
+- **🛑 HARD BLOCK:** Dirty working tree, direct main commits, or failing CI checks.

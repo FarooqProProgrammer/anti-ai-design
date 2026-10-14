@@ -1,0 +1,66 @@
+---
+description: Engineering quality standards, Humanized Content Rule, Vercel design best practices, Single Driver discipline, and diagram rules
+globs: *
+alwaysApply: true
+---
+
+# Engineering Standards & Code Quality Rules
+
+These standards enforce code quality, architectural discipline, and humanized engineering communication across all changes.
+
+## 1. Humanized Content Rule (Mandatory)
+All content created or touched by agents—code comments, docstrings, commit messages, PR descriptions, and markdown documentation—must read like it was written by a thoughtful, practical software engineer:
+- **Zero AI Clichés & Buzzwords:** Never use AI-generated filler words such as:
+  - *"delve into"*, *"tapestry"*, *"in conclusion"*, *"it is important to remember"*, *"testament to"*
+  - *"harnessing the power"*, *"streamlined"*, *"game-changer"*, *"meticulously crafted"*, *"plethora"*, *"beacon"*
+- **Active, Direct Voice:** Write plainly: "we recommend", "this function throws when...", "here's how to configure".
+- **Pragmatic Code Comments:** Only explain *why* something non-obvious was done. Never narrate plain syntax (e.g. avoid `// increment i by 1` or `// set name to string`).
+- **Natural Engineering Rhythm:** Keep sentences direct, punchy, and grounded in real-world software trade-offs.
+
+---
+
+## 2. Single Driver Discipline
+- Keep one agent responsible for the primary implementation of any given task.
+- When collaborating (e.g., Cursor with Claude Code/Codex):
+  - Primary driver handles core domain models, business logic, and API contracts.
+  - Interactive or styling refinements can be handled by Cursor without rewriting the core architecture.
+- Prevent multi-driver churn: do not rewrite working foundations between competing models.
+
+---
+
+## 3. Zero-Concealment Verification Standard
+- **Never suppress errors:**
+  - Prohibited: `@ts-ignore`, `@ts-nocheck`, `eslint-disable`, commenting out tests, softening assertions.
+  - Prohibited: Catching exceptions and silently returning null or mock data without explicit requirements.
+- **Root-Cause Resolution:** Fix defects at their origin. If tests fail, log the exact stack trace and resolve the root issue in the implementation.
+
+---
+
+## 4. Vercel & React Architecture Best Practices
+- **Re-render Optimization:**
+  - Avoid inline objects/functions in frequently rendered children.
+  - Derive state during render instead of syncing in `useEffect`.
+  - Use functional `setState(prev => ...)` for state updates dependent on previous values.
+- **Component Composition:**
+  - Prefer compound components and slots over boolean prop proliferation.
+  - Hoist static configuration and constants outside component bodies.
+- **Accessibility & Design:**
+  - Follow Web Interface Guidelines: accessible interactive targets (min 44x44px), semantic HTML elements, complete keyboard navigation, explicit ARIA roles where required.
+  - Responsive layouts using modern flexbox/grid.
+
+---
+
+## 5. Diagram Artifact Standard (.exceldraw)
+- Every workflow step must produce or update an ExcelDraw diagram (`.exceldraw`, `.excalidraw`, `.svg`) with a clear description.
+- Use `scripts/generate_exceldraw.py` to programmatically generate diagrams matching the standard color-coded schema.
+- Store phase-specific diagrams under `diagrams/` and root system diagrams at repository root.
+
+---
+
+## 6. Git & Commit Hygiene
+- **Commit Formatting:** Strictly adhere to Conventional Commits:
+  - `feat(scope): concise description`
+  - `fix(scope): concise description`
+  - `docs(scope): documentation update`
+  - `test(scope): test additions/fixes`
+- **Clean Diffs:** No residual debugging statements (`console.log`, `print()`, `debugger`), no un-tracked scratch files.
