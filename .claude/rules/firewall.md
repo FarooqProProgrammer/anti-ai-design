@@ -47,11 +47,14 @@ If the user requests immediate code changes ("just fix this", "generate code", "
   - **BLOCKED:** Monolithic multi-part code dumps that skip sub-specification and sub-planning.
   - **BLOCKED:** Parallel subagents writing code without an approved sub-spec and sub-plan.
 
-- **Gate 5: Verify (Zero Concealment)**
-  - Run type checking, linting, and automated tests.
-  - Validate runtime behavior against acceptance criteria.
+- **Gate 5: Verify (Automated Quality Gates & Evidence-Based Completion)**
+  - Risk-Tiered Automated Quality Gates: Run Git diff checks, TypeScript/typecheck, linters, tests, dependency/security audits, and CI build according to task risk.
+  - High-Risk Domain Scrutiny: Stricter checks for database migrations (schema idempotency & rollbacks), authentication (sessions & tokens), permissions (RBAC boundaries), and payment changes (decimal precision & idempotency).
+  - Evidence-Based Completion Report: Before declaring completion, output the mandatory 5-point report (what changed, files changed, tests passed, what was NOT tested, remaining risks).
   - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
   - **BLOCKED:** Disabling assertions, commenting out tests, or suppressing errors (`@ts-ignore`, `eslint-disable`).
+  - **BLOCKED:** Skipping automated gates or high-risk domain checks (migrations, auth, permissions, payments).
+  - **BLOCKED:** Declaring "Done" without an Evidence-Based Completion Report.
 
 - **Gate 6: Review Independently (Read-Only Auditor)**
   - Audit the final `git diff` with fresh context for security, correctness, and performance.

@@ -19,3 +19,8 @@
 ## [2026-10-14] update | Implementation Loop Gate & Parallel Agents
 - Disposition: Update (Add Gate 4 Loop: Implement -> Spec -> Plan -> Implement, /find-skills, parallel agents)
 - Raw: raw/workflow/2026-10-14-ai-workflow-spec.md, raw/workflow/2026-10-14-firewall-spec.md
+
+## [2026-10-14] update | Automated Quality Gates & Evidence-Based Completion
+- Disposition: Update (Add Gate 5 risk-tiered automated gates, high-risk domain checks, and 5-point evidence completion report)
+- Raw: raw/workflow/2026-10-14-ai-workflow-spec.md, raw/workflow/2026-10-14-firewall-spec.md
+

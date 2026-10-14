@@ -50,11 +50,12 @@ Every incoming request must proceed through the sequential firewall gates:
 - Maintain consistency with existing architecture and patterns. Avoid speculative scope.
 - **Diagram:** Maintain and reference `diagrams/04-implement.exceldraw`.
 
-### 5. Phase 5: Verify (Zero Concealment)
-- Run project test suites, linters, and type checkers.
-- Test actual runtime behavior against acceptance criteria.
+### 5. Phase 5: Verify (Automated Quality Gates & Evidence Completion)
+- Run risk-tiered automated quality gates: Git diff checks, TypeScript/typecheck, linters, tests, dependency/security audits, and CI build.
+- Enforce stricter checks for high-risk domains: database migrations (schema idempotency & rollbacks), authentication (sessions & tokens), permissions (RBAC boundaries), and payment changes (decimal precision & idempotency).
 - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
 - **Rule:** Never suppress or hide errors (`@ts-ignore`, commented tests). Fix root causes.
+- **Evidence-Based Completion Report:** Before declaring "Done", output the mandatory 5-point report (what changed, files changed, tests passed, what was NOT tested, remaining risks).
 - **Diagram:** Maintain and reference `diagrams/05-verify.exceldraw`.
 
 ### 6. Phase 6: Review Independently (Read-Only Auditor)

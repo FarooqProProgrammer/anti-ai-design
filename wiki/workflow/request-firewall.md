@@ -58,9 +58,15 @@ When someone prompts: "Just quickly patch this file", "Generate the code for X",
   - BLOCKED: Monolithic multi-part code dumps that skip sub-specification and sub-planning.
   - BLOCKED: Parallel subagents writing code without an approved sub-spec and sub-plan.
 
-- **Gate 5: Verify (Zero Concealment)**
-  - Agents: Any agent with the project test runner.
+- **Gate 5: Verify (Automated Quality Gates & Evidence-Based Completion)**
+  - Agents: Any agent with the project test runner / environment.
+  - The Check:
+    - Risk-Tiered Automated Quality Gates: Are automated checks executed according to task risk: Git diff checks, TypeScript/typecheck, linters, tests, dependency/security audits, and CI build?
+    - High-Risk Domain Scrutiny: Do database migrations, authentication, permissions, and payment changes clear stricter checks (rollback testing, session security, RBAC boundary tests, and decimal precision/idempotency)?
+    - Evidence-Based Completion Report: Did the agent output the mandatory 5-point audit report before declaring completion?
   - BLOCKED: Concealed failures (commented-out tests, softened assertions, `@ts-ignore`, `eslint-disable`).
+  - BLOCKED: Skipping automated gates or high-risk domain checks (migrations, auth, permissions, payments).
+  - BLOCKED: Declaring "Done" without an Evidence-Based Completion Report detailing what passed vs. what was not tested.
   - BLOCKED: Type errors, linter warnings, or failing tests.
   - BLOCKED: Inconsistent wiki evidence (python skills/karpathy-llm-wiki/scripts/check_evidence.py . reports errors).
 

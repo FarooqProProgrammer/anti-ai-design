@@ -43,11 +43,12 @@ You can execute **all 7 phases** of the software engineering lifecycle end-to-en
 - Avoid scope creep or unsolicited refactors.
 - **Diagram:** Maintain and reference `diagrams/04-implement.exceldraw`.
 
-### Phase 5: Verify
-- Run project test runner, compiler/typechecker, and linters.
-- Test actual runtime behavior against acceptance criteria.
+### Phase 5: Verify (Automated Quality Gates & Evidence Completion)
+- Run risk-tiered automated quality gates: Git diff sanity, TypeScript/typecheck, linters, tests, dependency/security audits, and CI build.
+- Enforce stricter checks for high-risk domains: database migrations (schema idempotency & rollbacks), authentication (sessions & tokens), permissions (RBAC boundaries), and payment changes (decimal precision & idempotency).
+- Zero Concealment: Fix root causes; never suppress errors.
 - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
-- **Constraint:** Zero Concealment. Fix root causes; never suppress errors.
+- Output mandatory 5-point Evidence-Based Completion Report (what changed, files changed, tests passed, what was NOT tested, remaining risks).
 - **Diagram:** Maintain and reference `diagrams/05-verify.exceldraw`.
 
 ### Phase 6: Review Independently

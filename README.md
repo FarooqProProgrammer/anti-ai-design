@@ -30,7 +30,7 @@ A pragmatic, battle-tested framework for building software with AI coding agents
 | **2. Spec** | Any Agent (Cursor / Claude / Codex) + Wiki | Technical & functional contracts: schemas, APIs, invariants (WHAT) | **Read-Only**: Zero source code edits allowed. |
 | **3. Plan** | Any Agent (Cursor / Claude / Codex) + Wiki | Implementation roadmap, risk matrix, acceptance criteria (HOW) | No code written until human sign-off on the plan. |
 | **4. Implement** | Primary Driver + Parallel Agents | Core logic, implementation loop (`Spec➔Plan➔Impl`), `/find-skills`, parallel dispatch | **Single Driver & Loop Invariant**: Sub-specs required for all streams. |
-| **5. Verify** | Any Agent + Test Runner | Typechecking, linting, unit/integration suites, wiki evidence check | **Zero Concealment**: Never hide, skip, or suppress failures. |
+| **5. Verify** | Any Agent + Test Runner | Automated quality gates, high-risk domain checks, evidence report | **Zero Concealment & Evidence Gate**: Stricter checks on migrations/auth/permissions/payments; 5-point report required. |
 | **6. Review Independently** | Auditor (Clean Context / Second Agent) | Full `git diff` audit for bugs, security holes, performance | **Review Without Editing**: Reviewer cannot modify files. |
 | **7. Ship Safely** | Any Agent + Engineer | Clean diff check, conventional commits, CI/CD run, compound wiki | Never commit straight to `main` or `master`. |
 
@@ -160,12 +160,18 @@ Every step in this workflow is **agent-universal** (executable by **Cursor**, **
 4. If collaborating, secondary agents focus strictly on interactive styling and frontend polish.
 5. **Visual Artifact**: Generate [`diagrams/04-implement.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/04-implement.exceldraw) detailing component wiring, the implementation loop, and parallel agent orchestration.
 
-### Step 5: Verify (Any Agent + Test Runner)
+### Step 5: Verify (Automated Quality Gates & Evidence Completion)
 1. Run the verification protocol from [`templates/05-verify.md`](file:///d:/ai%20agent/the-developer/templates/05-verify.md).
-2. Run typechecks, linters, unit tests, integration suites, and validate actual runtime behavior.
-3. Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .` if wiki files were touched.
-4. **Zero Concealment**: Never hide failures. Fix root causes rather than disabling tests or assertions.
-5. **Visual Artifact**: Generate [`diagrams/05-verify.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/05-verify.exceldraw) showing check results and runtime flow validation.
+2. **Automated Quality Gates (Risk-Tiered)**: Scale Git diff checks, TypeScript/typecheck, linters, tests, dependency/security audits, and CI builds to task risk to catch regressions before review and deployment.
+3. **High-Risk Domain Stricter Checks**:
+   - *Database Migrations:* Test schema idempotency, test rollback scripts, ensure zero accidental column truncation or data loss.
+   - *Authentication:* Test session invalidation, token expiration, credential hashing, and cookie security flags.
+   - *Permissions (RBAC):* Test cross-tenant isolation, run negative tests (unauthorized role blocking), and check privilege escalation.
+   - *Payments:* Verify currency decimal precision, idempotency key enforcement, and webhook signature verification.
+4. **Zero Concealment**: Never hide failures. Fix root causes rather than disabling tests, softening assertions, or adding suppressions (`@ts-ignore`, `eslint-disable`).
+5. Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .` if wiki files were touched.
+6. **Evidence-Based Completion Report**: Output the mandatory 5-point report before declaring "Done" (What changed? Which files changed? Which tests actually passed? What was NOT tested? Any remaining risks or manual steps?) to maintain a clear difference between claiming "Done" and genuinely verified work.
+7. **Visual Artifact**: Generate [`diagrams/05-verify.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/05-verify.exceldraw) (and `.svg` / `.excalidraw`) showing gate checks, domain scrutiny, and evidence flow.
 
 ### Step 6: Review Independently (Auditor Agent)
 1. Generate the git diff (`git diff origin/main` or `git diff HEAD~1`).

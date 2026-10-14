@@ -52,10 +52,17 @@ Companion Rules:
 - **Rule:** Follow the approved plan sequentially; avoid speculative scope.
 - **Diagram:** Reference `diagrams/04-implement.exceldraw`.
 
-### 5. Phase 5: Verify
-- **Objective:** Run type checks, linters, test suites, and test actual runtime behavior.
+### 5. Phase 5: Verify (Automated Quality Gates & Evidence Completion)
+- **Automated Quality Gates (Risk-Tiered):** Run Git diff checks, TypeScript/typecheck, linters, tests, dependency/security checks, and CI build scaled to task risk.
+- **High-Risk Domain Stricter Checks:** Enforce rollback & schema idempotency for DB migrations, session/token security for auth, negative RBAC boundary tests for permissions, and decimal precision/idempotency for payment changes.
+- **Zero Concealment:** Never hide, suppress, or soften failing tests. Capture error logs and fix root causes.
 - **Wiki Evidence Check:** Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
-- **Rule:** **Zero concealment.** Never hide or suppress failing tests. Capture and fix root causes.
+- **Evidence-Based Completion Report:** Before completion, output the mandatory 5-point report:
+  1. What changed?
+  2. Which files changed?
+  3. Which tests actually passed?
+  4. What was NOT tested?
+  5. Remaining risks or manual steps?
 - **Diagram:** Reference `diagrams/05-verify.exceldraw`.
 
 ### 6. Phase 6: Review Independently

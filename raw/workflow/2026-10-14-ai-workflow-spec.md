@@ -38,7 +38,19 @@ Any agent (Cursor, Claude Code, Codex, Antigravity) can run all seven phases end
 
 5. Phase 5: Verify
 - Objective: Run types, linters, test suites, runtime behavior validation, and the wiki evidence audit.
+- Automated Quality Gates (Risk-Tiered): Automate Git diff sanity checks, TypeScript/typecheck, linters, tests, dependency/security checks, and CI build according to task risk.
+- Stricter Checks for High-Risk Domains:
+  - Database Migrations: Test schema changes, index impact, and verify rollback scripts with zero accidental data loss.
+  - Authentication: Verify session invalidation, token lifecycle, CSRF/CORS, and password/credential handling.
+  - Permissions (RBAC): Run negative permission tests; verify cross-tenant boundaries and unauthorized access blocking.
+  - Payment & Billing: Test currency decimal precision, idempotency key enforcement, webhook verification, and race conditions.
 - Zero Concealment: Never hide, skip, or suppress failing tests. Capture error logs and fix root causes.
+- Evidence-Based Completion Report: At the completion of every task, the agent MUST produce an evidence report before hand-off:
+  1. What changed? Summary of functional and behavioral modifications.
+  2. Which files changed? Exact list of files matching git status.
+  3. Which tests actually passed? Proof of tests run, passing counts, and command outputs.
+  4. What was NOT tested? Explicitly call out blind spots, unmocked systems, and untested edge cases.
+  5. Remaining risks or manual steps? Document pending migrations, required env vars, or manual acceptance checks.
 
 6. Phase 6: Review Independently
 - Objective: Fresh-context audit of final git diff.

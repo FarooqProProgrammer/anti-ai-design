@@ -48,11 +48,12 @@ Every request MUST proceed sequentially through the firewall gates:
   - Do NOT introduce unrequested refactorings or speculative features.
   - If collaborating with Cursor, handle core architecture while allowing Cursor to perform interactive/visual refinements.
 
-- **Gate 5: Verify (Zero Concealment)**
-  - Run project test runner, type checkers, and linters.
-  - Test actual runtime behavior against acceptance criteria.
+- **Gate 5: Verify (Automated Quality Gates & Evidence-Based Completion)**
+  - Run risk-tiered automated quality gates: Git diff sanity, TypeScript/typecheck, linters, tests, dependency/security audits, and CI build.
+  - Enforce stricter checks for high-risk domains: database migrations (schema idempotency & rollbacks), authentication (sessions & tokens), permissions (RBAC boundaries), and payment changes (decimal precision & idempotency).
   - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
   - **Zero Concealment:** Never hide or suppress failures (`@ts-ignore`, commented tests). Fix root causes.
+  - **Evidence-Based Completion Report:** Before declaring "Done", output the mandatory 5-point report (what changed, files changed, tests passed, what was NOT tested, remaining risks).
 
 - **Gate 6: Review Independently (Read-Only Auditor)**
   - When given a `git diff` for independent review:

@@ -30,7 +30,7 @@ A pragmatic, disciplined workflow for building software with AI coding agents (C
 | **2. Spec** | Any Agent | Functional & technical contracts: schemas, APIs, invariants | Approved specification; **zero code edits** |
 | **3. Plan** | Any Agent | Implementation blueprint, weigh risks, write Given-When-Then tests | Approved plan with acceptance criteria & risk matrix |
 | **4. Implement** | **Primary Driver** (Cursor, Claude, Codex) + **Parallel Agents** | Core logic, implementation loop (`Spec➔Plan➔Impl`), `/find-skills`, parallel dispatch | Completed plan; all parallel streams integrated cleanly |
-| **5. Verify** | Any Agent + Test Runner | Run tests, linters, types, runtime check, and wiki evidence audit | All checks green; zero suppressed errors |
+| **5. Verify** | Any Agent + Test Runner | Automated quality gates, high-risk domain checks, evidence completion report | All checks green; zero suppressed errors; evidence report filed |
 | **6. Review Independently** | Auditor (Clean Context / Second Agent) | Audit final git diff with one mandate: **review without editing** | All confirmed review findings addressed & verified |
 | **7. Ship Safely** | Any Agent + Engineer | Clean diff check, atomic commit, CI/CD run, compound knowledge | Clean diff, passed CI/CD, documented in `wiki/` |
 
@@ -164,24 +164,32 @@ When an implementation phase involves multiple tasks, independent components, or
 
 ### Phase 5: Verify
 **Tools:** Any Agent + Test Runner / Environment  
-**Objective:** Prove the code actually works and catch regressions.
+**Objective:** Prove the code actually works, catch regressions, and provide verifiable evidence.
 
 #### What to Do:
-1. **Run the Checks**:
-   - Types: Run your compiler/typechecker (`tsc --noEmit`, `mypy`).
-   - Linters: Run code formatters and linters (`eslint`, `ruff`, `prettier`).
-   - Test suites: Execute unit, integration, and end-to-end tests.
-   - Wiki check: Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
-2. **Test Runtime Behavior**:
-   - Test the real behavior against the Phase 3 acceptance criteria and Phase 2 spec invariants.
-   - Hit error paths, empty states, and weird inputs.
+1. **Automated Quality Gates (Risk-Tiered)**:
+   - Automate Git diff sanity checks, TypeScript/typecheck, linters, tests, dependency/security checks, and CI build according to task risk.
+   - Catch common regressions before independent review and deployment.
+2. **Stricter Checks for High-Risk Domains**:
+   - **Database Migrations:** Test schema changes, index impact, and verify rollback scripts with zero accidental data loss.
+   - **Authentication:** Verify session invalidation, token lifecycle, CSRF/CORS, and password/credential handling.
+   - **Permissions (RBAC):** Run negative permission tests; verify cross-tenant boundaries and unauthorized access blocking.
+   - **Payment & Billing:** Test currency decimal precision, idempotency key enforcement, webhook verification, and race conditions.
 3. **Zero Concealment**:
    > [!CAUTION]
    > **Never hide, skip, or suppress failing tests.**
    > - Don't comment out assertions, add `@ts-ignore`, or slap on `eslint-disable`.
    > - Capture the actual error message and stack trace.
    > - Fix the root cause in the implementation code.
-4. **Diagram**:
+4. **Evidence-Based Completion Report**:
+   At the completion of every task, the agent MUST produce an evidence report before hand-off:
+   - **What changed?**: Summary of functional and behavioral modifications.
+   - **Which files changed?**: Exact list of files matching `git status`.
+   - **Which tests actually passed?**: Proof of tests run, passing counts, and command outputs.
+   - **What was NOT tested?**: Explicitly call out blind spots, unmocked systems, and untested edge cases.
+   - **Remaining risks or manual steps?**: Document pending migrations, required env vars, or manual acceptance checks.
+   *(Maintains a clear difference between claiming "Done" and genuinely verified work).*
+5. **Diagram**:
    - Generate `diagrams/05-verify.exceldraw`.
 
 ---

@@ -46,10 +46,12 @@ Every request proceeds sequentially:
    - **Implementation Loop (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):** If multiple tasks, decoupled sub-modules, or new domain requirements arise, break them down. Use `/find-skills` (`npx skills find`) to equip missing tools, and dispatch parallel subagents under Single Driver orchestration. Each parallel stream must follow `Spec ➔ Plan ➔ Implement`.
    - Strictly follow the approved plan and spec; avoid speculative scope.
 
-5. **Phase 5: Verify (Zero Concealment)**
-   - Run typecheckers, linters, and full automated test suites.
+5. **Phase 5: Verify (Automated Quality Gates & Evidence Completion)**
+   - Run risk-tiered automated quality gates: Git diff checks, TypeScript/typecheck, linters, tests, dependency/security audits, and CI build.
+   - Enforce stricter checks for high-risk domains: database migrations (schema idempotency & rollbacks), authentication (sessions & tokens), permissions (RBAC boundaries), and payment changes (decimal precision & idempotency).
    - Verify wiki consistency via `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
    - Never suppress or bypass errors (`@ts-ignore`, commented-out tests). Fix root causes.
+   - Output mandatory 5-point Evidence-Based Completion Report (what changed, files changed, tests passed, what was NOT tested, remaining risks).
 
 6. **Phase 6: Review Independently (Read-Only Auditor)**
    - Audit the final `git diff` for correctness, security, performance, and acceptance criteria.
