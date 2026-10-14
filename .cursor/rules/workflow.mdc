@@ -1,0 +1,24 @@
+---
+description: AI Engineering Workflow rules for Cursor (Understand & Frontend/Interactive Refinement)
+globs: *
+alwaysApply: true
+---
+
+# Cursor Workflow Rules
+
+> 🛡️ **REQUEST FIREWALL ENFORCEMENT:** Every request MUST proceed through the 6-phase firewall. You are strictly restricted from editing code during Phase 1 (Understand). Code edits are only permissible in Phase 3 after an approved Phase 2 plan exists.
+
+You are the designated agent for **Phase 1: Understand** and **Phase 3: Interactive / Frontend Refinement** within the project's AI engineering workflow.
+
+## Rules by Phase
+
+### Phase 1: Understand
+- **Objective:** Deeply explore the codebase, trace dependencies, and detect patterns.
+- **Action:** Query `wiki/index.md` for existing architectural decisions; use semantic search, symbol search, and file inspection to map all touchpoints.
+- **Rule:** **NEVER edit code during Understand.** Summarize the findings, existing idioms, and technical constraints.
+
+### Phase 3: Implement (Interactive & Frontend)
+- **Objective:** Scoped frontend refinement and live interactive adjustments.
+- **Constraint:** One agent (Claude Code or Codex) acts as the Primary Driver. Do not refactor core business logic or domain types unless explicitly requested.
+- **Hygiene:** Keep diffs minimal, preserve existing code structure, and avoid overwriting work done by the Primary Driver.
+

@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1070 1670" width="1070" height="1670" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#495057" />
+  </marker>
+  <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#e03131" />
+  </marker>
+  <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#1971c2" />
+  </marker>
+  <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#f76707" />
+  </marker>
+  <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#2f9e44" />
+  </marker>
+</defs>
+<rect x="200" y="40" width="760" height="70" rx="8" fill="#f1f3f5" stroke="#343a40" stroke-width="2" />
+<text x="240" y="74" font-size="22" fill="#1e1e1e" font-weight="bold" text-anchor="start">
+  <tspan x="240" dy="0">MULTI-AGENT AI ENGINEERING WORKFLOW</tspan>
+</text>
+<text x="280" y="94" font-size="14" fill="#495057" font-weight="normal" text-anchor="start">
+  <tspan x="280" dy="0">Cursor  •  Claude Code  •  Codex  •  Karpathy LLM Wiki</tspan>
+</text>
+<rect x="310" y="150" width="540" height="130" rx="8" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" />
+<text x="330" y="182" font-size="18" fill="#1971c2" font-weight="bold" text-anchor="start">
+  <tspan x="330" dy="0">PHASE 1: UNDERSTAND</tspan>
+</text>
+<rect x="679" y="162" width="151" height="24" rx="8" fill="#d0ebff" stroke="#1971c2" stroke-width="1" />
+<text x="687" y="176" font-size="11" fill="#1971c2" font-weight="normal" text-anchor="start">
+  <tspan x="687" dy="0">READ-ONLY RECON</tspan>
+</text>
+<text x="330" y="205" font-size="13" fill="#212529" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">Tool: Cursor (Read-Only Exploration)</tspan>
+</text>
+<text x="330" y="228" font-size="12" fill="#495057" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">• Explore codebase &amp; map dependencies</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Query wiki/index.md for established ADRs</tspan>
+  <tspan x="330" dy="15.600000000000001px">• RULE: Zero code modifications</tspan>
+</text>
+<line x1="580" y1="280" x2="580" y2="340" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />
+<rect x="310" y="340" width="540" height="130" rx="8" fill="#fff4e6" stroke="#f76707" stroke-width="2" />
+<text x="330" y="372" font-size="18" fill="#f76707" font-weight="bold" text-anchor="start">
+  <tspan x="330" dy="0">PHASE 2: PLAN</tspan>
+</text>
+<rect x="652" y="352" width="178" height="24" rx="8" fill="#ffe8cc" stroke="#f76707" stroke-width="1" />
+<text x="660" y="366" font-size="11" fill="#f76707" font-weight="normal" text-anchor="start">
+  <tspan x="660" dy="0">PLAN APPROVAL GATE</tspan>
+</text>
+<text x="330" y="395" font-size="13" fill="#212529" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">Tool: Claude Code (Architect &amp; Strategist)</tspan>
+</text>
+<text x="330" y="418" font-size="12" fill="#495057" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">• Investigate complex requirements &amp; risks</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Ingest external RFCs/specs into raw/</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Formulate testable Acceptance Criteria</tspan>
+</text>
+<line x1="580" y1="470" x2="580" y2="530" stroke="#f76707" stroke-width="2" marker-end="url(#arrowhead-orange)" />
+<rect x="310" y="530" width="540" height="130" rx="8" fill="#e6fcf5" stroke="#0ca678" stroke-width="2" />
+<text x="330" y="562" font-size="18" fill="#0ca678" font-weight="bold" text-anchor="start">
+  <tspan x="330" dy="0">PHASE 3: IMPLEMENT</tspan>
+</text>
+<rect x="697" y="542" width="133" height="24" rx="8" fill="#c3fae8" stroke="#0ca678" stroke-width="1" />
+<text x="705" y="556" font-size="11" fill="#0ca678" font-weight="normal" text-anchor="start">
+  <tspan x="705" dy="0">SINGLE DRIVER</tspan>
+</text>
+<text x="330" y="585" font-size="13" fill="#212529" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">Primary Driver: Claude Code or Codex | Collaborator: Cursor</tspan>
+</text>
+<text x="330" y="608" font-size="12" fill="#495057" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">• Primary Driver owns core logic &amp; domain models</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Cursor handles frontend &amp; interactive refinements</tspan>
+  <tspan x="330" dy="15.600000000000001px">• SINGLE DRIVER PRINCIPLE strictly enforced</tspan>
+</text>
+<line x1="580" y1="660" x2="580" y2="720" stroke="#0ca678" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="310" y="720" width="540" height="130" rx="8" fill="#fff9db" stroke="#f59f00" stroke-width="2" />
+<text x="330" y="752" font-size="18" fill="#f59f00" font-weight="bold" text-anchor="start">
+  <tspan x="330" dy="0">PHASE 4: VERIFY</tspan>
+</text>
+<rect x="670" y="732" width="160" height="24" rx="8" fill="#ffec99" stroke="#f59f00" stroke-width="1" />
+<text x="678" y="746" font-size="11" fill="#f59f00" font-weight="normal" text-anchor="start">
+  <tspan x="678" dy="0">100% GREEN CHECK</tspan>
+</text>
+<text x="330" y="775" font-size="13" fill="#212529" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">Tool: Test Runner &amp; Driver Agent</tspan>
+</text>
+<text x="330" y="798" font-size="12" fill="#495057" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">• Run full typecheck, linter &amp; test suites</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Validate actual runtime flow vs Acceptance Criteria</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Run check_evidence.py (Wiki Grounding)</tspan>
+  <tspan x="330" dy="15.600000000000001px">• RULE: Capture failures — zero concealment</tspan>
+</text>
+<line x1="580" y1="850" x2="580" y2="910" stroke="#f59f00" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="310" y="910" width="540" height="130" rx="8" fill="#f3f0ff" stroke="#7950f2" stroke-width="2" />
+<text x="330" y="942" font-size="18" fill="#7950f2" font-weight="bold" text-anchor="start">
+  <tspan x="330" dy="0">PHASE 5: REVIEW INDEPENDENTLY</tspan>
+</text>
+<rect x="616" y="922" width="214" height="24" rx="8" fill="#e5dbff" stroke="#7950f2" stroke-width="1" />
+<text x="624" y="936" font-size="11" fill="#7950f2" font-weight="normal" text-anchor="start">
+  <tspan x="624" dy="0">REVIEW WITHOUT EDITING</tspan>
+</text>
+<text x="330" y="965" font-size="13" fill="#212529" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">Auditor: Codex or Claude Code (Independent Clean Agent)</tspan>
+</text>
+<text x="330" y="988" font-size="12" fill="#495057" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">• Audit full git diff for logic, security &amp; regressions</tspan>
+  <tspan x="330" dy="15.600000000000001px">• MANDATE: Review without editing (Read-only)</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Confirmed findings triaged &amp; fixed by Driver</tspan>
+</text>
+<line x1="580" y1="1040" x2="580" y2="1100" stroke="#7950f2" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="310" y="1100" width="540" height="130" rx="8" fill="#ebfbee" stroke="#2f9e44" stroke-width="2" />
+<text x="330" y="1132" font-size="18" fill="#2f9e44" font-weight="bold" text-anchor="start">
+  <tspan x="330" dy="0">PHASE 6: SHIP SAFELY</tspan>
+</text>
+<rect x="661" y="1112" width="169" height="24" rx="8" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1" />
+<text x="669" y="1126" font-size="11" fill="#2f9e44" font-weight="normal" text-anchor="start">
+  <tspan x="669" dy="0">DEPLOY &amp; COMPOUND</tspan>
+</text>
+<text x="330" y="1155" font-size="13" fill="#212529" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">Owner: Driver Agent &amp; Lead Engineer</tspan>
+</text>
+<text x="330" y="1178" font-size="12" fill="#495057" font-weight="normal" text-anchor="start">
+  <tspan x="330" dy="0">• Final git diff sanity (no debug statements)</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Atomic conventional commit on feature branch</tspan>
+  <tspan x="330" dy="15.600000000000001px">• PR review &amp; CI/CD pipeline verification</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Compound new knowledge into wiki/ and log.md</tspan>
+</text>
+<line x1="850" y1="975" x2="930" y2="975" stroke="#e03131" stroke-width="2" marker-end="url(#arrowhead-red)" />
+<line x1="930" y1="975" x2="930" y2="595" stroke="#e03131" stroke-width="2" marker-end="url(#arrowhead-red)" />
+<line x1="930" y1="595" x2="850" y2="595" stroke="#e03131" stroke-width="2" marker-end="url(#arrowhead-red)" />
+<rect x="865" y="765" width="130" height="40" rx="8" fill="#ffe3e3" stroke="#e03131" stroke-width="1" />
+<text x="875" y="785" font-size="12" fill="#c92a2a" font-weight="normal" text-anchor="start">
+  <tspan x="875" dy="0">Fix Findings</tspan>
+  <tspan x="875" dy="15.600000000000001px">&amp; Re-verify</tspan>
+</text>
+<rect x="40" y="200" width="230" height="520" rx="8" fill="#f8f9fa" stroke="#495057" stroke-width="2" />
+<text x="55" y="231" font-size="16" fill="#1e1e1e" font-weight="bold" text-anchor="start">
+  <tspan x="55" dy="0">KARPATHY LLM WIKI</tspan>
+</text>
+<text x="55" y="252" font-size="12" fill="#868e96" font-weight="normal" text-anchor="start">
+  <tspan x="55" dy="0">Compounding Knowledge</tspan>
+</text>
+<rect x="55" y="275" width="200" height="80" rx="8" fill="#ffffff" stroke="#adb5bd" stroke-width="1" />
+<text x="65" y="296" font-size="11" fill="#343a40" font-weight="normal" text-anchor="start">
+  <tspan x="65" dy="0">raw/</tspan>
+  <tspan x="65" dy="14.3px">• Immutable Sources</tspan>
+  <tspan x="65" dy="14.3px">• RFCs, Docs, Notes</tspan>
+  <tspan x="65" dy="14.3px">• Read-only to agents</tspan>
+</text>
+<rect x="55" y="375" width="200" height="100" rx="8" fill="#ffffff" stroke="#adb5bd" stroke-width="1" />
+<text x="65" y="396" font-size="11" fill="#343a40" font-weight="normal" text-anchor="start">
+  <tspan x="65" dy="0">wiki/</tspan>
+  <tspan x="65" dy="14.3px">• Compiled Articles</tspan>
+  <tspan x="65" dy="14.3px">• wiki/index.md</tspan>
+  <tspan x="65" dy="14.3px">• wiki/log.md</tspan>
+  <tspan x="65" dy="14.3px">• Grounding Invariant</tspan>
+</text>
+<rect x="55" y="495" width="200" height="80" rx="8" fill="#ffffff" stroke="#adb5bd" stroke-width="1" />
+<text x="65" y="516" font-size="11" fill="#343a40" font-weight="normal" text-anchor="start">
+  <tspan x="65" dy="0">check_evidence.py</tspan>
+  <tspan x="65" dy="14.3px">• Mechanical linter</tspan>
+  <tspan x="65" dy="14.3px">• Verifies quotes/dates</tspan>
+  <tspan x="65" dy="14.3px">• 0 suspect tolerance</tspan>
+</text>
+<line x1="270" y1="245" x2="310" y2="190" stroke="#1971c2" stroke-width="1" marker-end="url(#arrowhead-blue)" />
+<line x1="270" y1="315" x2="310" y2="380" stroke="#f76707" stroke-width="1" marker-end="url(#arrowhead-orange)" />
+<line x1="310" y1="1165" x2="155" y2="720" stroke="#2f9e44" stroke-width="1" marker-end="url(#arrowhead-green)" />
+</svg>

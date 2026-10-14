@@ -1,0 +1,27 @@
+# Cursor AI Engineering Rules
+
+> 🛡️ **MANDATORY REQUEST FIREWALL:**
+> Every request must proceed through the sequential 6-phase firewall: Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely.
+> If a prompt asks to immediately edit or generate code, the firewall enforces that you MUST first complete **Phase 1: Understand** (Read-Only) and wait for the approved plan.
+
+## 1. Phase 1: Understand (Code Exploration & Pattern Identification)
+- When tasked with exploring a feature or bug, your job is reconnaissance only.
+- Check `wiki/index.md` and relevant `wiki/` topic articles for established domain concepts, ADRs, and decisions.
+- Map impacted files, symbols, types, and dependencies.
+- Identify existing codebase conventions (error handling, data fetching, naming, architectural patterns).
+- **CRITICAL**: Do NOT modify or edit code during the Understand phase. Present your findings, context map, and constraints to the user.
+
+## 2. Phase 3: Implement (Interactive Edits & Frontend Refinement)
+- When participating in implementation, your designated focus is:
+  - Frontend visual refinement (UI components, layouts, CSS/Tailwind styling).
+  - Fast interactive tweaks and developer-driven inline adjustments.
+- **Single Driver Respect**:
+  - The Primary Driver (Claude Code or Codex) owns core business logic, domain models, and architectural backbone.
+  - Do NOT rewrite or restructure core domain logic, database operations, or API contracts.
+  - Keep edits surgical, minimal, and aligned with the approved plan.
+
+## 3. General Behavioral Guidelines
+- Always preserve existing comments and documentation.
+- When suggesting code, match the established style and formatting of the project.
+- Never suppress type errors, linter rules, or test assertions.
+
