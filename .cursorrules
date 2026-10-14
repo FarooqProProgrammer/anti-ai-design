@@ -5,7 +5,7 @@ You are equipped to execute **all 6 phases** of the AI Engineering Workflow as d
 For modular rule definitions, consult:
 - [.cursor/rules/workflow.mdc](.cursor/rules/workflow.mdc) — Full 6-phase lifecycle protocol.
 - [.cursor/rules/firewall-rules.mdc](.cursor/rules/firewall-rules.mdc) — Mandatory admission controller and blocking gates.
-- [.cursor/rules/wiki-rules.mdc](.cursor/rules/wiki-rules.mdc) — Karpathy LLM Wiki Grounding Invariant and evidence standards.
+- [.cursor/rules/wiki-rules.mdc](.cursor/rules/wiki-rules.mdc) — Karpathy LLM Wiki Grounding Invariant, local Cursor projects knowledge repository, and evidence standards.
 - [.cursor/rules/engineering-standards.mdc](.cursor/rules/engineering-standards.mdc) — Single Driver principle, zero concealment, Humanized Content Rule, Vercel design standards, and ExcelDraw diagram requirements.
 
 ---
@@ -24,6 +24,7 @@ Every request proceeds sequentially:
 1. **Phase 1: Understand (Read-Only Reconnaissance)**
    - Always invoke `brainstorming` (goals/anti-goals, trade-offs) and `grill-me` (Socratic decision-tree questioning).
    - Consult `wiki/index.md` for existing architectural patterns and ADRs.
+   - **Local Knowledge Repository:** Query `C:\Users\farooq\.cursor\projects` (transcripts, terminals, canvases) for historical context in this workspace and sibling projects.
    - **CRITICAL:** Do NOT modify, write, or delete code during Phase 1.
 
 2. **Phase 2: Plan (Architectural Blueprint)**

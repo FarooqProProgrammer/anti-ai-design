@@ -57,13 +57,13 @@ the-developer/
 │   └── rules/
 │       ├── workflow.mdc               # Universal 6-phase lifecycle protocol
 │       ├── firewall-rules.mdc         # Request Firewall admission controller & contradiction check
-│       ├── wiki-rules.mdc             # Karpathy LLM Wiki Grounding Invariant & evidence rules
+│       ├── wiki-rules.mdc             # Karpathy LLM Wiki Grounding Invariant & local cursor projects
 │       ├── wiki-researcher.mdc        # Web research & wiki auto-indexing rule
 │       └── engineering-standards.mdc  # Single Driver, zero concealment, humanized content rules
 ├── .cursorrules                       # Root Cursor universal agent instructions
 ├── .claude/
 │   ├── agents/
-│   │   └── wiki-researcher.md         # Claude Code custom research agent
+│   │   └── wiki-researcher.md         # Claude Code custom research agent (sonnet model, cyan color)
 │   ├── commands/
 │   │   ├── research.md                # /research <topic or url> command
 │   │   └── setup-agent.md             # /setup-agent onboarding command
@@ -75,12 +75,15 @@ the-developer/
 ├── CLAUDE.md                          # Claude Code master instruction file
 ├── CODEX.md                           # Codex master universal instructions
 ├── raw/                               # Immutable source documents
+│   ├── cursor-projects/               # Local Cursor workspace inventories & transcripts
 │   └── workflow/
 │       ├── 2026-10-14-ai-workflow-spec.md
 │       └── 2026-10-14-firewall-spec.md
 └── wiki/                              # Compiled knowledge base
     ├── index.md                       # Global knowledge index
     ├── log.md                         # Append-only operation log
+    ├── cursor-projects/
+    │   └── local-knowledge-base.md    # Local Cursor projects knowledge reference
     └── workflow/
         ├── universal-workflow.md      # Grounded universal workflow article
         └── request-firewall.md        # Grounded request firewall article
@@ -118,7 +121,7 @@ Every step in this workflow is **agent-universal** (executable by **Cursor**, **
 ### Step 1: Understand (Any Agent)
 1. Use the prompt from [`templates/01-understand.md`](file:///d:/ai%20agent/the-developer/templates/01-understand.md) with your task description.
 2. The agent runs **Brainstorming** (goals/anti-goals, trade-offs) and **Grill-Me** (Socratic decision-tree questioning).
-3. The agent explores the codebase (read-only) and checks `wiki/index.md`.
+3. The agent explores the codebase (read-only), checks `wiki/index.md`, and inspects `C:\Users\farooq\.cursor\projects` for prior session transcripts.
 4. **Visual Artifact**: Update [`diagrams/01-understand.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/01-understand.exceldraw) with an architectural context and trade-off description.
 
 ### Step 2: Plan (Any Agent)
@@ -157,9 +160,12 @@ Every step in this workflow is **agent-universal** (executable by **Cursor**, **
 
 ---
 
-## Karpathy LLM Wiki Skill Integration
+## Karpathy LLM Wiki & Local Project Knowledge
 
 This repository incorporates [`skills/karpathy-llm-wiki/`](file:///d:/ai%20agent/the-developer/skills/karpathy-llm-wiki/) based on [Astro-Han/karpathy-llm-wiki](https://github.com/Astro-Han/karpathy-llm-wiki).
+
+### Local Cursor Knowledge Base (`C:\Users\farooq\.cursor\projects`)
+The project recognizes `C:\Users\farooq\.cursor\projects` as an authorized knowledge base. Agents can inspect past multi-turn session logs in `agent-transcripts/`, execution records in `terminals/`, and design scratchpads in `canvases/` to recover prior context and solutions.
 
 ### Quick Usage Commands
 - **Ingest a new source**:

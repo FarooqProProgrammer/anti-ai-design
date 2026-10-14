@@ -12,7 +12,7 @@ You are equipped to execute **all 6 phases** of the AI Engineering Workflow. Eve
 
 Companion Rules:
 - [Firewall Rules](firewall-rules.mdc) — Admission controller & blocking gates.
-- [Wiki Rules](wiki-rules.mdc) — Karpathy LLM Wiki, Grounding Invariant, evidence checks.
+- [Wiki Rules](wiki-rules.mdc) — Karpathy LLM Wiki, Grounding Invariant, local Cursor projects knowledge repository.
 - [Engineering Standards](engineering-standards.mdc) — Single Driver, zero concealment, Vercel design patterns, commit hygiene.
 
 ---
@@ -23,7 +23,7 @@ Companion Rules:
 - **Mandatory Skills:** Use **`brainstorming`** and **`grill-me`** before any plan or code is conceived.
   - **Brainstorming:** Clarify goals/anti-goals, explore 2–3 architectural approaches with trade-offs.
   - **Grill-Me:** Socratic decision-tree questioning; challenge edge cases, failure modes, and unstated assumptions.
-- **Code Recon:** Query `wiki/index.md` and explore codebase symbols/dependencies.
+- **Code Recon:** Query `wiki/index.md`, explore codebase symbols/dependencies, and inspect `C:\Users\farooq\.cursor\projects` (especially `d-ai-agent-the-developer/`) for historical agent transcripts and execution context.
 - **Rule:** **READ-ONLY.** Never edit or write code during Understand.
 - **Diagram:** Maintain and reference `diagrams/01-understand.exceldraw` (and `.svg`).
 

@@ -4,7 +4,7 @@ This repository adheres to a strict 6-Phase AI Engineering Workflow governed by 
 
 Modular rules:
 - [.claude/rules/firewall.md](.claude/rules/firewall.md) — Firewall admission control, contradiction checks & blocking gates
-- [.claude/rules/wiki.md](.claude/rules/wiki.md) — Karpathy LLM Wiki Grounding Invariant & procedures
+- [.claude/rules/wiki.md](.claude/rules/wiki.md) — Karpathy LLM Wiki Grounding Invariant, local cursor projects & procedures
 - [.claude/rules/workflow.md](.claude/rules/workflow.md) — Universal 6-phase lifecycle protocol
 - [.claude/rules/engineering.md](.claude/rules/engineering.md) — Engineering standards, humanized content & diagram rules
 
@@ -25,7 +25,7 @@ Every request MUST proceed sequentially through the firewall gates:
   - Mandatory Skills: `brainstorming` (`.claude/skills/brainstorming/`) and `grill-me` (`.claude/skills/grill-me/`).
   - Uncover goals, non-goals, and anti-goals. Propose 2–3 architectural approaches with trade-offs.
   - Socratic questioning down the decision tree; challenge edge cases and surface unstated assumptions.
-  - Explore codebase, trace call stacks, and consult `wiki/index.md`.
+  - Explore codebase, trace call stacks, and consult `wiki/index.md` as well as local Cursor project knowledge (`C:\Users\farooq\.cursor\projects`).
   - **STRICT RULE:** READ-ONLY. Do NOT edit or write code during this phase.
 
 - **Gate 2: Plan (Architect & Strategist)**
@@ -69,8 +69,9 @@ All generated content—including comments, PR summaries, commit messages, and d
 
 ---
 
-## Karpathy LLM Wiki Skill Integration
+## Karpathy LLM Wiki & Local Project Knowledge
 You have access to the `karpathy-llm-wiki` skill located at `.claude/skills/karpathy-llm-wiki/` and `skills/karpathy-llm-wiki/`.
+- **Local Cursor Knowledge Base (`C:\Users\farooq\.cursor\projects`)**: Query local project directories (especially `d-ai-agent-the-developer/` and sibling projects) for past agent transcripts, terminal execution records, and architectural canvases.
 - **Ingest:** When given a new source, fetch into `raw/<topic>/YYYY-MM-DD-slug.md` and compile into `wiki/<topic>/concept.md`. Adhere to the Grounding Invariant (locate every quote/literal in raw before writing).
 - **Query:** Search `wiki/` and provide grounded answers with citations.
 - **Lint:** Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .` during verification to guarantee evidence consistency.

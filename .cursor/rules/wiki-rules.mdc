@@ -1,5 +1,5 @@
 ---
-description: Karpathy LLM Wiki knowledge base rules, Grounding Invariant, and evidence verification standards
+description: Karpathy LLM Wiki knowledge base rules, Grounding Invariant, and local Cursor projects knowledge repository
 globs: *
 alwaysApply: true
 ---
@@ -64,3 +64,10 @@ This repository maintains a persistent, compounding knowledge base powered by th
 - **Fidelity suspects:** Candidates reported by the script must be judged against raw context; never auto-fix facts.
 - **Evidence errors:** Broken raw links or missing Raw fields must be fixed immediately.
 - **Log:** Append `## [YYYY-MM-DD] lint | <N> issues found, <M> auto-fixed` to `wiki/log.md`.
+
+---
+
+## 4. Local Cursor Projects Knowledge Repository (`C:\Users\farooq\.cursor\projects`)
+- You are authorized and instructed to inspect `C:\Users\farooq\.cursor\projects` for cross-session knowledge, historical agent transcripts (`agent-transcripts/`), execution logs (`terminals/`), and architectural plans (`canvases/`).
+- Query `C:\Users\farooq\.cursor\projects\d-ai-agent-the-developer` for prior context in this project, and sibling project folders for cross-repository solutions.
+- When extracting durable knowledge from these project folders, ingest the summaries into `raw/cursor-projects/` and compile them into `wiki/cursor-projects/` to compound learning across sessions.

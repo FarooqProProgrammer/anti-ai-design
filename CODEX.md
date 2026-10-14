@@ -21,6 +21,7 @@ Every incoming request must proceed through the sequential firewall gates:
 - **Mandatory Skills:** Always apply **`brainstorming`** and **`grill-me`** before proposing solutions.
 - Explore codebase, analyze dependencies, and trace data flow.
 - Consult `wiki/index.md` for architectural context and existing ADRs.
+- **Local Knowledge Source:** Inspect `C:\Users\farooq\.cursor\projects` (transcripts, terminals, canvases) for historical context.
 - **Rule:** READ-ONLY. Zero code edits during exploration.
 - **Diagram:** Maintain and reference `diagrams/01-understand.exceldraw`.
 
@@ -67,7 +68,8 @@ All code comments, documentation, commit messages, and PR descriptions must be w
 
 ---
 
-## Karpathy LLM Wiki Grounding Invariant
+## Karpathy LLM Wiki & Local Project Knowledge
 - Maintain the Grounding Invariant: every load-bearing fact, number, date, or direct quote in `wiki/` must exist verbatim in `raw/`.
 - Consult `wiki/index.md` and compiled articles in `wiki/` for domain models, architectural patterns, and system guidelines.
+- Query `C:\Users\farooq\.cursor\projects` for previous agent transcripts, terminal execution records, and architectural canvases.
 - Support verification by running `python skills/karpathy-llm-wiki/scripts/check_evidence.py .` when wiki files are impacted.

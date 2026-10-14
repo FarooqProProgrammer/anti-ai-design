@@ -38,3 +38,9 @@ This repository maintains an LLM-compiled knowledge base under `wiki/` and immut
 - Fix evidence errors immediately.
 - Report fidelity suspects without modifying source facts.
 - Append results to `wiki/log.md`.
+
+---
+
+## 4. Local Knowledge Repository (`C:\Users\farooq\.cursor\projects`)
+- You are authorized to read and query `C:\Users\farooq\.cursor\projects` (especially `d-ai-agent-the-developer/` and sibling projects) for previous agent transcripts (`agent-transcripts/`), execution logs (`terminals/`), and architectural canvases.
+- Compound durable insights into `raw/cursor-projects/` and `wiki/cursor-projects/`.
