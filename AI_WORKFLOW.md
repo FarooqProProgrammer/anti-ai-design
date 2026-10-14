@@ -29,7 +29,7 @@ A pragmatic, disciplined workflow for building software with AI coding agents (C
 | **1. Understand** | Any Agent + **Brainstorming & Grill-Me** | Trace code, explore patterns, run Socratic interview, check `wiki/` | Context snapshot with trade-offs; **zero code edits** |
 | **2. Spec** | Any Agent | Functional & technical contracts: schemas, APIs, invariants | Approved specification; **zero code edits** |
 | **3. Plan** | Any Agent | Implementation blueprint, weigh risks, write Given-When-Then tests | Approved plan with acceptance criteria & risk matrix |
-| **4. Implement** | **Primary Driver** (Cursor, Claude, or Codex) | Write core logic, build tests, polish UI | Completed plan; **one agent owns the core logic** |
+| **4. Implement** | **Primary Driver** (Cursor, Claude, Codex) + **Parallel Agents** | Core logic, implementation loop (`Spec➔Plan➔Impl`), `/find-skills`, parallel dispatch | Completed plan; all parallel streams integrated cleanly |
 | **5. Verify** | Any Agent + Test Runner | Run tests, linters, types, runtime check, and wiki evidence audit | All checks green; zero suppressed errors |
 | **6. Review Independently** | Auditor (Clean Context / Second Agent) | Audit final git diff with one mandate: **review without editing** | All confirmed review findings addressed & verified |
 | **7. Ship Safely** | Any Agent + Engineer | Clean diff check, atomic commit, CI/CD run, compound knowledge | Clean diff, passed CI/CD, documented in `wiki/` |
@@ -132,6 +132,23 @@ A pragmatic, disciplined workflow for building software with AI coding agents (C
 > - **Using Cursor alone:** Cursor writes the core logic, adds tests, and polishes the UI.
 > - **Collaborating (e.g., Claude Code + Cursor):** Claude Code drives the backend and core business logic, while Cursor handles interactive UI styling and visual tweaks.
 > - **Avoid chaos:** Never bounce core logic between competing agents on the fly.
+
+#### The Implementation Loop Gate:
+When an implementation phase involves multiple tasks, independent components, or missing capabilities:
+1. **Decomposition Loop (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):**
+   - Never write monolithic, un-specified code across multiple domain layers at once.
+   - Break multi-part features into decoupled, atomic sub-features.
+   - Run each sub-feature through its own mini-loop: `Spec (Contracts/Schemas) ➔ Plan (Acceptance Criteria/Roadmap) ➔ Implement`.
+2. **Skill Discovery via `/find-skills`:**
+   - When specialized capabilities or new domain knowledge are required (e.g., specialized testing, auth, animations, mobile, databases):
+   - Invoke `/find-skills` or run `npx skills find <domain>` to search the open skills ecosystem on `skills.sh`.
+   - Install verified packages via `npx skills add <package>` so agents have authoritative instructions and tools.
+3. **Dispatch Parallel Agents:**
+   - If sub-features are decoupled and independent (e.g. backend services vs. frontend UI vs. database migrations):
+   - The Primary Driver dispatches parallel subagents to work concurrently in isolated contexts.
+   - Each parallel subagent is constrained strictly to its approved sub-spec and sub-plan.
+4. **Master Reconciliation:**
+   - The Primary Driver reviews all parallel diffs, resolves integration points, and ensures zero drift before advancing to Phase 5 Verify.
 
 #### What to Do:
 1. **Follow the Plan**:

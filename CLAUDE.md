@@ -40,9 +40,10 @@ Every request MUST proceed sequentially through the firewall gates:
   - Ingest external references into `raw/` and compile in `wiki/`.
   - **Gate:** Await user confirmation before beginning Phase 4 (Implement).
 
-- **Gate 4: Implement (Single Driver)**
+- **Gate 4: Implement (Single Driver & Implementation Loop Gate)**
   - When assigned as the Primary Driver, hold sole accountability for core logic and architecture.
   - Follow the approved plan sequentially.
+  - **Implementation Loop (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):** If multiple tasks, decoupled sub-modules, or new domain requirements arise, break them down. Use `/find-skills` (`npx skills find`) to equip missing tools, and dispatch parallel subagents under Single Driver orchestration. Each parallel stream must follow `Spec ➔ Plan ➔ Implement`.
   - Write unit and integration tests alongside implementation.
   - Do NOT introduce unrequested refactorings or speculative features.
   - If collaborating with Cursor, handle core architecture while allowing Cursor to perform interactive/visual refinements.

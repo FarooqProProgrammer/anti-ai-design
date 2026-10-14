@@ -57,11 +57,17 @@ Any agent (Cursor, Claude Code, Codex, Antigravity) is empowered to execute all 
 - **🛑 HARD BLOCK:** Starting implementation without explicit plan approval from the user or lead engineer.
 - **Exit Condition:** Approved implementation plan and risk matrix.
 
-### Gate 4: Implement (Single Driver)
+### Gate 4: Implement (Single Driver & Implementation Loop Gate)
 - **Primary Driver:** Maintain single agent ownership for core logic and architecture during an implementation task.
 - **Implementation Scope:** Strictly adhere to the approved Phase 3 plan and Phase 2 spec.
+- **Decomposition & Parallel Loop (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):**
+  - If multiple sub-modules, decoupled tasks, or new domain requirements arise, break them down.
+  - Run `/find-skills` (or `npx skills find <domain>`) to find and equip missing specialized capabilities.
+  - Dispatch **parallel subagents** for decoupled tasks under Single Driver orchestration.
+  - Invariant: Every parallel stream must follow `Spec ➔ Plan ➔ Implement` before code is committed.
 - **🛑 HARD BLOCK:** Multi-driver chaos (competing agents editing core logic simultaneously) or unapproved scope creep.
-- **Exit Condition:** Complete code implementation satisfying all acceptance criteria.
+- **🛑 HARD BLOCK:** Monolithic multi-part code dumps that skip sub-specification and sub-planning.
+- **Exit Condition:** Complete code implementation satisfying all acceptance criteria with all parallel streams cleanly reconciled.
 
 ### Gate 5: Verify (Zero Concealment)
 - **Verification Suite:** Run typecheck (`tsc`, `mypy`), linters, and full automated test suites.

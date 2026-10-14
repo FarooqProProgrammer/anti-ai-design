@@ -41,9 +41,14 @@ Companion Rules:
 - **Rule:** No code is written until the plan is approved.
 - **Diagram:** Generate/reference `diagrams/03-plan.exceldraw`.
 
-### 4. Phase 4: Implement
+### 4. Phase 4: Implement (Single Driver & Implementation Loop Gate)
 - **Objective:** Execute the approved plan. You can serve as the Primary Driver for the entire change, or collaborate by handling interactive/frontend refinements.
 - **Single Driver:** Keep one agent responsible for main business logic; do not bounce core logic between competing agents.
+- **Implementation Loop Gate (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):**
+  - If multiple sub-modules, decoupled tasks, or new domain requirements arise, break them down.
+  - Run `/find-skills` (or `npx skills find <domain>`) to find and equip missing specialized capabilities.
+  - Dispatch **parallel subagents** for decoupled tasks under Single Driver orchestration.
+  - Invariant: Every parallel stream must follow `Spec ➔ Plan ➔ Implement` before code is committed.
 - **Rule:** Follow the approved plan sequentially; avoid speculative scope.
 - **Diagram:** Reference `diagrams/04-implement.exceldraw`.
 

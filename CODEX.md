@@ -38,9 +38,14 @@ Every incoming request must proceed through the sequential firewall gates:
 - **Gate:** Do not start coding until the plan is approved by the user.
 - **Diagram:** Maintain and reference `diagrams/03-plan.exceldraw`.
 
-### 4. Phase 4: Implement (Single Driver)
+### 4. Phase 4: Implement (Single Driver & Implementation Loop Gate)
 - Execute the approved plan as Primary Driver.
 - Keep one agent responsible for main business logic and architecture.
+- **Implementation Loop (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):**
+  - If multiple sub-modules, decoupled tasks, or new domain requirements arise, break them down.
+  - Run `/find-skills` (or `npx skills find <domain>`) to find and equip missing specialized capabilities.
+  - Dispatch **parallel subagents** for decoupled tasks under Single Driver orchestration.
+  - Invariant: Every parallel stream must follow `Spec ➔ Plan ➔ Implement` before code is committed.
 - Write unit/integration tests alongside core implementation.
 - Maintain consistency with existing architecture and patterns. Avoid speculative scope.
 - **Diagram:** Maintain and reference `diagrams/04-implement.exceldraw`.

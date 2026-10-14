@@ -15,3 +15,7 @@
 ## [2026-10-14] update | Universal AI Engineering Workflow & Firewall
 - Disposition: Update (Add Phase 2: Spec)
 - Raw: raw/workflow/2026-10-14-ai-workflow-spec.md, raw/workflow/2026-10-14-firewall-spec.md
+
+## [2026-10-14] update | Implementation Loop Gate & Parallel Agents
+- Disposition: Update (Add Gate 4 Loop: Implement -> Spec -> Plan -> Implement, /find-skills, parallel agents)
+- Raw: raw/workflow/2026-10-14-ai-workflow-spec.md, raw/workflow/2026-10-14-firewall-spec.md

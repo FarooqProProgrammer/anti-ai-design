@@ -40,9 +40,10 @@ Every request proceeds sequentially:
    - External RFCs/docs must be fetched into `raw/` and compiled in `wiki/`.
    - Wait for user/lead approval before writing code.
 
-4. **Phase 4: Implement (Single Driver)**
+4. **Phase 4: Implement (Single Driver & Implementation Loop Gate)**
    - You can act as the Primary Driver for the entire change, or collaborate by handling interactive/frontend refinements.
    - Maintain single agent ownership of the core logic. Do not bounce core logic between competing agents.
+   - **Implementation Loop (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):** If multiple tasks, decoupled sub-modules, or new domain requirements arise, break them down. Use `/find-skills` (`npx skills find`) to equip missing tools, and dispatch parallel subagents under Single Driver orchestration. Each parallel stream must follow `Spec ➔ Plan ➔ Implement`.
    - Strictly follow the approved plan and spec; avoid speculative scope.
 
 5. **Phase 5: Verify (Zero Concealment)**

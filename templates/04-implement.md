@@ -42,3 +42,35 @@ Strict Constraints:
 2. Maintain compatibility with existing props, interfaces, and state stores.
 3. Keep changes minimal, scoped, and visually refined.
 ```
+
+---
+
+## 4C. Implementation Loop Gate: Decomposition, /find-skills & Parallel Agents
+
+```markdown
+You are executing the Implementation Loop Gate within Phase 4 (Implement).
+
+Condition:
+The implementation task involves multiple sub-modules, independent components, or requires specialized capabilities not yet equipped.
+
+Execution Protocol:
+1. Decomposition Loop (Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement):
+   - Do NOT write monolithic, un-specified code across multiple domain layers at once.
+   - Break the multi-part task into decoupled, atomic sub-features.
+   - For each sub-feature, generate an unambiguous sub-spec (contracts & schemas) and sub-plan (acceptance criteria & risks).
+
+2. Skill Discovery (/find-skills):
+   - If specialized capabilities or domain expertise are missing (e.g., specialized testing, auth, animations, mobile, databases):
+   - Invoke `/find-skills` or execute:
+     `npx skills find <domain>`
+   - Inspect top-ranked skills from skills.sh and install via:
+     `npx skills add <package>`
+
+3. Parallel Agent Dispatch:
+   - When sub-features are decoupled and independent (e.g., Backend API vs. Frontend UI vs. DB migrations):
+   - The Primary Driver dispatches parallel subagents to work concurrently in isolated contexts.
+   - Each parallel subagent is constrained strictly to its approved sub-spec and sub-plan.
+
+4. Primary Driver Reconciliation:
+   - The Primary Driver reviews all parallel diffs, resolves integration points, and runs Phase 5 (Verify).
+```

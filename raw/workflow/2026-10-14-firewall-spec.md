@@ -50,11 +50,13 @@ Gate 3: Plan
   - BLOCKED: Vague plans missing testable acceptance criteria or failure modes.
   - BLOCKED: Unresolved external specs (must be fetched into raw/ and compiled in wiki/).
 
-Gate 4: Implement (Single Driver)
-- Agents: Cursor, Claude Code, Codex, Antigravity.
+Gate 4: Implement (Single Driver & Implementation Loop Gate)
+- Agents: Cursor, Claude Code, Codex, Antigravity (Primary Driver + Parallel Subagents).
 - Blocking conditions:
   - BLOCKED: Bouncing core logic back and forth between different agents mid-task.
   - BLOCKED: Sneaking in unrelated refactors or out-of-scope edits.
+  - BLOCKED: Monolithic multi-part code dumps that skip sub-specification and sub-planning.
+  - BLOCKED: Parallel subagents writing code without an approved sub-spec and sub-plan.
 
 Gate 5: Verify (Zero Concealment)
 - Agents: Any agent with the project test runner.

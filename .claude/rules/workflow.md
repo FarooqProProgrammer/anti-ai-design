@@ -32,9 +32,14 @@ You can execute **all 7 phases** of the software engineering lifecycle end-to-en
 - **Constraint:** No code is written until plan approval.
 - **Diagram:** Maintain and reference `diagrams/03-plan.exceldraw`.
 
-### Phase 4: Implement
+### Phase 4: Implement (Single Driver & Implementation Loop Gate)
 - Execute the approved plan sequentially as Primary Driver.
 - Write unit and integration tests alongside business logic.
+- **Implementation Loop (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):**
+  - If multiple sub-modules, decoupled tasks, or new domain requirements arise, break them down.
+  - Run `/find-skills` (or `npx skills find <domain>`) to find and equip missing specialized capabilities.
+  - Dispatch **parallel subagents** for decoupled tasks under Single Driver orchestration.
+  - Invariant: Every parallel stream must follow `Spec ➔ Plan ➔ Implement` before code is committed.
 - Avoid scope creep or unsolicited refactors.
 - **Diagram:** Maintain and reference `diagrams/04-implement.exceldraw`.
 

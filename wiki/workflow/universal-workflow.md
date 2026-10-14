@@ -31,6 +31,7 @@ Any agent (Cursor, Claude Code, Codex, Antigravity) can run all seven phases end
 4. **Phase 4: Implement**
    - Objective: Write core logic, build tests, polish UI.
    - Single Driver Principle: One agent drives the main implementation. Never bounce core logic between competing agents on the fly.
+   - Implementation Loop Gate: If multiple things or domain gaps arise, loop back (Implement -> Loop -> Spec -> Plan -> Implement). Use /find-skills to discover and install missing tools, and dispatch parallel agents for decoupled sub-modules under Single Driver orchestration.
 
 5. **Phase 5: Verify**
    - Objective: Run types, linters, test suites, runtime behavior validation, and the wiki evidence audit.

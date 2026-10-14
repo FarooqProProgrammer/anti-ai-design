@@ -95,13 +95,19 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
   - 🛑 **BLOCKED**: Unresolved external specs (must be fetched into `raw/` and compiled in `wiki/`).
 - **Exit Criteria:** Explicit approval on the implementation plan from you or the lead engineer.
 
-### Gate 4: Implement (Single Driver)
-- **Agents:** Cursor, Claude Code, Codex, Antigravity.
-- **The Check:** Does one primary driver own the implementation from start to finish?
+### Gate 4: Implement (Single Driver & Implementation Loop Gate)
+- **Agents:** Cursor, Claude Code, Codex, Antigravity (Primary Driver + Parallel Subagents).
+- **The Check:**
+  - Does one primary driver own and orchestrate the implementation?
+  - **Decomposition Check:** If multiple sub-modules, decoupled tasks, or missing capabilities arise, does the agent enter the **Implementation Loop** (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`)?
+  - **Skill Discovery (`/find-skills`):** Are missing domain capabilities or specialized tools found and installed via `/find-skills` (`npx skills find <domain>`)?
+  - **Parallel Dispatch:** Are independent, decoupled sub-features dispatched to parallel subagents working concurrently under the Primary Driver?
 - **What Gets Blocked:**
   - 🛑 **BLOCKED**: Bouncing core logic back and forth between different agents mid-task.
   - 🛑 **BLOCKED**: Sneaking in unrelated refactors or out-of-scope edits.
-- **Exit Criteria:** Code that fulfills the approved plan and passes initial tests.
+  - 🛑 **BLOCKED**: Monolithic multi-part code dumps that skip sub-specification and sub-planning.
+  - 🛑 **BLOCKED**: Parallel subagents writing code without an approved sub-spec and sub-plan.
+- **Exit Criteria:** Code that fulfills the approved plan, with all parallel streams cleanly reconciled and passing initial tests.
 
 ### Gate 5: Verify (Zero Concealment)
 - **Agents:** Any agent with the project test runner.
@@ -140,7 +146,7 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
 | **Gate 1** | **Understand** | Any agent + Brainstorming & Grill-Me | Writing code, skipping the technical interview |
 | **Gate 2** | **Spec** | Any agent (Cursor / Claude / Codex) | Coding without contract specification, ambiguous schemas |
 | **Gate 3** | **Plan** | Any agent (Cursor / Claude / Codex) | Coding without an approved plan and acceptance criteria |
-| **Gate 4** | **Implement** | Primary Driver | Multi-driver churn, scope creep |
+| **Gate 4** | **Implement & Loop** | Primary Driver + Parallel Subagents | Multi-driver churn, monolithic code dumps without sub-specs |
 | **Gate 5** | **Verify** | Any agent + test runner | Hidden failures, suppressed errors, broken tests |
 | **Gate 6** | **Review Independently** | Auditor (clean context) | Reviewer editing code, unaddressed review blockers |
 | **Gate 7** | **Ship Safely** | Driver & engineer | Committing to main, messy diffs, broken CI |

@@ -243,7 +243,7 @@ def create_root_workflow_diagram(out_path: Path):
         ("1. UNDERSTAND", "• Brainstorming\n• Grill-Me interview\n• Code exploration\n• wiki/ & cursor log\n• READ-ONLY", "#e7f5ff", "#1971c2"),
         ("2. SPEC", "• Functional Spec\n• Technical contracts\n• API & Data schemas\n• Non-functional limits\n• Sign-off WHAT", "#f3f0ff", "#7950f2"),
         ("3. PLAN", "• Risk & mitigations\n• Given-When-Then AC\n• Phased milestones\n• Single driver pick\n• Sign-off HOW", "#fff4e6", "#f76707"),
-        ("4. IMPLEMENT", "• Single Driver owner\n• Sequential build\n• Unit tests alongside\n• UI polish (Cursor)\n• Plan fidelity", "#e6fcf5", "#0ca678"),
+        ("4. IMPLEMENT", "• Single Driver owner\n• Loop: Spec➔Plan➔Impl\n• /find-skills for gaps\n• Dispatch parallel\n• Plan fidelity", "#e6fcf5", "#0ca678"),
         ("5. VERIFY", "• Typecheck & linters\n• Automated test run\n• Runtime validation\n• check_evidence.py\n• Zero concealment", "#ebfbee", "#2f9e44"),
         ("6. REVIEW", "• Fresh context audit\n• Final git diff check\n• Security & bugs\n• REVIEW ONLY\n• Driver fixes", "#ffe3e3", "#e03131"),
         ("7. SHIP SAFELY", "• Clean git status\n• Feature branch only\n• Conventional commit\n• CI/CD pass\n• Compound wiki/", "#f8f9fa", "#343a40")
@@ -257,10 +257,10 @@ def create_root_workflow_diagram(out_path: Path):
         if i < len(phases) - 1:
             b.add_arrow(x + col_w, y + 110, x + col_w + spacing, y + 110, color=stroke)
 
-    # Bottom summary block
-    b.add_rect(50, 440, 1120, 70, bg_color="#f8f9fa", stroke_color="#495057", stroke_width=2)
-    b.add_text(70, 452, "QUALITY INVARIANT: EVERY FEATURE IS RESEARCHED, SPECIFIED, PLANNED, VERIFIED, AND AUDITED", font_size=14, color="#212529")
-    b.add_text(70, 477, "Zero hallucinations • Zero hidden failures • Clean diffs • Compounded permanent knowledge in wiki/", font_size=12, color="#495057")
+    # Bottom summary block with Implementation Loop Callout
+    b.add_rect(50, 440, 1120, 80, bg_color="#f8f9fa", stroke_color="#495057", stroke_width=2)
+    b.add_text(70, 452, "🔄 IMPLEMENTATION LOOP GATE (Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement)", font_size=14, color="#099268")
+    b.add_text(70, 477, "If multiple tasks or domain gaps emerge: /find-skills installs missing tools ➔ Dispatch parallel agents ➔ Each follows Spec ➔ Plan ➔ Implement under Single Driver.", font_size=11, color="#495057")
 
     b.save(out_path / "workflow")
 
@@ -386,24 +386,50 @@ def create_step3_plan_diagram(out_dir: Path):
 
 
 def create_step4_implement_diagram(out_dir: Path):
-    b = ExcelDrawBuilder("STEP 4: IMPLEMENT — Single Driver & Collaborative Execution", "Firewall Gate 4 | Applicable: Cursor, Claude Code, or Codex as Primary Driver")
+    b = ExcelDrawBuilder("STEP 4: IMPLEMENT — Single Driver, Loop Gate & Parallel Agents", "Firewall Gate 4 | Loop: Implement ➔ Spec ➔ Plan ➔ Implement | /find-skills & Parallel Dispatch")
     b.add_banner(w=860)
 
-    y = 120
-    b.add_rect(50, y, 400, 260, bg_color="#e7f5ff", stroke_color="#1971c2", stroke_width=2)
-    b.add_text(70, y + 20, "PRIMARY DRIVER (Sole Logic Owner)", font_size=16, color="#1864ab")
-    b.add_text(70, y + 55, "• Cursor, Claude Code, or Codex\n• Owns core business logic & domain\n• Builds unit & integration tests alongside\n• Follows approved plan sequentially\n• Prevents multi-driver context drift\n• Strictly no scope creep", font_size=13, color="#343a40")
+    y = 115
+    # Row 1: Primary Driver & UI Polish
+    b.add_rect(50, y, 410, 160, bg_color="#e7f5ff", stroke_color="#1971c2", stroke_width=2)
+    b.add_text(70, y + 15, "PRIMARY DRIVER (Sole Logic Owner)", font_size=15, color="#1864ab")
+    b.add_text(70, y + 42, "• Cursor, Claude Code, or Codex\n• Owns core business logic & domain\n• Builds unit & integration tests alongside\n• Follows approved plan sequentially\n• Prevents multi-driver context drift", font_size=12, color="#343a40")
 
-    b.add_rect(505, y, 400, 260, bg_color="#fff4e6", stroke_color="#f76707", stroke_width=2)
-    b.add_text(525, y + 20, "FRONTEND / INTERACTIVE POLISH", font_size=16, color="#d9480f")
-    b.add_text(525, y + 55, "• Cursor live inline adjustments\n• Visual styling (Tailwind / CSS)\n• UI component layout & ergonomics\n• Keyboard accessibility & ARIA\n• Keeps domain architecture intact\n• Clean surgical diffs", font_size=13, color="#343a40")
+    b.add_rect(495, y, 410, 160, bg_color="#fff4e6", stroke_color="#f76707", stroke_width=2)
+    b.add_text(515, y + 15, "FRONTEND / INTERACTIVE POLISH", font_size=15, color="#d9480f")
+    b.add_text(515, y + 42, "• Cursor live inline adjustments\n• Visual styling (Tailwind / CSS)\n• UI component layout & ergonomics\n• Keyboard accessibility & ARIA\n• Clean surgical diffs", font_size=12, color="#343a40")
 
-    b.add_arrow(450, y + 130, 505, y + 130, color="#1971c2", stroke_width=2)
-    b.add_arrow(505, y + 150, 450, y + 150, color="#f76707", stroke_width=2)
+    b.add_arrow(460, y + 80, 495, y + 80, color="#1971c2", stroke_width=2)
+    b.add_arrow(495, y + 100, 460, y + 100, color="#f76707", stroke_width=2)
 
-    b.add_rect(50, 410, 855, 90, bg_color="#f8f9fa", stroke_color="#495057", stroke_width=2)
-    b.add_text(70, 422, "GOLDEN IMPLEMENTATION RULE", font_size=15, color="#212529")
-    b.add_text(70, 448, "Keep one agent accountable for core business logic. Do not bounce architectural decisions between competing models.", font_size=12, color="#495057")
+    # Row 2: THE IMPLEMENTATION LOOP GATE (Implement -> Loop -> Spec -> Plan -> Implement)
+    ly = 295
+    b.add_rect(50, ly, 855, 175, bg_color="#f3f0ff", stroke_color="#7950f2", stroke_width=2)
+    b.add_text(70, ly + 14, "🔄 THE IMPLEMENTATION LOOP GATE: SUB-TASK DECOMPOSITION & PARALLEL DISPATCH", font_size=15, color="#5f3dc4")
+    b.add_text(70, ly + 38, "Trigger: When implementation reveals multiple decoupled sub-modules, independent tasks, or missing skills:", font_size=12, color="#495057")
+
+    # 3 sub-blocks in loop
+    sw = 260
+    b.add_rect(70, ly + 62, sw, 95, bg_color="#fff9db", stroke_color="#f59f00", stroke_width=1)
+    b.add_text(80, ly + 72, "1. /find-skills DISCOVERY", font_size=13, color="#f08c00")
+    b.add_text(80, ly + 94, "• npx skills find <domain>\n• Leaderboard on skills.sh\n• Equip missing tools/skills\n• Ready specialized capabilities", font_size=11, color="#495057")
+
+    b.add_arrow(330, ly + 110, 365, ly + 110, color="#7950f2")
+
+    b.add_rect(365, ly + 62, sw, 95, bg_color="#e6fcf5", stroke_color="#0ca678", stroke_width=1)
+    b.add_text(375, ly + 72, "2. PARALLEL AGENTS", font_size=13, color="#099268")
+    b.add_text(375, ly + 94, "• Dispatch parallel subagents\n• Independent work streams\n• Backend vs UI vs DB models\n• Single Driver orchestrates", font_size=11, color="#495057")
+
+    b.add_arrow(625, ly + 110, 660, ly + 110, color="#0ca678")
+
+    b.add_rect(660, ly + 62, sw, 95, bg_color="#e7f5ff", stroke_color="#1971c2", stroke_width=1)
+    b.add_text(670, ly + 72, "3. LOOP: SPEC ➔ PLAN ➔ IMPL", font_size=13, color="#1864ab")
+    b.add_text(670, ly + 94, "• Sub-Spec: contracts & schemas\n• Sub-Plan: testable criteria\n• Implement with zero drift\n• Re-integrate to Primary Driver", font_size=11, color="#495057")
+
+    # Bottom summary
+    b.add_rect(50, 490, 855, 75, bg_color="#ebfbee", stroke_color="#2f9e44", stroke_width=2)
+    b.add_text(70, 502, "INVARIANT: NO PARALLEL STREAM CODE WITHOUT SPEC & PLAN APPROVAL", font_size=14, color="#2b8a3e")
+    b.add_text(70, 526, "Primary Driver merges parallel streams cleanly, reviews diffs, and enforces quality gates before Phase 5 Verify.", font_size=12, color="#495057")
 
     b.save(out_dir / "04-implement")
 

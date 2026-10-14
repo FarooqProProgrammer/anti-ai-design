@@ -40,9 +40,12 @@ If the user requests immediate code changes ("just fix this", "generate code", "
   - Ingest external references into `raw/` and compile in `wiki/`.
   - **BLOCKED:** Writing code before the user approves the plan.
 
-- **Gate 4: Implement (Single Driver)**
+- **Gate 4: Implement (Single Driver & Implementation Loop Gate)**
   - Act as Primary Driver for end-to-end logic, or collaborate cleanly with frontend agents.
+  - **Implementation Loop (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`):** If multiple tasks, decoupled sub-modules, or new domain requirements arise, break them down. Use `/find-skills` (`npx skills find`) to equip missing tools, and dispatch parallel subagents under Single Driver orchestration. Each parallel stream must follow `Spec ➔ Plan ➔ Implement`.
   - **BLOCKED:** Switching core logic ownership back and forth between competing models, or introducing unrequested refactors.
+  - **BLOCKED:** Monolithic multi-part code dumps that skip sub-specification and sub-planning.
+  - **BLOCKED:** Parallel subagents writing code without an approved sub-spec and sub-plan.
 
 - **Gate 5: Verify (Zero Concealment)**
   - Run type checking, linting, and automated tests.

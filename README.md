@@ -29,7 +29,7 @@ A pragmatic, battle-tested framework for building software with AI coding agents
 | **1. Understand** | Any Agent + **Brainstorming & Grill-Me** + Wiki | Socratic interview, edge cases, trade-offs, explore code & wiki | **Read-Only**: Zero code edits allowed. |
 | **2. Spec** | Any Agent (Cursor / Claude / Codex) + Wiki | Technical & functional contracts: schemas, APIs, invariants (WHAT) | **Read-Only**: Zero source code edits allowed. |
 | **3. Plan** | Any Agent (Cursor / Claude / Codex) + Wiki | Implementation roadmap, risk matrix, acceptance criteria (HOW) | No code written until human sign-off on the plan. |
-| **4. Implement** | Primary Driver (Cursor / Claude / Codex) | Core logic, data models, APIs, and UI styling polish | **Single Driver**: One agent owns the core logic. |
+| **4. Implement** | Primary Driver + Parallel Agents | Core logic, implementation loop (`Spec➔Plan➔Impl`), `/find-skills`, parallel dispatch | **Single Driver & Loop Invariant**: Sub-specs required for all streams. |
 | **5. Verify** | Any Agent + Test Runner | Typechecking, linting, unit/integration suites, wiki evidence check | **Zero Concealment**: Never hide, skip, or suppress failures. |
 | **6. Review Independently** | Auditor (Clean Context / Second Agent) | Full `git diff` audit for bugs, security holes, performance | **Review Without Editing**: Reviewer cannot modify files. |
 | **7. Ship Safely** | Any Agent + Engineer | Clean diff check, conventional commits, CI/CD run, compound wiki | Never commit straight to `main` or `master`. |
@@ -88,7 +88,7 @@ the-developer/
 │   ├── 01-understand.md               # Phase 1 Understand template
 │   ├── 02-spec.md                     # Phase 2 Spec template
 │   ├── 03-plan.md                     # Phase 3 Plan template
-│   ├── 04-implement.md                # Phase 4 Implement template
+│   ├── 04-implement.md                # Phase 4 Implement template (Single Driver & Loop Gate)
 │   ├── 05-verify.md                   # Phase 5 Verify template
 │   ├── 06-independent-review.md       # Phase 6 Review template
 │   └── 07-ship-safely.md              # Phase 7 Ship Safely template
@@ -149,11 +149,16 @@ Every step in this workflow is **agent-universal** (executable by **Cursor**, **
 3. **Visual Artifact**: Generate [`diagrams/03-plan.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/03-plan.exceldraw) illustrating milestones and acceptance gates.
 4. Review and approve the plan before any coding begins.
 
-### Step 4: Implement (Primary Driver)
+### Step 4: Implement (Primary Driver & Implementation Loop Gate)
 1. Designate the **Primary Driver** (Cursor, Claude Code, or Codex) using [`templates/04-implement.md`](file:///d:/ai%20agent/the-developer/templates/04-implement.md).
 2. The Primary Driver owns the core change, domain logic, and unit tests sequentially.
-3. If collaborating, secondary agents focus strictly on interactive styling and frontend polish.
-4. **Visual Artifact**: Generate [`diagrams/04-implement.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/04-implement.exceldraw) detailing component wiring and module interactions.
+3. **Implementation Loop Gate (`Implement ➔ Loop ➔ Spec ➔ Plan ➔ Implement`)**:
+   - If multiple tasks, decoupled sub-modules, or new capabilities emerge, enter the decomposition loop.
+   - Run `/find-skills` (or `npx skills find <domain>`) to find and install specialized skills from [skills.sh](https://skills.sh).
+   - Dispatch **parallel subagents** for independent sub-tasks (e.g. backend service vs. frontend UI vs. DB migrations).
+   - Invariant: Each parallel stream must satisfy its own sub-spec and sub-plan before writing code.
+4. If collaborating, secondary agents focus strictly on interactive styling and frontend polish.
+5. **Visual Artifact**: Generate [`diagrams/04-implement.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/04-implement.exceldraw) detailing component wiring, the implementation loop, and parallel agent orchestration.
 
 ### Step 5: Verify (Any Agent + Test Runner)
 1. Run the verification protocol from [`templates/05-verify.md`](file:///d:/ai%20agent/the-developer/templates/05-verify.md).
