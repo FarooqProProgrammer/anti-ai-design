@@ -56,6 +56,9 @@ the-developer/
 ├── .cursor/
 │   ├── agents/
 │   │   └── wiki-researcher.md         # Cursor custom subagent (inherit model)
+│   ├── commands/
+│   │   ├── understand.md              # Cursor /understand command
+│   │   └── plan.md                    # Cursor /plan command
 │   └── rules/
 │       ├── workflow.mdc               # Universal 6-phase lifecycle protocol
 │       ├── firewall-rules.mdc         # Request Firewall admission controller & contradiction check
@@ -67,6 +70,8 @@ the-developer/
 │   ├── agents/
 │   │   └── wiki-researcher.md         # Claude Code custom research agent (sonnet model, cyan color)
 │   ├── commands/
+│   │   ├── understand.md              # /understand <requirement> command
+│   │   ├── plan.md                    # /plan [context] command
 │   │   ├── research.md                # /research <topic or url> command
 │   │   └── setup-agent.md             # /setup-agent onboarding command
 │   └── rules/
@@ -102,13 +107,6 @@ The **Wiki Researcher** is configured as a dedicated subagent across both **Curs
 - **In Claude Code:** Run `/research <topic or url>` or delegate with `@wiki-researcher`.
 - **In Antigravity:** Trigger subagent `wiki-researcher`.
 
-### What Happens Automatically:
-1. **Fetches Source**: Web text is extracted and archived cleanly in `raw/<topic>/YYYY-MM-DD-<slug>.md`.
-2. **Compiles Grounded Article**: Synthesizes a structured article in `wiki/<topic>/<article>.md` maintaining the Grounding Invariant (numbers, dates, and quotes match verbatim).
-3. **Indexes in Wiki**: Immediately updates `wiki/index.md` so all developers and agents have access to the knowledge.
-4. **Logs Operation**: Records the ingest in `wiki/log.md`.
-5. **Verifies Evidence**: Runs `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
-
 ---
 
 ## Step-by-Step Universal Execution Guide
@@ -120,14 +118,15 @@ Every step in this workflow is **agent-universal** (executable by **Cursor**, **
 2. The agent matches the requirement against `wiki/index.md`, relevant `wiki/` articles, and project documentation.
 3. If the requirement contradicts documented architecture or decisions, execution is **BLOCKED**, and the contradiction is returned immediately.
 
-### Step 1: Understand (Any Agent)
-1. Use the prompt from [`templates/01-understand.md`](file:///d:/ai%20agent/the-developer/templates/01-understand.md) with your task description.
-2. The agent runs **Brainstorming** (goals/anti-goals, trade-offs) and **Grill-Me** (Socratic decision-tree questioning).
+### Step 1: Understand (Command: `/understand`)
+1. Run **`/understand <task description>`** (defined in [`.claude/commands/understand.md`](file:///d:/ai%20agent/the-developer/.claude/commands/understand.md) and [`.cursor/commands/understand.md`](file:///d:/ai%20agent/the-developer/.cursor/commands/understand.md)).
+2. The agent executes **Brainstorming** (goals/anti-goals, trade-offs) and **Grill-Me** (Socratic decision-tree questioning).
 3. The agent explores the codebase (read-only), checks `wiki/index.md`, and inspects `C:\Users\farooq\.cursor\projects` for prior session transcripts.
 4. **Visual Artifact**: Update [`diagrams/01-understand.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/01-understand.exceldraw) with an architectural context and trade-off description.
+5. **Hard Rule**: READ-ONLY. Zero code edits.
 
-### Step 2: Plan (Any Agent)
-1. Feed the Phase 1 context into the prompt from [`templates/02-plan.md`](file:///d:/ai%20agent/the-developer/templates/02-plan.md).
+### Step 2: Plan (Command: `/plan`)
+1. Run **`/plan`** (defined in [`.claude/commands/plan.md`](file:///d:/ai%20agent/the-developer/.claude/commands/plan.md) and [`.cursor/commands/plan.md`](file:///d:/ai%20agent/the-developer/.cursor/commands/plan.md)).
 2. The agent investigates tricky requirements, maps out risks, and writes testable Acceptance Criteria (Given-When-Then).
 3. Ingest external references into `raw/` and compile into `wiki/` if needed.
 4. **Visual Artifact**: Generate [`diagrams/02-plan.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/02-plan.exceldraw) illustrating milestones and acceptance gates.

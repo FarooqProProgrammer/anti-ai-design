@@ -1,13 +1,13 @@
-# Phase 2: Plan (Claude Code Prompt Template)
+# Phase 2: Plan (Universal Prompt Template)
 
 **Firewall Gate:** Gate 2 (Architecture, Risk & Acceptance Criteria Approval)  
-**Target Tool/Agent:** Claude Code  
+**Target Tool/Agent:** Any Agent (Cursor, Claude Code, Codex, or Antigravity)  
 **Goal:** Deep investigation of complex requirements, risk assessment, acceptance criteria, and phased implementation blueprint.  
 **Strict Firewall Rule:** No code implementation may begin until this plan is approved. Direct coding is BLOCKED.
 
 ---
 
-## Claude Code Prompt
+## Universal Plan Prompt
 
 ```markdown
 You are acting in Phase 2 (Plan) of the AI Engineering Workflow.
@@ -55,4 +55,3 @@ Step-by-step sequential tasks:
 
 Wait for explicit approval before proceeding to Phase 3 (Implement).
 ```
-
