@@ -1,8 +1,9 @@
 # Phase 2: Plan (Claude Code Prompt Template)
 
+**Firewall Gate:** Gate 2 (Architecture, Risk & Acceptance Criteria Approval)  
 **Target Tool/Agent:** Claude Code  
 **Goal:** Deep investigation of complex requirements, risk assessment, acceptance criteria, and phased implementation blueprint.  
-**Constraint:** Do not write production code until the plan is reviewed and approved.
+**Strict Firewall Rule:** No code implementation may begin until this plan is approved. Direct coding is BLOCKED.
 
 ---
 

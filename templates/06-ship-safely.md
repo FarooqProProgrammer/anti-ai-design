@@ -1,7 +1,9 @@
 # Phase 6: Ship Safely (Checklist & Deployment Guide)
 
+**Firewall Gate:** Gate 6 (Production Release & Knowledge Compounding Gate)  
 **Target:** Driver Agent & Engineer  
-**Goal:** Final sanity check, clean atomic commits, branch management, CI/CD pipeline verification, and deployment.
+**Goal:** Final sanity check, clean atomic commits, branch management, CI/CD pipeline verification, and deployment.  
+**Strict Firewall Rule:** Committing to protected branches is BLOCKED. Unverified diffs are BLOCKED.
 
 ---
 

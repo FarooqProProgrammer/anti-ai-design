@@ -1,8 +1,9 @@
 # Phase 1: Understand (Cursor Prompt Template)
 
+**Firewall Gate:** Gate 1 (Entry Admission & Reconnaissance)  
 **Target Tool/Agent:** Cursor  
 **Goal:** Codebase reconnaissance, pattern detection, and architectural discovery.  
-**Constraint:** READ-ONLY. Do not write or edit any code.
+**Strict Firewall Rule:** READ-ONLY. Do not write or edit any code. Any edit attempt is BLOCKED.
 
 ---
 

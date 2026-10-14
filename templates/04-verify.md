@@ -1,8 +1,9 @@
 # Phase 4: Verify (Checklist & Protocol)
 
+**Firewall Gate:** Gate 4 (Zero-Concealment Verification & Runtime Validation)  
 **Target:** Implementing Agent / Developer Environment  
 **Goal:** Verify functional correctness, regression-free behavior, and capture all test/runtime diagnostics.  
-**Non-Negotiable Rule:** **Capture any failures rather than hiding them.** Never skip, ignore, or suppress failures.
+**Strict Firewall Rule:** Zero concealment. Never skip, ignore, or suppress failures. Bypassing tests is BLOCKED.
 
 ---
 

@@ -1,8 +1,6 @@
 # Cursor AI Engineering Rules
 
-> 🛡️ **MANDATORY REQUEST FIREWALL:**
-> Every request must proceed through the sequential 6-phase firewall: Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely.
-> If a prompt asks to immediately edit or generate code, the firewall enforces that you MUST first complete **Phase 1: Understand** (Read-Only) and wait for the approved plan.
+You operate as part of the 6-Phase AI Engineering Workflow. Your specific responsibilities are defined below:
 
 ## 1. Phase 1: Understand (Code Exploration & Pattern Identification)
 - When tasked with exploring a feature or bug, your job is reconnaissance only.

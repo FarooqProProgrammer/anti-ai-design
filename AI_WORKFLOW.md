@@ -14,16 +14,21 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
 
 ---
 
-## The 6-Phase Lifecycle Matrix
+## The Universal 6-Phase Lifecycle Matrix
 
-| Phase | Primary Agent / Tool | Secondary / Support | Core Objective | Quality Gate / Exit Criteria |
-|---|---|---|---|---|
-| **1. Understand** | **Cursor** | **LLM Wiki (Query)** | Explore relevant codebases, consult compiled wiki knowledge, identify design patterns | Documented context notes & pattern map; **zero code modifications** |
-| **2. Plan** | **Claude Code** | **LLM Wiki (Ingest)** | Investigate complex requirements, ingest external RFCs/specs into wiki, generate acceptance criteria | Approved implementation plan with explicit testable criteria & risk matrix |
-| **3. Implement** | **Claude Code** or **Codex** (Single Driver) | **Cursor** (Interactive & UI) | Execute main change according to plan; scoped UI refinement | Plan items completed; single agent ownership maintained; no speculative scope |
-| **4. Verify** | **Project Shell / Agent** | **LLM Wiki (Lint)** | Run full test suites, typechecks, linter, runtime checks, and wiki evidence verification | 100% checks passing; all failures captured and resolved; zero hidden errors |
-| **5. Review Independently** | **Codex** or **Claude Code** (Read-Only) | - | Independent audit of `git diff` without editing permissions | All high/medium severity findings remediated and re-verified |
-| **6. Ship Safely** | **Driver Agent / Engineer** | **LLM Wiki (Compound)** | Atomic commit, branch push, PR review, CI pipeline validation, and wiki knowledge compounding | Clean diff, passed CI/CD checks, deployment readiness verified, wiki updated |
+> [!NOTE]
+> **AGENT-UNIVERSAL EXECUTION:**
+> This workflow is **not rigidly split** between agents. **Any agent**—whether **Cursor**, **Claude Code**, **Codex**, or **Antigravity**—can execute all 6 phases end-to-end, or collaborate flexibly.
+> The discipline lies in the **Firewall Gates & Sequential Process**, regardless of which AI tool is driving.
+
+| Phase | Executing Agent | Role & Activity | Quality Gate / Exit Criteria |
+|---|---|---|---|
+| **1. Understand** | **Any Agent** (Cursor / Claude / Codex) | Explore code, trace dependencies, consult `wiki/`, detect existing patterns | Context notes & pattern map; **zero code modifications** |
+| **2. Plan** | **Any Agent** (Cursor / Claude / Codex) | Investigate complex requirements, analyze risks, generate testable acceptance criteria | Approved implementation plan with acceptance criteria & risk matrix |
+| **3. Implement** | **Primary Driver** (Cursor, Claude, or Codex) | Execute core change per plan; interactive edits & frontend refinement | Plan items completed; **single agent ownership** for core logic |
+| **4. Verify** | **Any Agent** + Test Runner | Run tests, linters, type checks, runtime behavior, and wiki evidence checker | 100% checks passing; all failures captured and resolved |
+| **5. Review Independently** | **Auditor** (Clean Context / Second Agent) | Audit final `git diff` with strict instructions: **review without editing** | All confirmed findings remediated and re-verified |
+| **6. Ship Safely** | **Any Agent** + Engineer | Final diff review, atomic commit on feature branch, CI/CD, and wiki compounding | Clean diff, passed CI/CD checks, deployment readiness verified |
 
 ---
 
@@ -34,12 +39,13 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
 ## Detailed Phase Specifications
 
 ### Phase 1: Understand
-**Owner:** Cursor  
+**Applicable Tools:** Cursor, Claude Code, Codex, or Antigravity  
 **Goal:** Build complete architectural awareness and map dependencies before proposing any modifications.
 
 #### Protocols & Actions:
-1. **Repository Indexing & Search**:
-   - Use Cursor's codebase indexing (`@Codebase`, semantic search, symbol search) to locate relevant files, types, and schemas.
+1. **Codebase Exploration & Search**:
+   - Use codebase indexing (`@Codebase`, semantic search, file/symbol lookup) to locate relevant files, types, and schemas.
+   - Consult `wiki/index.md` and relevant `wiki/` topic articles for prior architectural decisions and ADRs.
    - Trace callers and callees of affected components.
 2. **Identify Existing Patterns**:
    - Note error-handling strategies (result types, exceptions, custom error classes).
@@ -52,12 +58,13 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
 ---
 
 ### Phase 2: Plan
-**Owner:** Claude Code  
+**Applicable Tools:** Cursor, Claude Code, Codex, or Antigravity  
 **Goal:** Deeply analyze complex requirements, forecast edge cases, assess risks, and formulate an actionable implementation plan.
 
 #### Protocols & Actions:
 1. **Requirements & Scope Investigation**:
    - Ingest requirements, existing codebase context from Phase 1, and technical constraints.
+   - Ingest external RFCs, specifications, or library documentation into `raw/` and compile into `wiki/` using the `karpathy-llm-wiki` skill.
    - Identify implicit requirements, breaking change potentials, and backward compatibility concerns.
 2. **Risk & Mitigation Matrix**:
    - Identify performance bottlenecks, race conditions, security vulnerabilities, and API limits.
@@ -73,23 +80,24 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
 ---
 
 ### Phase 3: Implement
-**Owner:** Claude Code or Codex (Primary Driver)  
-**Collaborator:** Cursor (Interactive Edits & Frontend Refinement)  
+**Applicable Tools:** Cursor, Claude Code, Codex, or Antigravity (Any agent as Primary Driver)  
 **Goal:** Execute the planned changes with discipline and architectural fidelity.
 
 #### The Single Driver Principle:
 > [!IMPORTANT]
-> **Exactly one agent holds primary responsibility for the main implementation.**
-> Do NOT bounce core backend/business logic between multiple generative agents. This prevents context fragmentation, conflicting paradigms, and code duplication.
+> **Keep one agent responsible for the main implementation.**
+> Whether you use **Cursor**, **Claude Code**, or **Codex** as the driver, that agent owns the core logic and architecture for the task.
+> - **If using Cursor alone:** Cursor performs the main implementation, unit testing, and interactive/frontend refinement.
+> - **If collaborating across agents (e.g., Claude/Codex + Cursor):** Claude Code or Codex drives the core business logic, while Cursor handles interactive edits and frontend visual tuning.
+> - **Golden Rule:** Do not bounce core logic between competing agents simultaneously to avoid context fragmentation.
 
 #### Protocols & Actions:
-1. **Main Change (Claude Code or Codex)**:
+1. **Main Change Execution**:
    - Follow the approved plan sequentially.
    - Build unit/integration tests alongside or prior to business logic (TDD preferred).
    - Maintain consistency with patterns identified in Phase 1.
-2. **Interactive & Frontend Refinement (Cursor)**:
-   - Use Cursor for live UI preview iteration, styling tweaks (CSS/Tailwind), visual adjustments, and small interactive fixes.
-   - Scope Cursor's role strictly to interactive edits; core business and domain logic remains with the Primary Driver.
+2. **Interactive & Frontend Refinement**:
+   - Live UI iteration, styling tweaks (CSS/Tailwind), visual adjustments, and small interactive fixes.
 3. **Implementation Hygiene**:
    - Do not touch unrelated files or refactor code outside the planned scope.
    - Keep diffs minimal, focused, and clean.
@@ -97,7 +105,7 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
 ---
 
 ### Phase 4: Verify
-**Owner:** Driver Agent / Local Environment  
+**Applicable Tools:** Any Agent + Test Runner / Environment  
 **Goal:** Validate functional behavior, ensure zero regressions, and transparently log all diagnostic outputs.
 
 #### Protocols & Actions:
@@ -105,6 +113,7 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
    - **Type Checking**: Run compiler/typechecker (e.g., `tsc --noEmit`, `mypy`, `cargo check`).
    - **Linting & Formatting**: Run project linters (e.g., `eslint`, `flake8`, `ruff`, `prettier`).
    - **Automated Tests**: Execute unit, integration, and end-to-end test suites.
+   - **Wiki Grounding Check**: If wiki or documentation was updated, run `python skills/karpathy-llm-wiki/scripts/check_evidence.py`.
 2. **Behavioral Runtime Verification**:
    - Test the actual behavior against the acceptance criteria defined in Phase 2.
    - Trigger edge cases, error conditions, and empty states.
@@ -113,17 +122,17 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
    > **Never hide, bypass, suppress, or skip failing tests or type errors.**
    > - Capture the full stack trace and error message.
    > - Root-cause every failure.
-   > - Fix the underlying defect, do not modify the test assertions to make failing code appear green unless the requirement itself changed.
+   > - Fix the underlying defect; do not modify test assertions to make failing code appear green unless the requirement itself changed.
 
 ---
 
 ### Phase 5: Review Independently
-**Owner:** Codex or Claude Code (Independent Auditor)  
+**Applicable Tools:** Codex, Claude Code, Cursor (Fresh Context), or Antigravity  
 **Goal:** Fresh-context, objective code review of the final Git diff without editing permissions.
 
 #### Protocols & Actions:
-1. **Reviewer Segregation**:
-   - The reviewer agent must be initialized with a clean context or be a separate model/agent instance from the implementation driver.
+1. **Reviewer Independence**:
+   - The review must be performed with a clean context (or a separate model/agent instance) from the implementation driver.
 2. **Strict Read-Only Instruction**:
    - Prompt instructions: *"You are an independent code auditor. Review this git diff for correctness, performance, edge cases, and security vulnerabilities. DO NOT edit or modify files."*
 3. **Review Evaluation Criteria**:

@@ -1,24 +1,36 @@
 ---
-description: AI Engineering Workflow rules for Cursor (Understand & Frontend/Interactive Refinement)
+description: Universal AI Engineering Workflow rules for Cursor across all 6 phases
 globs: *
 alwaysApply: true
 ---
 
-# Cursor Workflow Rules
+# Cursor Workflow Rules (All 6 Phases)
 
-> 🛡️ **REQUEST FIREWALL ENFORCEMENT:** Every request MUST proceed through the 6-phase firewall. You are strictly restricted from editing code during Phase 1 (Understand). Code edits are only permissible in Phase 3 after an approved Phase 2 plan exists.
+You are equipped to execute **all 6 phases** of the AI Engineering Workflow. Every request is governed by the **Request Firewall** ([FIREWALL.md](FIREWALL.md)):
 
-You are the designated agent for **Phase 1: Understand** and **Phase 3: Interactive / Frontend Refinement** within the project's AI engineering workflow.
+`Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
 
-## Rules by Phase
+## Execution Rules by Phase
 
-### Phase 1: Understand
-- **Objective:** Deeply explore the codebase, trace dependencies, and detect patterns.
-- **Action:** Query `wiki/index.md` for existing architectural decisions; use semantic search, symbol search, and file inspection to map all touchpoints.
-- **Rule:** **NEVER edit code during Understand.** Summarize the findings, existing idioms, and technical constraints.
+### 1. Phase 1: Understand
+- **Objective:** Deeply explore the codebase, consult `wiki/index.md`, and detect existing patterns.
+- **Rule:** **READ-ONLY.** Never edit or write code during Understand. Present findings first.
 
-### Phase 3: Implement (Interactive & Frontend)
-- **Objective:** Scoped frontend refinement and live interactive adjustments.
-- **Constraint:** One agent (Claude Code or Codex) acts as the Primary Driver. Do not refactor core business logic or domain types unless explicitly requested.
-- **Hygiene:** Keep diffs minimal, preserve existing code structure, and avoid overwriting work done by the Primary Driver.
+### 2. Phase 2: Plan
+- **Objective:** Deep requirement investigation, edge case analysis, risk matrix, and testable acceptance criteria.
+- **Rule:** No code is written until the plan is approved.
 
+### 3. Phase 3: Implement
+- **Objective:** Execute the approved plan. You can serve as the Primary Driver for the entire change, or collaborate by handling interactive/frontend refinements.
+- **Rule:** Follow the approved plan sequentially; avoid speculative scope.
+
+### 4. Phase 4: Verify
+- **Objective:** Run type checks, linters, test suites, and test actual runtime behavior.
+- **Rule:** **Zero concealment.** Never hide or suppress failing tests. Capture and fix root causes.
+
+### 5. Phase 5: Review Independently
+- **Objective:** Audit the final `git diff` for correctness, security, performance, and regressions.
+- **Rule:** **Review without editing.** Never modify files during review mode.
+
+### 6. Phase 6: Ship Safely
+- **Objective:** Verify diff hygiene, commit atomically on feature branch, follow CI/CD, and compound new knowledge into `wiki/`.

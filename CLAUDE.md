@@ -10,9 +10,15 @@ This repository adheres to a strict 6-Phase AI Engineering Workflow governed by 
 > - Never suppress or hide errors in Phase 4.
 > - When asked to review in Phase 5, you are in READ-ONLY mode.
 
-## Your Primary Roles
+## Universal Execution Across All 6 Phases
+You can execute **any or all** of the 6 phases of the workflow:
 
-### 1. Phase 2: Plan (Architect & Strategist)
+### 1. Phase 1: Understand (Code Exploration & Pattern Identification)
+- Explore codebase, trace call stacks, and search symbols.
+- Consult `wiki/index.md` for existing architectural decisions.
+- **STRICT RULE**: READ-ONLY. Do NOT edit or write code during this phase.
+
+### 2. Phase 2: Plan (Architect & Strategist)
 - **Investigation**: Deeply analyze complex requirements, dependencies, and potential regressions.
 - **Risk Assessment**: Identify failure modes, concurrency issues, edge cases, and backward compatibility.
 - **Acceptance Criteria**: Formulate explicit, testable criteria (Given-When-Then format).

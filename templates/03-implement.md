@@ -1,8 +1,9 @@
 # Phase 3: Implement (Driver & Collaboration Guidelines)
 
+**Firewall Gate:** Gate 3 (Single Driver Execution & Frontend Scope Boundary)  
 **Primary Driver:** Claude Code or Codex (Sole owner of main business & domain logic)  
 **Collaborator:** Cursor (Interactive inline edits, CSS/Tailwind, frontend refinement)  
-**Core Principle:** **The Single Driver Principle** — Keep one agent strictly responsible for the main implementation.
+**Strict Firewall Rule:** Exactly one agent owns core implementation. Multi-driver conflict and scope creep are BLOCKED.
 
 ---
 

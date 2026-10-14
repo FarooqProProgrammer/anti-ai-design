@@ -15,16 +15,19 @@ A structured, resilient framework for building software with AI coding agents (C
 
 ---
 
-## Agent Role Matrix
+## Universal 6-Phase Lifecycle Matrix
 
-| Phase | Assigned Tool / Agent | Focus Area | Mandatory Constraint |
+> [!NOTE]
+> **Universal Agent Execution**: Any agent (**Cursor**, **Claude Code**, **Codex**, or **Antigravity**) can execute all 6 phases. The process is not locked to one specific tool.
+
+| Phase | Executing Agent | Focus Area | Mandatory Constraint |
 |---|---|---|---|
-| **1. Understand** | **Cursor** + **LLM Wiki** | Code exploration, semantic search, consult compiled wiki (`wiki/`) | **Read-Only**: Zero code edits permitted. |
-| **2. Plan** | **Claude Code** + **LLM Wiki** | Complex requirements, risk matrix, ingest RFCs/specs into `raw/` | No code written until plan is approved. |
-| **3. Implement** | **Claude Code** or **Codex** (Primary Driver) <br> **Cursor** (Secondary) | Core logic, data modeling, backend services (Primary) <br> Frontend refinement, UI styling, interactive tweaks (Cursor) | **Single Driver Principle**: One agent owns the core implementation. |
-| **4. Verify** | **Test Runner & Driver Agent** | Typechecking, linting, unit/integration suites, manual validation, wiki evidence check | **Zero Concealment**: Never hide, skip, or suppress failures. |
-| **5. Review Independently** | **Codex** or **Claude Code** (Independent) | Code review of complete `git diff` for correctness, security, performance | **Review Without Editing**: Reviewer cannot modify files. |
-| **6. Ship Safely** | **Driver Agent & Engineer** | Final diff inspection, conventional commits, CI/CD pipeline, compound wiki | Never commit directly to protected branches. |
+| **1. Understand** | Any Agent (Cursor / Claude / Codex) + LLM Wiki | Code exploration, semantic search, consult compiled wiki (`wiki/`) | **Read-Only**: Zero code edits permitted. |
+| **2. Plan** | Any Agent (Cursor / Claude / Codex) + LLM Wiki | Complex requirements, risk matrix, ingest RFCs/specs into `raw/` | No code written until plan is approved. |
+| **3. Implement** | Primary Driver (Cursor / Claude / Codex) | Core logic, data modeling, backend services & frontend refinement | **Single Driver Principle**: One agent owns the core implementation. |
+| **4. Verify** | Any Agent + Test Runner | Typechecking, linting, unit/integration suites, manual validation, wiki evidence check | **Zero Concealment**: Never hide, skip, or suppress failures. |
+| **5. Review Independently** | Auditor (Clean Context / Second Agent) | Code review of complete `git diff` for correctness, security, performance | **Review Without Editing**: Reviewer cannot modify files. |
+| **6. Ship Safely** | Any Agent + Engineer | Final diff inspection, conventional commits, CI/CD pipeline, compound wiki | Never commit directly to protected branches. |
 
 ---
 

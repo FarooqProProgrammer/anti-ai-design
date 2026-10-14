@@ -1,8 +1,9 @@
 # Phase 5: Review Independently (Auditor Prompt Template)
 
+**Firewall Gate:** Gate 5 (Independent Read-Only Audit & Remediation Gate)  
 **Target Tool/Agent:** Codex or Claude Code (Independent Reviewer)  
 **Goal:** Objective audit of the complete `git diff`.  
-**Strict Mandate:** **Review without editing.** Zero file modifications by the reviewer.
+**Strict Firewall Rule:** Review without editing. Reviewer file edits are BLOCKED. Self-approval without audit is BLOCKED.
 
 ---
 
