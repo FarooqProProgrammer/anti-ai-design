@@ -23,7 +23,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 606093,
+      "seed": 759639,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -48,7 +48,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 677909,
+      "seed": 124797,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -83,7 +83,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 516849,
+      "seed": 181373,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -124,7 +124,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 774483,
+      "seed": 338753,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -149,7 +149,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 864242,
+      "seed": 955548,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -182,7 +182,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 319825,
+      "seed": 119926,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -217,7 +217,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 438998,
+      "seed": 493550,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -258,7 +258,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 250828,
+      "seed": 463257,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -283,7 +283,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 243122,
+      "seed": 523832,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -301,9 +301,9 @@
     {
       "id": "rect_10",
       "type": "rectangle",
-      "x": 697,
+      "x": 625,
       "y": 232,
-      "width": 133,
+      "width": 205,
       "height": 24,
       "angle": 0,
       "strokeColor": "#1971c2",
@@ -318,7 +318,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 905496,
+      "seed": 281409,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -328,9 +328,9 @@
     {
       "id": "text_11",
       "type": "text",
-      "x": 705,
+      "x": 633,
       "y": 235,
-      "width": 85.8,
+      "width": 138.6,
       "height": 14.3,
       "angle": 0,
       "strokeColor": "#1971c2",
@@ -343,18 +343,18 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 133744,
+      "seed": 274205,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
-      "text": "GATE 1: RECON",
+      "text": "GATE 1: GRILL & RECON",
       "fontSize": 11,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "top",
       "baseline": 11,
       "containerId": null,
-      "originalText": "GATE 1: RECON",
+      "originalText": "GATE 1: GRILL & RECON",
       "lineHeight": 1.3,
       "updated": 1
     },
@@ -363,7 +363,7 @@
       "type": "text",
       "x": 330,
       "y": 262,
-      "width": 436.8,
+      "width": 390.0,
       "height": 16.900000000000002,
       "angle": 0,
       "strokeColor": "#212529",
@@ -376,18 +376,18 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 485065,
+      "seed": 433700,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
-      "text": "Agent: Any Agent (Cursor / Claude / Codex / Antigravity)",
+      "text": "Agent: Any Agent + Brainstorming & Grill-Me Skills",
       "fontSize": 13,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "top",
       "baseline": 13,
       "containerId": null,
-      "originalText": "Agent: Any Agent (Cursor / Claude / Codex / Antigravity)",
+      "originalText": "Agent: Any Agent + Brainstorming & Grill-Me Skills",
       "lineHeight": 1.3,
       "updated": 1
     },
@@ -396,7 +396,7 @@
       "type": "text",
       "x": 330,
       "y": 286,
-      "width": 331.2,
+      "width": 403.19999999999993,
       "height": 62.400000000000006,
       "angle": 0,
       "strokeColor": "#495057",
@@ -409,18 +409,18 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 484752,
+      "seed": 324261,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
-      "text": "\u2022 Explore relevant code & trace dependencies\n\u2022 Identify existing codebase patterns & idioms\n\u2022 Consult wiki/index.md for prior decisions\n\u2022 FIREWALL GATE: Read-only \u2014 zero code edits",
+      "text": "\u2022 Always use Brainstorming & Grill-Me skills\n\u2022 Socratic interview: resolve decision tree & edge cases\n\u2022 Explore code, trace dependencies & check wiki/\n\u2022 FIREWALL GATE: Read-only \u2014 zero code edits",
       "fontSize": 12,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "top",
       "baseline": 12,
       "containerId": null,
-      "originalText": "\u2022 Explore relevant code & trace dependencies\n\u2022 Identify existing codebase patterns & idioms\n\u2022 Consult wiki/index.md for prior decisions\n\u2022 FIREWALL GATE: Read-only \u2014 zero code edits",
+      "originalText": "\u2022 Always use Brainstorming & Grill-Me skills\n\u2022 Socratic interview: resolve decision tree & edge cases\n\u2022 Explore code, trace dependencies & check wiki/\n\u2022 FIREWALL GATE: Read-only \u2014 zero code edits",
       "lineHeight": 1.3,
       "updated": 1
     },
@@ -444,7 +444,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 953536,
+      "seed": 470444,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -485,7 +485,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 721343,
+      "seed": 500887,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -510,7 +510,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 675716,
+      "seed": 557563,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -545,7 +545,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 910334,
+      "seed": 634167,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -570,7 +570,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 630233,
+      "seed": 542463,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -603,7 +603,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 649083,
+      "seed": 838448,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -636,7 +636,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 793697,
+      "seed": 678322,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -671,7 +671,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 948008,
+      "seed": 307752,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -712,7 +712,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 608316,
+      "seed": 814891,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -737,7 +737,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 832302,
+      "seed": 703726,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -772,7 +772,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 183014,
+      "seed": 365072,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -797,7 +797,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 869916,
+      "seed": 145903,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -830,7 +830,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 416861,
+      "seed": 340928,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -863,7 +863,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 464743,
+      "seed": 774836,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -898,7 +898,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 428752,
+      "seed": 159668,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -939,7 +939,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 933586,
+      "seed": 726275,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -964,7 +964,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 610798,
+      "seed": 638960,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -999,7 +999,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 815377,
+      "seed": 153534,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1024,7 +1024,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 445798,
+      "seed": 489526,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1057,7 +1057,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 554633,
+      "seed": 377013,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1090,7 +1090,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 820618,
+      "seed": 178282,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1125,7 +1125,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 335738,
+      "seed": 524830,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1166,7 +1166,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 974448,
+      "seed": 359122,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1191,7 +1191,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 677477,
+      "seed": 838792,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1226,7 +1226,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 239510,
+      "seed": 929777,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1251,7 +1251,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 455860,
+      "seed": 662332,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1284,7 +1284,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 834684,
+      "seed": 188818,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1317,7 +1317,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 336964,
+      "seed": 938532,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1352,7 +1352,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 167661,
+      "seed": 905306,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1393,7 +1393,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 451146,
+      "seed": 675105,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1418,7 +1418,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 833498,
+      "seed": 652900,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1453,7 +1453,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 310003,
+      "seed": 902868,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1478,7 +1478,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 249412,
+      "seed": 229888,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1511,7 +1511,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 169342,
+      "seed": 841943,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1544,7 +1544,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 262396,
+      "seed": 179239,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1579,7 +1579,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 732346,
+      "seed": 722595,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1620,7 +1620,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 694791,
+      "seed": 251393,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1661,7 +1661,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 770468,
+      "seed": 708556,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1702,7 +1702,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 997538,
+      "seed": 149387,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1727,7 +1727,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 276987,
+      "seed": 562505,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1762,7 +1762,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 315793,
+      "seed": 459405,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1787,7 +1787,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 403891,
+      "seed": 563760,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1820,7 +1820,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 745237,
+      "seed": 807658,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1855,7 +1855,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 322477,
+      "seed": 432185,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1880,7 +1880,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 433661,
+      "seed": 668540,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1915,7 +1915,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 255114,
+      "seed": 703900,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1940,7 +1940,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 420363,
+      "seed": 651139,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1975,7 +1975,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 779488,
+      "seed": 797113,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -2000,7 +2000,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 600183,
+      "seed": 228632,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -2035,7 +2035,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 685363,
+      "seed": 376112,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -2076,7 +2076,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 923218,
+      "seed": 259911,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -2117,7 +2117,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 488959,
+      "seed": 856179,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,

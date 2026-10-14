@@ -34,17 +34,17 @@
 <text x="330" y="252" font-size="18" fill="#1971c2" font-weight="bold" text-anchor="start">
   <tspan x="330" dy="0">PHASE 1: UNDERSTAND</tspan>
 </text>
-<rect x="697" y="232" width="133" height="24" rx="8" fill="#d0ebff" stroke="#1971c2" stroke-width="1" />
-<text x="705" y="246" font-size="11" fill="#1971c2" font-weight="normal" text-anchor="start">
-  <tspan x="705" dy="0">GATE 1: RECON</tspan>
+<rect x="625" y="232" width="205" height="24" rx="8" fill="#d0ebff" stroke="#1971c2" stroke-width="1" />
+<text x="633" y="246" font-size="11" fill="#1971c2" font-weight="normal" text-anchor="start">
+  <tspan x="633" dy="0">GATE 1: GRILL &amp; RECON</tspan>
 </text>
 <text x="330" y="275" font-size="13" fill="#212529" font-weight="normal" text-anchor="start">
-  <tspan x="330" dy="0">Agent: Any Agent (Cursor / Claude / Codex / Antigravity)</tspan>
+  <tspan x="330" dy="0">Agent: Any Agent + Brainstorming &amp; Grill-Me Skills</tspan>
 </text>
 <text x="330" y="298" font-size="12" fill="#495057" font-weight="normal" text-anchor="start">
-  <tspan x="330" dy="0">• Explore relevant code &amp; trace dependencies</tspan>
-  <tspan x="330" dy="15.600000000000001px">• Identify existing codebase patterns &amp; idioms</tspan>
-  <tspan x="330" dy="15.600000000000001px">• Consult wiki/index.md for prior decisions</tspan>
+  <tspan x="330" dy="0">• Always use Brainstorming &amp; Grill-Me skills</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Socratic interview: resolve decision tree &amp; edge cases</tspan>
+  <tspan x="330" dy="15.600000000000001px">• Explore code, trace dependencies &amp; check wiki/</tspan>
   <tspan x="330" dy="15.600000000000001px">• FIREWALL GATE: Read-only — zero code edits</tspan>
 </text>
 <line x1="580" y1="360" x2="580" y2="420" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />

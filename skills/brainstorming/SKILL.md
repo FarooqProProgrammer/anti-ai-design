@@ -29,3 +29,4 @@ Use this skill during **Phase 1: Understand** before writing plans or implementa
 4. **One Question at a Time**:
    - Keep clarifying questions focused, concrete, and grounded in real codebase realities.
    - Avoid overwhelming menus of options; give a sensible default when the user asks for guidance.
+

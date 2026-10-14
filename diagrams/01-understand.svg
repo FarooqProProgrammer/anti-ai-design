@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 1080 610" width="1080" height="610" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#495057" /></marker>
+  <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e03131" /></marker>
+  <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1971c2" /></marker>
+  <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2f9e44" /></marker>
+</defs>
+<rect x="50" y="30" width="860" height="70" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="2" />
+<text x="75" y="64" font-size="20" fill="#212529" font-weight="bold">
+  <tspan x="75" dy="0">STEP 1: UNDERSTAND — Socratic Reconnaissance &amp; Brainstorming</tspan>
+</text>
+<text x="75" y="85" font-size="13" fill="#6c757d" font-weight="normal">
+  <tspan x="75" dy="0">Firewall Gate 1 | Applicable: Any Agent (Cursor / Claude / Codex)</tspan>
+</text>
+<rect x="50" y="120" width="265" height="320" rx="8" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" />
+<text x="65" y="150" font-size="15" fill="#1864ab" font-weight="normal">
+  <tspan x="65" dy="0">1. BRAINSTORMING SKILL</tspan>
+</text>
+<text x="65" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="65" dy="0">• Uncover the 'Why'</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Define Goals &amp; Non-Goals</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Surface Anti-Goals</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Propose 2-3 Approaches:</tspan>
+  <tspan x="65" dy="15.600000000000001px">  - Minimal / Simple</tspan>
+  <tspan x="65" dy="15.600000000000001px">  - Idiomatic / Extensible</tspan>
+  <tspan x="65" dy="15.600000000000001px">  - High Performance</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Trade-off Analysis</tspan>
+</text>
+<rect x="345" y="120" width="265" height="320" rx="8" fill="#fff4e6" stroke="#f76707" stroke-width="2" />
+<text x="360" y="150" font-size="15" fill="#d9480f" font-weight="normal">
+  <tspan x="360" dy="0">2. GRILL-ME SKILL</tspan>
+</text>
+<text x="360" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="360" dy="0">• Socratic Technical Interview</tspan>
+  <tspan x="360" dy="15.600000000000001px">• Decision-tree resolution</tspan>
+  <tspan x="360" dy="15.600000000000001px">• Round-by-round questioning</tspan>
+  <tspan x="360" dy="15.600000000000001px">• Challenge assumptions:</tspan>
+  <tspan x="360" dy="15.600000000000001px">  - Network / DB failure</tspan>
+  <tspan x="360" dy="15.600000000000001px">  - Empty states &amp; edge limits</tspan>
+  <tspan x="360" dy="15.600000000000001px">  - Breaking contracts</tspan>
+  <tspan x="360" dy="15.600000000000001px">• Zero passive nodding</tspan>
+</text>
+<rect x="640" y="120" width="265" height="320" rx="8" fill="#f3f0ff" stroke="#7950f2" stroke-width="2" />
+<text x="655" y="150" font-size="15" fill="#5f3dc4" font-weight="normal">
+  <tspan x="655" dy="0">3. CODE &amp; WIKI RECON</tspan>
+</text>
+<text x="655" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="655" dy="0">• Query wiki/index.md (ADRs)</tspan>
+  <tspan x="655" dy="15.600000000000001px">• Index codebase &amp; symbols</tspan>
+  <tspan x="655" dy="15.600000000000001px">• Trace call graph &amp; data flow</tspan>
+  <tspan x="655" dy="15.600000000000001px">• Identify existing conventions:</tspan>
+  <tspan x="655" dy="15.600000000000001px">  - Error handling style</tspan>
+  <tspan x="655" dy="15.600000000000001px">  - State &amp; schema patterns</tspan>
+  <tspan x="655" dy="15.600000000000001px">  - Naming &amp; file hierarchy</tspan>
+  <tspan x="655" dy="15.600000000000001px">• READ-ONLY: 0 code edits</tspan>
+</text>
+<line x1="180" y1="440" x2="480" y2="480" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />
+<line x1="480" y1="440" x2="480" y2="480" stroke="#f76707" stroke-width="2" marker-end="url(#arrowhead)" />
+<line x1="770" y1="440" x2="480" y2="480" stroke="#7950f2" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="50" y="480" width="855" height="90" rx="8" fill="#ebfbee" stroke="#2f9e44" stroke-width="2" />
+<text x="70" y="508" font-size="16" fill="#2b8a3e" font-weight="bold">
+  <tspan x="70" dy="0">GATE 1 DELIVERABLE: RESOLVED CONTEXT SNAPSHOT</tspan>
+</text>
+<text x="70" y="532" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="70" dy="0">Input to Phase 2: Decided architecture, answered interview edge cases, documented patterns, and boundary constraints.</tspan>
+</text>
+</svg>

@@ -24,3 +24,4 @@ Use this skill during **Phase 1: Understand** to rigorously stress-test assumpti
 
 4. **Exit Criteria**:
    - The interrogation concludes only when all load-bearing architectural choices, failure modes, and boundaries are explicitly decided.
+

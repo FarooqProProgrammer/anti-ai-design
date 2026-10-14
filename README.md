@@ -22,7 +22,7 @@ A structured, resilient framework for building software with AI coding agents (C
 
 | Phase | Executing Agent | Focus Area | Mandatory Constraint |
 |---|---|---|---|
-| **1. Understand** | Any Agent (Cursor / Claude / Codex) + LLM Wiki | Code exploration, semantic search, consult compiled wiki (`wiki/`) | **Read-Only**: Zero code edits permitted. |
+| **1. Understand** | Any Agent + **Brainstorming & Grill-Me** + LLM Wiki | Socratic interview, edge-case probing, architectural trade-offs, code & wiki exploration | **Read-Only**: Zero code edits permitted. |
 | **2. Plan** | Any Agent (Cursor / Claude / Codex) + LLM Wiki | Complex requirements, risk matrix, ingest RFCs/specs into `raw/` | No code written until plan is approved. |
 | **3. Implement** | Primary Driver (Cursor / Claude / Codex) | Core logic, data modeling, backend services & frontend refinement | **Single Driver Principle**: One agent owns the core implementation. |
 | **4. Verify** | Any Agent + Test Runner | Typechecking, linting, unit/integration suites, manual validation, wiki evidence check | **Zero Concealment**: Never hide, skip, or suppress failures. |
@@ -45,13 +45,17 @@ the-developer/
 │   └── rules/
 │       └── workflow.mdc        # Modern Cursor rule file
 ├── skills/
+│   ├── brainstorming/          # Design-first exploration & trade-offs skill
+│   │   └── SKILL.md
+│   ├── grill-me/               # Relentless Socratic interview & edge-case skill
+│   │   └── SKILL.md
 │   └── karpathy-llm-wiki/      # Karpathy-style knowledge base skill
 │       ├── SKILL.md            # Skill specification & grounding invariant
 │       ├── references/         # Article, raw, index, and archive templates
 │       ├── scripts/            # check_evidence.py linting script
 │       └── examples/           # Sample articles and logs
 └── templates/
-    ├── 01-understand.md        # Cursor prompt template for Phase 1
+    ├── 01-understand.md        # Understand prompt template (Brainstorming + Grill-me)
     ├── 02-plan.md              # Claude Code planning prompt for Phase 2
     ├── 03-implement.md         # Single Driver & UI refinement guidelines for Phase 3
     ├── 04-verify.md            # Verification checklist & failure handling for Phase 4

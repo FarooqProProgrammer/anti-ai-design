@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 997 540" width="997" height="540" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#495057" /></marker>
+  <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e03131" /></marker>
+  <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1971c2" /></marker>
+  <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2f9e44" /></marker>
+</defs>
+<rect x="50" y="30" width="860" height="70" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="2" />
+<text x="75" y="64" font-size="20" fill="#212529" font-weight="bold">
+  <tspan x="75" dy="0">STEP 2: PLAN — Architecture Blueprint &amp; Acceptance Criteria</tspan>
+</text>
+<text x="75" y="85" font-size="13" fill="#6c757d" font-weight="normal">
+  <tspan x="75" dy="0">Firewall Gate 2 | Applicable: Any Agent (Cursor / Claude / Codex)</tspan>
+</text>
+<rect x="50" y="120" width="250" height="110" rx="8" fill="#f8f9fa" stroke="#495057" stroke-width="2" />
+<text x="65" y="150" font-size="15" fill="#212529" font-weight="normal">
+  <tspan x="65" dy="0">1. INGEST &amp; SCOPE</tspan>
+</text>
+<text x="65" y="172" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="65" dy="0">• Ingest RFCs/specs into raw/</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Compile concepts into wiki/</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Strict scope boundaries</tspan>
+</text>
+<line x1="300" y1="175" x2="350" y2="175" stroke="#495057" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="350" y="120" width="250" height="110" rx="8" fill="#fff4e6" stroke="#f76707" stroke-width="2" />
+<text x="365" y="150" font-size="15" fill="#d9480f" font-weight="normal">
+  <tspan x="365" dy="0">2. RISK MATRIX</tspan>
+</text>
+<text x="365" y="172" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="365" dy="0">• Failure mode analysis</tspan>
+  <tspan x="365" dy="15.600000000000001px">• Concurrency &amp; race hazards</tspan>
+  <tspan x="365" dy="15.600000000000001px">• Mitigation for each risk</tspan>
+</text>
+<line x1="600" y1="175" x2="650" y2="175" stroke="#f76707" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="650" y="120" width="255" height="110" rx="8" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" />
+<text x="665" y="150" font-size="15" fill="#1864ab" font-weight="normal">
+  <tspan x="665" dy="0">3. ACCEPTANCE CRITERIA</tspan>
+</text>
+<text x="665" y="172" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="665" dy="0">• Given-When-Then criteria</tspan>
+  <tspan x="665" dy="15.600000000000001px">• Edge-case assertions</tspan>
+  <tspan x="665" dy="15.600000000000001px">• 100% testable conditions</tspan>
+</text>
+<line x1="775" y1="230" x2="775" y2="270" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />
+<rect x="50" y="270" width="855" height="120" rx="8" fill="#e6fcf5" stroke="#0ca678" stroke-width="2" />
+<text x="70" y="301" font-size="16" fill="#087f5b" font-weight="bold">
+  <tspan x="70" dy="0">4. PHASED IMPLEMENTATION ROADMAP</tspan>
+</text>
+<text x="70" y="327" font-size="12" fill="#212529" font-weight="normal">
+  <tspan x="70" dy="0">Milestone 3.1: Data Models &amp; Core Schemas  ➔  Milestone 3.2: Domain Logic &amp; Services  ➔  Milestone 3.3: UI Wiring &amp; Refinement</tspan>
+</text>
+<text x="70" y="357" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="70" dy="0">Each milestone specifies exact files to touch, test conditions to write, and verification checkpoints.</tspan>
+</text>
+<line x1="480" y1="390" x2="480" y2="430" stroke="#0ca678" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="150" y="430" width="650" height="70" rx="8" fill="#fff5f5" stroke="#e03131" stroke-width="2" />
+<text x="180" y="458" font-size="16" fill="#c92a2a" font-weight="bold">
+  <tspan x="180" dy="0">🛑 GATE 2 APPROVAL CHECKPOINT</tspan>
+</text>
+<text x="180" y="480" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="180" dy="0">Coding is strictly BLOCKED until engineer reviews and signs off on this plan.</tspan>
+</text>
+</svg>

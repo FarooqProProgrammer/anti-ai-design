@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 930 530" width="930" height="530" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#495057" /></marker>
+  <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e03131" /></marker>
+  <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1971c2" /></marker>
+  <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2f9e44" /></marker>
+</defs>
+<rect x="50" y="30" width="860" height="70" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="2" />
+<text x="75" y="64" font-size="20" fill="#212529" font-weight="bold">
+  <tspan x="75" dy="0">STEP 5: REVIEW INDEPENDENTLY — Read-Only Diff Audit</tspan>
+</text>
+<text x="75" y="85" font-size="13" fill="#6c757d" font-weight="normal">
+  <tspan x="75" dy="0">Firewall Gate 5 | Applicable: Codex, Claude Code, or Cursor (Clean Context)</tspan>
+</text>
+<rect x="50" y="120" width="380" height="250" rx="8" fill="#f3f0ff" stroke="#7950f2" stroke-width="2" />
+<text x="70" y="154" font-size="16" fill="#5f3dc4" font-weight="bold">
+  <tspan x="70" dy="0">INDEPENDENT AUDITOR</tspan>
+</text>
+<text x="70" y="180" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="70" dy="0">Auditor: Clean Context / Second Agent</tspan>
+  <tspan x="70" dy="15.600000000000001px"></tspan>
+  <tspan x="70" dy="15.600000000000001px">• Input: Complete git diff + Phase 2 Plan</tspan>
+  <tspan x="70" dy="15.600000000000001px">• STRICT MANDATE: Review without editing</tspan>
+  <tspan x="70" dy="15.600000000000001px">• Auditor never modifies code files</tspan>
+  <tspan x="70" dy="15.600000000000001px">• Evaluates logic, security &amp; edge cases</tspan>
+  <tspan x="70" dy="15.600000000000001px">• Checks acceptance criteria compliance</tspan>
+</text>
+<rect x="470" y="120" width="435" height="250" rx="8" fill="#f8f9fa" stroke="#495057" stroke-width="2" />
+<text x="490" y="154" font-size="16" fill="#212529" font-weight="bold">
+  <tspan x="490" dy="0">SEVERITY TRIAGE MATRIX</tspan>
+</text>
+<text x="490" y="180" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="490" dy="0">🔴 HIGH / BLOCKER:</tspan>
+  <tspan x="490" dy="15.600000000000001px">  Bugs, regressions, unhandled crashes, security leaks</tspan>
+  <tspan x="490" dy="15.600000000000001px"></tspan>
+  <tspan x="490" dy="15.600000000000001px">🟡 MEDIUM:</tspan>
+  <tspan x="490" dy="15.600000000000001px">  Performance pitfalls, edge case gaps, code smells</tspan>
+  <tspan x="490" dy="15.600000000000001px"></tspan>
+  <tspan x="490" dy="15.600000000000001px">🟢 LOW / NIT:</tspan>
+  <tspan x="490" dy="15.600000000000001px">  Minor naming, comments, stylistic suggestions</tspan>
+</text>
+<line x1="430" y1="245" x2="470" y2="245" stroke="#7950f2" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="50" y="400" width="855" height="90" rx="8" fill="#ffe3e3" stroke="#e03131" stroke-width="2" />
+<text x="70" y="427" font-size="15" fill="#c92a2a" font-weight="normal">
+  <tspan x="70" dy="0">REMEDIATION LOOP (Primary Driver Fixes &amp; Re-Verifies)</tspan>
+</text>
+<text x="70" y="452" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="70" dy="0">Primary Driver applies confirmed fixes ➔ Re-run Phase 4 (Verify) across all checks until 100% green.</tspan>
+</text>
+</svg>

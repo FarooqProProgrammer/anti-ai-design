@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 930 530" width="930" height="530" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#495057" /></marker>
+  <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e03131" /></marker>
+  <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1971c2" /></marker>
+  <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2f9e44" /></marker>
+</defs>
+<rect x="50" y="30" width="860" height="70" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="2" />
+<text x="75" y="64" font-size="20" fill="#212529" font-weight="bold">
+  <tspan x="75" dy="0">STEP 4: VERIFY — Zero-Concealment Quality Validation Pipeline</tspan>
+</text>
+<text x="75" y="85" font-size="13" fill="#6c757d" font-weight="normal">
+  <tspan x="75" dy="0">Firewall Gate 4 | Applicable: Any Agent + Test Runner</tspan>
+</text>
+<rect x="50" y="120" width="195" height="130" rx="8" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" />
+<text x="65" y="149" font-size="14" fill="#1971c2" font-weight="normal">
+  <tspan x="65" dy="0">1. TYPECHECK</tspan>
+</text>
+<text x="65" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="65" dy="0">• tsc --noEmit / mypy</tspan>
+  <tspan x="65" dy="15.600000000000001px">• 0 type errors</tspan>
+  <tspan x="65" dy="15.600000000000001px">• No 'any' leaks</tspan>
+</text>
+<line x1="245" y1="185" x2="270" y2="185" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />
+<rect x="270" y="120" width="195" height="130" rx="8" fill="#fff4e6" stroke="#f76707" stroke-width="2" />
+<text x="285" y="149" font-size="14" fill="#f76707" font-weight="normal">
+  <tspan x="285" dy="0">2. LINTER</tspan>
+</text>
+<text x="285" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="285" dy="0">• eslint / ruff / fmt</tspan>
+  <tspan x="285" dy="15.600000000000001px">• 0 warnings</tspan>
+  <tspan x="285" dy="15.600000000000001px">• Style conformance</tspan>
+</text>
+<line x1="465" y1="185" x2="490" y2="185" stroke="#f76707" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="490" y="120" width="195" height="130" rx="8" fill="#e6fcf5" stroke="#0ca678" stroke-width="2" />
+<text x="505" y="149" font-size="14" fill="#0ca678" font-weight="normal">
+  <tspan x="505" dy="0">3. TEST SUITE</tspan>
+</text>
+<text x="505" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="505" dy="0">• Unit &amp; integration</tspan>
+  <tspan x="505" dy="15.600000000000001px">• 100% tests green</tspan>
+  <tspan x="505" dy="15.600000000000001px">• Edge cases covered</tspan>
+</text>
+<line x1="685" y1="185" x2="710" y2="185" stroke="#0ca678" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="710" y="120" width="195" height="130" rx="8" fill="#f3f0ff" stroke="#7950f2" stroke-width="2" />
+<text x="725" y="149" font-size="14" fill="#7950f2" font-weight="normal">
+  <tspan x="725" dy="0">4. WIKI CHECK</tspan>
+</text>
+<text x="725" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="725" dy="0">• check_evidence.py</tspan>
+  <tspan x="725" dy="15.600000000000001px">• Verifies literals</tspan>
+  <tspan x="725" dy="15.600000000000001px">• 0 suspect tolerance</tspan>
+</text>
+<line x1="480" y1="250" x2="480" y2="290" stroke="#0ca678" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="50" y="290" width="855" height="80" rx="8" fill="#fff9db" stroke="#f59f00" stroke-width="2" />
+<text x="70" y="320" font-size="15" fill="#e67700" font-weight="normal">
+  <tspan x="70" dy="0">5. RUNTIME BEHAVIORAL VERIFICATION</tspan>
+</text>
+<text x="70" y="344" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="70" dy="0">Test actual flow manually or via E2E • Assert outputs directly against Phase 2 Acceptance Criteria.</tspan>
+</text>
+<rect x="50" y="400" width="855" height="90" rx="8" fill="#fff5f5" stroke="#e03131" stroke-width="2" />
+<text x="70" y="427" font-size="15" fill="#c92a2a" font-weight="normal">
+  <tspan x="70" dy="0">🛑 ZERO CONCEALMENT PROTOCOL (FAILURES MUST BE CAPTURED)</tspan>
+</text>
+<text x="70" y="452" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="70" dy="0">Never skip, comment out, or suppress failing tests • Fix root causes in implementation • Never silence linter.</tspan>
+</text>
+</svg>

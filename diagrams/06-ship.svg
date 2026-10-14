@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 930 540" width="930" height="540" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#495057" /></marker>
+  <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e03131" /></marker>
+  <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1971c2" /></marker>
+  <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2f9e44" /></marker>
+</defs>
+<rect x="50" y="30" width="860" height="70" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="2" />
+<text x="75" y="64" font-size="20" fill="#212529" font-weight="bold">
+  <tspan x="75" dy="0">STEP 6: SHIP SAFELY — Release Pipeline &amp; Knowledge Compounding</tspan>
+</text>
+<text x="75" y="85" font-size="13" fill="#6c757d" font-weight="normal">
+  <tspan x="75" dy="0">Firewall Gate 6 | Applicable: Driver Agent + Lead Engineer</tspan>
+</text>
+<rect x="50" y="120" width="185" height="140" rx="8" fill="#f8f9fa" stroke="#495057" stroke-width="2" />
+<text x="65" y="149" font-size="14" fill="#495057" font-weight="normal">
+  <tspan x="65" dy="0">1. DIFF SANITY</tspan>
+</text>
+<text x="65" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="65" dy="0">• git diff &amp; status</tspan>
+  <tspan x="65" dy="15.600000000000001px">• No console.log</tspan>
+  <tspan x="65" dy="15.600000000000001px">• No temp files</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Clean working tree</tspan>
+</text>
+<line x1="235" y1="190" x2="273" y2="190" stroke="#495057" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="273" y="120" width="185" height="140" rx="8" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" />
+<text x="288" y="149" font-size="14" fill="#1971c2" font-weight="normal">
+  <tspan x="288" dy="0">2. BRANCH &amp; COMMIT</tspan>
+</text>
+<text x="288" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="288" dy="0">• Dedicated branch</tspan>
+  <tspan x="288" dy="15.600000000000001px">• Never direct to main</tspan>
+  <tspan x="288" dy="15.600000000000001px">• Conventional commit</tspan>
+  <tspan x="288" dy="15.600000000000001px">• feat/fix(&lt;scope&gt;): ...</tspan>
+</text>
+<line x1="458" y1="190" x2="496" y2="190" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />
+<rect x="496" y="120" width="185" height="140" rx="8" fill="#e6fcf5" stroke="#0ca678" stroke-width="2" />
+<text x="511" y="149" font-size="14" fill="#0ca678" font-weight="normal">
+  <tspan x="511" dy="0">3. PR &amp; CI/CD</tspan>
+</text>
+<text x="511" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="511" dy="0">• Open Pull Request</tspan>
+  <tspan x="511" dy="15.600000000000001px">• Green status checks</tspan>
+  <tspan x="511" dy="15.600000000000001px">• Automated builds pass</tspan>
+  <tspan x="511" dy="15.600000000000001px">• Peer sign-off</tspan>
+</text>
+<line x1="681" y1="190" x2="719" y2="190" stroke="#0ca678" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="719" y="120" width="185" height="140" rx="8" fill="#fff4e6" stroke="#f76707" stroke-width="2" />
+<text x="734" y="149" font-size="14" fill="#f76707" font-weight="normal">
+  <tspan x="734" dy="0">4. COMPOUND WIKI</tspan>
+</text>
+<text x="734" y="177" font-size="12" fill="#343a40" font-weight="normal">
+  <tspan x="734" dy="0">• Record ADR in wiki/</tspan>
+  <tspan x="734" dy="15.600000000000001px">• Update wiki/index.md</tspan>
+  <tspan x="734" dy="15.600000000000001px">• Append wiki/log.md</tspan>
+  <tspan x="734" dy="15.600000000000001px">• Permanent memory</tspan>
+</text>
+<rect x="50" y="310" width="855" height="90" rx="8" fill="#fff5f5" stroke="#e03131" stroke-width="2" />
+<text x="70" y="338" font-size="16" fill="#c92a2a" font-weight="bold">
+  <tspan x="70" dy="0">🛑 PRODUCTION RELEASE GATES</tspan>
+</text>
+<text x="70" y="362" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="70" dy="0">Direct commits to main/master are strictly blocked • CI pipeline must be 100% green before merge.</tspan>
+</text>
+<rect x="50" y="430" width="855" height="70" rx="8" fill="#ebfbee" stroke="#2f9e44" stroke-width="2" />
+<text x="70" y="456" font-size="14" fill="#2b8a3e" font-weight="normal">
+  <tspan x="70" dy="0">LIFECYCLE COMPLETE: ZERO REGRESSIONS, VERIFIED EVIDENCE &amp; COMPOUNDED KNOWLEDGE</tspan>
+</text>
+<text x="70" y="480" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="70" dy="0">Every feature shipped leaves the codebase cleaner, safer, and better documented.</tspan>
+</text>
+</svg>
