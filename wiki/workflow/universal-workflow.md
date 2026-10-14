@@ -8,9 +8,9 @@
 
 A pragmatic, disciplined workflow for building software with AI coding agents (Cursor, Claude Code, Codex, and Antigravity). It keeps AI models from making wild assumptions, hacking code in a rush, hiding failing tests, or breaking existing architecture.
 
-## The Universal 6-Phase Lifecycle
+## The Universal 7-Phase Lifecycle
 
-Any agent (Cursor, Claude Code, Codex, Antigravity) can run all six phases end-to-end, or collaborate as a team:
+Any agent (Cursor, Claude Code, Codex, Antigravity) can run all seven phases end-to-end, or collaborate as a team:
 
 0. **Pre-Admission: Contradiction Check**
    - Match input against `wiki/` and project documentation; check for contradictions and return any conflicts immediately.
@@ -20,23 +20,27 @@ Any agent (Cursor, Claude Code, Codex, Antigravity) can run all six phases end-t
    - Objective: Trace code, explore patterns, run Socratic interview, check `wiki/index.md`.
    - Rule: READ-ONLY. Zero code edits.
 
-2. **Phase 2: Plan**
+2. **Phase 2: Spec**
+   - Objective: Formalize requirements into an unambiguous Technical & Functional Specification (the WHAT, not the HOW).
+   - Rule: READ-ONLY on source code. Zero code edits.
+
+3. **Phase 3: Plan**
    - Objective: Investigate requirements, weigh risks, write Given-When-Then tests.
    - Rule: Human sign-off required before writing code.
 
-3. **Phase 3: Implement**
+4. **Phase 4: Implement**
    - Objective: Write core logic, build tests, polish UI.
    - Single Driver Principle: One agent drives the main implementation. Never bounce core logic between competing agents on the fly.
 
-4. **Phase 4: Verify**
+5. **Phase 5: Verify**
    - Objective: Run types, linters, test suites, runtime behavior validation, and the wiki evidence audit.
    - Zero Concealment: Never hide, skip, or suppress failing tests. Capture error logs and fix root causes.
 
-5. **Phase 5: Review Independently**
+6. **Phase 6: Review Independently**
    - Objective: Fresh-context audit of final git diff.
    - Rule: Review without editing. Never modify files while in review mode.
 
-6. **Phase 6: Ship Safely**
+7. **Phase 7: Ship Safely**
    - Objective: Clean diff check, atomic conventional commit on feature branch, CI/CD run, compound knowledge into `wiki/`.
 
 ## Humanized Content Standard

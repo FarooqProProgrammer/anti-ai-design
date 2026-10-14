@@ -1,10 +1,10 @@
 # Universal AI Engineering Rules for Cursor
 
-You are equipped to execute **all 6 phases** of the AI Engineering Workflow as defined in [AI_WORKFLOW.md](AI_WORKFLOW.md) and governed by the Request Firewall in [FIREWALL.md](FIREWALL.md).
+You are equipped to execute **all 7 phases** of the AI Engineering Workflow as defined in [AI_WORKFLOW.md](AI_WORKFLOW.md) and governed by the Request Firewall in [FIREWALL.md](FIREWALL.md).
 
 For modular agent and rule definitions, consult:
 - [.cursor/agents/wiki-researcher.md](.cursor/agents/wiki-researcher.md) — Custom Web Researcher & Wiki Indexing Subagent.
-- [.cursor/rules/workflow.mdc](.cursor/rules/workflow.mdc) — Full 6-phase lifecycle protocol.
+- [.cursor/rules/workflow.mdc](.cursor/rules/workflow.mdc) — Full 7-phase lifecycle protocol.
 - [.cursor/rules/firewall-rules.mdc](.cursor/rules/firewall-rules.mdc) — Mandatory admission controller and blocking gates.
 - [.cursor/rules/wiki-rules.mdc](.cursor/rules/wiki-rules.mdc) — Karpathy LLM Wiki Grounding Invariant, local Cursor projects knowledge repository, and evidence standards.
 - [.cursor/rules/wiki-researcher.mdc](.cursor/rules/wiki-researcher.mdc) — Research & auto-indexing trigger rule.
@@ -14,7 +14,7 @@ For modular agent and rule definitions, consult:
 
 ## Non-Bypassable Firewall Protocol
 Every request proceeds sequentially:
-`Contradiction Check ➔ Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
+`Contradiction Check ➔ Understand ➔ Spec ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
 
 0. **First Action: Match Request Against Wiki & Docs (Contradiction Check)**
    - Before accepting any request, match it against `wiki/index.md`, compiled articles, and project documentation.
@@ -29,26 +29,32 @@ Every request proceeds sequentially:
    - **Local Knowledge Repository:** Query `C:\Users\farooq\.cursor\projects` (transcripts, terminals, canvases) for historical context in this workspace and sibling projects.
    - **CRITICAL:** Do NOT modify, write, or delete code during Phase 1.
 
-2. **Phase 2: Plan (Architectural Blueprint)**
+2. **Phase 2: Spec (Functional & Technical Contracts)**
+   - Formalize user journeys, behavioral invariants, state machines, and explicit non-features (WHAT to build).
+   - Author TypeScript interfaces, database schemas, API payload schemas, and standard error envelopes.
+   - Establish latency thresholds (<50ms), security rules, concurrency safety, and migration compatibility.
+   - **CRITICAL:** READ-ONLY on source code. Obtain human sign-off before planning.
+
+3. **Phase 3: Plan (Architectural Blueprint)**
    - Formulate risk matrix, edge cases, and testable acceptance criteria (Given-When-Then).
    - External RFCs/docs must be fetched into `raw/` and compiled in `wiki/`.
    - Wait for user/lead approval before writing code.
 
-3. **Phase 3: Implement (Single Driver)**
+4. **Phase 4: Implement (Single Driver)**
    - You can act as the Primary Driver for the entire change, or collaborate by handling interactive/frontend refinements.
    - Maintain single agent ownership of the core logic. Do not bounce core logic between competing agents.
-   - Strictly follow the approved plan; avoid speculative scope.
+   - Strictly follow the approved plan and spec; avoid speculative scope.
 
-4. **Phase 4: Verify (Zero Concealment)**
+5. **Phase 5: Verify (Zero Concealment)**
    - Run typecheckers, linters, and full automated test suites.
    - Verify wiki consistency via `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
    - Never suppress or bypass errors (`@ts-ignore`, commented-out tests). Fix root causes.
 
-5. **Phase 5: Review Independently (Read-Only Auditor)**
+6. **Phase 6: Review Independently (Read-Only Auditor)**
    - Audit the final `git diff` for correctness, security, performance, and acceptance criteria.
    - **MANDATE:** Review without editing. Never modify files during review mode.
 
-6. **Phase 6: Ship Safely (Branch Hygiene & CI/CD)**
+7. **Phase 7: Ship Safely (Branch Hygiene & CI/CD)**
    - Inspect diff hygiene (no lingering `console.log` or debug code).
    - Commit atomically using Conventional Commits on feature branches.
    - Compound new patterns and models into `wiki/` and record in `wiki/log.md`.

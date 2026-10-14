@@ -1,14 +1,14 @@
 ---
-description: Universal AI Engineering Workflow rules for Cursor across all 6 phases
+description: Universal AI Engineering Workflow rules for Cursor across all 7 phases
 globs: *
 alwaysApply: true
 ---
 
-# Cursor Workflow Rules (All 6 Phases)
+# Cursor Workflow Rules (All 7 Phases)
 
-You are equipped to execute **all 6 phases** of the AI Engineering Workflow. Every request is governed by the **Request Firewall** ([FIREWALL.md](../../FIREWALL.md)):
+You are equipped to execute **all 7 phases** of the AI Engineering Workflow. Every request is governed by the **Request Firewall** ([FIREWALL.md](../../FIREWALL.md)):
 
-`Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
+`Understand ➔ Spec ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
 
 Companion Rules:
 - [Firewall Rules](firewall-rules.mdc) — Admission controller & blocking gates.
@@ -27,29 +27,37 @@ Companion Rules:
 - **Rule:** **READ-ONLY.** Never edit or write code during Understand.
 - **Diagram:** Maintain and reference `diagrams/01-understand.exceldraw` (and `.svg`).
 
-### 2. Phase 2: Plan
+### 2. Phase 2: Spec (Functional & Technical Contracts)
+- **Objective:** Formalize requirements into an unambiguous Technical & Functional Specification (the WHAT, not the HOW):
+  - User journeys, workflows, behavioral invariants, state transitions, explicit non-features.
+  - TypeScript types, database schemas, API endpoints, error envelopes.
+  - Performance budgets (<50ms), auth boundaries, concurrency rules, backward compatibility.
+- **Rule:** **READ-ONLY on source code.** Obtain human review and sign-off on the spec before planning.
+- **Diagram:** Maintain and reference `diagrams/02-spec.exceldraw`.
+
+### 3. Phase 3: Plan
 - **Objective:** Deep requirement investigation, edge case analysis, risk matrix, and testable acceptance criteria (Given-When-Then).
 - **External Specs:** Ingest external RFCs/docs into `raw/` and compile to `wiki/`.
 - **Rule:** No code is written until the plan is approved.
-- **Diagram:** Generate/reference `diagrams/02-plan.exceldraw`.
+- **Diagram:** Generate/reference `diagrams/03-plan.exceldraw`.
 
-### 3. Phase 3: Implement
+### 4. Phase 4: Implement
 - **Objective:** Execute the approved plan. You can serve as the Primary Driver for the entire change, or collaborate by handling interactive/frontend refinements.
 - **Single Driver:** Keep one agent responsible for main business logic; do not bounce core logic between competing agents.
 - **Rule:** Follow the approved plan sequentially; avoid speculative scope.
-- **Diagram:** Reference `diagrams/03-implement.exceldraw`.
+- **Diagram:** Reference `diagrams/04-implement.exceldraw`.
 
-### 4. Phase 4: Verify
+### 5. Phase 5: Verify
 - **Objective:** Run type checks, linters, test suites, and test actual runtime behavior.
 - **Wiki Evidence Check:** Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
 - **Rule:** **Zero concealment.** Never hide or suppress failing tests. Capture and fix root causes.
-- **Diagram:** Reference `diagrams/04-verify.exceldraw`.
+- **Diagram:** Reference `diagrams/05-verify.exceldraw`.
 
-### 5. Phase 5: Review Independently
+### 6. Phase 6: Review Independently
 - **Objective:** Audit the final `git diff` for correctness, security, performance, and regressions.
 - **Rule:** **Review without editing.** Never modify files during review mode.
-- **Diagram:** Reference `diagrams/05-review.exceldraw`.
+- **Diagram:** Reference `diagrams/06-review.exceldraw`.
 
-### 6. Phase 6: Ship Safely
+### 7. Phase 7: Ship Safely
 - **Objective:** Verify diff hygiene, commit atomically on feature branch, follow CI/CD, and compound new knowledge into `wiki/` and `wiki/log.md`.
-- **Diagram:** Reference `diagrams/06-ship.exceldraw`.
+- **Diagram:** Reference `diagrams/07-ship.exceldraw`.

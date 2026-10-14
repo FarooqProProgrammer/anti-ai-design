@@ -10,13 +10,12 @@ A pragmatic, disciplined workflow for building software with AI coding agents (C
 ## The AI Request Firewall
 Every request stops at the firewall first. Before moving into implementation:
 1. Match with Wiki & Docs First: Take the input and check it against wiki/index.md and project documentation. If it contradicts established architecture, invariants, or ADRs, halt and return the contradiction immediately.
-2. Run the 6 Gates Sequentially:
-`Understand -> Plan -> Implement -> Verify -> Review Independently -> Ship Safely`.
+2. Run the 7 Gates Sequentially:
+`Understand -> Spec -> Plan -> Implement -> Verify -> Review Independently -> Ship Safely`.
 
 Skipping planning, disabling tests, self-approving, or pushing unreviewed diffs is BLOCKED.
-
-## The Universal 6-Phase Lifecycle
-Any agent (Cursor, Claude Code, Codex, Antigravity) can run all six phases end-to-end, or collaborate as a team.
+## The Universal 7-Phase Lifecycle
+Any agent (Cursor, Claude Code, Codex, Antigravity) can run all seven phases end-to-end, or collaborate as a team.
 
 0. Pre-Admission: Match input against wiki/ and docs; check for contradictions.
 1. Phase 1: Understand
@@ -24,23 +23,27 @@ Any agent (Cursor, Claude Code, Codex, Antigravity) can run all six phases end-t
 - Objective: Trace code, explore patterns, run Socratic interview, check wiki/index.md.
 - Rule: READ-ONLY. Zero code edits.
 
-2. Phase 2: Plan
+2. Phase 2: Spec
+- Objective: Formalize requirements into an unambiguous Technical & Functional Specification (the WHAT, not the HOW).
+- Rule: READ-ONLY on source code. Zero code edits.
+
+3. Phase 3: Plan
 - Objective: Investigate requirements, weigh risks, write Given-When-Then tests.
 - Rule: Human sign-off required before writing code.
 
-3. Phase 3: Implement
+4. Phase 4: Implement
 - Objective: Write core logic, build tests, polish UI.
 - Single Driver Principle: One agent drives the main implementation. Never bounce core logic between competing agents on the fly.
 
-4. Phase 4: Verify
+5. Phase 5: Verify
 - Objective: Run types, linters, test suites, runtime behavior validation, and the wiki evidence audit.
 - Zero Concealment: Never hide, skip, or suppress failing tests. Capture error logs and fix root causes.
 
-5. Phase 5: Review Independently
+6. Phase 6: Review Independently
 - Objective: Fresh-context audit of final git diff.
 - Rule: Review without editing. Never modify files while in review mode.
 
-6. Phase 6: Ship Safely
+7. Phase 7: Ship Safely
 - Objective: Clean diff check, atomic conventional commit on feature branch, CI/CD run, compound knowledge into wiki/.
 
 ## Humanized Content Standard

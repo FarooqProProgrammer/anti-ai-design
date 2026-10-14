@@ -1,18 +1,18 @@
 # Claude Code Instructions — AI Engineering Workflow
 
-This repository adheres to a strict 6-Phase AI Engineering Workflow governed by a mandatory **Request Firewall** ([FIREWALL.md](FIREWALL.md)).
+This repository adheres to a strict 7-Phase AI Engineering Workflow governed by a mandatory **Request Firewall** ([FIREWALL.md](FIREWALL.md)).
 
 Modular rules:
 - [.claude/rules/firewall.md](.claude/rules/firewall.md) — Firewall admission control, contradiction checks & blocking gates
 - [.claude/rules/wiki.md](.claude/rules/wiki.md) — Karpathy LLM Wiki Grounding Invariant, local cursor projects & procedures
-- [.claude/rules/workflow.md](.claude/rules/workflow.md) — Universal 6-phase lifecycle protocol
+- [.claude/rules/workflow.md](.claude/rules/workflow.md) — Universal 7-phase lifecycle protocol
 - [.claude/rules/engineering.md](.claude/rules/engineering.md) — Engineering standards, humanized content & diagram rules
 
 ---
 
 ## 🛡️ Non-Bypassable Request Firewall Protocol
 Every request MUST proceed sequentially through the firewall gates:
-`Contradiction Check ➔ Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
+`Contradiction Check ➔ Understand ➔ Spec ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
 
 - **First Action: Match Request Against Wiki & Docs (Contradiction Check)**
   - Before accepting any request or beginning Gate 1, match it against `wiki/index.md`, compiled articles, and project documentation.
@@ -28,32 +28,38 @@ Every request MUST proceed sequentially through the firewall gates:
   - Explore codebase, trace call stacks, and consult `wiki/index.md` as well as local Cursor project knowledge (`C:\Users\farooq\.cursor\projects`).
   - **STRICT RULE:** READ-ONLY. Do NOT edit or write code during this phase.
 
-- **Gate 2: Plan (Architect & Strategist)**
-  - Deeply analyze complex requirements, dependencies, and potential regressions.
+- **Gate 2: Spec (Technical & Functional Specification)**
+  - Formalize workflows, schemas, API contracts, error response envelopes, and behavioral invariants (the WHAT).
+  - Set latency budgets (<50ms), security rules, concurrency safety, and migration rules.
+  - Ingest external specs into `raw/` and compile in `wiki/`.
+  - **STRICT RULE:** READ-ONLY on source code. Obtain human sign-off before Phase 3 (Plan).
+
+- **Gate 3: Plan (Architect & Strategist)**
+  - Deeply analyze complex requirements, dependencies, and potential regressions (the HOW).
   - Formulate testable Acceptance Criteria (Given-When-Then format) and risk matrix.
   - Ingest external references into `raw/` and compile in `wiki/`.
-  - **Gate:** Await user confirmation before beginning Phase 3 (Implement).
+  - **Gate:** Await user confirmation before beginning Phase 4 (Implement).
 
-- **Gate 3: Implement (Single Driver)**
+- **Gate 4: Implement (Single Driver)**
   - When assigned as the Primary Driver, hold sole accountability for core logic and architecture.
   - Follow the approved plan sequentially.
   - Write unit and integration tests alongside implementation.
   - Do NOT introduce unrequested refactorings or speculative features.
   - If collaborating with Cursor, handle core architecture while allowing Cursor to perform interactive/visual refinements.
 
-- **Gate 4: Verify (Zero Concealment)**
+- **Gate 5: Verify (Zero Concealment)**
   - Run project test runner, type checkers, and linters.
   - Test actual runtime behavior against acceptance criteria.
   - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
   - **Zero Concealment:** Never hide or suppress failures (`@ts-ignore`, commented tests). Fix root causes.
 
-- **Gate 5: Review Independently (Read-Only Auditor)**
+- **Gate 6: Review Independently (Read-Only Auditor)**
   - When given a `git diff` for independent review:
     - **READ-ONLY MANDATE:** Review without editing or modifying files.
     - Audit for correctness, security, performance, and acceptance criteria.
     - Report findings categorized by severity (High/Blocker, Medium, Low/Nit).
 
-- **Gate 6: Ship Safely (Branch Hygiene & CI/CD)**
+- **Gate 7: Ship Safely (Branch Hygiene & CI/CD)**
   - Review final git diff and status for lingering debug statements or extraneous files.
   - Commit atomically using Conventional Commits on dedicated feature/fix branches.
   - Follow established CI/CD pipeline and release protocols.

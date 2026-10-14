@@ -15,8 +15,8 @@ Before accepting any request or starting Phase 1:
 
 ## 1. Admission Control & Interception
 If the user requests immediate code changes ("just fix this", "generate code", "skip tests"):
-- **Intercept and enforce the 6 gates:** Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely.
-- You can execute **any and all 6 phases** of this lifecycle.
+- **Intercept and enforce the 7 gates:** Understand ➔ Spec ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely.
+- You can execute **any and all 7 phases** of this lifecycle.
 - Never bypass a gate or proceed without meeting its exit criteria.
 
 ---
@@ -29,26 +29,32 @@ If the user requests immediate code changes ("just fix this", "generate code", "
   - **BLOCKED:** Proceeding when input contradicts documented wiki/doc rules without explicit resolution.
   - **BLOCKED:** Any file modification, creation, or deletion during Understand.
 
-- **Gate 2: Plan**
+- **Gate 2: Spec (Technical & Functional Specification)**
+  - Formalize functional workflows, behavioral invariants, schemas, API contracts, error envelopes, and explicit non-features (the WHAT).
+  - Ingest external specs into `raw/` and compile in `wiki/`.
+  - **BLOCKED:** Writing or modifying source code during Spec (READ-ONLY on source code).
+  - **BLOCKED:** Ambiguous interface contracts, missing error states, or unspecified schema changes.
+
+- **Gate 3: Plan**
   - Generate explicit Given-When-Then acceptance criteria and a risk mitigation matrix.
   - Ingest external references into `raw/` and compile in `wiki/`.
   - **BLOCKED:** Writing code before the user approves the plan.
 
-- **Gate 3: Implement (Single Driver)**
+- **Gate 4: Implement (Single Driver)**
   - Act as Primary Driver for end-to-end logic, or collaborate cleanly with frontend agents.
   - **BLOCKED:** Switching core logic ownership back and forth between competing models, or introducing unrequested refactors.
 
-- **Gate 4: Verify (Zero Concealment)**
+- **Gate 5: Verify (Zero Concealment)**
   - Run type checking, linting, and automated tests.
   - Validate runtime behavior against acceptance criteria.
   - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
   - **BLOCKED:** Disabling assertions, commenting out tests, or suppressing errors (`@ts-ignore`, `eslint-disable`).
 
-- **Gate 5: Review Independently (Read-Only Auditor)**
+- **Gate 6: Review Independently (Read-Only Auditor)**
   - Audit the final `git diff` with fresh context for security, correctness, and performance.
   - **BLOCKED:** The reviewer agent editing or modifying source code.
 
-- **Gate 6: Ship Safely (Branch Hygiene & CI/CD)**
+- **Gate 7: Ship Safely (Branch Hygiene & CI/CD)**
   - Verify clean diff (no debug statements or temp files).
   - Commit atomically on feature branches with Conventional Commits.
   - Compound new architecture models into `wiki/` and record in `wiki/log.md`.

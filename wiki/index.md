@@ -6,7 +6,7 @@ AI Engineering Workflow specifications, firewall admission controller, and lifec
 
 | Article | Summary | Updated |
 |---------|---------|---------|
-| [Universal AI Engineering Workflow](workflow/universal-workflow.md) | Universal 6-phase engineering lifecycle for all AI agents | 2026-10-14 |
+| [Universal AI Engineering Workflow](workflow/universal-workflow.md) | Universal 7-phase engineering lifecycle for all AI agents | 2026-10-14 |
 | [AI Request Firewall](workflow/request-firewall.md) | Mandatory admission controller enforcing sequential quality gates | 2026-10-14 |
 
 ## cursor-projects
