@@ -24,3 +24,12 @@
 - Disposition: Update (Add Gate 5 risk-tiered automated gates, high-risk domain checks, and 5-point evidence completion report)
 - Raw: raw/workflow/2026-10-14-ai-workflow-spec.md, raw/workflow/2026-10-14-firewall-spec.md
 
+## [2026-10-14] ingest | Open Knowledge Format (OKF)
+- Disposition: New
+- Raw: raw/knowledge-format/2026-10-14-open-knowledge-format.md
+
+## [2026-10-14] update | Memory Structure OKF Standardization
+- Disposition: Update (Adopt Open Knowledge Format v0.1 YAML frontmatter and concept linking across wiki/)
+- Raw: raw/knowledge-format/2026-10-14-open-knowledge-format.md
+
+

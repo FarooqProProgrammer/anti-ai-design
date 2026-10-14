@@ -1,3 +1,12 @@
+---
+type: Knowledge Repository
+title: Cursor Projects Local Knowledge Base
+description: Local Cursor workspaces, transcripts, terminal execution records, and canvases.
+resource: file:///C:/Users/farooq/.cursor/projects
+tags: [cursor, transcripts, local-knowledge, context]
+timestamp: 2026-10-14
+---
+
 # Cursor Projects Local Knowledge Base
 
 > Sources: Cursor Projects Local Knowledge Inventory, 2026-10-14

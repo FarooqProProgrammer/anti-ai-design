@@ -1,3 +1,12 @@
+---
+type: Workflow Specification
+title: Universal AI Engineering Workflow
+description: Pragmatic, disciplined 7-phase lifecycle for building software with AI coding agents.
+resource: file:///d:/ai%20agent/the-developer/AI_WORKFLOW.md
+tags: [workflow, lifecycle, engineering, quality-gates]
+timestamp: 2026-10-14
+---
+
 # Universal AI Engineering Workflow
 
 > Sources: AI Engineering Workflow Specification, 2026-10-14

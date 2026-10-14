@@ -66,6 +66,7 @@ class Document:
     title: str | None
     header: tuple[str, ...]
     body: tuple[str, ...]
+    frontmatter: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -94,12 +95,25 @@ def is_fence_closer(line: str, char: str, length: int) -> bool:
 
 
 def parse_document(text: str) -> Document:
-    """Return the visible title, metadata header, and body.
+    """Return the visible title, metadata header, body, and optional YAML frontmatter.
 
     The metadata header is only the contiguous blockquote immediately
     after the first H1 outside a fence. A fence is a body boundary; its
     removal must not promote a later blockquote into the header.
+    Leading YAML frontmatter (--- ... ---) is parsed into frontmatter
+    to support the Open Knowledge Format (OKF).
     """
+    raw_lines = text.splitlines()
+    frontmatter: list[str] = []
+    lines = raw_lines
+
+    if raw_lines and raw_lines[0].strip() == "---":
+        for i in range(1, len(raw_lines)):
+            if raw_lines[i].strip() == "---":
+                frontmatter = raw_lines[1:i]
+                lines = raw_lines[i + 1 :]
+                break
+
     title = None
     header = []
     preamble = []
@@ -108,7 +122,7 @@ def parse_document(text: str) -> Document:
     fence_char = None
     fence_len = 0
 
-    for line in text.splitlines():
+    for line in lines:
         if fence_char:
             if is_fence_closer(line, fence_char, fence_len):
                 fence_char = None
@@ -143,7 +157,7 @@ def parse_document(text: str) -> Document:
         else:
             body.append(line)
 
-    return Document(title, tuple(header), tuple(preamble + body))
+    return Document(title, tuple(header), tuple(preamble + body), tuple(frontmatter))
 
 
 def strip_fences(text: str) -> str:
@@ -258,12 +272,21 @@ def extract_candidates(text: str) -> list[Candidate]:
 
 
 def raw_links_of(article_text: str) -> list[str]:
-    """Raw links come only from the metadata header; identical lines in
+    """Raw links come from the metadata header or YAML frontmatter; identical lines in
     the body or in code fences are content, not fields."""
     links = []
-    for line in parse_document(article_text).header:
+    doc = parse_document(article_text)
+    for line in doc.header:
         if re.match(r"^>\s*Raw:", line.strip()):
             links.extend(RAW_LINK_RE.findall(line))
+    for line in doc.frontmatter:
+        if re.match(r"^(?:raw|resource):", line.strip(), re.IGNORECASE):
+            links.extend(RAW_LINK_RE.findall(line))
+            m = re.search(r":\s*\[?[^\]]*\]?\(([^)]+\.md)\)", line, re.IGNORECASE)
+            if not m:
+                m2 = re.search(r":\s*[\"']?([^\"'\s]+\.md)[\"']?", line, re.IGNORECASE)
+                if m2:
+                    links.append(m2.group(1))
     return links
 
 

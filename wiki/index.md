@@ -16,3 +16,12 @@ Local project workspaces, historical agent transcripts, and cross-project knowle
 | Article | Summary | Updated |
 |---------|---------|---------|
 | [Cursor Projects Local Knowledge Base](cursor-projects/local-knowledge-base.md) | Local agent transcripts, terminal logs, and project context | 2026-10-14 |
+
+## knowledge-format
+
+Open Knowledge Format (OKF) specification and interoperability standards for AI agent memory and metadata sharing.
+
+| Article | Summary | Updated |
+|---------|---------|---------|
+| [Open Knowledge Format](knowledge-format/open-knowledge-format.md) | Standardized YAML frontmatter and markdown graph for agent memory | 2026-10-14 |
+

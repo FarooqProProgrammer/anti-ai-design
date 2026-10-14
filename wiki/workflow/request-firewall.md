@@ -1,3 +1,12 @@
+---
+type: Architecture Decision Record
+title: AI Request Firewall
+description: Mandatory admission controller and 7-gate quality firewall preventing unverified AI code modifications.
+resource: file:///d:/ai%20agent/the-developer/FIREWALL.md
+tags: [firewall, quality-gates, admission-control, security]
+timestamp: 2026-10-14
+---
+
 # AI Request Firewall
 
 > Sources: AI Request Firewall Specification, 2026-10-14
