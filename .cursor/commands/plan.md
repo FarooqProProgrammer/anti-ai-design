@@ -1,6 +1,6 @@
 # Cursor Command: /plan
 
-Executes **Phase 2 (Plan)** of the AI Engineering Workflow in Cursor.
+Executes **Phase 3 (Plan)** of the AI Engineering Workflow in Cursor.
 
 ---
 
@@ -25,9 +25,9 @@ Type `/plan [context or requirements]` in Cursor Chat or Composer.
    - Define atomic milestones and designate the Primary Driver.
 
 5. **Visual Diagram**:
-   - Generate `diagrams/02-plan.exceldraw`.
+   - Generate `diagrams/03-plan.exceldraw`.
 
 6. **HARD RULE**:
    - **No code is written until human sign-off.**
-   - Await explicit user approval before starting Phase 3 (Implement).
+   - Await explicit user approval before starting Phase 4 (Implement).
 

@@ -1,17 +1,17 @@
 # Command: /plan
 
-Executes **Phase 2 (Plan)** of the AI Engineering Workflow governed by the Request Firewall ([FIREWALL.md](../../FIREWALL.md)).
+Executes **Phase 3 (Plan)** of the AI Engineering Workflow governed by the Request Firewall ([FIREWALL.md](../../FIREWALL.md)).
 
 ---
 
 ## Usage
 
 ```bash
-/plan [context from /understand or detailed requirements]
+/plan [context from /spec or detailed requirements]
 ```
 
 ### Examples:
-- `/plan` (uses the findings and context snapshot from `/understand`)
+- `/plan` (uses the findings and context snapshot from `/spec`)
 - `/plan Add database migrations, repository pattern, and service layer for user profiles`
 
 ---
@@ -38,13 +38,13 @@ When `/plan` is executed, the agent MUST produce an architectural implementation
      ```
 
 4. **Phased Implementation Roadmap**:
-   - Break implementation into atomic milestones (Phase 3.1, Phase 3.2, Phase 3.3).
+   - Break implementation into atomic milestones (Phase 4.1, Phase 4.2, Phase 4.3).
    - Designate the Primary Driver (Cursor, Claude Code, or Codex).
 
 5. **Visual Diagram Artifact**:
-   - Generate or update `diagrams/02-plan.exceldraw` (and `.svg`) displaying milestones and acceptance gates.
+   - Generate or update `diagrams/03-plan.exceldraw` (and `.svg`) displaying milestones and acceptance gates.
 
 6. **🛑 MANDATORY FIREWALL RULE**:
    - **No code is written until human sign-off.**
-   - Output the plan and wait for user approval before moving to Phase 3 (Implement).
+   - Output the plan and wait for user approval before moving to Phase 4 (Implement).
 

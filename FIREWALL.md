@@ -1,6 +1,6 @@
 # AI Request Firewall
 
-The Request Firewall stops shortcuts before they touch the codebase. When an AI agent gets a request, it cannot jump straight into hacking files, disable failing tests, or self-approve a pull request. Every change must clear six practical gates in order.
+The Request Firewall stops shortcuts before they touch the codebase. When an AI agent gets a request, it cannot jump straight into hacking files, disable failing tests, or self-approve a pull request. Every change must clear seven practical gates in order.
 
 ---
 
@@ -27,22 +27,24 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
 ╔════════════════════════════════════════════════════════════════════╗
 ║                      AI REQUEST FIREWALL                           ║
 ║   1. Match input with wiki & docs -> If contradict, RETURN error.  ║
-║   2. Every change clears all six gates sequentially.               ║
+║   2. Every change clears all seven gates sequentially.             ║
 ║   3. Any agent (Cursor, Claude Code, Codex, Antigravity) can drive.║
 ║   4. Shortcuts, blind edits, and skipped tests are BLOCKED.        ║
 ╚════════════════════════════════════════════════════════════════════╝
         │
    [GATE 1] ──► 1. UNDERSTAND            (Explore, Brainstorm, Grill-Me, Read-Only)
         │
-   [GATE 2] ──► 2. PLAN                  (Define Risks & Acceptance Criteria)
+   [GATE 2] ──► 2. SPEC                  (Functional & Technical Spec: WHAT to build)
         │
-   [GATE 3] ──► 3. IMPLEMENT             (Single Driver owns the core change)
+   [GATE 3] ──► 3. PLAN                  (Define Risks, Acceptance Criteria: HOW)
         │
-   [GATE 4] ──► 4. VERIFY                (Run tests, check runtime, zero concealment)
+   [GATE 4] ──► 4. IMPLEMENT             (Single Driver owns the core change)
         │
-   [GATE 5] ──► 5. REVIEW INDEPENDENTLY  (Fresh eyes: audit the diff without editing)
+   [GATE 5] ──► 5. VERIFY                (Run tests, check runtime, zero concealment)
         │
-   [GATE 6] ──► 6. SHIP SAFELY           (Clean diff, conventional commits, CI/CD)
+   [GATE 6] ──► 6. REVIEW INDEPENDENTLY  (Fresh eyes: audit the diff without editing)
+        │
+   [GATE 7] ──► 7. SHIP SAFELY           (Clean diff, conventional commits, CI/CD)
 ```
 
 > [!NOTE]
@@ -53,15 +55,16 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
 > **Shortcut Interception:**
 > When someone prompts: *"Just quickly patch this file"*, *"Generate the code for X"*, or *"Skip tests and push"*, the firewall steps in and runs the full process:
 > 1. Understand what's actually happening in the code first.
-> 2. Write a clear plan with testable criteria.
-> 3. Let one agent drive the implementation.
-> 4. Verify that tests pass and the runtime actually works.
-> 5. Review the diff with fresh context without editing.
-> 6. Ship safely on a clean branch.
+> 2. Specify the exact functional and technical contracts.
+> 3. Write a clear plan with testable criteria.
+> 4. Let one agent drive the implementation.
+> 5. Verify that tests pass and the runtime actually works.
+> 6. Review the diff with fresh context without editing.
+> 7. Ship safely on a clean branch.
 
 ---
 
-## The Six Quality Gates
+## The Seven Quality Gates
 
 ### Gate 1: Understand
 - **Agents:** Cursor, Claude Code, Codex, Antigravity.
@@ -74,16 +77,25 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
   - 🛑 **BLOCKED**: Skipping `wiki/index.md` or existing design patterns.
 - **Exit Criteria:** A clear context snapshot with trade-offs weighed, edge cases resolved, contradictions checked, and impacted files mapped out.
 
-### Gate 2: Plan
+### Gate 2: Spec (Technical & Functional Specification)
 - **Agents:** Cursor, Claude Code, Codex, Antigravity.
-- **The Check:** Did the agent pin down tricky requirements, call out risks, and write concrete acceptance criteria (Given-When-Then)?
+- **The Check:** Are the functional workflows, data schemas, API contracts, error envelopes, and behavioral invariants unambiguously specified before planning tasks?
+- **What Gets Blocked:**
+  - 🛑 **BLOCKED**: Skipping the specification to begin planning or implementation directly.
+  - 🛑 **BLOCKED**: Writing or modifying source code during this phase (READ-ONLY on source code).
+  - 🛑 **BLOCKED**: Ambiguous interface contracts, missing error states, or unspecified schema changes.
+- **Exit Criteria:** A comprehensive, human-approved Specification document (`WHAT` to build, not `HOW`).
+
+### Gate 3: Plan
+- **Agents:** Cursor, Claude Code, Codex, Antigravity.
+- **The Check:** Did the agent take the approved Spec, pin down tricky implementation milestones, call out risks, and write concrete acceptance criteria (Given-When-Then)?
 - **What Gets Blocked:**
   - 🛑 **BLOCKED**: Touching code before getting human sign-off on the plan.
   - 🛑 **BLOCKED**: Vague plans missing testable acceptance criteria or failure modes.
   - 🛑 **BLOCKED**: Unresolved external specs (must be fetched into `raw/` and compiled in `wiki/`).
-- **Exit Criteria:** Explicit approval on the plan from you or the lead engineer.
+- **Exit Criteria:** Explicit approval on the implementation plan from you or the lead engineer.
 
-### Gate 3: Implement (Single Driver)
+### Gate 4: Implement (Single Driver)
 - **Agents:** Cursor, Claude Code, Codex, Antigravity.
 - **The Check:** Does one primary driver own the implementation from start to finish?
 - **What Gets Blocked:**
@@ -91,7 +103,7 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
   - 🛑 **BLOCKED**: Sneaking in unrelated refactors or out-of-scope edits.
 - **Exit Criteria:** Code that fulfills the approved plan and passes initial tests.
 
-### Gate 4: Verify (Zero Concealment)
+### Gate 5: Verify (Zero Concealment)
 - **Agents:** Any agent with the project test runner.
 - **The Check:** Do all automated checks pass, and did you test the actual behavior?
 - **What Gets Blocked:**
@@ -100,7 +112,7 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
   - 🛑 **BLOCKED**: Inconsistent wiki evidence (`python skills/karpathy-llm-wiki/scripts/check_evidence.py .` reports errors).
 - **Exit Criteria:** 100% clean test runs, with root causes fixed instead of hidden.
 
-### Gate 5: Review Independently (Read-Only Auditor)
+### Gate 6: Review Independently (Read-Only Auditor)
 - **Agents:** An agent running in a fresh, clean context or a separate model.
 - **The Check:** Did fresh eyes review the entire `git diff` without editing privileges?
 - **What Gets Blocked:**
@@ -109,7 +121,7 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
   - 🛑 **BLOCKED**: Leaving high-severity issues or security bugs unaddressed.
 - **Exit Criteria:** A clear review report, with all valid findings fixed by the primary driver and re-verified.
 
-### Gate 6: Ship Safely (Branch Hygiene & CI/CD)
+### Gate 7: Ship Safely (Branch Hygiene & CI/CD)
 - **Agents:** The driver agent and the engineer.
 - **The Check:** Is the working tree clean, on a feature branch, and passing CI?
 - **What Gets Blocked:**
@@ -126,8 +138,9 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
 |---|---|---|---|
 | **Pre-Admission** | **Contradiction Check** | Any agent + Wiki / Docs | Unresolved contradictions against documented architecture |
 | **Gate 1** | **Understand** | Any agent + Brainstorming & Grill-Me | Writing code, skipping the technical interview |
-| **Gate 2** | **Plan** | Any agent (Cursor / Claude / Codex) | Coding without an approved plan and acceptance criteria |
-| **Gate 3** | **Implement** | Primary Driver | Multi-driver churn, scope creep |
-| **Gate 4** | **Verify** | Any agent + test runner | Hidden failures, suppressed errors, broken tests |
-| **Gate 5** | **Review Independently** | Auditor (clean context) | Reviewer editing code, unaddressed review blockers |
-| **Gate 6** | **Ship Safely** | Driver & engineer | Committing to main, messy diffs, broken CI |
+| **Gate 2** | **Spec** | Any agent (Cursor / Claude / Codex) | Coding without contract specification, ambiguous schemas |
+| **Gate 3** | **Plan** | Any agent (Cursor / Claude / Codex) | Coding without an approved plan and acceptance criteria |
+| **Gate 4** | **Implement** | Primary Driver | Multi-driver churn, scope creep |
+| **Gate 5** | **Verify** | Any agent + test runner | Hidden failures, suppressed errors, broken tests |
+| **Gate 6** | **Review Independently** | Auditor (clean context) | Reviewer editing code, unaddressed review blockers |
+| **Gate 7** | **Ship Safely** | Driver & engineer | Committing to main, messy diffs, broken CI |
