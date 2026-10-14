@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 930 540" width="930" height="540" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#495057" /></marker>
+  <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e03131" /></marker>
+  <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1971c2" /></marker>
+  <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2f9e44" /></marker>
+</defs>
+<rect x="50" y="30" width="860" height="70" fill="#f8f9fa" stroke="#343a40" stroke-width="2" rx="8" />
+<text x="75" y="64" font-size="20" fill="#212529" font-weight="bold">
+  <tspan x="75" dy="0">STEP 3: PLAN — Implementation Blueprint &amp; Acceptance Criteria</tspan>
+</text>
+<text x="75" y="85" font-size="13" fill="#6c757d" font-weight="normal">
+  <tspan x="75" dy="0">Firewall Gate 3 | Applicable: Any Agent (Cursor / Claude / Codex)</tspan>
+</text>
+<rect x="50" y="120" width="250" height="110" fill="#f8f9fa" stroke="#495057" stroke-width="2" rx="8" />
+<text x="65" y="150" font-size="15" fill="#212529" font-weight="normal">
+  <tspan x="65" dy="0">1. SCOPE FROM SPEC</tspan>
+</text>
+<text x="65" y="172" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="65" dy="0">• Ingest approved Phase 2 spec</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Confirm scope boundaries</tspan>
+  <tspan x="65" dy="15.600000000000001px">• Zero ambiguity on contracts</tspan>
+</text>
+<line x1="300" y1="175" x2="350" y2="175" stroke="#495057" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="350" y="120" width="250" height="110" fill="#fff4e6" stroke="#f76707" stroke-width="2" rx="8" />
+<text x="365" y="150" font-size="15" fill="#d9480f" font-weight="normal">
+  <tspan x="365" dy="0">2. RISK MATRIX</tspan>
+</text>
+<text x="365" y="172" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="365" dy="0">• Failure mode analysis</tspan>
+  <tspan x="365" dy="15.600000000000001px">• Concurrency &amp; race hazards</tspan>
+  <tspan x="365" dy="15.600000000000001px">• Mitigation for each risk</tspan>
+</text>
+<line x1="600" y1="175" x2="650" y2="175" stroke="#f76707" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="650" y="120" width="255" height="110" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" rx="8" />
+<text x="665" y="150" font-size="15" fill="#1864ab" font-weight="normal">
+  <tspan x="665" dy="0">3. ACCEPTANCE CRITERIA</tspan>
+</text>
+<text x="665" y="172" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="665" dy="0">• Given-When-Then criteria</tspan>
+  <tspan x="665" dy="15.600000000000001px">• Edge-case assertions</tspan>
+  <tspan x="665" dy="15.600000000000001px">• 100% testable conditions</tspan>
+</text>
+<line x1="775" y1="230" x2="775" y2="270" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />
+<rect x="50" y="270" width="855" height="120" fill="#f8f9fa" stroke="#343a40" stroke-width="2" rx="8" />
+<text x="70" y="301" font-size="16" fill="#212529" font-weight="bold">
+  <tspan x="70" dy="0">4. PHASED IMPLEMENTATION ROADMAP (HOW TO BUILD)</tspan>
+</text>
+<rect x="70" y="315" width="250" height="55" fill="#e7f5ff" stroke="#1971c2" stroke-width="1" rx="8" />
+<text x="80" y="335" font-size="13" fill="#1864ab" font-weight="normal">
+  <tspan x="80" dy="0">Milestone 4.1: Data Models</tspan>
+</text>
+<text x="80" y="353" font-size="11" fill="#495057" font-weight="normal">
+  <tspan x="80" dy="0">Schemas, migrations, domain entities</tspan>
+</text>
+<line x1="320" y1="342" x2="360" y2="342" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />
+<rect x="360" y="315" width="250" height="55" fill="#fff4e6" stroke="#f76707" stroke-width="1" rx="8" />
+<text x="370" y="335" font-size="13" fill="#d9480f" font-weight="normal">
+  <tspan x="370" dy="0">Milestone 4.2: Core Logic</tspan>
+</text>
+<text x="370" y="353" font-size="11" fill="#495057" font-weight="normal">
+  <tspan x="370" dy="0">Services, business rules, unit tests</tspan>
+</text>
+<line x1="610" y1="342" x2="650" y2="342" stroke="#f76707" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="650" y="315" width="250" height="55" fill="#e6fcf5" stroke="#0ca678" stroke-width="1" rx="8" />
+<text x="660" y="335" font-size="13" fill="#099268" font-weight="normal">
+  <tspan x="660" dy="0">Milestone 4.3: UI &amp; Wiring</tspan>
+</text>
+<text x="660" y="353" font-size="11" fill="#495057" font-weight="normal">
+  <tspan x="660" dy="0">Interactive UI, styling, E2E tests</tspan>
+</text>
+<rect x="50" y="420" width="855" height="80" fill="#ebfbee" stroke="#2f9e44" stroke-width="2" rx="8" />
+<text x="70" y="448" font-size="16" fill="#2b8a3e" font-weight="bold">
+  <tspan x="70" dy="0">GATE 3 APPROVAL CHECKPOINT (HUMAN SIGN-OFF REQUIRED)</tspan>
+</text>
+<text x="70" y="472" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="70" dy="0">Lead engineer reviews plan &amp; risks. No code is written until sign-off is confirmed.</tspan>
+</text>
+</svg>

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """ExcelDraw / Excalidraw diagram generator and exporter.
 
-Generates .exceldraw, .excalidraw, and .svg diagrams for each phase of the
-AI Engineering Workflow, ensuring every step has a visual diagram with a
-proper description.
+Generates .exceldraw, .excalidraw, and .svg diagrams for all 7 phases of the
+Universal AI Engineering Workflow:
+1. Understand -> 2. Spec -> 3. Plan -> 4. Implement -> 5. Verify -> 6. Review -> 7. Ship
 """
 
 import json
@@ -58,14 +58,13 @@ class ExcelDrawBuilder:
         line_height = font_size * 1.3
         total_height = len(lines) * line_height
         max_len = max(len(l) for l in lines) if lines else 1
-        approx_width = max_len * (font_size * 0.6)
 
         self.elements.append({
             "id": el_id,
             "type": "text",
             "x": x,
             "y": y,
-            "width": approx_width,
+            "width": max_len * (font_size * 0.6),
             "height": total_height,
             "angle": 0,
             "strokeColor": color,
@@ -131,7 +130,7 @@ class ExcelDrawBuilder:
         })
         return el_id
 
-    def add_banner(self, x=50, y=30, w=800, h=70):
+    def add_banner(self, x=50, y=30, w=860, h=70):
         self.add_rect(x, y, w, h, bg_color="#f8f9fa", stroke_color="#343a40", stroke_width=2, roundness=3)
         self.add_text(x + 25, y + 14, self.title, font_size=20, color="#212529")
         self.add_text(x + 25, y + 42, self.subtitle, font_size=13, color="#6c757d")
@@ -154,7 +153,6 @@ class ExcelDrawBuilder:
         base_path.parent.mkdir(parents=True, exist_ok=True)
         data = self.build_json()
 
-        # Save .exceldraw and .excalidraw
         exceldraw_path = base_path.with_suffix(".exceldraw")
         excalidraw_path = base_path.with_suffix(".excalidraw")
         svg_path = base_path.with_suffix(".svg")
@@ -194,8 +192,8 @@ class ExcelDrawBuilder:
             if el_type == "rectangle":
                 rx = 8 if el.get("roundness") else 0
                 svg_parts.append(
-                    f'<rect x="{el["x"]}" y="{el["y"]}" width="{el["width"]}" height="{el["height"]}" rx="{rx}" '
-                    f'fill="{el["backgroundColor"]}" stroke="{el["strokeColor"]}" stroke-width="{el["strokeWidth"]}" />'
+                    f'<rect x="{el["x"]}" y="{el["y"]}" width="{el["width"]}" height="{el["height"]}" '
+                    f'fill="{el["backgroundColor"]}" stroke="{el["strokeColor"]}" stroke-width="{el["strokeWidth"]}" rx="{rx}" />'
                 )
             elif el_type == "text":
                 lines = el["text"].split("\n")
@@ -225,14 +223,52 @@ class ExcelDrawBuilder:
 
 
 # ---------------------------------------------------------------------------
-# Pre-built Phase Diagram Generators (Steps 1 to 6)
+# Pre-built Phase Diagram Generators (Steps 1 to 7 + Root)
 # ---------------------------------------------------------------------------
+
+def create_root_workflow_diagram(out_path: Path):
+    b = ExcelDrawBuilder("UNIVERSAL 7-PHASE AI ENGINEERING WORKFLOW", "Request Firewall Admission & Quality Gates | Agent-Universal (Cursor, Claude Code, Codex, Antigravity)")
+    b.add_banner(w=1120)
+
+    # Top admission block: Contradiction Check
+    b.add_rect(50, 115, 1120, 65, bg_color="#fff9db", stroke_color="#f59f00", stroke_width=2)
+    b.add_text(70, 127, "🛡️ PRE-ADMISSION: CONTRADICTION CHECK", font_size=15, color="#f08c00")
+    b.add_text(70, 150, "Match input with wiki/ & docs -> If contradictory, HALT & RETURN conflict. Only proceed if consistent or clarified.", font_size=12, color="#495057")
+
+    # 7 Sequential Phase Columns
+    y = 200
+    col_w = 145
+    spacing = 18
+    phases = [
+        ("1. UNDERSTAND", "• Brainstorming\n• Grill-Me interview\n• Code exploration\n• wiki/ & cursor log\n• READ-ONLY", "#e7f5ff", "#1971c2"),
+        ("2. SPEC", "• Functional Spec\n• Technical contracts\n• API & Data schemas\n• Non-functional limits\n• Sign-off WHAT", "#f3f0ff", "#7950f2"),
+        ("3. PLAN", "• Risk & mitigations\n• Given-When-Then AC\n• Phased milestones\n• Single driver pick\n• Sign-off HOW", "#fff4e6", "#f76707"),
+        ("4. IMPLEMENT", "• Single Driver owner\n• Sequential build\n• Unit tests alongside\n• UI polish (Cursor)\n• Plan fidelity", "#e6fcf5", "#0ca678"),
+        ("5. VERIFY", "• Typecheck & linters\n• Automated test run\n• Runtime validation\n• check_evidence.py\n• Zero concealment", "#ebfbee", "#2f9e44"),
+        ("6. REVIEW", "• Fresh context audit\n• Final git diff check\n• Security & bugs\n• REVIEW ONLY\n• Driver fixes", "#ffe3e3", "#e03131"),
+        ("7. SHIP SAFELY", "• Clean git status\n• Feature branch only\n• Conventional commit\n• CI/CD pass\n• Compound wiki/", "#f8f9fa", "#343a40")
+    ]
+
+    for i, (title, desc, bg, stroke) in enumerate(phases):
+        x = 50 + i * (col_w + spacing)
+        b.add_rect(x, y, col_w, 220, bg_color=bg, stroke_color=stroke, stroke_width=2)
+        b.add_text(x + 10, y + 15, title, font_size=13, color=stroke)
+        b.add_text(x + 10, y + 45, desc, font_size=11, color="#343a40")
+        if i < len(phases) - 1:
+            b.add_arrow(x + col_w, y + 110, x + col_w + spacing, y + 110, color=stroke)
+
+    # Bottom summary block
+    b.add_rect(50, 440, 1120, 70, bg_color="#f8f9fa", stroke_color="#495057", stroke_width=2)
+    b.add_text(70, 452, "QUALITY INVARIANT: EVERY FEATURE IS RESEARCHED, SPECIFIED, PLANNED, VERIFIED, AND AUDITED", font_size=14, color="#212529")
+    b.add_text(70, 477, "Zero hallucinations • Zero hidden failures • Clean diffs • Compounded permanent knowledge in wiki/", font_size=12, color="#495057")
+
+    b.save(out_path / "workflow")
+
 
 def create_step1_diagram(out_dir: Path):
     b = ExcelDrawBuilder("STEP 1: UNDERSTAND — Socratic Reconnaissance & Brainstorming", "Firewall Gate 1 | Applicable: Any Agent (Cursor / Claude / Codex)")
     b.add_banner(w=860)
 
-    # 3 Parallel Columns: Brainstorming, Grill-Me, Code/Wiki Recon
     col_w = 265
     y = 120
     h = 320
@@ -250,29 +286,61 @@ def create_step1_diagram(out_dir: Path):
     # Column 3: Code & Wiki Recon
     b.add_rect(640, y, col_w, h, bg_color="#f3f0ff", stroke_color="#7950f2", stroke_width=2)
     b.add_text(655, y + 15, "3. CODE & WIKI RECON", font_size=15, color="#5f3dc4")
-    b.add_text(655, y + 45, "• Query wiki/index.md (ADRs)\n• Index codebase & symbols\n• Trace call graph & data flow\n• Identify existing conventions:\n  - Error handling style\n  - State & schema patterns\n  - Naming & file hierarchy\n• READ-ONLY: 0 code edits", font_size=12, color="#343a40")
+    b.add_text(655, y + 45, "• Query wiki/index.md (ADRs)\n• Check .cursor/projects context\n• Index codebase & symbols\n• Trace call graph & data flow\n• Identify existing conventions\n• READ-ONLY: 0 code edits", font_size=12, color="#343a40")
 
-    # Bottom Output Box
     b.add_arrow(180, y + h, 480, 480, color="#1971c2")
     b.add_arrow(480, y + h, 480, 480, color="#f76707")
     b.add_arrow(770, y + h, 480, 480, color="#7950f2")
 
     b.add_rect(50, 480, 855, 90, bg_color="#ebfbee", stroke_color="#2f9e44", stroke_width=2)
     b.add_text(70, 492, "GATE 1 DELIVERABLE: RESOLVED CONTEXT SNAPSHOT", font_size=16, color="#2b8a3e")
-    b.add_text(70, 520, "Input to Phase 2: Decided architecture, answered interview edge cases, documented patterns, and boundary constraints.", font_size=12, color="#495057")
+    b.add_text(70, 520, "Input to Phase 2 (Spec): Decided architectural approach, answered interview edge cases, documented patterns, and boundary constraints.", font_size=12, color="#495057")
 
     b.save(out_dir / "01-understand")
 
 
-def create_step2_diagram(out_dir: Path):
-    b = ExcelDrawBuilder("STEP 2: PLAN — Architecture Blueprint & Acceptance Criteria", "Firewall Gate 2 | Applicable: Any Agent (Cursor / Claude / Codex)")
+def create_step2_spec_diagram(out_dir: Path):
+    b = ExcelDrawBuilder("STEP 2: SPEC — Technical & Functional Specification", "Firewall Gate 2 | Applicable: Any Agent (Cursor / Claude / Codex)")
+    b.add_banner(w=860)
+
+    col_w = 265
+    y = 120
+    h = 320
+
+    # Column 1: Functional Spec
+    b.add_rect(50, y, col_w, h, bg_color="#f3f0ff", stroke_color="#7950f2", stroke_width=2)
+    b.add_text(65, y + 15, "1. FUNCTIONAL SPEC", font_size=15, color="#5f3dc4")
+    b.add_text(65, y + 45, "• User Journeys & Workflows\n• Behavioral Invariants\n• Input / Output Contracts\n• State Machine Transitions\n• UI / UX Interactions\n• Explicit Non-Features", font_size=12, color="#343a40")
+
+    # Column 2: Technical & Data Contracts
+    b.add_rect(345, y, col_w, h, bg_color="#e7f5ff", stroke_color="#1971c2", stroke_width=2)
+    b.add_text(360, y + 15, "2. DATA & API SCHEMAS", font_size=15, color="#1864ab")
+    b.add_text(360, y + 45, "• TypeScript Types & Schemas\n• Database Entity Models\n• API Payloads & Status Codes\n• Error Response Formats\n• External RFCs into raw/\n• Grounded in wiki/", font_size=12, color="#343a40")
+
+    # Column 3: Non-Functional Guardrails
+    b.add_rect(640, y, col_w, h, bg_color="#fff9db", stroke_color="#f59f00", stroke_width=2)
+    b.add_text(655, y + 15, "3. SYSTEM GUARDRAILS", font_size=15, color="#f08c00")
+    b.add_text(655, y + 45, "• Latency & Performance Budgets\n• Security & Auth Requirements\n• Concurrency Invariants\n• Backward Compatibility\n• Breaking Change Policies\n• Rate Limits & Scaling", font_size=12, color="#343a40")
+
+    b.add_arrow(180, y + h, 480, 480, color="#7950f2")
+    b.add_arrow(480, y + h, 480, 480, color="#1971c2")
+    b.add_arrow(770, y + h, 480, 480, color="#f59f00")
+
+    b.add_rect(50, 480, 855, 90, bg_color="#ebfbee", stroke_color="#2f9e44", stroke_width=2)
+    b.add_text(70, 492, "GATE 2 DELIVERABLE: APPROVED SPECIFICATION DOCUMENT (WHAT, NOT HOW)", font_size=16, color="#2b8a3e")
+    b.add_text(70, 520, "Human sign-off on contracts, schemas, and invariants before planning milestones in Phase 3. READ-ONLY on source code.", font_size=12, color="#495057")
+
+    b.save(out_dir / "02-spec")
+
+
+def create_step3_plan_diagram(out_dir: Path):
+    b = ExcelDrawBuilder("STEP 3: PLAN — Implementation Blueprint & Acceptance Criteria", "Firewall Gate 3 | Applicable: Any Agent (Cursor / Claude / Codex)")
     b.add_banner(w=860)
 
     y = 120
-    # Step 2 Flow: Context Input -> Risk Assessment -> Acceptance Criteria -> Approval Gate
     b.add_rect(50, y, 250, 110, bg_color="#f8f9fa", stroke_color="#495057", stroke_width=2)
-    b.add_text(65, y + 15, "1. INGEST & SCOPE", font_size=15, color="#212529")
-    b.add_text(65, y + 40, "• Ingest RFCs/specs into raw/\n• Compile concepts into wiki/\n• Strict scope boundaries", font_size=12, color="#495057")
+    b.add_text(65, y + 15, "1. SCOPE FROM SPEC", font_size=15, color="#212529")
+    b.add_text(65, y + 40, "• Ingest approved Phase 2 spec\n• Confirm scope boundaries\n• Zero ambiguity on contracts", font_size=12, color="#495057")
 
     b.add_arrow(300, y + 55, 350, y + 55, color="#495057")
 
@@ -286,112 +354,117 @@ def create_step2_diagram(out_dir: Path):
     b.add_text(665, y + 15, "3. ACCEPTANCE CRITERIA", font_size=15, color="#1864ab")
     b.add_text(665, y + 40, "• Given-When-Then criteria\n• Edge-case assertions\n• 100% testable conditions", font_size=12, color="#495057")
 
-    # Sequential Roadmap
     b.add_arrow(775, y + 110, 775, 270, color="#1971c2")
-    b.add_rect(50, 270, 855, 120, bg_color="#e6fcf5", stroke_color="#0ca678", stroke_width=2)
-    b.add_text(70, 285, "4. PHASED IMPLEMENTATION ROADMAP", font_size=16, color="#087f5b")
-    b.add_text(70, 315, "Milestone 3.1: Data Models & Core Schemas  ➔  Milestone 3.2: Domain Logic & Services  ➔  Milestone 3.3: UI Wiring & Refinement", font_size=12, color="#212529")
-    b.add_text(70, 345, "Each milestone specifies exact files to touch, test conditions to write, and verification checkpoints.", font_size=12, color="#495057")
 
-    # Approval Gate Banner
-    b.add_arrow(480, 390, 480, 430, color="#0ca678")
-    b.add_rect(150, 430, 650, 70, bg_color="#fff5f5", stroke_color="#e03131", stroke_width=2)
-    b.add_text(180, 442, "🛑 GATE 2 APPROVAL CHECKPOINT", font_size=16, color="#c92a2a")
-    b.add_text(180, 468, "Coding is strictly BLOCKED until engineer reviews and signs off on this plan.", font_size=12, color="#495057")
+    # Sequential Roadmap
+    ry = 270
+    b.add_rect(50, ry, 855, 120, bg_color="#f8f9fa", stroke_color="#343a40", stroke_width=2)
+    b.add_text(70, ry + 15, "4. PHASED IMPLEMENTATION ROADMAP (HOW TO BUILD)", font_size=16, color="#212529")
 
-    b.save(out_dir / "02-plan")
+    mw = 250
+    b.add_rect(70, ry + 45, mw, 55, bg_color="#e7f5ff", stroke_color="#1971c2", stroke_width=1)
+    b.add_text(80, ry + 52, "Milestone 4.1: Data Models", font_size=13, color="#1864ab")
+    b.add_text(80, ry + 72, "Schemas, migrations, domain entities", font_size=11, color="#495057")
+
+    b.add_arrow(320, ry + 72, 360, ry + 72, color="#1971c2")
+
+    b.add_rect(360, ry + 45, mw, 55, bg_color="#fff4e6", stroke_color="#f76707", stroke_width=1)
+    b.add_text(370, ry + 52, "Milestone 4.2: Core Logic", font_size=13, color="#d9480f")
+    b.add_text(370, ry + 72, "Services, business rules, unit tests", font_size=11, color="#495057")
+
+    b.add_arrow(610, ry + 72, 650, ry + 72, color="#f76707")
+
+    b.add_rect(650, ry + 45, mw, 55, bg_color="#e6fcf5", stroke_color="#0ca678", stroke_width=1)
+    b.add_text(660, ry + 52, "Milestone 4.3: UI & Wiring", font_size=13, color="#099268")
+    b.add_text(660, ry + 72, "Interactive UI, styling, E2E tests", font_size=11, color="#495057")
+
+    b.add_rect(50, 420, 855, 80, bg_color="#ebfbee", stroke_color="#2f9e44", stroke_width=2)
+    b.add_text(70, 432, "GATE 3 APPROVAL CHECKPOINT (HUMAN SIGN-OFF REQUIRED)", font_size=16, color="#2b8a3e")
+    b.add_text(70, 460, "Lead engineer reviews plan & risks. No code is written until sign-off is confirmed.", font_size=12, color="#495057")
+
+    b.save(out_dir / "03-plan")
 
 
-def create_step3_diagram(out_dir: Path):
-    b = ExcelDrawBuilder("STEP 3: IMPLEMENT — Single Driver Principle & Scoped Refinement", "Firewall Gate 3 | Applicable: Cursor, Claude Code, or Codex")
+def create_step4_implement_diagram(out_dir: Path):
+    b = ExcelDrawBuilder("STEP 4: IMPLEMENT — Single Driver & Collaborative Execution", "Firewall Gate 4 | Applicable: Cursor, Claude Code, or Codex as Primary Driver")
     b.add_banner(w=860)
 
     y = 120
-    # Left: Primary Driver
-    b.add_rect(50, y, 400, 260, bg_color="#e6fcf5", stroke_color="#0ca678", stroke_width=2)
-    b.add_text(70, y + 18, "PRIMARY DRIVER (Single Ownership)", font_size=16, color="#087f5b")
-    b.add_text(70, y + 48, "Assigned Agent: Cursor, Claude Code, or Codex\n\n• Owns core business logic & domain models\n• Drives API endpoints, schemas & state store\n• Writes unit & integration tests alongside code\n• Adheres strictly to the approved Phase 2 plan\n• Prevents context fragmentation", font_size=12, color="#343a40")
+    b.add_rect(50, y, 400, 260, bg_color="#e7f5ff", stroke_color="#1971c2", stroke_width=2)
+    b.add_text(70, y + 20, "PRIMARY DRIVER (Sole Logic Owner)", font_size=16, color="#1864ab")
+    b.add_text(70, y + 55, "• Cursor, Claude Code, or Codex\n• Owns core business logic & domain\n• Builds unit & integration tests alongside\n• Follows approved plan sequentially\n• Prevents multi-driver context drift\n• Strictly no scope creep", font_size=13, color="#343a40")
 
-    # Right: Secondary / Frontend Refinement
-    b.add_rect(490, y, 415, 260, bg_color="#e7f5ff", stroke_color="#1971c2", stroke_width=2)
-    b.add_text(510, y + 18, "INTERACTIVE & FRONTEND REFINEMENT", font_size=16, color="#1864ab")
-    b.add_text(510, y + 48, "Assigned Agent: Cursor (or Primary Driver)\n\n• Scoped visual tweaks: CSS, Tailwind, layouts\n• Interactive UI states: hover, focus, animations\n• Real-time inline edits requested by engineer\n• BOUNDARY: Does NOT alter core domain logic\n• Maintains contract with Primary Driver", font_size=12, color="#343a40")
+    b.add_rect(505, y, 400, 260, bg_color="#fff4e6", stroke_color="#f76707", stroke_width=2)
+    b.add_text(525, y + 20, "FRONTEND / INTERACTIVE POLISH", font_size=16, color="#d9480f")
+    b.add_text(525, y + 55, "• Cursor live inline adjustments\n• Visual styling (Tailwind / CSS)\n• UI component layout & ergonomics\n• Keyboard accessibility & ARIA\n• Keeps domain architecture intact\n• Clean surgical diffs", font_size=13, color="#343a40")
 
-    # Coordination Arrow
-    b.add_arrow(450, y + 130, 490, y + 130, color="#0ca678", stroke_width=2)
+    b.add_arrow(450, y + 130, 505, y + 130, color="#1971c2", stroke_width=2)
+    b.add_arrow(505, y + 150, 450, y + 150, color="#f76707", stroke_width=2)
 
-    # Bottom Implementation Hygiene
-    b.add_rect(50, 420, 855, 80, bg_color="#f8f9fa", stroke_color="#495057", stroke_width=2)
-    b.add_text(70, 432, "IMPLEMENTATION HYGIENE PROTOCOL", font_size=15, color="#212529")
-    b.add_text(70, 458, "No speculative code • No unapproved refactoring • Atomic changes matching plan milestones.", font_size=12, color="#495057")
+    b.add_rect(50, 410, 855, 90, bg_color="#f8f9fa", stroke_color="#495057", stroke_width=2)
+    b.add_text(70, 422, "GOLDEN IMPLEMENTATION RULE", font_size=15, color="#212529")
+    b.add_text(70, 448, "Keep one agent accountable for core business logic. Do not bounce architectural decisions between competing models.", font_size=12, color="#495057")
 
-    b.save(out_dir / "03-implement")
+    b.save(out_dir / "04-implement")
 
 
-def create_step4_diagram(out_dir: Path):
-    b = ExcelDrawBuilder("STEP 4: VERIFY — Zero-Concealment Quality Validation Pipeline", "Firewall Gate 4 | Applicable: Any Agent + Test Runner")
+def create_step5_verify_diagram(out_dir: Path):
+    b = ExcelDrawBuilder("STEP 5: VERIFY — Zero-Concealment Validation Pipeline", "Firewall Gate 5 | Applicable: Any Agent + Test Runner / Environment")
     b.add_banner(w=860)
 
-    # 4 Check stages horizontally
     y = 120
-    cw = 195
-    spacing = 25
+    cw = 185
+    spacing = 38
 
     stages = [
-        ("1. TYPECHECK", "• tsc --noEmit / mypy\n• 0 type errors\n• No 'any' leaks", "#e7f5ff", "#1971c2"),
-        ("2. LINTER", "• eslint / ruff / fmt\n• 0 warnings\n• Style conformance", "#fff4e6", "#f76707"),
-        ("3. TEST SUITE", "• Unit & integration\n• 100% tests green\n• Edge cases covered", "#e6fcf5", "#0ca678"),
-        ("4. WIKI CHECK", "• check_evidence.py\n• Verifies literals\n• 0 suspect tolerance", "#f3f0ff", "#7950f2")
+        ("1. TYPECHECK", "• tsc --noEmit / mypy\n• Zero type errors\n• No @ts-ignore\n• Strict null safety", "#e7f5ff", "#1971c2"),
+        ("2. LINT & FORMAT", "• eslint / ruff\n• Prettier / biome\n• Zero suppressed lints\n• Clean code style", "#fff4e6", "#f76707"),
+        ("3. TEST RUNNER", "• Unit & integration\n• Actual runtime checks\n• Edge case coverage\n• 100% green tests", "#e6fcf5", "#0ca678"),
+        ("4. WIKI EVIDENCE", "• check_evidence.py\n• 0 fidelity suspects\n• 0 evidence errors\n• Grounding intact", "#f3f0ff", "#7950f2")
     ]
 
     for i, (st_title, st_desc, bg, stroke) in enumerate(stages):
         sx = 50 + i * (cw + spacing)
-        b.add_rect(sx, y, cw, 130, bg_color=bg, stroke_color=stroke, stroke_width=2)
-        b.add_text(sx + 15, y + 15, st_title, font_size=14, color=stroke)
+        b.add_rect(sx, y, cw, 150, bg_color=bg, stroke_color=stroke, stroke_width=2)
+        b.add_text(sx + 15, y + 15, st_title, font_size=15, color=stroke)
         b.add_text(sx + 15, y + 45, st_desc, font_size=12, color="#343a40")
         if i < len(stages) - 1:
-            b.add_arrow(sx + cw, y + 65, sx + cw + spacing, y + 65, color=stroke)
+            b.add_arrow(sx + cw, y + 75, sx + cw + spacing, y + 75, color=stroke)
 
-    # Runtime behavior validation
-    b.add_arrow(480, y + 130, 480, 290, color="#0ca678")
-    b.add_rect(50, 290, 855, 80, bg_color="#fff9db", stroke_color="#f59f00", stroke_width=2)
-    b.add_text(70, 305, "5. RUNTIME BEHAVIORAL VERIFICATION", font_size=15, color="#e67700")
-    b.add_text(70, 332, "Test actual flow manually or via E2E • Assert outputs directly against Phase 2 Acceptance Criteria.", font_size=12, color="#343a40")
+    b.add_rect(50, 310, 855, 90, bg_color="#ffe3e3", stroke_color="#e03131", stroke_width=2)
+    b.add_text(70, 322, "🛑 ZERO CONCEALMENT PROTOCOL", font_size=16, color="#c92a2a")
+    b.add_text(70, 350, "Never disable tests, relax types, or hide errors to make code pass. Fix root causes in implementation.", font_size=12, color="#495057")
 
-    # Failure handling protocol
-    b.add_rect(50, 400, 855, 90, bg_color="#fff5f5", stroke_color="#e03131", stroke_width=2)
-    b.add_text(70, 412, "🛑 ZERO CONCEALMENT PROTOCOL (FAILURES MUST BE CAPTURED)", font_size=15, color="#c92a2a")
-    b.add_text(70, 440, "Never skip, comment out, or suppress failing tests • Fix root causes in implementation • Never silence linter.", font_size=12, color="#495057")
+    b.add_rect(50, 420, 855, 70, bg_color="#ebfbee", stroke_color="#2f9e44", stroke_width=2)
+    b.add_text(70, 432, "GATE 5 EXIT: 100% GREEN VALIDATION PROOF", font_size=15, color="#2b8a3e")
+    b.add_text(70, 458, "All four checks passing cleanly. Ready for independent review.", font_size=12, color="#495057")
 
-    b.save(out_dir / "04-verify")
+    b.save(out_dir / "05-verify")
 
 
-def create_step5_diagram(out_dir: Path):
-    b = ExcelDrawBuilder("STEP 5: REVIEW INDEPENDENTLY — Read-Only Diff Audit", "Firewall Gate 5 | Applicable: Codex, Claude Code, or Cursor (Clean Context)")
+def create_step6_review_diagram(out_dir: Path):
+    b = ExcelDrawBuilder("STEP 6: REVIEW INDEPENDENTLY — Fresh-Context Diff Audit", "Firewall Gate 6 | Applicable: Auditor Agent in Clean Context")
     b.add_banner(w=860)
 
     y = 120
-    # Left: Auditor input & mandate
-    b.add_rect(50, y, 380, 250, bg_color="#f3f0ff", stroke_color="#7950f2", stroke_width=2)
-    b.add_text(70, y + 18, "INDEPENDENT AUDITOR", font_size=16, color="#5f3dc4")
-    b.add_text(70, y + 48, "Auditor: Clean Context / Second Agent\n\n• Input: Complete git diff + Phase 2 Plan\n• STRICT MANDATE: Review without editing\n• Auditor never modifies code files\n• Evaluates logic, security & edge cases\n• Checks acceptance criteria compliance", font_size=12, color="#343a40")
+    b.add_rect(50, y, 380, 250, bg_color="#fff5f5", stroke_color="#e03131", stroke_width=2)
+    b.add_text(70, y + 18, "STRICT READ-ONLY AUDITOR", font_size=16, color="#c92a2a")
+    b.add_text(70, y + 48, "Mandate: Review without editing!\n• Clean context or separate agent\n• Full git diff inspection\n• Check against acceptance criteria\n• Logic & off-by-one errors\n• Security & data leakage\n• Performance bottlenecks", font_size=13, color="#343a40")
 
-    # Right: Severity Findings & Triage
     b.add_rect(470, y, 435, 250, bg_color="#f8f9fa", stroke_color="#495057", stroke_width=2)
     b.add_text(490, y + 18, "SEVERITY TRIAGE MATRIX", font_size=16, color="#212529")
     b.add_text(490, y + 48, "🔴 HIGH / BLOCKER:\n  Bugs, regressions, unhandled crashes, security leaks\n\n🟡 MEDIUM:\n  Performance pitfalls, edge case gaps, code smells\n\n🟢 LOW / NIT:\n  Minor naming, comments, stylistic suggestions", font_size=12, color="#343a40")
 
-    # Remediation Loop
     b.add_arrow(430, y + 125, 470, y + 125, color="#7950f2", stroke_width=2)
     b.add_rect(50, 400, 855, 90, bg_color="#ffe3e3", stroke_color="#e03131", stroke_width=2)
     b.add_text(70, 412, "REMEDIATION LOOP (Primary Driver Fixes & Re-Verifies)", font_size=15, color="#c92a2a")
-    b.add_text(70, 440, "Primary Driver applies confirmed fixes ➔ Re-run Phase 4 (Verify) across all checks until 100% green.", font_size=12, color="#495057")
+    b.add_text(70, 440, "Primary Driver applies confirmed fixes ➔ Re-run Phase 5 (Verify) across all checks until 100% green.", font_size=12, color="#495057")
 
-    b.save(out_dir / "05-review")
+    b.save(out_dir / "06-review")
 
 
-def create_step6_diagram(out_dir: Path):
-    b = ExcelDrawBuilder("STEP 6: SHIP SAFELY — Release Pipeline & Knowledge Compounding", "Firewall Gate 6 | Applicable: Driver Agent + Lead Engineer")
+def create_step7_ship_diagram(out_dir: Path):
+    b = ExcelDrawBuilder("STEP 7: SHIP SAFELY — Release Pipeline & Knowledge Compounding", "Firewall Gate 7 | Applicable: Driver Agent + Lead Engineer")
     b.add_banner(w=860)
 
     y = 120
@@ -413,30 +486,33 @@ def create_step6_diagram(out_dir: Path):
         if i < len(steps) - 1:
             b.add_arrow(sx + cw, y + 70, sx + cw + spacing, y + 70, color=stroke)
 
-    # Protected Branch Gate Callout
     b.add_rect(50, 310, 855, 90, bg_color="#fff5f5", stroke_color="#e03131", stroke_width=2)
     b.add_text(70, 322, "🛑 PRODUCTION RELEASE GATES", font_size=16, color="#c92a2a")
     b.add_text(70, 350, "Direct commits to main/master are strictly blocked • CI pipeline must be 100% green before merge.", font_size=12, color="#495057")
 
-    # Complete lifecycle summary
     b.add_rect(50, 430, 855, 70, bg_color="#ebfbee", stroke_color="#2f9e44", stroke_width=2)
     b.add_text(70, 442, "LIFECYCLE COMPLETE: ZERO REGRESSIONS, VERIFIED EVIDENCE & COMPOUNDED KNOWLEDGE", font_size=14, color="#2b8a3e")
     b.add_text(70, 468, "Every feature shipped leaves the codebase cleaner, safer, and better documented.", font_size=12, color="#495057")
 
-    b.save(out_dir / "06-ship")
+    b.save(out_dir / "07-ship")
 
 
 def main():
-    out_dir = Path("d:/ai agent/the-developer/diagrams")
+    repo_root = Path("d:/ai agent/the-developer")
+    out_dir = repo_root / "diagrams"
     out_dir.mkdir(parents=True, exist_ok=True)
+    print("Generating root workflow diagram...")
+    create_root_workflow_diagram(repo_root)
+
     print("Generating per-step ExcelDraw diagrams in:", out_dir)
     create_step1_diagram(out_dir)
-    create_step2_diagram(out_dir)
-    create_step3_diagram(out_dir)
-    create_step4_diagram(out_dir)
-    create_step5_diagram(out_dir)
-    create_step6_diagram(out_dir)
-    print("All 6 phase diagrams generated successfully!")
+    create_step2_spec_diagram(out_dir)
+    create_step3_plan_diagram(out_dir)
+    create_step4_implement_diagram(out_dir)
+    create_step5_verify_diagram(out_dir)
+    create_step6_review_diagram(out_dir)
+    create_step7_ship_diagram(out_dir)
+    print("All 7 phase diagrams generated successfully!")
 
 
 if __name__ == "__main__":

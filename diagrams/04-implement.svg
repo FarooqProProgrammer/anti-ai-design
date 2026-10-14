@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 930 540" width="930" height="540" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#495057" /></marker>
+  <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e03131" /></marker>
+  <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1971c2" /></marker>
+  <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2f9e44" /></marker>
+</defs>
+<rect x="50" y="30" width="860" height="70" fill="#f8f9fa" stroke="#343a40" stroke-width="2" rx="8" />
+<text x="75" y="64" font-size="20" fill="#212529" font-weight="bold">
+  <tspan x="75" dy="0">STEP 4: IMPLEMENT — Single Driver &amp; Collaborative Execution</tspan>
+</text>
+<text x="75" y="85" font-size="13" fill="#6c757d" font-weight="normal">
+  <tspan x="75" dy="0">Firewall Gate 4 | Applicable: Cursor, Claude Code, or Codex as Primary Driver</tspan>
+</text>
+<rect x="50" y="120" width="400" height="260" fill="#e7f5ff" stroke="#1971c2" stroke-width="2" rx="8" />
+<text x="70" y="156" font-size="16" fill="#1864ab" font-weight="bold">
+  <tspan x="70" dy="0">PRIMARY DRIVER (Sole Logic Owner)</tspan>
+</text>
+<text x="70" y="188" font-size="13" fill="#343a40" font-weight="normal">
+  <tspan x="70" dy="0">• Cursor, Claude Code, or Codex</tspan>
+  <tspan x="70" dy="16.900000000000002px">• Owns core business logic &amp; domain</tspan>
+  <tspan x="70" dy="16.900000000000002px">• Builds unit &amp; integration tests alongside</tspan>
+  <tspan x="70" dy="16.900000000000002px">• Follows approved plan sequentially</tspan>
+  <tspan x="70" dy="16.900000000000002px">• Prevents multi-driver context drift</tspan>
+  <tspan x="70" dy="16.900000000000002px">• Strictly no scope creep</tspan>
+</text>
+<rect x="505" y="120" width="400" height="260" fill="#fff4e6" stroke="#f76707" stroke-width="2" rx="8" />
+<text x="525" y="156" font-size="16" fill="#d9480f" font-weight="bold">
+  <tspan x="525" dy="0">FRONTEND / INTERACTIVE POLISH</tspan>
+</text>
+<text x="525" y="188" font-size="13" fill="#343a40" font-weight="normal">
+  <tspan x="525" dy="0">• Cursor live inline adjustments</tspan>
+  <tspan x="525" dy="16.900000000000002px">• Visual styling (Tailwind / CSS)</tspan>
+  <tspan x="525" dy="16.900000000000002px">• UI component layout &amp; ergonomics</tspan>
+  <tspan x="525" dy="16.900000000000002px">• Keyboard accessibility &amp; ARIA</tspan>
+  <tspan x="525" dy="16.900000000000002px">• Keeps domain architecture intact</tspan>
+  <tspan x="525" dy="16.900000000000002px">• Clean surgical diffs</tspan>
+</text>
+<line x1="450" y1="250" x2="505" y2="250" stroke="#1971c2" stroke-width="2" marker-end="url(#arrowhead-blue)" />
+<line x1="505" y1="270" x2="450" y2="270" stroke="#f76707" stroke-width="2" marker-end="url(#arrowhead)" />
+<rect x="50" y="410" width="855" height="90" fill="#f8f9fa" stroke="#495057" stroke-width="2" rx="8" />
+<text x="70" y="437" font-size="15" fill="#212529" font-weight="normal">
+  <tspan x="70" dy="0">GOLDEN IMPLEMENTATION RULE</tspan>
+</text>
+<text x="70" y="460" font-size="12" fill="#495057" font-weight="normal">
+  <tspan x="70" dy="0">Keep one agent accountable for core business logic. Do not bounce architectural decisions between competing models.</tspan>
+</text>
+</svg>
