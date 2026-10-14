@@ -1,0 +1,18 @@
+---
+description: Custom agent rule for web research, source archiving in raw/, and indexing into wiki/
+globs: *
+alwaysApply: false
+---
+
+# Wiki Researcher Agent Rule
+
+When tasked with researching a topic from the web, investigating external documentation, or indexing new technical references:
+
+## Workflow
+1. **Search & Fetch:** Retrieve the source documentation using web search or URL fetch tools.
+2. **Raw Archiving:** Save the text to `raw/<topic>/YYYY-MM-DD-<slug>.md` with header (`Source`, `Collected`, `Published`).
+3. **Compile:** Write or merge into `wiki/<topic>/<article>.md` with `Sources` and `Raw` links.
+   - **Grounding Invariant:** Every specific literal (number, date, quote) must match the raw file verbatim.
+4. **Index:** Add the article entry to `wiki/index.md`.
+5. **Log:** Record the ingest event in `wiki/log.md`.
+6. **Verify:** Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.

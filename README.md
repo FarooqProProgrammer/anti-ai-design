@@ -45,20 +45,28 @@ All content in this project—code comments, commit messages, PR descriptions, a
 
 ---
 
-## Repository Rules Architecture (Agents & Wiki)
+## Repository Rules & Agents Architecture
 
 Rules derived from repository documents (`FIREWALL.md`, `AI_WORKFLOW.md`, `skills/`) and compiled into the Karpathy LLM Wiki (`wiki/`) are active across all coding assistants:
 
 ```
 the-developer/
+├── agents/
+│   └── wiki-researcher.md             # Custom Web Researcher agent specification
 ├── .cursor/
 │   └── rules/
 │       ├── workflow.mdc               # Universal 6-phase lifecycle protocol
 │       ├── firewall-rules.mdc         # Request Firewall admission controller & contradiction check
 │       ├── wiki-rules.mdc             # Karpathy LLM Wiki Grounding Invariant & evidence rules
+│       ├── wiki-researcher.mdc        # Web research & wiki auto-indexing rule
 │       └── engineering-standards.mdc  # Single Driver, zero concealment, humanized content rules
 ├── .cursorrules                       # Root Cursor universal agent instructions
 ├── .claude/
+│   ├── agents/
+│   │   └── wiki-researcher.md         # Claude Code custom research agent
+│   ├── commands/
+│   │   ├── research.md                # /research <topic or url> command
+│   │   └── setup-agent.md             # /setup-agent onboarding command
 │   └── rules/
 │       ├── firewall.md                # Claude Code firewall admission rules & contradiction gate
 │       ├── wiki.md                    # Claude Code wiki Grounding Invariant & procedures
@@ -77,6 +85,24 @@ the-developer/
         ├── universal-workflow.md      # Grounded universal workflow article
         └── request-firewall.md        # Grounded request firewall article
 ```
+
+---
+
+## Custom Agent: Wiki Researcher & `/research` Command
+
+The **Wiki Researcher** (`agents/wiki-researcher.md`) is a specialized agent that investigates technical topics, libraries, and RFCs on the web, downloads the raw source into `raw/`, and immediately compiles and indexes the researched website into the project's knowledge base.
+
+### Run via Command:
+```bash
+/research <topic or url>
+```
+
+### What Happens Automatically:
+1. **Fetches Source**: Web text is extracted and archived cleanly in `raw/<topic>/YYYY-MM-DD-<slug>.md`.
+2. **Compiles Grounded Article**: Synthesizes a structured article in `wiki/<topic>/<article>.md` maintaining the Grounding Invariant (numbers, dates, and quotes match verbatim).
+3. **Indexes in Wiki**: Immediately updates `wiki/index.md` so all developers and agents have access to the knowledge.
+4. **Logs Operation**: Records the ingest in `wiki/log.md`.
+5. **Verifies Evidence**: Runs `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
 
 ---
 
