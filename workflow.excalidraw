@@ -23,7 +23,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 918765,
+      "seed": 354587,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -48,7 +48,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 183061,
+      "seed": 301275,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -81,7 +81,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 494425,
+      "seed": 597338,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -116,7 +116,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 933267,
+      "seed": 247644,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -141,7 +141,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 326637,
+      "seed": 602970,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -174,7 +174,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 983198,
+      "seed": 352889,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -209,7 +209,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 107145,
+      "seed": 804924,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -234,7 +234,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 146184,
+      "seed": 681845,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -267,7 +267,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 377224,
+      "seed": 500994,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -302,7 +302,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 125528,
+      "seed": 333526,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -343,7 +343,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 175403,
+      "seed": 157858,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -368,7 +368,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 937203,
+      "seed": 750606,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -401,7 +401,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 242705,
+      "seed": 321905,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -436,7 +436,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 831519,
+      "seed": 526312,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -477,7 +477,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 505292,
+      "seed": 857124,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -502,7 +502,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 123252,
+      "seed": 215360,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -535,7 +535,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 284572,
+      "seed": 102430,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -570,7 +570,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 929074,
+      "seed": 612574,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -611,7 +611,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 273106,
+      "seed": 322972,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -636,7 +636,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 878140,
+      "seed": 818976,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -669,7 +669,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 465759,
+      "seed": 167174,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -704,7 +704,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 127544,
+      "seed": 202231,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -745,7 +745,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 521483,
+      "seed": 502091,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -770,7 +770,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 458261,
+      "seed": 101200,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -790,7 +790,7 @@
       "type": "text",
       "x": 712,
       "y": 245,
-      "width": 138.6,
+      "width": 132.0,
       "height": 71.5,
       "angle": 0,
       "strokeColor": "#343a40",
@@ -803,18 +803,18 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 149220,
+      "seed": 839759,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
-      "text": "\u2022 Typecheck & linters\n\u2022 Automated test run\n\u2022 Runtime validation\n\u2022 check_evidence.py\n\u2022 Zero concealment",
+      "text": "\u2022 Automated gates\n\u2022 Risk-tiered checks\n\u2022 High-risk scrutiny\n\u2022 Evidence report\n\u2022 Zero concealment",
       "fontSize": 11,
       "fontFamily": 1,
       "textAlign": "start",
       "verticalAlign": "top",
       "baseline": 11,
       "containerId": null,
-      "originalText": "\u2022 Typecheck & linters\n\u2022 Automated test run\n\u2022 Runtime validation\n\u2022 check_evidence.py\n\u2022 Zero concealment",
+      "originalText": "\u2022 Automated gates\n\u2022 Risk-tiered checks\n\u2022 High-risk scrutiny\n\u2022 Evidence report\n\u2022 Zero concealment",
       "lineHeight": 1.3,
       "updated": 1
     },
@@ -838,7 +838,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 235631,
+      "seed": 531826,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -879,7 +879,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 789392,
+      "seed": 786569,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -904,7 +904,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 138671,
+      "seed": 583601,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -937,7 +937,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 250961,
+      "seed": 194714,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -972,7 +972,7 @@
       "roundness": {
         "type": 2
       },
-      "seed": 377729,
+      "seed": 588810,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1013,7 +1013,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 137063,
+      "seed": 337547,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1038,7 +1038,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 541063,
+      "seed": 395282,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1071,7 +1071,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 995502,
+      "seed": 754840,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1106,7 +1106,7 @@
       "roundness": {
         "type": 3
       },
-      "seed": 479548,
+      "seed": 511853,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1131,7 +1131,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 909550,
+      "seed": 899835,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,
@@ -1164,7 +1164,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 614783,
+      "seed": 336297,
       "version": 1,
       "versionNonce": 1,
       "isDeleted": false,

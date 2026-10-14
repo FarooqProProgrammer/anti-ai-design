@@ -72,10 +72,10 @@
   <tspan x="712" dy="0">5. VERIFY</tspan>
 </text>
 <text x="712" y="256" font-size="11" fill="#343a40" font-weight="normal">
-  <tspan x="712" dy="0">• Typecheck &amp; linters</tspan>
-  <tspan x="712" dy="14.3px">• Automated test run</tspan>
-  <tspan x="712" dy="14.3px">• Runtime validation</tspan>
-  <tspan x="712" dy="14.3px">• check_evidence.py</tspan>
+  <tspan x="712" dy="0">• Automated gates</tspan>
+  <tspan x="712" dy="14.3px">• Risk-tiered checks</tspan>
+  <tspan x="712" dy="14.3px">• High-risk scrutiny</tspan>
+  <tspan x="712" dy="14.3px">• Evidence report</tspan>
   <tspan x="712" dy="14.3px">• Zero concealment</tspan>
 </text>
 <line x1="847" y1="310" x2="865" y2="310" stroke="#2f9e44" stroke-width="2" marker-end="url(#arrowhead-green)" />

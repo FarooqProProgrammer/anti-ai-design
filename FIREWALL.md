@@ -109,14 +109,18 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
   - 🛑 **BLOCKED**: Parallel subagents writing code without an approved sub-spec and sub-plan.
 - **Exit Criteria:** Code that fulfills the approved plan, with all parallel streams cleanly reconciled and passing initial tests.
 
-### Gate 5: Verify (Zero Concealment)
-- **Agents:** Any agent with the project test runner.
-- **The Check:** Do all automated checks pass, and did you test the actual behavior?
+### Gate 5: Verify (Automated Quality Gates & Evidence-Based Completion)
+- **Agents:** Any agent with the project test runner / environment.
+- **The Check:**
+  - **Risk-Tiered Automated Quality Gates:** Are automated checks executed according to task risk: Git diff checks, TypeScript/typecheck, linters, tests, dependency/security audits, and CI build?
+  - **High-Risk Domain Scrutiny:** Do database migrations, authentication, permissions, and payment changes clear stricter checks (rollback testing, session security, RBAC boundary tests, and decimal precision/idempotency)?
+  - **Evidence-Based Completion Report:** Did the agent output the mandatory 5-point audit report before declaring completion?
 - **What Gets Blocked:**
   - 🛑 **BLOCKED**: Concealed failures (commented-out tests, softened assertions, `@ts-ignore`, `eslint-disable`).
-  - 🛑 **BLOCKED**: Type errors, linter warnings, or failing tests.
+  - 🛑 **BLOCKED**: Skipping automated gates or high-risk domain checks (migrations, auth, permissions, payments).
+  - 🛑 **BLOCKED**: Declaring "Done" without an Evidence-Based Completion Report detailing what passed vs. what was not tested.
   - 🛑 **BLOCKED**: Inconsistent wiki evidence (`python skills/karpathy-llm-wiki/scripts/check_evidence.py .` reports errors).
-- **Exit Criteria:** 100% clean test runs, with root causes fixed instead of hidden.
+- **Exit Criteria:** 100% clean test runs, high-risk checks cleared, and a complete Evidence-Based Completion Report.
 
 ### Gate 6: Review Independently (Read-Only Auditor)
 - **Agents:** An agent running in a fresh, clean context or a separate model.
@@ -147,6 +151,6 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
 | **Gate 2** | **Spec** | Any agent (Cursor / Claude / Codex) | Coding without contract specification, ambiguous schemas |
 | **Gate 3** | **Plan** | Any agent (Cursor / Claude / Codex) | Coding without an approved plan and acceptance criteria |
 | **Gate 4** | **Implement & Loop** | Primary Driver + Parallel Subagents | Multi-driver churn, monolithic code dumps without sub-specs |
-| **Gate 5** | **Verify** | Any agent + test runner | Hidden failures, suppressed errors, broken tests |
+| **Gate 5** | **Verify** | Any agent + test runner | Hidden failures, skipping high-risk checks, missing evidence report |
 | **Gate 6** | **Review Independently** | Auditor (clean context) | Reviewer editing code, unaddressed review blockers |
 | **Gate 7** | **Ship Safely** | Driver & engineer | Committing to main, messy diffs, broken CI |

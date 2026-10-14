@@ -244,7 +244,7 @@ def create_root_workflow_diagram(out_path: Path):
         ("2. SPEC", "• Functional Spec\n• Technical contracts\n• API & Data schemas\n• Non-functional limits\n• Sign-off WHAT", "#f3f0ff", "#7950f2"),
         ("3. PLAN", "• Risk & mitigations\n• Given-When-Then AC\n• Phased milestones\n• Single driver pick\n• Sign-off HOW", "#fff4e6", "#f76707"),
         ("4. IMPLEMENT", "• Single Driver owner\n• Loop: Spec➔Plan➔Impl\n• /find-skills for gaps\n• Dispatch parallel\n• Plan fidelity", "#e6fcf5", "#0ca678"),
-        ("5. VERIFY", "• Typecheck & linters\n• Automated test run\n• Runtime validation\n• check_evidence.py\n• Zero concealment", "#ebfbee", "#2f9e44"),
+        ("5. VERIFY", "• Automated gates\n• Risk-tiered checks\n• High-risk scrutiny\n• Evidence report\n• Zero concealment", "#ebfbee", "#2f9e44"),
         ("6. REVIEW", "• Fresh context audit\n• Final git diff check\n• Security & bugs\n• REVIEW ONLY\n• Driver fixes", "#ffe3e3", "#e03131"),
         ("7. SHIP SAFELY", "• Clean git status\n• Feature branch only\n• Conventional commit\n• CI/CD pass\n• Compound wiki/", "#f8f9fa", "#343a40")
     ]
@@ -435,35 +435,54 @@ def create_step4_implement_diagram(out_dir: Path):
 
 
 def create_step5_verify_diagram(out_dir: Path):
-    b = ExcelDrawBuilder("STEP 5: VERIFY — Zero-Concealment Validation Pipeline", "Firewall Gate 5 | Applicable: Any Agent + Test Runner / Environment")
+    b = ExcelDrawBuilder("STEP 5: VERIFY — Automated Quality Gates & Evidence Completion", "Firewall Gate 5 | Risk-Tiered Quality Gates | Evidence-Based Completion Report")
     b.add_banner(w=860)
 
-    y = 120
-    cw = 185
-    spacing = 38
-
+    y = 115
+    # Row 1: 4 Automated Quality Gates
+    cw = 195
+    spacing = 25
     stages = [
-        ("1. TYPECHECK", "• tsc --noEmit / mypy\n• Zero type errors\n• No @ts-ignore\n• Strict null safety", "#e7f5ff", "#1971c2"),
-        ("2. LINT & FORMAT", "• eslint / ruff\n• Prettier / biome\n• Zero suppressed lints\n• Clean code style", "#fff4e6", "#f76707"),
-        ("3. TEST RUNNER", "• Unit & integration\n• Actual runtime checks\n• Edge case coverage\n• 100% green tests", "#e6fcf5", "#0ca678"),
-        ("4. WIKI EVIDENCE", "• check_evidence.py\n• 0 fidelity suspects\n• 0 evidence errors\n• Grounding intact", "#f3f0ff", "#7950f2")
+        ("1. TYPES & LINT", "• tsc --noEmit / mypy\n• eslint / ruff / prettier\n• Zero type errors\n• Zero suppressed lints", "#e7f5ff", "#1971c2"),
+        ("2. TEST & RUNTIME", "• Unit & integration\n• Actual runtime checks\n• Edge case coverage\n• 100% green tests", "#fff4e6", "#f76707"),
+        ("3. SEC & DEPS", "• npm audit / pip-audit\n• Git diff sanity\n• Dependency check\n• CI build pass", "#f3f0ff", "#7950f2"),
+        ("4. HIGH-RISK GATES", "• DB Migrations / rollback\n• Auth & Session safety\n• Permissions & RBAC\n• Payment & Idempotency", "#ffe3e3", "#e03131")
     ]
 
     for i, (st_title, st_desc, bg, stroke) in enumerate(stages):
         sx = 50 + i * (cw + spacing)
-        b.add_rect(sx, y, cw, 150, bg_color=bg, stroke_color=stroke, stroke_width=2)
-        b.add_text(sx + 15, y + 15, st_title, font_size=15, color=stroke)
-        b.add_text(sx + 15, y + 45, st_desc, font_size=12, color="#343a40")
+        b.add_rect(sx, y, cw, 140, bg_color=bg, stroke_color=stroke, stroke_width=2)
+        b.add_text(sx + 12, y + 14, st_title, font_size=14, color=stroke)
+        b.add_text(sx + 12, y + 40, st_desc, font_size=11, color="#343a40")
         if i < len(stages) - 1:
-            b.add_arrow(sx + cw, y + 75, sx + cw + spacing, y + 75, color=stroke)
+            b.add_arrow(sx + cw, y + 70, sx + cw + spacing, y + 70, color=stroke)
 
-    b.add_rect(50, 310, 855, 90, bg_color="#ffe3e3", stroke_color="#e03131", stroke_width=2)
-    b.add_text(70, 322, "🛑 ZERO CONCEALMENT PROTOCOL", font_size=16, color="#c92a2a")
-    b.add_text(70, 350, "Never disable tests, relax types, or hide errors to make code pass. Fix root causes in implementation.", font_size=12, color="#495057")
+    # Row 2: Evidence-Based Completion Report
+    ry = 275
+    b.add_rect(50, ry, 855, 170, bg_color="#e6fcf5", stroke_color="#0ca678", stroke_width=2)
+    b.add_text(70, ry + 14, "📋 EVIDENCE-BASED COMPLETION REPORT (GENUINELY VERIFIED WORK)", font_size=15, color="#099268")
+    b.add_text(70, ry + 38, "Before declaring 'Done' or moving to Review, the agent must output a verified audit report:", font_size=12, color="#495057")
 
-    b.add_rect(50, 420, 855, 70, bg_color="#ebfbee", stroke_color="#2f9e44", stroke_width=2)
-    b.add_text(70, 432, "GATE 5 EXIT: 100% GREEN VALIDATION PROOF", font_size=15, color="#2b8a3e")
-    b.add_text(70, 458, "All four checks passing cleanly. Ready for independent review.", font_size=12, color="#495057")
+    cols = [
+        ("1. What changed?", "• Functional summary\n• Architectural shift\n• Exact logic modified", "#f8f9fa", "#495057"),
+        ("2. Files changed?", "• git status list\n• Modified / added files\n• Clean diff scope", "#f8f9fa", "#495057"),
+        ("3. Tests passed?", "• Actual commands run\n• Passing test counts\n• Real assertions green", "#f8f9fa", "#495057"),
+        ("4. What was NOT?", "• Blind spots called out\n• Mock limitations\n• Untested edge paths", "#fff5f5", "#e03131"),
+        ("5. Pending risks?", "• Manual migrations\n• Missing env vars\n• Lead sign-off needed", "#fff9db", "#f59f00")
+    ]
+
+    rcw = 155
+    rsp = 18
+    for i, (rtitle, rdesc, rbg, rstroke) in enumerate(cols):
+        rx = 68 + i * (rcw + rsp)
+        b.add_rect(rx, ry + 62, rcw, 95, bg_color=rbg, stroke_color=rstroke, stroke_width=1)
+        b.add_text(rx + 8, ry + 70, rtitle, font_size=12, color=rstroke)
+        b.add_text(rx + 8, ry + 92, rdesc, font_size=10, color="#343a40")
+
+    # Bottom summary
+    b.add_rect(50, 465, 855, 65, bg_color="#ebfbee", stroke_color="#2f9e44", stroke_width=2)
+    b.add_text(70, 477, "GATE 5 INVARIANT: ZERO CONCEALMENT & VERIFIED EVIDENCE", font_size=14, color="#2b8a3e")
+    b.add_text(70, 500, "High-risk checks enforced • Common regressions caught early • Clear difference between 'Done' and verified.", font_size=11, color="#495057")
 
     b.save(out_dir / "05-verify")
 

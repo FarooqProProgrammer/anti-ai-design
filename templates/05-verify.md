@@ -17,29 +17,49 @@ Context:
 - All Acceptance Criteria from Phase 3 must be tested against the Phase 2 Spec.
 
 Mandatory Verification Checklist:
-1. [ ] **Type System Check**:
-   - Run typechecker (e.g. `npm run type-check`, `tsc --noEmit`, `mypy`, `cargo check`).
-   - Zero type errors allowed.
 
-2. [ ] **Linting & Code Quality**:
-   - Run linter (e.g. `npm run lint`, `flake8`, `golangci-lint`).
-   - Verify zero new lint warnings or formatting errors.
+### 1. Automated Quality Gates (Risk-Tiered)
+- [ ] **Git Diff Sanity**: Inspect `git diff` for stray `console.log`, temporary scratch files, or unintended modifications.
+- [ ] **Type System Check**: Run compiler/typechecker (e.g. `tsc --noEmit`, `mypy`, `cargo check`). Zero type errors permitted.
+- [ ] **Linting & Code Quality**: Run linter (e.g. `eslint`, `ruff`, `prettier`). Zero unhandled warnings or formatting violations.
+- [ ] **Automated Test Suites**: Run unit and integration tests (e.g. `npm test`, `pytest`, `cargo test`). 100% test pass rate required.
+- [ ] **Dependency & Security Vulnerability Check**: Run package audit (`npm audit`, `pip-audit`, `cargo audit`).
+- [ ] **Local Build & CI Sanity**: Verify local build succeeds (`npm run build`, `make build`) before submitting to remote CI.
 
-3. [ ] **Unit & Integration Tests**:
-   - Run existing and new test suites (e.g. `npm test`, `pytest`, `cargo test`).
-   - Verify 100% test pass rate.
+### 2. High-Risk Domain Stricter Checks
+If the change affects any of the following high-risk domains, enforce stricter scrutiny:
+- [ ] **Database Migrations**: Verify migration schema idempotency, test rollback script, confirm zero accidental data loss or column truncation.
+- [ ] **Authentication & Sessions**: Test token expiration, session invalidation, credential hashing, and cookie security flags.
+- [ ] **Authorization & Permissions (RBAC)**: Test cross-tenant isolation, negative permission tests (ensure unauthorized roles are blocked), and privilege escalation guards.
+- [ ] **Payment & Billing**: Verify currency decimal precision, idempotency key enforcement, webhook signature verification, and race conditions under concurrent checkouts.
 
-4. [ ] **Runtime Behavioral Validation**:
-   - Execute the actual behavior via CLI, API request, or end-to-end user flow.
-   - Test both the "Happy Path" and "Edge/Failure Cases".
-   - Confirm output matches each Acceptance Criterion in the Phase 3 plan.
+### 3. Runtime Behavioral Validation
+- [ ] Execute actual runtime behavior via CLI, API endpoints, or user interactions.
+- [ ] Verify both "Happy Path" and "Edge/Failure Modes" against Phase 3 acceptance criteria and Phase 2 spec invariants.
+- [ ] Wiki evidence check (if wiki modified): Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
 
-5. [ ] **Wiki Evidence & Grounding Check (if wiki modified)**:
-   - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
-   - Confirm all citations and factual literals in `wiki/` match immutable sources in `raw/`.
+### 4. Diagram
+- [ ] Maintain and describe `diagrams/05-verify.exceldraw`.
 
-6. [ ] **Visual Diagram**:
-   - Generate and describe `diagrams/05-verify.exceldraw`.
+---
+
+## Evidence-Based Completion Report (Mandatory Before Gate Exit)
+
+At the completion of Phase 5, the agent MUST output this structured report before declaring work done:
+
+```markdown
+### Evidence-Based Completion Report
+1. **What changed?**:
+   [Concise summary of functional behavior, architecture modifications, or bug fixes]
+2. **Which files changed?**:
+   [Explicit list of modified, created, or deleted files matching git status]
+3. **Which tests actually passed?**:
+   [Exact commands executed, test count, assertions verified, and proof of green run]
+4. **What was NOT tested?**:
+   [Explicit declaration of unmocked systems, third-party integrations, manual edge cases, or blind spots]
+5. **Remaining risks or manual steps?**:
+   [Pending database migrations, required environment variables, manual lead engineer sign-offs, or rollout considerations]
+```
 
 ---
 
