@@ -4,15 +4,32 @@ globs: *
 alwaysApply: false
 ---
 
-# Wiki Researcher Agent Rule
+# Wiki Researcher Subagent Rule for Cursor
 
-When tasked with researching a topic from the web, investigating external documentation, or indexing new technical references:
+This rule activates when `@wiki-researcher` is mentioned in Cursor or when web research and wiki indexing is requested.
 
-## Workflow
-1. **Search & Fetch:** Retrieve the source documentation using web search or URL fetch tools.
-2. **Raw Archiving:** Save the text to `raw/<topic>/YYYY-MM-DD-<slug>.md` with header (`Source`, `Collected`, `Published`).
-3. **Compile:** Write or merge into `wiki/<topic>/<article>.md` with `Sources` and `Raw` links.
-   - **Grounding Invariant:** Every specific literal (number, date, quote) must match the raw file verbatim.
-4. **Index:** Add the article entry to `wiki/index.md`.
-5. **Log:** Record the ingest event in `wiki/log.md`.
-6. **Verify:** Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.
+- Subagent file: [`.cursor/agents/wiki-researcher.md`](../agents/wiki-researcher.md)
+- Global index: [`wiki/index.md`](../../wiki/index.md)
+- Operation log: [`wiki/log.md`](../../wiki/log.md)
+
+---
+
+## Execution Workflow
+
+1. **Search & Fetch:**
+   - Retrieve technical documentation using web search tools.
+   - Check local project context in `C:\Users\farooq\.cursor\projects` for existing session transcripts.
+
+2. **Archive in `raw/`:**
+   - Save original content to `raw/<topic>/YYYY-MM-DD-<slug>.md` with header (`Source`, `Collected`, `Published`).
+
+3. **Compile in `wiki/`:**
+   - Write or update `wiki/<topic>/<article>.md` with `Sources` and `Raw` links.
+   - **Grounding Invariant:** Every specific literal (number, date, quote) must exist verbatim in `raw/`.
+
+4. **Index in Wiki:**
+   - Update `wiki/index.md` with link, summary, and current date.
+   - Append ingest record to `wiki/log.md`.
+
+5. **Verify:**
+   - Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py .`.

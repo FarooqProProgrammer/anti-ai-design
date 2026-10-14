@@ -2,10 +2,12 @@
 
 You are equipped to execute **all 6 phases** of the AI Engineering Workflow as defined in [AI_WORKFLOW.md](AI_WORKFLOW.md) and governed by the Request Firewall in [FIREWALL.md](FIREWALL.md).
 
-For modular rule definitions, consult:
+For modular agent and rule definitions, consult:
+- [.cursor/agents/wiki-researcher.md](.cursor/agents/wiki-researcher.md) — Custom Web Researcher & Wiki Indexing Subagent.
 - [.cursor/rules/workflow.mdc](.cursor/rules/workflow.mdc) — Full 6-phase lifecycle protocol.
 - [.cursor/rules/firewall-rules.mdc](.cursor/rules/firewall-rules.mdc) — Mandatory admission controller and blocking gates.
 - [.cursor/rules/wiki-rules.mdc](.cursor/rules/wiki-rules.mdc) — Karpathy LLM Wiki Grounding Invariant, local Cursor projects knowledge repository, and evidence standards.
+- [.cursor/rules/wiki-researcher.mdc](.cursor/rules/wiki-researcher.mdc) — Research & auto-indexing trigger rule.
 - [.cursor/rules/engineering-standards.mdc](.cursor/rules/engineering-standards.mdc) — Single Driver principle, zero concealment, Humanized Content Rule, Vercel design standards, and ExcelDraw diagram requirements.
 
 ---

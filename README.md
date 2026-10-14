@@ -54,6 +54,8 @@ the-developer/
 ├── agents/
 │   └── wiki-researcher.md             # Custom Web Researcher agent specification
 ├── .cursor/
+│   ├── agents/
+│   │   └── wiki-researcher.md         # Cursor custom subagent (inherit model)
 │   └── rules/
 │       ├── workflow.mdc               # Universal 6-phase lifecycle protocol
 │       ├── firewall-rules.mdc         # Request Firewall admission controller & contradiction check
@@ -91,14 +93,14 @@ the-developer/
 
 ---
 
-## Custom Agent: Wiki Researcher & `/research` Command
+## Custom Subagents: Wiki Researcher
 
-The **Wiki Researcher** (`agents/wiki-researcher.md`) is a specialized agent that investigates technical topics, libraries, and RFCs on the web, downloads the raw source into `raw/`, and immediately compiles and indexes the researched website into the project's knowledge base.
+The **Wiki Researcher** is configured as a dedicated subagent across both **Cursor** ([`.cursor/agents/wiki-researcher.md`](file:///d:/ai%20agent/the-developer/.cursor/agents/wiki-researcher.md)) and **Claude Code** ([`.claude/agents/wiki-researcher.md`](file:///d:/ai%20agent/the-developer/.claude/agents/wiki-researcher.md)). It investigates technical topics on the web, archives source text into `raw/`, and immediately compiles and indexes the researched website into the project wiki.
 
-### Run via Command:
-```bash
-/research <topic or url>
-```
+### How to Run:
+- **In Cursor:** Mention `@wiki-researcher <topic or url>` in Composer/Chat.
+- **In Claude Code:** Run `/research <topic or url>` or delegate with `@wiki-researcher`.
+- **In Antigravity:** Trigger subagent `wiki-researcher`.
 
 ### What Happens Automatically:
 1. **Fetches Source**: Web text is extracted and archived cleanly in `raw/<topic>/YYYY-MM-DD-<slug>.md`.
