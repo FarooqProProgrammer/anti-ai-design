@@ -65,41 +65,49 @@ the-developer/
 
 ---
 
-## Step-by-Step Execution Guide
+## Step-by-Step Universal Execution Guide
 
-### Step 1: Understand (Cursor)
-1. Open the project in Cursor.
-2. Provide the prompt from [`templates/01-understand.md`](file:///d:/ai%20agent/the-developer/templates/01-understand.md) along with your task description.
-3. Review Cursor's analysis of affected files, existing patterns, and constraints.
+Every step in this workflow is **agent-universal** (executable by **Cursor**, **Claude Code**, **Codex**, or **Antigravity**). At each step, the agent must generate an **ExcelDraw diagram** (`.exceldraw` / `.excalidraw` / `.svg`) in [`diagrams/`](file:///d:/ai%20agent/the-developer/diagrams/) along with a structured description.
 
-### Step 2: Plan (Claude Code)
-1. Launch Claude Code.
-2. Feed the output from Phase 1 and the prompt from [`templates/02-plan.md`](file:///d:/ai%20agent/the-developer/templates/02-plan.md).
-3. Review the generated plan: check that risks, mitigations, and acceptance criteria are comprehensive.
-4. Approve the plan.
+### Step 1: Understand (Any Agent)
+1. Provide the prompt from [`templates/01-understand.md`](file:///d:/ai%20agent/the-developer/templates/01-understand.md) along with your task description.
+2. The agent executes **Brainstorming** (goals/anti-goals, trade-offs) and **Grill-Me** (Socratic decision-tree questioning).
+3. The agent explores the codebase (read-only) and consults `wiki/index.md`.
+4. **Mandatory Visual**: Generate/update [`diagrams/01-understand.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/01-understand.exceldraw) with an architectural context and trade-off description.
 
-### Step 3: Implement (Claude Code / Codex + Cursor)
-1. Designate either **Claude Code** or **Codex** as the **Primary Driver**.
-2. Supply [`templates/03-implement.md`](file:///d:/ai%20agent/the-developer/templates/03-implement.md) to the driver to execute core changes.
-3. If frontend adjustments or quick interactive iterations are needed, delegate those strictly to **Cursor**.
+### Step 2: Plan (Any Agent)
+1. Feed the Phase 1 context into the prompt from [`templates/02-plan.md`](file:///d:/ai%20agent/the-developer/templates/02-plan.md).
+2. The agent investigates complex requirements, builds a risk/mitigation matrix, and formulates testable Acceptance Criteria (Given-When-Then).
+3. Ingest external references into `raw/` and compile into `wiki/` if needed.
+4. **Mandatory Visual**: Generate [`diagrams/02-plan.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/02-plan.exceldraw) illustrating the phased roadmap and acceptance gates.
+5. Engineer reviews and approves the plan before any coding begins.
 
-### Step 4: Verify (Driver & Environment)
-1. Execute the verification checklist from [`templates/04-verify.md`](file:///d:/ai%20agent/the-developer/templates/04-verify.md).
-2. Run typechecks, linters, and unit/integration tests.
-3. Validate runtime behavior against Phase 2 Acceptance Criteria.
-4. Capture any failure outputs directly; fix root causes rather than hiding or bypassing tests.
+### Step 3: Implement (Primary Driver)
+1. Designate the **Primary Driver** (Cursor, Claude Code, or Codex) using [`templates/03-implement.md`](file:///d:/ai%20agent/the-developer/templates/03-implement.md).
+2. The Primary Driver owns the core change, domain logic, and unit tests sequentially.
+3. If collaborating, secondary agents focus strictly on interactive styling and frontend polish.
+4. **Mandatory Visual**: Generate [`diagrams/03-implement.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/03-implement.exceldraw) detailing component wiring and module interactions.
 
-### Step 5: Review Independently (Codex or Claude Code)
+### Step 4: Verify (Any Agent + Test Runner)
+1. Execute the verification protocol from [`templates/04-verify.md`](file:///d:/ai%20agent/the-developer/templates/04-verify.md).
+2. Run typechecks, linters, unit tests, integration suites, and validate actual runtime behavior.
+3. Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py` if wiki files were touched.
+4. **Zero Concealment**: Capture all failures explicitly; fix root causes rather than hiding or suppressing tests.
+5. **Mandatory Visual**: Generate [`diagrams/04-verify.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/04-verify.exceldraw) showing check results and runtime flow validation.
+
+### Step 5: Review Independently (Auditor Agent)
 1. Generate the git diff (`git diff origin/main` or `git diff HEAD~1`).
-2. Provide the diff and [`templates/05-independent-review.md`](file:///d:/ai%20agent/the-developer/templates/05-independent-review.md) to an independent agent instance (Codex or Claude Code).
-3. Enforce the **"Review without editing"** rule.
-4. Primary Driver resolves confirmed findings and re-runs Phase 4 verification.
+2. Provide the diff and [`templates/05-independent-review.md`](file:///d:/ai%20agent/the-developer/templates/05-independent-review.md) to an independent agent instance or clean context.
+3. Enforce the **"Review without editing"** mandate (the auditor never modifies files).
+4. The Primary Driver applies confirmed fixes, and Phase 4 verification is re-run.
+5. **Mandatory Visual**: Generate [`diagrams/05-review.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/05-review.exceldraw) mapping the diff review findings and remediation loop.
 
 ### Step 6: Ship Safely (Driver & Engineer)
 1. Complete the pre-flight checklist in [`templates/06-ship-safely.md`](file:///d:/ai%20agent/the-developer/templates/06-ship-safely.md).
-2. Commit changes with conventional commit syntax on a dedicated feature/fix branch.
-3. Submit a Pull Request and ensure all CI/CD checks pass prior to merging.
-4. Record new architectural insights or system models in `wiki/` and log in `wiki/log.md`.
+2. Commit changes with conventional commit syntax on a dedicated feature/fix branch (never direct to `main`).
+3. Submit a Pull Request and verify remote CI/CD status checks.
+4. Record newly established architecture decisions and domain models in `wiki/` and log in `wiki/log.md`.
+5. **Mandatory Visual**: Generate [`diagrams/06-ship.exceldraw`](file:///d:/ai%20agent/the-developer/diagrams/06-ship.exceldraw) displaying the release pipeline and knowledge compounding.
 
 ---
 
