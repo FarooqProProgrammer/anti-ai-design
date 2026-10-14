@@ -30,3 +30,4 @@ Type `/plan [context or requirements]` in Cursor Chat or Composer.
 6. **HARD RULE**:
    - **No code is written until human sign-off.**
    - Await explicit user approval before starting Phase 3 (Implement).
+

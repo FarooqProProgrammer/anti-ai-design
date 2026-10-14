@@ -45,3 +45,4 @@ When `/understand` is executed, the agent MUST perform:
 
 6. **🛑 MANDATORY FIREWALL RULE**:
    - **READ-ONLY.** Never edit, create, or delete source code during Phase 1.
+

@@ -47,3 +47,4 @@ When `/plan` is executed, the agent MUST produce an architectural implementation
 6. **🛑 MANDATORY FIREWALL RULE**:
    - **No code is written until human sign-off.**
    - Output the plan and wait for user approval before moving to Phase 3 (Implement).
+

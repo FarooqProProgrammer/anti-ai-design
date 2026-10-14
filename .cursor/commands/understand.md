@@ -30,3 +30,4 @@ Type `/understand <task description>` in Cursor Chat or Composer.
 
 6. **HARD RULE**:
    - **READ-ONLY.** Zero code modifications allowed.
+
