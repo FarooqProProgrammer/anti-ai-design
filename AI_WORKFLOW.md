@@ -23,7 +23,7 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
 
 | Phase | Executing Agent | Role & Activity | Quality Gate / Exit Criteria |
 |---|---|---|---|
-| **1. Understand** | **Any Agent** (Cursor / Claude / Codex) | Explore code, trace dependencies, consult `wiki/`, detect existing patterns | Context notes & pattern map; **zero code modifications** |
+| **1. Understand** | **Any Agent** (Cursor / Claude / Codex) + **Brainstorming & Grill-Me Skills** | Explore code, trace dependencies, apply **Brainstorming** (goals/anti-goals, trade-offs) and **Grill-Me** (Socratic interrogation, edge cases), consult `wiki/` | Context notes, resolved decision tree, pattern map; **zero code modifications** |
 | **2. Plan** | **Any Agent** (Cursor / Claude / Codex) | Investigate complex requirements, analyze risks, generate testable acceptance criteria | Approved implementation plan with acceptance criteria & risk matrix |
 | **3. Implement** | **Primary Driver** (Cursor, Claude, or Codex) | Execute core change per plan; interactive edits & frontend refinement | Plan items completed; **single agent ownership** for core logic |
 | **4. Verify** | **Any Agent** + Test Runner | Run tests, linters, type checks, runtime behavior, and wiki evidence checker | 100% checks passing; all failures captured and resolved |
@@ -40,20 +40,27 @@ An end-to-end, multi-agent development lifecycle designed to maximize code quali
 
 ### Phase 1: Understand
 **Applicable Tools:** Cursor, Claude Code, Codex, or Antigravity  
-**Goal:** Build complete architectural awareness and map dependencies before proposing any modifications.
+**Mandatory Skills:** **`brainstorming`** (`skills/brainstorming/`) & **`grill-me`** (`skills/grill-me/`)  
+**Goal:** Build complete architectural awareness, interrogate requirements, and map dependencies before proposing any modifications.
 
 #### Protocols & Actions:
-1. **Codebase Exploration & Search**:
+1. **Always Use Brainstorming (`skills/brainstorming/SKILL.md`)**:
+   - Clarify the underlying "Why": Goals, Non-Goals, and Anti-Goals.
+   - Propose 2–3 architectural approaches with clear trade-offs (minimal vs. extensible vs. high-performance).
+   - Ask clarifying open questions to uncover true intent before settling on an approach.
+2. **Always Use Grill-Me (`skills/grill-me/SKILL.md`)**:
+   - Conduct a relentless Socratic technical interview.
+   - Walk down the **decision tree** branch-by-branch, resolving prerequisites.
+   - Interrogate failure modes, edge cases, scaling limits, and breaking changes.
+   - Do NOT passively nod along; aggressively surface unstated assumptions.
+3. **Codebase Exploration & Pattern Reconnaissance**:
    - Use codebase indexing (`@Codebase`, semantic search, file/symbol lookup) to locate relevant files, types, and schemas.
    - Consult `wiki/index.md` and relevant `wiki/` topic articles for prior architectural decisions and ADRs.
    - Trace callers and callees of affected components.
-2. **Identify Existing Patterns**:
-   - Note error-handling strategies (result types, exceptions, custom error classes).
-   - Document state management patterns (stores, hooks, context, immutability).
-   - Inspect naming conventions, module structure, and layer boundaries.
-3. **Strict Constraints**:
+   - Note error-handling strategies, state management patterns, naming conventions, and layer boundaries.
+4. **Strict Constraints**:
    - **Do NOT edit code** during this phase.
-   - Summarize findings into a structured context snapshot (files impacted, patterns identified, constraints).
+   - Summarize findings into a structured context snapshot (interview answers, trade-off decision, files impacted, patterns identified, constraints).
 
 ---
 

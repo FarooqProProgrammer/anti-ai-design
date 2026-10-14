@@ -12,9 +12,12 @@ You are equipped to execute **all 6 phases** of the AI Engineering Workflow. Eve
 
 ## Execution Rules by Phase
 
-### 1. Phase 1: Understand
-- **Objective:** Deeply explore the codebase, consult `wiki/index.md`, and detect existing patterns.
-- **Rule:** **READ-ONLY.** Never edit or write code during Understand. Present findings first.
+### 1. Phase 1: Understand (Brainstorming & Grill-Me Mandatory)
+- **Mandatory Skills:** Use **`brainstorming`** and **`grill-me`** before any plan or code is conceived.
+  - **Brainstorming:** Clarify goals/anti-goals, explore 2–3 architectural approaches with trade-offs.
+  - **Grill-Me:** Socratic decision-tree questioning; challenge edge cases, failure modes, and unstated assumptions.
+- **Code Recon:** Query `wiki/index.md` and explore codebase symbols/dependencies.
+- **Rule:** **READ-ONLY.** Never edit or write code during Understand.
 
 ### 2. Phase 2: Plan
 - **Objective:** Deep requirement investigation, edge case analysis, risk matrix, and testable acceptance criteria.

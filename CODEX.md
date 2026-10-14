@@ -12,6 +12,7 @@ This codebase operates under a strict 6-Phase AI Engineering Workflow governed b
 ## Universal Capabilities Across All 6 Phases
 
 ### 1. Phase 1: Understand
+- **Mandatory Skills**: Always use **`brainstorming`** and **`grill-me`** before proposing solutions.
 - Explore codebase, analyze dependencies, and trace data flow.
 - Consult `wiki/index.md` for architectural context.
 - **Rule:** READ-ONLY. Zero code edits during exploration.

@@ -51,11 +51,13 @@ The **Request Firewall** is the mandatory admission controller and governance ga
 
 ### Gate 1: Understand
 - **Applicable Agents**: Cursor, Claude Code, Codex, Antigravity.
-- **Admission Check**: Does the agent understand the affected files, call stack, and existing patterns?
+- **Mandatory Skills**: `skills/brainstorming/` and `skills/grill-me/`.
+- **Admission Check**: Does the agent understand the affected files, call stack, existing patterns, and has it interviewed the user/spec to clarify all edge cases?
 - **Firewall Blocking Conditions**:
   - 🛑 **BLOCKED**: Any attempt to write, edit, or delete source code during Phase 1.
+  - 🛑 **BLOCKED**: Proceeding without applying **Brainstorming** (goals/anti-goals, trade-offs) and **Grill-Me** (Socratic decision-tree questioning).
   - 🛑 **BLOCKED**: Proceeding without consulting `wiki/index.md` or existing design patterns.
-- **Exit Condition**: Documented context snapshot (files impacted, patterns detected, technical constraints).
+- **Exit Condition**: Documented context snapshot (clarified edge cases, resolved trade-offs, files impacted, patterns detected, technical constraints).
 
 ### Gate 2: Plan
 - **Applicable Agents**: Cursor, Claude Code, Codex, Antigravity.
@@ -107,7 +109,7 @@ The **Request Firewall** is the mandatory admission controller and governance ga
 
 | Gate | Stage | Who Operates | What the Firewall Blocks |
 |---|---|---|---|
-| **Gate 1** | **Understand** | Any Agent (Cursor / Claude / Codex) | Writing/editing code during reconnaissance |
+| **Gate 1** | **Understand** | Any Agent + Brainstorming & Grill-Me | Writing/editing code; skipping brainstorming/interview |
 | **Gate 2** | **Plan** | Any Agent (Cursor / Claude / Codex) | Coding without an approved plan & acceptance criteria |
 | **Gate 3** | **Implement** | Primary Driver (Cursor / Claude / Codex) | Scope creep, competing simultaneous drivers |
 | **Gate 4** | **Verify** | Any Agent + Runner | Hidden failures, suppressed errors, broken tests |

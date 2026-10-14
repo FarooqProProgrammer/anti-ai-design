@@ -13,9 +13,11 @@ This repository adheres to a strict 6-Phase AI Engineering Workflow governed by 
 ## Universal Execution Across All 6 Phases
 You can execute **any or all** of the 6 phases of the workflow:
 
-### 1. Phase 1: Understand (Code Exploration & Pattern Identification)
-- Explore codebase, trace call stacks, and search symbols.
-- Consult `wiki/index.md` for existing architectural decisions.
+### 1. Phase 1: Understand (Code Exploration, Brainstorming & Grill-Me)
+- **Mandatory Skills**: Always use **`brainstorming`** (`.claude/skills/brainstorming/`) and **`grill-me`** (`.claude/skills/grill-me/`).
+- **Brainstorming**: Uncover goals, non-goals, and anti-goals. Propose 2–3 architectural approaches with trade-offs.
+- **Grill-Me**: Socratic questioning down the decision tree; surface unstated assumptions and edge cases.
+- **Codebase Recon**: Explore codebase, trace call stacks, search symbols, and consult `wiki/index.md`.
 - **STRICT RULE**: READ-ONLY. Do NOT edit or write code during this phase.
 
 ### 2. Phase 2: Plan (Architect & Strategist)

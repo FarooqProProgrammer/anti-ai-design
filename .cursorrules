@@ -1,25 +1,46 @@
-# Cursor AI Engineering Rules
+# Cursor AI Engineering Rules — Universal Workflow
 
-You operate as part of the 6-Phase AI Engineering Workflow. Your specific responsibilities are defined below:
+You can execute **all 6 phases** of the AI Engineering Workflow. Every request you handle is governed by the **Request Firewall** ([FIREWALL.md](FIREWALL.md)) and must proceed sequentially:
 
-## 1. Phase 1: Understand (Code Exploration & Pattern Identification)
-- When tasked with exploring a feature or bug, your job is reconnaissance only.
-- Check `wiki/index.md` and relevant `wiki/` topic articles for established domain concepts, ADRs, and decisions.
-- Map impacted files, symbols, types, and dependencies.
-- Identify existing codebase conventions (error handling, data fetching, naming, architectural patterns).
-- **CRITICAL**: Do NOT modify or edit code during the Understand phase. Present your findings, context map, and constraints to the user.
+> 🛡️ **FIREWALL ENFORCEMENT:**
+> `Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
+> Direct coding without understanding and planning is BLOCKED. Suppressing errors or skipping verification is BLOCKED.
 
-## 2. Phase 3: Implement (Interactive Edits & Frontend Refinement)
-- When participating in implementation, your designated focus is:
-  - Frontend visual refinement (UI components, layouts, CSS/Tailwind styling).
-  - Fast interactive tweaks and developer-driven inline adjustments.
-- **Single Driver Respect**:
-  - The Primary Driver (Claude Code or Codex) owns core business logic, domain models, and architectural backbone.
-  - Do NOT rewrite or restructure core domain logic, database operations, or API contracts.
-  - Keep edits surgical, minimal, and aligned with the approved plan.
+---
 
-## 3. General Behavioral Guidelines
-- Always preserve existing comments and documentation.
-- When suggesting code, match the established style and formatting of the project.
-- Never suppress type errors, linter rules, or test assertions.
+## Your Capabilities & Rules Across the 6 Phases
 
+### 1. Phase 1: Understand (Code Exploration, Brainstorming & Grill-Me)
+- **Mandatory Skills**: Always use **`brainstorming`** (`skills/brainstorming/`) and **`grill-me`** (`skills/grill-me/`).
+- **Brainstorming**: Uncover the "Why" (Goals, Non-Goals, Anti-Goals) and evaluate 2–3 architectural approaches with trade-offs.
+- **Grill-Me**: Relentlessly interview the user; walk down the decision tree branch-by-branch; challenge unstated assumptions and surface edge cases.
+- **Codebase Recon**: Search symbols (`@Codebase`), trace call stacks, and consult `wiki/index.md` for existing architectural decisions.
+- **STRICT RULE**: READ-ONLY. Do NOT edit or write code during Phase 1.
+
+### 2. Phase 2: Plan (Requirements, Risks & Acceptance Criteria)
+- Investigate complex requirements and edge cases uncovered in Phase 1.
+- Ingest external references into `raw/` and compile into `wiki/` if needed.
+- Produce a structured plan containing scope boundaries, risk & mitigation matrix, and testable Acceptance Criteria (Given-When-Then).
+- Await approval before starting implementation.
+
+### 3. Phase 3: Implement (Single Driver & Refinement)
+- You can act as the **Primary Driver** for the entire implementation (backend logic, domain models, APIs, and frontend).
+- If collaborating with another agent (e.g., Claude Code), maintain the Single Driver principle: keep one agent responsible for core logic while you handle interactive UI refinement.
+- Follow the approved Phase 2 plan step-by-step without scope creep.
+
+### 4. Phase 4: Verify (Zero-Concealment Quality Checks)
+- Run type checks, linters, unit tests, and integration tests in the terminal.
+- Test actual runtime behavior against Phase 2 Acceptance Criteria.
+- Run `python skills/karpathy-llm-wiki/scripts/check_evidence.py` if wiki files were touched.
+- **ZERO CONCEALMENT**: Never hide, comment out, or suppress failing tests. Capture and fix root causes.
+
+### 5. Phase 5: Review Independently (Diff Audit)
+- When auditing code or reviewing a git diff:
+- **READ-ONLY MANDATE**: Review without editing. Do NOT write or modify files.
+- Report findings by severity: High/Blocker, Medium, Low/Nit.
+
+### 6. Phase 6: Ship Safely (Deployment & Compounding)
+- Inspect final diff and status (no debug logs, no temp files).
+- Commit atomically using Conventional Commits on a feature branch (never directly to `main`).
+- Follow project CI/CD protocols.
+- Compound new architecture models or ADRs into `wiki/` and record in `wiki/log.md`.
