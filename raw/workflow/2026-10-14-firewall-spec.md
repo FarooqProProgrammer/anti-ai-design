@@ -7,6 +7,15 @@
 ## Overview
 The Request Firewall stops shortcuts before they touch the codebase. When an AI agent gets a request, it cannot jump straight into hacking files, disable failing tests, or self-approve a pull request. Every change must clear six practical gates in order.
 
+## First Action: Match Request Against Wiki & Docs (Contradiction Check)
+Before accepting any request or beginning Gate 1:
+1. Take the input: Parse the user's prompt, requirements, or proposed changes.
+2. Match with Wiki & Docs: Query wiki/index.md, search relevant wiki/ articles, and check repository documentation for existing decisions, invariants, and patterns.
+3. If a Contradiction is Found:
+   - FIREWALL BLOCKS: Halt execution immediately. Do NOT write code or assume intent.
+   - Return the Contradiction: Present the conflict clearly to the user, citing the conflicting wiki article and the specific requirement.
+   - Await Resolution: Ask whether this is an intentional architectural shift (which requires updating the wiki with a Status: Outdated or Status: Disputed block) or an error.
+
 ## Shortcut Interception
 When someone prompts: "Just quickly patch this file", "Generate the code for X", or "Skip tests and push", the firewall steps in and runs the full process:
 1. Understand what's actually happening in the code first.
@@ -21,6 +30,7 @@ Gate 1: Understand
 - Agents: Cursor, Claude Code, Codex, Antigravity.
 - Skills Required: brainstorming and grill-me.
 - Blocking conditions:
+  - BLOCKED: Proceeding when the input contradicts established wiki/ articles or project documentation without explicit resolution.
   - BLOCKED: Editing, creating, or deleting source code during this phase.
   - BLOCKED: Skipping Brainstorming (goals, non-goals, trade-offs) or Grill-Me (Socratic decision tree questioning).
   - BLOCKED: Skipping wiki/index.md or existing design patterns.

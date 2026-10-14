@@ -12,6 +12,9 @@ A pragmatic, disciplined workflow for building software with AI coding agents (C
 
 Any agent (Cursor, Claude Code, Codex, Antigravity) can run all six phases end-to-end, or collaborate as a team:
 
+0. **Pre-Admission: Contradiction Check**
+   - Match input against `wiki/` and project documentation; check for contradictions and return any conflicts immediately.
+
 1. **Phase 1: Understand**
    - Skills Required: `brainstorming` and `grill-me`.
    - Objective: Trace code, explore patterns, run Socratic interview, check `wiki/index.md`.

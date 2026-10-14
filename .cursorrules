@@ -12,7 +12,14 @@ For modular rule definitions, consult:
 
 ## Non-Bypassable Firewall Protocol
 Every request proceeds sequentially:
-`Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
+`Contradiction Check ➔ Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`
+
+0. **First Action: Match Request Against Wiki & Docs (Contradiction Check)**
+   - Before accepting any request, match it against `wiki/index.md`, compiled articles, and project documentation.
+   - If the request contradicts established architecture or invariants:
+     - 🛑 **FIREWALL BLOCKS**: Halt immediately.
+     - Return the contradiction clearly, citing the conflicting wiki article (`wiki/<topic>/<article>.md`).
+     - Await explicit user clarification.
 
 1. **Phase 1: Understand (Read-Only Reconnaissance)**
    - Always invoke `brainstorming` (goals/anti-goals, trade-offs) and `grill-me` (Socratic decision-tree questioning).

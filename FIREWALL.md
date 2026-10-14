@@ -4,6 +4,20 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
 
 ---
 
+## First Action: Match Request Against Wiki & Docs (Contradiction Check)
+
+> [!IMPORTANT]
+> **Always match incoming inputs against the wiki and docs first.**
+> Before beginning any work or moving past admission:
+> 1. **Take the input**: Parse the user's prompt, requirements, or proposed changes.
+> 2. **Match with Wiki & Docs**: Query `wiki/index.md`, search relevant `wiki/` articles, and check repository documentation for existing decisions, invariants, and patterns.
+> 3. **If a Contradiction is Found**:
+>    - 🛑 **FIREWALL BLOCKS**: Halt execution immediately. Do NOT write code or assume intent.
+>    - **Return the Contradiction**: Present the conflict clearly to the user, citing the conflicting wiki article (`wiki/<topic>/<article>.md`) and the specific requirement.
+>    - **Await Resolution**: Ask whether this is an intentional architectural shift (which requires updating the wiki with a `Status: Outdated` or `Status: Disputed` block) or an error.
+
+---
+
 ## How the Firewall Works
 
 ```
@@ -12,9 +26,10 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
         ▼
 ╔════════════════════════════════════════════════════════════════════╗
 ║                      AI REQUEST FIREWALL                           ║
-║   Every change clears all six gates sequentially.                  ║
-║   Any agent (Cursor, Claude Code, Codex, Antigravity) can drive.   ║
-║   Shortcuts, blind edits, and skipped tests are BLOCKED.           ║
+║   1. Match input with wiki & docs -> If contradict, RETURN error.  ║
+║   2. Every change clears all six gates sequentially.               ║
+║   3. Any agent (Cursor, Claude Code, Codex, Antigravity) can drive.║
+║   4. Shortcuts, blind edits, and skipped tests are BLOCKED.        ║
 ╚════════════════════════════════════════════════════════════════════╝
         │
    [GATE 1] ──► 1. UNDERSTAND            (Explore, Brainstorm, Grill-Me, Read-Only)
@@ -51,12 +66,13 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
 ### Gate 1: Understand
 - **Agents:** Cursor, Claude Code, Codex, Antigravity.
 - **Skills Required:** `skills/brainstorming/` and `skills/grill-me/`.
-- **The Check:** Did the agent trace the affected files, check caller/callee paths, uncover existing patterns, and ask the hard questions about edge cases?
+- **The Check:** Did the agent trace the affected files, check caller/callee paths, match against the wiki/docs, and ask the hard questions about edge cases?
 - **What Gets Blocked:**
+  - 🛑 **BLOCKED**: Proceeding when the input contradicts established `wiki/` articles or project documentation without explicit resolution.
   - 🛑 **BLOCKED**: Editing, creating, or deleting source code during this phase.
   - 🛑 **BLOCKED**: Skipping **Brainstorming** (goals, non-goals, trade-offs) or **Grill-Me** (Socratic decision tree questioning).
   - 🛑 **BLOCKED**: Skipping `wiki/index.md` or existing design patterns.
-- **Exit Criteria:** A clear context snapshot with trade-offs weighed, edge cases resolved, and impacted files mapped out.
+- **Exit Criteria:** A clear context snapshot with trade-offs weighed, edge cases resolved, contradictions checked, and impacted files mapped out.
 
 ### Gate 2: Plan
 - **Agents:** Cursor, Claude Code, Codex, Antigravity.
@@ -108,6 +124,7 @@ The Request Firewall stops shortcuts before they touch the codebase. When an AI 
 
 | Gate | Name | Who Runs It | What Gets Blocked |
 |---|---|---|---|
+| **Pre-Admission** | **Contradiction Check** | Any agent + Wiki / Docs | Unresolved contradictions against documented architecture |
 | **Gate 1** | **Understand** | Any agent + Brainstorming & Grill-Me | Writing code, skipping the technical interview |
 | **Gate 2** | **Plan** | Any agent (Cursor / Claude / Codex) | Coding without an approved plan and acceptance criteria |
 | **Gate 3** | **Implement** | Primary Driver | Multi-driver churn, scope creep |

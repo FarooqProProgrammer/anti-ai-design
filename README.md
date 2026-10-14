@@ -2,8 +2,10 @@
 
 A pragmatic, battle-tested framework for building software with AI coding agents (Cursor, Claude Code, Codex, and Antigravity). It keeps AI tools from making wild assumptions, writing sloppy code in a hurry, hiding broken tests, or blowing up your architecture.
 
-> 🛡️ **THE REQUEST FIREWALL**: Every request entering this repository stops at the **[Request Firewall](file:///d:/ai%20agent/the-developer/FIREWALL.md)** first. Blind coding, skipped tests, and unreviewed diffs are strictly blocked. Every change clears six practical steps in order:
-> **1. Understand** ➔ **2. Plan** ➔ **3. Implement** ➔ **4. Verify** ➔ **5. Review Independently** ➔ **6. Ship Safely**.
+> 🛡️ **THE REQUEST FIREWALL**: Every request entering this repository stops at the **[Request Firewall](file:///d:/ai%20agent/the-developer/FIREWALL.md)** first:
+> 1. **Match with Wiki & Docs First:** If the requested change contradicts existing architecture, ADRs, or wiki knowledge, the firewall blocks execution and returns the contradiction immediately.
+> 2. **Sequential Quality Gates:**
+>    **1. Understand** ➔ **2. Plan** ➔ **3. Implement** ➔ **4. Verify** ➔ **5. Review Independently** ➔ **6. Ship Safely**.
 
 ---
 
@@ -23,6 +25,7 @@ A pragmatic, battle-tested framework for building software with AI coding agents
 
 | Phase | Who Runs It | Core Focus | Hard Constraint |
 |---|---|---|---|
+| **0. Pre-Admission** | Any Agent + Wiki / Docs | Match input against `wiki/` and docs; detect contradictions | Return contradiction or proceed to Phase 1. |
 | **1. Understand** | Any Agent + **Brainstorming & Grill-Me** + Wiki | Socratic interview, edge cases, trade-offs, explore code & wiki | **Read-Only**: Zero code edits allowed. |
 | **2. Plan** | Any Agent (Cursor / Claude / Codex) + Wiki | Real requirements, risk matrix, ingest RFCs/specs into `raw/` | No code written until human sign-off. |
 | **3. Implement** | Primary Driver (Cursor / Claude / Codex) | Core logic, data models, APIs, and UI styling polish | **Single Driver**: One agent owns the core logic. |
@@ -51,13 +54,13 @@ the-developer/
 ├── .cursor/
 │   └── rules/
 │       ├── workflow.mdc               # Universal 6-phase lifecycle protocol
-│       ├── firewall-rules.mdc         # Request Firewall admission controller & blocking gates
+│       ├── firewall-rules.mdc         # Request Firewall admission controller & contradiction check
 │       ├── wiki-rules.mdc             # Karpathy LLM Wiki Grounding Invariant & evidence rules
 │       └── engineering-standards.mdc  # Single Driver, zero concealment, humanized content rules
 ├── .cursorrules                       # Root Cursor universal agent instructions
 ├── .claude/
 │   └── rules/
-│       ├── firewall.md                # Claude Code firewall admission rules
+│       ├── firewall.md                # Claude Code firewall admission rules & contradiction gate
 │       ├── wiki.md                    # Claude Code wiki Grounding Invariant & procedures
 │       ├── workflow.md                # Claude Code 6-phase universal lifecycle
 │       └── engineering.md             # Claude Code engineering, humanized prose & diagram rules
@@ -80,6 +83,11 @@ the-developer/
 ## Step-by-Step Universal Execution Guide
 
 Every step in this workflow is **agent-universal** (executable by **Cursor**, **Claude Code**, **Codex**, or **Antigravity**). At each step, the agent maintains an **ExcelDraw diagram** (`.exceldraw` / `.excalidraw` / `.svg`) in [`diagrams/`](file:///d:/ai%20agent/the-developer/diagrams/) along with a clear description.
+
+### Pre-Admission: Contradiction Check
+1. The agent parses the user's prompt or requirement.
+2. The agent matches the requirement against `wiki/index.md`, relevant `wiki/` articles, and project documentation.
+3. If the requirement contradicts documented architecture or decisions, execution is **BLOCKED**, and the contradiction is returned immediately.
 
 ### Step 1: Understand (Any Agent)
 1. Use the prompt from [`templates/01-understand.md`](file:///d:/ai%20agent/the-developer/templates/01-understand.md) with your task description.

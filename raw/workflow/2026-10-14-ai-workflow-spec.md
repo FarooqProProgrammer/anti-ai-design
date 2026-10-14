@@ -8,7 +8,9 @@
 A pragmatic, disciplined workflow for building software with AI coding agents (Cursor, Claude Code, Codex, and Antigravity). It keeps AI models from making wild assumptions, hacking code in a rush, hiding failing tests, or breaking existing architecture.
 
 ## The AI Request Firewall
-Every request stops at the firewall first. No agent jumps straight to writing or editing code. When you give a prompt, request a feature, or report a bug, the firewall intercepts it and walks it through six practical phases:
+Every request stops at the firewall first. Before moving into implementation:
+1. Match with Wiki & Docs First: Take the input and check it against wiki/index.md and project documentation. If it contradicts established architecture, invariants, or ADRs, halt and return the contradiction immediately.
+2. Run the 6 Gates Sequentially:
 `Understand -> Plan -> Implement -> Verify -> Review Independently -> Ship Safely`.
 
 Skipping planning, disabling tests, self-approving, or pushing unreviewed diffs is BLOCKED.
@@ -16,6 +18,7 @@ Skipping planning, disabling tests, self-approving, or pushing unreviewed diffs 
 ## The Universal 6-Phase Lifecycle
 Any agent (Cursor, Claude Code, Codex, Antigravity) can run all six phases end-to-end, or collaborate as a team.
 
+0. Pre-Admission: Match input against wiki/ and docs; check for contradictions.
 1. Phase 1: Understand
 - Skills Required: brainstorming and grill-me
 - Objective: Trace code, explore patterns, run Socratic interview, check wiki/index.md.

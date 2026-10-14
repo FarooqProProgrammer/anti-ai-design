@@ -8,8 +8,10 @@ A pragmatic, disciplined workflow for building software with AI coding agents (C
 
 > [!IMPORTANT]
 > **Every request stops at the firewall first.**
-> No agent jumps straight to writing or editing code. When you give a prompt, request a feature, or report a bug, the firewall intercepts it and walks it through six practical phases:
-> `Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
+> No agent jumps straight to writing or editing code. When you give a prompt, request a feature, or report a bug, the firewall intercepts it:
+> 1. **Match with Wiki & Docs First:** Take the input and check it against `wiki/index.md` and project documentation. If it contradicts established architecture, invariants, or ADRs, **halt and return the contradiction immediately**.
+> 2. **Run the 6 Gates Sequentially:**
+>    `Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
 >
 > Skipping planning, disabling tests, self-approving, or pushing unreviewed diffs is **BLOCKED**. Details live in **[`FIREWALL.md`](file:///d:/ai%20agent/the-developer/FIREWALL.md)**.
 
@@ -19,16 +21,17 @@ A pragmatic, disciplined workflow for building software with AI coding agents (C
 
 > [!NOTE]
 > **Any agent can drive any phase:**
-> This workflow isn't split into rigid agent silos. **Cursor**, **Claude Code**, **Codex**, or **Antigravity** can run all six phases end-to-end, or collaborate as a team. What matters is following the gates and not cutting corners.
+> This workflow isn't split into rigid silos. **Cursor**, **Claude Code**, **Codex**, or **Antigravity** can run all six phases end-to-end, or collaborate as a team. What matters is following the gates and not cutting corners.
 
 | Phase | Agent Role | Core Focus | Exit Criteria |
 |---|---|---|---|
+| **0. Pre-Admission** | Any Agent + Wiki / Docs | Match input against `wiki/` and docs; check for contradictions | Contradictions returned or input validated |
 | **1. Understand** | Any Agent + **Brainstorming & Grill-Me** | Trace code, explore patterns, run Socratic interview, check `wiki/` | Context snapshot with trade-offs; **zero code edits** |
 | **2. Plan** | Any Agent | Investigate requirements, weigh risks, write Given-When-Then tests | Approved plan with acceptance criteria & risk matrix |
 | **3. Implement** | **Primary Driver** (Cursor, Claude, or Codex) | Write core logic, build tests, polish UI | Completed plan; **one agent owns the core logic** |
 | **4. Verify** | Any Agent + Test Runner | Run tests, linters, types, runtime check, and wiki evidence audit | All checks green; zero suppressed errors |
 | **5. Review Independently** | Auditor (Clean Context / Second Agent) | Audit final git diff with one mandate: **review without editing** | All confirmed review findings addressed & verified |
-| **6. Ship Safely** | Any Agent + Engineer | Final diff check, atomic commit, CI/CD run, compound knowledge | Clean diff, passed CI/CD, documented in `wiki/` |
+| **6. Ship Safely** | Any Agent + Engineer | Clean diff check, atomic commit, CI/CD run, compound knowledge | Clean diff, passed CI/CD, documented in `wiki/` |
 
 ---
 
@@ -44,22 +47,25 @@ A pragmatic, disciplined workflow for building software with AI coding agents (C
 **Objective:** Figure out how the code actually works today and pin down the true requirements before touching a single line.
 
 #### What to Do:
-1. **Brainstorming (`skills/brainstorming/SKILL.md`)**:
+1. **Contradiction Check Against Wiki & Docs**:
+   - Match the input request against `wiki/index.md` and compiled `wiki/` articles.
+   - If a contradiction is detected, halt immediately and return the contradiction with links to the conflicting wiki articles before proceeding.
+2. **Brainstorming (`skills/brainstorming/SKILL.md`)**:
    - Call out Goals, Non-Goals, and Anti-Goals.
    - Lay out 2–3 architectural approaches with real trade-offs (e.g. minimal vs. extensible vs. high performance).
    - Ask clarifying questions before settling on a design.
-2. **Grill-Me (`skills/grill-me/SKILL.md`)**:
+3. **Grill-Me (`skills/grill-me/SKILL.md`)**:
    - Run a Socratic technical interview.
    - Walk down the decision tree branch by branch.
    - Pressure-test edge cases, network failures, empty states, and breaking changes.
    - Don't just nod along; bring hidden assumptions out into the open.
-3. **Explore the Codebase**:
+4. **Explore the Codebase**:
    - Trace caller and callee chains across affected files.
    - Check `wiki/index.md` for earlier architecture decisions and ADRs.
    - Note down existing conventions for error handling, state, and naming.
-4. **Hard Rule**:
+5. **Hard Rule**:
    - **Do not write or edit code.** Gather context only.
-5. **Diagram**:
+6. **Diagram**:
    - Maintain and describe `diagrams/01-understand.exceldraw`.
 
 ---

@@ -7,8 +7,15 @@ You are equipped to execute **any or all** of the 6 phases. Always adhere to eac
 ---
 
 ## 🛡️ Request Firewall Protocol
-Every incoming request must proceed through the sequential 6-phase firewall:
-`Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
+Every incoming request must proceed through the sequential firewall gates:
+`Contradiction Check ➔ Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
+
+### 0. First Action: Match Request Against Wiki & Docs (Contradiction Check)
+- Before accepting any request, match it against `wiki/index.md`, compiled `wiki/` articles, and project documentation.
+- If the request contradicts established architecture, invariants, or ADRs:
+  - 🛑 **FIREWALL BLOCKS**: Halt execution immediately.
+  - Return the contradiction clearly, citing the conflicting wiki article (`wiki/<topic>/<article>.md`).
+  - Await explicit user clarification.
 
 ### 1. Phase 1: Understand (Read-Only Reconnaissance)
 - **Mandatory Skills:** Always apply **`brainstorming`** and **`grill-me`** before proposing solutions.

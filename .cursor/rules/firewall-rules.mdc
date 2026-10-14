@@ -8,6 +8,17 @@ alwaysApply: true
 
 The Request Firewall is the non-bypassable admission controller and governance gatekeeper for this repository. Every user prompt, bugfix, or feature request must pass through the Firewall before code can be written, tested, or merged.
 
+## 0. First Action: Match Request Against Wiki & Docs (Contradiction Check)
+Before accepting any request or starting Phase 1:
+1. **Take the input** and search `wiki/index.md`, relevant `wiki/` articles, and project documentation.
+2. **Detect contradictions:** Check if the request contradicts documented architecture, invariants, ADRs, or business rules.
+3. **If a contradiction is found:**
+   - 🛑 **FIREWALL BLOCKS**: Halt immediately. Do NOT write code or assume intent.
+   - **Return the contradiction** clearly to the user, citing the conflicting wiki article (`wiki/<topic>/<article>.md`) and specific requirement.
+   - Await resolution: Ask if this is an intentional requirement change (requiring a wiki update with a Status block) or an error.
+
+---
+
 ## 1. Non-Bypassable Intercept Rule
 If the user requests shortcuts such as:
 - *"Just quickly fix this file"*
@@ -28,6 +39,7 @@ Any agent (Cursor, Claude Code, Codex, Antigravity) is empowered to execute all 
   1. `brainstorming` (`skills/brainstorming/`): Identify goals, non-goals, anti-goals; explore 2–3 architectural approaches with trade-offs.
   2. `grill-me` (`skills/grill-me/`): Socratic interrogation down the decision tree; challenge edge cases, failure modes, and unstated assumptions.
 - **Knowledge Base Consultation:** Always check `wiki/index.md` and relevant `wiki/` topic articles before inspecting source files.
+- **🛑 HARD BLOCK:** Proceeding when input contradicts established `wiki/` documentation without explicit resolution.
 - **🛑 HARD BLOCK:** Never edit, create, or delete source code during Phase 1.
 - **Exit Condition:** Structured context snapshot produced (edge cases clarified, trade-offs resolved, impacted files mapped).
 

@@ -2,6 +2,17 @@
 
 The Request Firewall ([FIREWALL.md](../../FIREWALL.md)) is the non-bypassable admission controller for all engineering work.
 
+## 0. First Action: Match Request Against Wiki & Docs (Contradiction Check)
+Before accepting any request or starting Phase 1:
+1. **Take the input** and match it against `wiki/index.md`, compiled `wiki/` articles, and project documentation.
+2. **Detect contradictions:** Check if the request contradicts documented architecture, invariants, ADRs, or business rules.
+3. **If a contradiction is found:**
+   - 🛑 **FIREWALL BLOCKS**: Halt execution immediately. Do NOT write code or assume intent.
+   - **Return the contradiction** clearly to the user, citing the conflicting wiki article (`wiki/<topic>/<article>.md`) and specific requirement.
+   - Await resolution: Ask if this is an intentional shift (requiring a wiki update with a Status block) or an error.
+
+---
+
 ## 1. Admission Control & Interception
 If the user requests immediate code changes ("just fix this", "generate code", "skip tests"):
 - **Intercept and enforce the 6 gates:** Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely.
@@ -15,6 +26,7 @@ If the user requests immediate code changes ("just fix this", "generate code", "
 - **Gate 1: Understand**
   - Mandatory Skills: `brainstorming` (`.claude/skills/brainstorming/`) and `grill-me` (`.claude/skills/grill-me/`).
   - Read `wiki/index.md` and explore codebase context.
+  - **BLOCKED:** Proceeding when input contradicts documented wiki/doc rules without explicit resolution.
   - **BLOCKED:** Any file modification, creation, or deletion during Understand.
 
 - **Gate 2: Plan**

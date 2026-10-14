@@ -3,7 +3,7 @@
 This repository adheres to a strict 6-Phase AI Engineering Workflow governed by a mandatory **Request Firewall** ([FIREWALL.md](FIREWALL.md)).
 
 Modular rules:
-- [.claude/rules/firewall.md](.claude/rules/firewall.md) — Firewall admission control & blocking gates
+- [.claude/rules/firewall.md](.claude/rules/firewall.md) — Firewall admission control, contradiction checks & blocking gates
 - [.claude/rules/wiki.md](.claude/rules/wiki.md) — Karpathy LLM Wiki Grounding Invariant & procedures
 - [.claude/rules/workflow.md](.claude/rules/workflow.md) — Universal 6-phase lifecycle protocol
 - [.claude/rules/engineering.md](.claude/rules/engineering.md) — Engineering standards, humanized content & diagram rules
@@ -11,8 +11,15 @@ Modular rules:
 ---
 
 ## 🛡️ Non-Bypassable Request Firewall Protocol
-Every request MUST proceed sequentially through the 6 gates:
-`Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
+Every request MUST proceed sequentially through the firewall gates:
+`Contradiction Check ➔ Understand ➔ Plan ➔ Implement ➔ Verify ➔ Review Independently ➔ Ship Safely`.
+
+- **First Action: Match Request Against Wiki & Docs (Contradiction Check)**
+  - Before accepting any request or beginning Gate 1, match it against `wiki/index.md`, compiled articles, and project documentation.
+  - If the request contradicts established architecture, invariants, or ADRs:
+    - 🛑 **FIREWALL BLOCKS**: Halt execution immediately.
+    - **Return the contradiction** clearly to the user, citing the conflicting wiki article (`wiki/<topic>/<article>.md`).
+    - Await explicit user clarification.
 
 - **Gate 1: Understand (Read-Only Reconnaissance)**
   - Mandatory Skills: `brainstorming` (`.claude/skills/brainstorming/`) and `grill-me` (`.claude/skills/grill-me/`).
