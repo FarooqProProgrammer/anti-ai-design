@@ -1,3 +1,8 @@
+---
+name: plan
+description: Run Phase 3 (Plan) — risk matrix, acceptance criteria, implementation blueprint; await approval before code
+---
+
 # Cursor Command: /plan
 
 Executes **Phase 3 (Plan)** of the AI Engineering Workflow in Cursor.

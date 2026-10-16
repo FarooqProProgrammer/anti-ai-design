@@ -1,3 +1,8 @@
+---
+name: understand
+description: Run Phase 1 (Understand) — contradiction check, brainstorming, grill-me, read-only reconnaissance
+---
+
 # Cursor Command: /understand
 
 Executes **Phase 1 (Understand)** of the AI Engineering Workflow in Cursor.

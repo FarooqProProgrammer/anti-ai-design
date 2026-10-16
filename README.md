@@ -46,26 +46,55 @@ All content in this project—code comments, commit messages, PR descriptions, a
 
 ---
 
+## Install as a Cursor Plugin
+
+This repo is a Cursor Plugin (`.cursor-plugin/plugin.json`). Install locally:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-cursor-plugin.ps1
+```
+
+Then **Developer: Reload Window**, open **Customize**, and confirm **The Developer - AI Engineering Workflow**.
+
+You get:
+- Rules: firewall, workflow, wiki, engineering standards, frontend
+- Commands: `/understand`, `/spec`, `/plan`, `/doc-prd`
+- Agents: `wiki-researcher`, `doc-prd` (docs → PRD + ExcelDraw = SoT for UI), `frontend` (implements PRD; shadcn; Mobbin → Hallmark)
+- Skills: brainstorming, grill-me, karpathy-llm-wiki, hallmark, and the rest under `skills/`
+
+For team distribution: import this Git repo as a Team Marketplace under Dashboard → Plugins & MCPs, or submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish).
+
+---
+
 ## Repository Rules & Agents Architecture
 
 Rules derived from repository documents (`FIREWALL.md`, `AI_WORKFLOW.md`, `skills/`) and compiled into the Karpathy LLM Wiki (`wiki/`) are active across all coding assistants:
 
 ```
 the-developer/
+├── .cursor-plugin/
+│   └── plugin.json                    # Cursor Plugin manifest (installable)
 ├── agents/
-│   └── wiki-researcher.md             # Custom Web Researcher agent specification
+│   ├── wiki-researcher.md             # Custom Web Researcher agent specification
+│   ├── frontend.md                    # Frontend UI/UX agent (mandatory shadcn/ui on web)
+│   └── doc-prd.md                     # Doc → PRD + ExcelDraw agent specification
 ├── .cursor/
 │   ├── agents/
-│   │   └── wiki-researcher.md         # Cursor custom subagent (inherit model)
+│   │   ├── wiki-researcher.md         # Cursor custom subagent (inherit model)
+│   │   ├── frontend.md                # Cursor frontend subagent (inherit model)
+│   │   └── doc-prd.md                 # Cursor doc→PRD subagent (inherit model)
 │   ├── commands/
 │   │   ├── understand.md              # Cursor /understand command
 │   │   ├── spec.md                    # Cursor /spec command
-│   │   └── plan.md                    # Cursor /plan command
+│   │   ├── plan.md                    # Cursor /plan command
+│   │   └── doc-prd.md                 # Cursor /doc-prd command
 │   └── rules/
 │       ├── workflow.mdc               # Universal 7-phase lifecycle protocol
 │       ├── firewall-rules.mdc         # Request Firewall admission controller & contradiction check
 │       ├── wiki-rules.mdc             # Karpathy LLM Wiki Grounding Invariant & local cursor projects
 │       ├── wiki-researcher.mdc        # Web research & wiki auto-indexing rule
+│       ├── frontend.mdc               # Frontend subagent activation rule
+│       ├── doc-prd.mdc                # Doc→PRD + ExcelDraw activation rule
 │       └── engineering-standards.mdc  # Single Driver, zero concealment, humanized content rules
 ├── .cursorrules                       # Root Cursor universal agent instructions
 ├── .claude/

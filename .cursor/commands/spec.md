@@ -1,3 +1,8 @@
+---
+name: spec
+description: Run Phase 2 (Spec) — functional and technical contracts, schemas, non-features; no source edits
+---
+
 # Cursor Command: /spec
 
 Executes **Phase 2 (Spec)** of the AI Engineering Workflow in Cursor.

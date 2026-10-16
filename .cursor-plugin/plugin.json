@@ -1,0 +1,48 @@
+{
+  "name": "the-developer",
+  "displayName": "The Developer - AI Engineering Workflow",
+  "version": "1.2.0",
+  "description": "7-phase AI engineering workflow with Request Firewall, wiki grounding, phase commands (/understand, /spec, /plan, /doc-prd), wiki-researcher, frontend, and doc-prd agents, plus core skills.",
+  "author": {
+    "name": "FarooqProProgrammer"
+  },
+  "homepage": "https://github.com/FarooqProProgrammer/anti-ai-design",
+  "repository": "https://github.com/FarooqProProgrammer/anti-ai-design",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "firewall",
+    "spec",
+    "plan",
+    "understand",
+    "wiki",
+    "brainstorming",
+    "grill-me",
+    "engineering",
+    "quality-gates",
+    "shadcn",
+    "hallmark",
+    "frontend",
+    "prd",
+    "doc-prd",
+    "exceldraw"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "ai-engineering",
+    "request-firewall",
+    "7-phase-lifecycle",
+    "wiki",
+    "verification",
+    "frontend",
+    "hallmark",
+    "prd"
+  ],
+  "rules": "./.cursor/rules/",
+  "agents": [
+    "./.cursor/agents/",
+    "./agents/"
+  ],
+  "commands": "./.cursor/commands/",
+  "skills": "./skills/"
+}

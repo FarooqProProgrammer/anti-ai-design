@@ -1,0 +1,35 @@
+---
+description: Frontend subagent — doc-prd PRD is SoT; shadcn always; Mobbin then Hallmark for craft
+globs: *.{tsx,jsx,css,scss,vue,svelte,html}
+alwaysApply: false
+---
+
+# Frontend Subagent Rule for Cursor
+
+This rule activates when `@frontend` is mentioned or when the task is clearly UI/frontend (components, layout, styling, motion, a11y).
+
+- Subagent file: [`.cursor/agents/frontend.md`](../agents/frontend.md)
+- Shared spec: [`agents/frontend.md`](../../agents/frontend.md)
+- **Source of truth:** `@doc-prd` output — `docs/prd/*.md` + `diagrams/prd/*`
+- Foundation: [shadcn/ui](https://ui.shadcn.com/) — required on every web React frontend
+- Visual craft (after PRD scope is fixed):
+  1. **Mobbin MCP** — preferred when available
+  2. **Hallmark** — fallback when Mobbin is unavailable
+
+---
+
+## Execution Workflow
+
+1. **PRD gate:** Load the active PRD and ExcelDraw from doc-prd. If missing for this product surface, hand off to `@doc-prd` / `/doc-prd` before major UI.
+2. **shadcn gate:** If web React and `components.json` / `components/ui` is missing, init and add primitives.
+3. **Visual craft gate:** Mobbin if available, else Hallmark — must not expand PRD scope.
+4. **Implement:** Map PRD journeys to screens; shadcn/Radix; compound components; a11y; motion.
+5. **Report:** PRD paths used, requirement IDs covered, shadcn status, mobbin/hallmark, files, gaps.
+
+## Hard Boundaries
+
+- **doc-prd PRD wins** over chat when they conflict (unless user updates the PRD).
+- Do not invent features, journeys, or metrics outside the PRD.
+- Do not ship web UI without shadcn/ui.
+- Do not let Mobbin/Hallmark override PRD scope.
+- Do not own core business logic or schema migrations by default.

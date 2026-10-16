@@ -1,0 +1,30 @@
+---
+description: Doc-to-PRD agent — extract meaning from docs, write PRD, generate ExcelDraw
+globs: *.{md,mdx,txt,pdf,docx,html}
+alwaysApply: false
+---
+
+# Doc → PRD Subagent Rule for Cursor
+
+Activate when `@doc-prd` is mentioned, or when the user asks to turn documents into a PRD, product brief, requirements list, or ExcelDraw from docs.
+
+- Subagent: [`.cursor/agents/doc-prd.md`](../agents/doc-prd.md)
+- Shared spec: [`agents/doc-prd.md`](../../agents/doc-prd.md)
+- Template: [`templates/prd.md`](../../templates/prd.md)
+
+---
+
+## Execution Workflow
+
+1. **Ingest:** Read all named sources (files, URLs, Google Docs MCP if available).
+2. **Extract:** Problem, users, goals/non-goals/anti-goals, FRs, NFRs, journeys, constraints, open questions. Label assumptions.
+3. **PRD:** Write `docs/prd/YYYY-MM-DD-<slug>.md` from `templates/prd.md`. Cite sources for P0 items.
+4. **ExcelDraw:** Create `diagrams/prd/<slug>.exceldraw` (problem → users → outcomes, scope, primary journey). Prefer `scripts/generate_exceldraw.py` builder patterns.
+5. **Report:** Paths, sources, open questions, ambiguities.
+
+## Hard Boundaries
+
+- No implementation code.
+- No invented metrics or unsourced P0 requirements.
+- Diagram is mandatory.
+- Call out wiki/doc contradictions before resolving them unilaterally.
