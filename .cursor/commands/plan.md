@@ -32,7 +32,15 @@ Type `/plan [context or requirements]` in Cursor Chat or Composer.
 5. **Visual Diagram**:
    - Generate `diagrams/03-plan.exceldraw`.
 
-6. **HARD RULE**:
+6. **HTML Plan (html-plan skill)**:
+   - Read and follow `skills/html-plan/SKILL.md`.
+   - Write a chart-rich aesthetic HTML plan to `plans/html/<slug>.html`, sync to `.cursor/plans/html/`.
+   - When the plan document is complete, run `node skills/html-plan/scripts/serve-open.js plans/html/<slug>.html` so it opens in **Chrome** (keep server running).
+   - Reviewer **annotates** in the page and clicks **Send to Cursor** → writes `.cursor/plans/inbox/<slug>-feedback.md` plus `*.annotations.md`.
+   - Before Implement, read inbox/annotations and apply change/block feedback (regenerate HTML if the plan changes).
+
+7. **HARD RULE**:
    - **No code is written until human sign-off.**
    - Await explicit user approval before starting Phase 4 (Implement).
+   - Prefer inbox **approve** annotations + chat approval; treat **block** as a hard stop.
 

@@ -1,0 +1,17 @@
+{
+  "slug": "2026-10-16-html-plan-smoke",
+  "sentAt": "2026-10-16T00:00:00.000Z",
+  "title": "HTML Plan Smoke Test",
+  "annotations": [
+    {
+      "id": "a-mouse",
+      "section": "Scope",
+      "quote": "hover/click",
+      "note": "Mouse interactions smoke",
+      "kind": "comment",
+      "createdAt": "2026-10-16T00:00:00.000Z",
+      "x": 120,
+      "y": 340
+    }
+  ]
+}

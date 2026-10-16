@@ -1,8 +1,8 @@
 {
   "name": "the-developer",
   "displayName": "The Developer - AI Engineering Workflow",
-  "version": "1.3.0",
-  "description": "7-phase AI engineering workflow with Request Firewall, wiki grounding, phase commands (/understand, /spec, /plan, /doc-prd), wiki-researcher, frontend, backend, and doc-prd agents. All agents use find-skills when a capability is missing.",
+  "version": "1.3.1",
+  "description": "7-phase AI engineering workflow with Request Firewall, wiki grounding, phase commands (/understand, /spec, /plan, /doc-prd), html-plan (visual plan in Chrome), wiki-researcher, frontend, backend, and doc-prd agents. All agents use find-skills when a capability is missing.",
   "author": {
     "name": "FarooqProProgrammer"
   },
@@ -26,7 +26,8 @@
     "backend",
     "prd",
     "doc-prd",
-    "exceldraw"
+    "exceldraw",
+    "html-plan"
   ],
   "category": "developer-tools",
   "tags": [
