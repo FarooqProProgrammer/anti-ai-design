@@ -40,6 +40,10 @@ If you need a skill not in `skills/`: read `skills/find-skills/SKILL.md`, run `n
 
 Unless PRD/user/repo overrides: **Prisma** ORM + **PostgreSQL**. Repositories own Prisma Client; migrations via Prisma; no hardcoded DB URLs. Match existing stack if the repo already differs.
 
+## Default Cache: Redis
+
+**Always** use **Redis** as the cache (sessions/OTP hot keys, response/data cache, rate limits) unless PRD/user overrides. Read `skills/redis-core/SKILL.md`. Centralized client via config; TTLs; services own cache-aside — not in-memory Maps/Memcached by default.
+
 ## Default Asset Upload
 
 Two modes via config: **`local`** (filesystem) and **`bucket`** (S3-compatible). One storage adapter; services do not hard-code the mode. Validate size/MIME; metadata in Prisma when needed; secrets only in config. Document uploads in Swagger.

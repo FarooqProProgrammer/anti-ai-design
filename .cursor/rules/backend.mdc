@@ -13,6 +13,7 @@ This rule activates when `@backend` is mentioned or when the task is clearly ser
 - **Source of truth:** `@doc-prd` — `docs/prd/*.md` + `diagrams/prd/*`
 - **Architecture (REQUIRED):** `skills/backend-dev-guidelines/SKILL.md` — layered Routes → Controllers → Services → Repositories
 - **Default data stack:** Prisma ORM + PostgreSQL
+- **Cache (REQUIRED default):** Redis — `skills/redis-core/`
 - **Asset upload:** `local` (filesystem) \| `bucket` (S3) via config + storage adapter
 - **API docs (REQUIRED):** `skills/openapi-spec-generation/` + Swagger UI for every new or changed route
 - **Default auth:** client_id + client_secret; Google via Firebase; signup → OTP → profile; login → 2FA if enabled; forgot → OTP → reset
@@ -22,6 +23,10 @@ This rule activates when `@backend` is mentioned or when the task is clearly ser
 ## Default Data Stack
 
 Unless the PRD/user/repo explicitly overrides: use **Prisma** + **PostgreSQL**. Repositories own Prisma Client; schema/migrations via Prisma; DB URL only via config/env. If the repo already uses another ORM/DB, match it unless asked to migrate.
+
+## Default Cache: Redis
+
+Unless the PRD/user overrides: **always use Redis** for application caching (and hot auth/rate-limit keys as appropriate). Follow `skills/redis-core/SKILL.md`. Centralized Redis client via config; TTLs and colon key namespaces; cache-aside in services. Do not default to in-memory Maps or Memcached.
 
 ## Default Asset Upload
 
