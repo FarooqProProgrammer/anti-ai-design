@@ -1,0 +1,70 @@
+---
+description: Backend subagent — Prisma+Postgres; Redis cache; upload local|S3; Swagger; Firebase Google
+globs: *.{ts,js,mjs,cjs,prisma,sql,graphql}
+alwaysApply: false
+---
+
+# Backend Subagent Rule for Cursor
+
+This rule activates when `@backend` is mentioned or when the task is clearly server-side (routes, controllers, services, repositories, auth, migrations, Prisma/SQL, API contracts).
+
+- Subagent file: [`.cursor/agents/backend.md`](../agents/backend.md)
+- Shared spec: [`agents/backend.md`](../../agents/backend.md)
+- **Source of truth:** `@doc-prd` — `docs/prd/*.md` + `diagrams/prd/*`
+- **Architecture (REQUIRED):** `skills/backend-dev-guidelines/SKILL.md` — layered Routes → Controllers → Services → Repositories
+- **Default data stack:** Prisma ORM + PostgreSQL
+- **Asset upload:** `local` (filesystem) \| `bucket` (S3) via config + storage adapter
+- **API docs (REQUIRED):** `skills/openapi-spec-generation/` + Swagger UI for every new or changed route
+- **Default auth:** client_id + client_secret; Google via Firebase; signup → OTP → profile; login → 2FA if enabled; forgot → OTP → reset
+
+---
+
+## Default Data Stack
+
+Unless the PRD/user/repo explicitly overrides: use **Prisma** + **PostgreSQL**. Repositories own Prisma Client; schema/migrations via Prisma; DB URL only via config/env. If the repo already uses another ORM/DB, match it unless asked to migrate.
+
+## Default Asset Upload
+
+Unless the PRD/user overrides: support **`local`** and **`bucket`** (S3-compatible) modes selected by config (`STORAGE_MODE` or equivalent). One storage adapter behind services; validate size/MIME; persist asset metadata when needed; never hard-code credentials. Document upload endpoints in Swagger.
+
+## Mandatory: Swagger / OpenAPI
+
+Do not ship API changes without updated Swagger docs (operations, schemas, auth, errors). Read `skills/openapi-spec-generation/SKILL.md` first. Add Swagger UI/spec if missing. Report UI URL or spec path in the handoff. No undocumentated endpoints; no real secrets in examples.
+
+## Default Auth Strategy
+
+Unless the PRD/user explicitly overrides:
+
+**Clients:** Require **`client_id` + `client_secret`** on auth entrypoints; store secrets hashed; support rotate/revoke and M2M client-credentials tokens. Document in Swagger without real secrets.
+
+**Google:** Use **Firebase Authentication** (Google provider). Verify Firebase ID tokens with Admin SDK; upsert user; same session shape. Do not add a parallel raw Google OAuth path.
+
+| Flow | Steps |
+|------|--------|
+| Signup | client auth → signup → verify OTP → create profile → session |
+| Login | client auth → login → 2FA if enabled → session |
+| Forgot password | client auth → forgot password → verify OTP → reset password |
+| Google | client auth → Firebase ID token → Admin verify → session |
+
+Enforce OTP hygiene (TTL, rate limits, single-use), post-OTP profile creation, and 2FA only when the user enabled it. Auth remains a high-risk verify domain.
+
+## Execution Workflow
+
+1. **PRD gate:** Load active PRD + ExcelDraw. If missing for a new capability, hand off to `@doc-prd` / `/doc-prd`.
+2. **Recon:** Map existing layers, schema, auth, error envelopes.
+3. **backend-dev-guidelines gate:** Read the skill; place logic in the correct layer; note BFRI for non-trivial work.
+4. **Implement:** Validation at boundary; services hold rules; repositories isolate DB; tests for failure paths.
+5. **Swagger gate:** Create/update OpenAPI for every new/changed route; confirm UI or spec path.
+6. **High-risk:** Stricter checks for migrations, auth, RBAC, payments.
+7. **Missing skill:** `skills/find-skills/` → `npx skills find <domain>` → install with consent.
+8. **Report:** PRD paths, layers touched, Swagger URL/path, API surface for `@frontend`, tests/gaps.
+
+## Hard Boundaries
+
+- **doc-prd PRD wins** over chat when they conflict (unless user updates the PRD).
+- Do not invent features outside the PRD.
+- Do not skip `skills/backend-dev-guidelines/` for route/service/DB work.
+- Do not put business logic in routes or collapse layers for speed.
+- Do not ship APIs without updated Swagger/OpenAPI.
+- Do not own UI — hand presentation to `@frontend`.
+- Do not conceal type/lint/test failures.

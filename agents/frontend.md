@@ -21,7 +21,8 @@ Product UI work is driven by **doc-prd** outputs:
 
 - If no PRD exists for the surface, run `@doc-prd` / `/doc-prd` first.
 - Chat that conflicts with the PRD loses unless the PRD is updated.
-- Mobbin/Hallmark refine visuals **inside** PRD scope; they do not redefine product scope.
+- **Always** apply `skills/frontend-design/` for aesthetic execution.
+- Mobbin/Hallmark refine structure refs **inside** PRD scope; they do not redefine product scope.
 
 ---
 
@@ -81,8 +82,9 @@ Every **new page**, **landing**, **marketing site**, or **product/platform UI** 
 
 | Skill / tool | When |
 |-------|------|
-| Mobbin MCP | **Preferred** for new pages/platforms when tools are available |
-| `skills/hallmark/` | **Fallback** for new pages/platforms when Mobbin is unavailable |
+| `skills/frontend-design/` | **REQUIRED** for distinctive UI aesthetics |
+| Mobbin MCP | **Preferred** structure refs for new pages/platforms when available |
+| `skills/hallmark/` | **Fallback** structure when Mobbin is unavailable |
 | `skills/vercel-react-best-practices/` | React/Next performance and data-fetch patterns |
 | `skills/vercel-composition-patterns/` | Component architecture |
 | `skills/vercel-react-view-transitions/` | Route/state transitions on web |

@@ -1,5 +1,5 @@
 ---
-description: Frontend subagent — doc-prd PRD is SoT; shadcn always; Mobbin then Hallmark for craft
+description: Frontend subagent — doc-prd SoT; shadcn; frontend-design; Mobbin then Hallmark
 globs: *.{tsx,jsx,css,scss,vue,svelte,html}
 alwaysApply: false
 ---
@@ -10,9 +10,10 @@ This rule activates when `@frontend` is mentioned or when the task is clearly UI
 
 - Subagent file: [`.cursor/agents/frontend.md`](../agents/frontend.md)
 - Shared spec: [`agents/frontend.md`](../../agents/frontend.md)
-- **Source of truth:** `@doc-prd` output — `docs/prd/*.md` + `diagrams/prd/*`
+- **Source of truth:** `@doc-prd` — `docs/prd/*.md` + `diagrams/prd/*`
 - Foundation: [shadcn/ui](https://ui.shadcn.com/) — required on every web React frontend
-- Visual craft (after PRD scope is fixed):
+- **Aesthetics (REQUIRED):** `skills/frontend-design/SKILL.md` — read before implementing distinctive UI
+- Structure refs (after PRD scope):
   1. **Mobbin MCP** — preferred when available
   2. **Hallmark** — fallback when Mobbin is unavailable
 
@@ -20,17 +21,19 @@ This rule activates when `@frontend` is mentioned or when the task is clearly UI
 
 ## Execution Workflow
 
-1. **PRD gate:** Load the active PRD and ExcelDraw from doc-prd. If missing for this product surface, hand off to `@doc-prd` / `/doc-prd` before major UI.
-2. **shadcn gate:** If web React and `components.json` / `components/ui` is missing, init and add primitives.
-3. **Visual craft gate:** Mobbin if available, else Hallmark — must not expand PRD scope.
-4. **Implement:** Map PRD journeys to screens; shadcn/Radix; compound components; a11y; motion.
-5. **Missing skill:** If capability is not in `skills/`, use `skills/find-skills/` → `npx skills find <domain>` → install with consent.
-6. **Report:** PRD paths used, requirement IDs covered, shadcn status, mobbin/hallmark, files, gaps.
+1. **PRD gate:** Load active PRD + ExcelDraw. If missing, hand off to `@doc-prd` / `/doc-prd`.
+2. **shadcn gate:** Init/add primitives if web React lacks them.
+3. **frontend-design gate:** Read `skills/frontend-design/SKILL.md`; commit to a bold aesthetic direction (no AI slop defaults).
+4. **Structure refs:** Mobbin if available, else Hallmark — must not expand PRD scope.
+5. **Implement:** Map PRD journeys; shadcn + frontend-design aesthetics; compound components; a11y; motion.
+6. **Missing skill:** `skills/find-skills/` → `npx skills find <domain>` → install with consent.
+7. **Report:** PRD paths, requirement IDs, frontend-design direction, mobbin/hallmark, files, gaps.
 
 ## Hard Boundaries
 
 - **doc-prd PRD wins** over chat when they conflict (unless user updates the PRD).
-- Do not invent features, journeys, or metrics outside the PRD.
+- Do not invent features outside the PRD.
 - Do not ship web UI without shadcn/ui.
-- Do not let Mobbin/Hallmark override PRD scope.
+- Do not skip `skills/frontend-design/` for distinctive UI work.
+- Do not let Mobbin/Hallmark/frontend-design override PRD scope.
 - Do not own core business logic or schema migrations by default.

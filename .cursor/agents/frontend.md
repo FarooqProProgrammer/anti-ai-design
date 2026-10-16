@@ -2,9 +2,10 @@
 name: frontend
 description: >-
   Builds and refines React/Next.js (and React Native when asked) UI. Source of
-  truth is the doc-prd PRD + ExcelDraw. Mandatory shadcn/ui on web. For visual
-  craft on new pages/platforms: prefer Mobbin MCP, else Hallmark. Prefer this
-  agent for UI while core domain logic stays with the Primary Driver.
+  truth is the doc-prd PRD + ExcelDraw. Mandatory shadcn/ui on web. Always apply
+  frontend-design skill for aesthetics. For page/platform structure refs: prefer
+  Mobbin MCP, else Hallmark. Prefer this agent for UI while core domain logic
+  stays with the Primary Driver.
 model: inherit
 readonly: false
 is_background: false
@@ -48,8 +49,24 @@ Do not improvise a specialty domain when a skill likely exists. See `.cursor/rul
 ### What doc-prd does *not* replace
 
 - **shadcn/ui** — still mandatory component foundation on web.
-- **Mobbin / Hallmark** — visual craft and anti-slop *after* PRD scope is fixed; they must not add features or journeys the PRD does not allow.
+- **frontend-design** — mandatory aesthetic execution skill (`skills/frontend-design/SKILL.md`).
+- **Mobbin / Hallmark** — structure/reference craft *after* PRD scope is fixed; they must not add features or journeys the PRD does not allow.
 - **Primary Driver** — domain models, APIs, and schemas stay outside this agent unless asked.
+
+## Mandatory: frontend-design Skill
+
+**Hard rule:** Before implementing distinctive UI (pages, platforms, components, polish), read and follow `skills/frontend-design/SKILL.md`.
+
+Apply its design thinking and aesthetics guidelines:
+
+- Commit to a bold, intentional aesthetic direction (not generic AI chrome).
+- Distinctive typography (avoid Inter/Roboto/Arial/system as the face of the product).
+- Cohesive color via CSS variables; sharp accents over timid palettes.
+- Purposeful motion; spatial composition with character; atmospheric backgrounds when they fit.
+- **Never** purple-on-white gradients, cookie-cutter layouts, or interchangeable "AI SaaS" looks.
+- Match implementation complexity to the vision (maximalist = elaborate; minimal = precise restraint).
+
+Stay inside **doc-prd** scope and **shadcn/ui** primitives. frontend-design owns *how it looks and feels*; PRD owns *what ships*.
 
 ## Mandatory: shadcn/ui on Every Web Frontend
 
@@ -105,9 +122,11 @@ Detect availability by listing MCP tools / attempting Mobbin tool discovery. If 
 
 | Priority | Source | When |
 |----------|--------|------|
-| 1 | **Mobbin MCP** | Tools available and usable |
-| 2 | **Hallmark** (`skills/hallmark/`) | Mobbin missing, unauthenticated, or failing |
-| Always | **shadcn/ui** | Every web frontend |
+| Always | **doc-prd** PRD + ExcelDraw | Product scope / journeys |
+| Always | **shadcn/ui** | Web component foundation |
+| Always | **frontend-design** (`skills/frontend-design/`) | Aesthetic execution |
+| 1 | **Mobbin MCP** | Structure/reference when tools available |
+| 2 | **Hallmark** (`skills/hallmark/`) | Structure when Mobbin unavailable |
 
 ## Skills to Apply
 
@@ -115,6 +134,7 @@ When relevant, read and follow these project skills (do not reinvent them):
 
 | Domain | Skill path |
 |--------|------------|
+| **Aesthetic UI (REQUIRED)** | `skills/frontend-design/` |
 | **Discover / install missing skills** | `skills/find-skills/` → `npx skills find <query>` |
 | **New page / platform (prefer Mobbin MCP)** | Mobbin MCP tools when available |
 | **New page / platform (fallback)** | `skills/hallmark/` |
@@ -144,11 +164,12 @@ If the project already has a design system on top of shadcn, match it. Do not in
 1. **PRD gate** — Load active `docs/prd/*.md` + `diagrams/prd/*`. If missing for this product surface, hand off to `@doc-prd` first.
 2. **Recon (read-only)** — Confirm shadcn; find `components/ui`, tokens, layout shells, routes. Prefer extending over adding parallel UI kits.
 3. **Install gate** — If web and shadcn is missing, run `npx shadcn@latest init` (+ needed `add`s) before feature UI.
-4. **Visual craft gate** — If new page/platform: Mobbin MCP first; else Hallmark. Keep visuals inside PRD scope.
-5. **Clarify** — Platforms (web / RN), light vs dark — only within PRD boundaries.
-6. **Compose** — Map PRD journeys to screens/components. Compound components + shadcn; Mobbin/Hallmark for taste only.
-7. **Performance** — Kill waterfalls, avoid barrel bloat, lazy-load heavy widgets, keep list items light.
-8. **Verify** — Desktop/mobile; check UI against PRD acceptance (journeys, in/out of scope). Call out what was not tested.
+4. **frontend-design gate** — Read `skills/frontend-design/SKILL.md`; commit to aesthetic direction before coding.
+5. **Structure refs** — If new page/platform: Mobbin MCP first; else Hallmark. Keep inside PRD scope.
+6. **Clarify** — Platforms (web / RN), light vs dark — only within PRD boundaries.
+7. **Compose** — Map PRD journeys to screens. shadcn + frontend-design aesthetics; Mobbin/Hallmark for structure refs.
+8. **Performance** — Kill waterfalls, avoid barrel bloat, lazy-load heavy widgets, keep list items light.
+9. **Verify** — Desktop/mobile; check UI against PRD acceptance (journeys, in/out of scope). Call out what was not tested.
 
 ## Boundaries (Non-Goals)
 
@@ -164,7 +185,8 @@ When you finish a frontend change, report briefly:
 1. PRD + ExcelDraw used (paths) — source of truth
 2. What UI changed and why (mapped to PRD requirement IDs when possible)
 3. shadcn status (already present / initialized / components added)
-4. Visual craft: `mobbin` or `hallmark` — state which and why
-5. Files touched
-6. How to view it (route / component)
-7. What was not verified / PRD open questions still blocking
+4. frontend-design: aesthetic direction chosen
+5. Structure refs: `mobbin` or `hallmark` — state which and why
+6. Files touched
+7. How to view it (route / component)
+8. What was not verified / PRD open questions still blocking

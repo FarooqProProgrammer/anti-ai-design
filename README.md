@@ -57,10 +57,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-cursor-plu
 Then **Developer: Reload Window**, open **Customize**, and confirm **The Developer - AI Engineering Workflow**.
 
 You get:
-- Rules: firewall, workflow, wiki, engineering standards, frontend
+- Rules: firewall, workflow, wiki, engineering standards, frontend, backend
 - Commands: `/understand`, `/spec`, `/plan`, `/doc-prd`
-- Agents: `wiki-researcher`, `doc-prd` (docs → PRD + ExcelDraw = SoT for UI), `frontend` (implements PRD; shadcn; Mobbin → Hallmark)
-- Skills: brainstorming, grill-me, karpathy-llm-wiki, hallmark, find-skills — **all agents** run `find-skills` / `npx skills find` when a needed skill is missing
+- Agents: `wiki-researcher`, `doc-prd` (docs → PRD + ExcelDraw = SoT), `frontend` (PRD + shadcn + frontend-design; Mobbin → Hallmark), `backend` (PRD + backend-dev-guidelines)
+- Skills: brainstorming, grill-me, karpathy-llm-wiki, hallmark, find-skills, backend-dev-guidelines — **all agents** run `find-skills` / `npx skills find` when a needed skill is missing
 
 For team distribution: import this Git repo as a Team Marketplace under Dashboard → Plugins & MCPs, or submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish).
 
@@ -77,11 +77,13 @@ the-developer/
 ├── agents/
 │   ├── wiki-researcher.md             # Custom Web Researcher agent specification
 │   ├── frontend.md                    # Frontend UI/UX agent (mandatory shadcn/ui on web)
+│   ├── backend.md                     # Backend API/services agent (backend-dev-guidelines)
 │   └── doc-prd.md                     # Doc → PRD + ExcelDraw agent specification
 ├── .cursor/
 │   ├── agents/
 │   │   ├── wiki-researcher.md         # Cursor custom subagent (inherit model)
 │   │   ├── frontend.md                # Cursor frontend subagent (inherit model)
+│   │   ├── backend.md                 # Cursor backend subagent (inherit model)
 │   │   └── doc-prd.md                 # Cursor doc→PRD subagent (inherit model)
 │   ├── commands/
 │   │   ├── understand.md              # Cursor /understand command
@@ -94,13 +96,17 @@ the-developer/
 │       ├── wiki-rules.mdc             # Karpathy LLM Wiki Grounding Invariant & local cursor projects
 │       ├── wiki-researcher.mdc        # Web research & wiki auto-indexing rule
 │       ├── frontend.mdc               # Frontend subagent activation rule
+│       ├── backend.mdc                # Backend subagent activation rule
 │       ├── doc-prd.mdc                # Doc→PRD + ExcelDraw activation rule
 │       ├── find-skills-gate.mdc       # All agents: find-skills when capability missing
 │       └── engineering-standards.mdc  # Single Driver, zero concealment, humanized content rules
 ├── .cursorrules                       # Root Cursor universal agent instructions
 ├── .claude/
 │   ├── agents/
-│   │   └── wiki-researcher.md         # Claude Code custom research agent (sonnet model, cyan color)
+│   │   ├── wiki-researcher.md         # Claude Code custom research agent (sonnet model, cyan color)
+│   │   ├── frontend.md                # Claude Code frontend agent
+│   │   ├── backend.md                 # Claude Code backend agent
+│   │   └── doc-prd.md                 # Claude Code doc→PRD agent
 │   ├── commands/
 │   │   ├── understand.md              # /understand <requirement> command
 │   │   ├── spec.md                    # /spec [context] command

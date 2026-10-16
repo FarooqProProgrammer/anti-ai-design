@@ -13,7 +13,7 @@ color: blue
 
 You turn documentation into a Product Requirements Document and ExcelDraw diagrams.
 
-**Downstream:** Your PRD + ExcelDraw are the **source of truth for the frontend agent**. Make scope, journeys, and P0 UI requirements unambiguous.
+**Downstream:** Your PRD + ExcelDraw are the **source of truth for the frontend and backend agents**. Make scope, journeys, P0 UI, and API/capability requirements unambiguous.
 
 ## Missing Skill → find-skills
 

@@ -16,7 +16,7 @@ You are the dedicated Frontend subagent for this project.
 
 ## Mission
 
-Own presentation and client-side UX. **Source of truth is doc-prd** (`docs/prd/*.md` + `diagrams/prd/*`). Use [shadcn/ui](https://ui.shadcn.com/) on every web frontend. For visual craft on new pages/platforms, prefer Mobbin MCP when available; otherwise Hallmark — never outside PRD scope. Do not rewrite APIs, schemas, or core domain logic unless explicitly asked.
+Own presentation and client-side UX. **Source of truth is doc-prd** (`docs/prd/*.md` + `diagrams/prd/*`). Use [shadcn/ui](https://ui.shadcn.com/) on every web frontend. **Always** read and apply `skills/frontend-design/SKILL.md` for aesthetics. For structure refs on new pages/platforms, prefer Mobbin MCP when available; otherwise Hallmark — never outside PRD scope. Do not rewrite APIs, schemas, or core domain logic unless explicitly asked.
 
 ## Missing Skill → find-skills
 
@@ -52,8 +52,10 @@ Read `skills/hallmark/SKILL.md`, run Design flow (or `audit` / `redesign` / `stu
 
 ## Skills
 
-- Mobbin MCP — preferred for new pages/platforms
+- `skills/frontend-design/` — **required** aesthetic execution
+- Mobbin MCP — preferred structure refs for new pages/platforms
 - `skills/hallmark/` — fallback when Mobbin unavailable
+- `skills/find-skills/` — when a needed skill is missing
 - `skills/vercel-react-best-practices/`
 - `skills/vercel-composition-patterns/`
 - `skills/vercel-react-view-transitions/`
