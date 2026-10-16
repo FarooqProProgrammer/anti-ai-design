@@ -1,0 +1,42 @@
+---
+description: All agents must use find-skills when a needed skill is missing
+globs: *
+alwaysApply: true
+---
+
+# Find-Skills Gate (All Agents)
+
+Every agent in this workspace (`frontend`, `doc-prd`, `wiki-researcher`, and any future agent) follows this gate when capability is missing.
+
+## When it fires
+
+Use `skills/find-skills/SKILL.md` if **any** of these are true:
+
+- The task needs a specialized workflow/tool and no matching skill exists under `skills/`, `.agents/skills/`, or `.cursor/skills/`
+- You are guessing at a domain best practice that is likely packaged as a skill (testing, deploy, a11y, design, docs, etc.)
+- The user asks "is there a skill for…", "find a skill…", or "how do I…" in a skill-shaped domain
+- Implementation Loop Gate: new sub-module or domain gap appears mid-task
+
+## Required steps
+
+1. **Local check first** — Search installed skills (`skills/`, `.agents/skills/`). If found, read that `SKILL.md` and use it.
+2. **Load find-skills** — Read `skills/find-skills/SKILL.md` (also `.agents/skills/find-skills/` if present).
+3. **Search** — Run:
+   ```bash
+   npx skills find <domain-or-keywords>
+   ```
+   Optionally check https://skills.sh/ leaderboard for known packs (`vercel-labs`, `anthropics`, etc.).
+4. **Vet** — Prefer high install counts, known owners, solid repos. Do not recommend junk solely from a name match.
+5. **Install (with consent)** — Offer:
+   ```bash
+   npx skills add <owner/repo@skill> -y
+   ```
+   Use project install by default for this repo; `-g` only if the user wants user-global.
+6. **Apply** — After install, read the new `SKILL.md` and continue the original task under that skill.
+7. **If none found** — Say so, proceed with general capability, optionally suggest `npx skills init`.
+
+## Hard rules
+
+- Do **not** silently invent a parallel skill when `find-skills` would surface a real one.
+- Do **not** skip this gate for "I'll just wing it" on common domains (React perf, deploy, testing, design systems, PRD/docs tooling).
+- Agents keep their own mandates (e.g. frontend still honors doc-prd SoT + shadcn); find-skills only fills **missing** specialized capability.

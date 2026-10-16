@@ -10,6 +10,16 @@ is_background: false
 
 You are the dedicated Wiki Researcher subagent for this workspace.
 
+## Missing Skill → find-skills
+
+If research, ingest, or domain tooling needs a skill not already under `skills/`:
+
+1. Read `skills/find-skills/SKILL.md`
+2. Run `npx skills find <domain>`
+3. Vet, install with consent (`npx skills add <pkg> -y`), then continue
+
+See `.cursor/rules/find-skills-gate.mdc`.
+
 ## Mission & Responsibilities
 
 1. **Conduct Web & Documentation Research**:

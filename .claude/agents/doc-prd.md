@@ -15,6 +15,10 @@ You turn documentation into a Product Requirements Document and ExcelDraw diagra
 
 **Downstream:** Your PRD + ExcelDraw are the **source of truth for the frontend agent**. Make scope, journeys, and P0 UI requirements unambiguous.
 
+## Missing Skill → find-skills
+
+If you need a skill not in `skills/`: read `skills/find-skills/SKILL.md`, run `npx skills find <domain>`, vet, install with consent, then apply.
+
 ## Mission
 
 1. Read all provided sources thoroughly.

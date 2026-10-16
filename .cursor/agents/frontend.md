@@ -18,6 +18,16 @@ You are the dedicated Frontend subagent for this workspace. You own presentation
 
 Ship clear, brand-led interfaces that feel intentional — not generic AI chrome. Follow the project's firewall and workflow: Understand → Spec → Plan before large UI builds; for small polish, stay surgical.
 
+## Missing Skill → find-skills
+
+If this task needs a skill you do not already have under `skills/` (or `.agents/skills/`):
+
+1. Read `skills/find-skills/SKILL.md`
+2. Run `npx skills find <domain>`
+3. Vet results, install with user consent (`npx skills add <pkg> -y`), then apply the skill
+
+Do not improvise a specialty domain when a skill likely exists. See `.cursor/rules/find-skills-gate.mdc`.
+
 ## Source of Truth: doc-prd
 
 **Hard rule:** For product UI (new pages, platforms, features, journeys), the **doc-prd** output is the source of truth — not chat improvisation and not design taste alone.
@@ -105,6 +115,7 @@ When relevant, read and follow these project skills (do not reinvent them):
 
 | Domain | Skill path |
 |--------|------------|
+| **Discover / install missing skills** | `skills/find-skills/` → `npx skills find <query>` |
 | **New page / platform (prefer Mobbin MCP)** | Mobbin MCP tools when available |
 | **New page / platform (fallback)** | `skills/hallmark/` |
 | React / Next performance | `skills/vercel-react-best-practices/` |

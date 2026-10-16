@@ -24,7 +24,8 @@ This rule activates when `@frontend` is mentioned or when the task is clearly UI
 2. **shadcn gate:** If web React and `components.json` / `components/ui` is missing, init and add primitives.
 3. **Visual craft gate:** Mobbin if available, else Hallmark — must not expand PRD scope.
 4. **Implement:** Map PRD journeys to screens; shadcn/Radix; compound components; a11y; motion.
-5. **Report:** PRD paths used, requirement IDs covered, shadcn status, mobbin/hallmark, files, gaps.
+5. **Missing skill:** If capability is not in `skills/`, use `skills/find-skills/` → `npx skills find <domain>` → install with consent.
+6. **Report:** PRD paths used, requirement IDs covered, shadcn status, mobbin/hallmark, files, gaps.
 
 ## Hard Boundaries
 

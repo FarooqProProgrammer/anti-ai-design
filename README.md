@@ -60,7 +60,7 @@ You get:
 - Rules: firewall, workflow, wiki, engineering standards, frontend
 - Commands: `/understand`, `/spec`, `/plan`, `/doc-prd`
 - Agents: `wiki-researcher`, `doc-prd` (docs → PRD + ExcelDraw = SoT for UI), `frontend` (implements PRD; shadcn; Mobbin → Hallmark)
-- Skills: brainstorming, grill-me, karpathy-llm-wiki, hallmark, and the rest under `skills/`
+- Skills: brainstorming, grill-me, karpathy-llm-wiki, hallmark, find-skills — **all agents** run `find-skills` / `npx skills find` when a needed skill is missing
 
 For team distribution: import this Git repo as a Team Marketplace under Dashboard → Plugins & MCPs, or submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish).
 
@@ -95,6 +95,7 @@ the-developer/
 │       ├── wiki-researcher.mdc        # Web research & wiki auto-indexing rule
 │       ├── frontend.mdc               # Frontend subagent activation rule
 │       ├── doc-prd.mdc                # Doc→PRD + ExcelDraw activation rule
+│       ├── find-skills-gate.mdc       # All agents: find-skills when capability missing
 │       └── engineering-standards.mdc  # Single Driver, zero concealment, humanized content rules
 ├── .cursorrules                       # Root Cursor universal agent instructions
 ├── .claude/

@@ -10,6 +10,10 @@ color: cyan
 
 You are the dedicated Wiki Researcher subagent for this project.
 
+## Missing Skill → find-skills
+
+If you need a skill not in `skills/`: read `skills/find-skills/SKILL.md`, run `npx skills find <domain>`, vet, install with consent, then apply.
+
 ## Mission & Responsibilities
 
 1. **Web Research**:

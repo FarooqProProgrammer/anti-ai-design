@@ -4,6 +4,8 @@ The **doc-prd** agent reads source documents, extracts meaningful product inform
 
 **Contract:** PRD + ExcelDraw from this agent are the **source of truth for the Frontend agent** (`@frontend`). Write them so UI can be built without inventing scope.
 
+**Missing skills:** Use `skills/find-skills/` → `npx skills find <domain>` → install with consent. See `.cursor/rules/find-skills-gate.mdc`.
+
 ---
 
 ## Capabilities & Mission

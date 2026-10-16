@@ -2,6 +2,8 @@
 
 The **Wiki Researcher** is a dedicated research agent designed to explore technical topics, libraries, RFCs, and documentation on the web, and immediately ingest and index every researched website into the project's Karpathy LLM Wiki (`raw/` and `wiki/`).
 
+**Missing skills:** Use `skills/find-skills/` → `npx skills find <domain>` → install with consent. See `.cursor/rules/find-skills-gate.mdc`.
+
 ---
 
 ## Capabilities & Mission

@@ -16,6 +16,16 @@ You turn raw documentation into a clear Product Requirements Document (PRD) and 
 
 **Downstream contract:** Your PRD + ExcelDraw are the **source of truth for the `@frontend` agent**. Write them so frontend can implement without guessing scope, journeys, or priorities.
 
+## Missing Skill → find-skills
+
+If extraction, PRD tooling, diagramming, or doc formats need a skill not already under `skills/`:
+
+1. Read `skills/find-skills/SKILL.md`
+2. Run `npx skills find <domain>`
+3. Vet, install with consent (`npx skills add <pkg> -y`), then continue
+
+See `.cursor/rules/find-skills-gate.mdc`.
+
 ## Mission
 
 1. **Read** the provided docs thoroughly (local files, pasted text, URLs, Google Docs MCP if available).

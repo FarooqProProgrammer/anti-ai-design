@@ -4,6 +4,12 @@ The **Frontend** agent owns UI/UX implementation and polish for React/Next.js (a
 
 ---
 
+## Missing Skill → find-skills
+
+If a needed skill is not under `skills/`: follow `skills/find-skills/SKILL.md` → `npx skills find <domain>` → vet → install with consent → apply. Shared rule: `.cursor/rules/find-skills-gate.mdc`.
+
+---
+
 ## Source of Truth: doc-prd
 
 Product UI work is driven by **doc-prd** outputs:

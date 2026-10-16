@@ -20,7 +20,8 @@ Activate when `@doc-prd` is mentioned, or when the user asks to turn documents i
 2. **Extract:** Problem, users, goals/non-goals/anti-goals, FRs, NFRs, journeys, constraints, open questions. Label assumptions.
 3. **PRD:** Write `docs/prd/YYYY-MM-DD-<slug>.md` from `templates/prd.md`. Cite sources for P0 items.
 4. **ExcelDraw:** Create `diagrams/prd/<slug>.exceldraw` (problem → users → outcomes, scope, primary journey). Prefer `scripts/generate_exceldraw.py` builder patterns.
-5. **Report:** Paths, sources, open questions, ambiguities.
+5. **Missing skill:** If capability is not in `skills/`, use `skills/find-skills/` → `npx skills find <domain>` → install with consent.
+6. **Report:** Paths, sources, open questions, ambiguities.
 
 ## Hard Boundaries
 
